@@ -1,0 +1,36 @@
+{
+  "version": "1.0.0",
+  "pipeline_id": "video-to-tutorial",
+  "name": "video-to-tutorial",
+  "description": "Pipeline autônomo do enxame de skills para video-to-tutorial",
+  "nodes": [
+    {
+      "id": "node-01-ingest",
+      "skill": "aidd-video-reengineer",
+      "description": "Extração de evidências e análise de entrada",
+      "depends_on": [],
+      "input_handoff": "context/input/source_input.json",
+      "output_handoff": "context/handoffs/01_evidence_handoff.json"
+    },
+    {
+      "id": "node-02-creator",
+      "skill": "aidd-skill-creator",
+      "description": "Geração da skill hiper-especializada do domínio",
+      "depends_on": [
+        "node-01-ingest"
+      ],
+      "input_handoff": "context/handoffs/01_evidence_handoff.json",
+      "output_handoff": "context/handoffs/02_skill_handoff.json"
+    },
+    {
+      "id": "node-03-executor",
+      "skill": "aidd-remotion-motion",
+      "description": "Execução da entrega procedimental em código",
+      "depends_on": [
+        "node-02-creator"
+      ],
+      "input_handoff": "context/handoffs/02_skill_handoff.json",
+      "output_handoff": "context/output/final_delivery_handoff.json"
+    }
+  ]
+}

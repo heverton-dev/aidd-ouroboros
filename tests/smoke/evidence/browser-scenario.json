@@ -1,0 +1,21 @@
+{
+  "browser": {
+    "mode": "launch",
+    "executable_path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+  },
+  "start_url": { "url": "http://127.0.0.1:8765/" },
+  "environment": {
+    "locale": "pt-BR",
+    "timezone": "America/Sao_Paulo",
+    "viewport": { "width": 1280, "height": 720, "device_scale_factor": 1.5 }
+  },
+  "actions": [
+    { "step_id": "s01", "action": "click", "locator": { "kind": "css", "selector": "#nav-reports" }, "timeout_ms": 10000 },
+    { "step_id": "s02", "action": "select_option", "locator": { "kind": "css", "selector": "#period" }, "value": { "source": "literal", "value": "30" }, "timeout_ms": 10000 },
+    { "step_id": "s02-ready", "action": "wait_for", "locator": { "kind": "css", "selector": "table[data-state='ready']" }, "state": "visible", "timeout_ms": 10000 }
+  ],
+  "capture": {
+    "after_each_step": ["screenshot", "accessibility"],
+    "at_end": ["url"]
+  }
+}

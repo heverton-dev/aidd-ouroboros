@@ -1,0 +1,266 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "name": "AIDD Ecosystem Taxonomy",
+  "version": "1.0.0",
+  "description": "Taxonomia formal, AST e grafo de compatibilidade composivel de micro-skills e pipelines AIDD.",
+  "author": "Heverton Eduardo Peres",
+  "license": "MIT",
+  "naming_convention": {
+    "pattern": "^aidd-(rea|craft|motion|materialize|orchestrate)-[a-z0-9]+(-[a-z0-9]+)*$",
+    "tokens": [
+      "namespace (aidd)",
+      "domain",
+      "subdomain",
+      "specialization"
+    ]
+  },
+  "domains": {
+    "rea": {
+      "name": "Reverse Engineering Analysis",
+      "description": "Engenharia reversa profunda e extracao de evidencias a partir de alvos multimodais."
+    },
+    "craft": {
+      "name": "Crafting & Narrative Architecture",
+      "description": "Escrita tecnica, roteirizacao persuasiva e governanca de conteudo."
+    },
+    "motion": {
+      "name": "Motion Graphics & Procedural UI",
+      "description": "Engenharia de animacao declarativa e composicoes programmaticas em codigo."
+    },
+    "materialize": {
+      "name": "Asset & Media Materialization",
+      "description": "Sintese de midia, fusao de camadas audiovisuais e renderizacao deterministica final."
+    },
+    "orchestrate": {
+      "name": "Orchestration & Autonomous Governance",
+      "description": "Meta-orquestracao de agentes, descoberta de pipelines e evolucao continua de capacidades."
+    }
+  },
+  "skills": {
+    "aidd-rea-video-youtube": {
+      "domain": "rea",
+      "subdomain": "video",
+      "specialization": "youtube",
+      "directory": "aidd-skills/aidd-rea-video-youtube",
+      "description": "Engenharia reversa profunda de videos do YouTube dissecando conteudo e estrutura narrativa.",
+      "input_types": [
+        "url:youtube",
+        "video/mp4"
+      ],
+      "output_contracts": [
+        "EVIDENCIAS_REA.json",
+        "HANDOFF.json"
+      ],
+      "compatible_downstream": [
+        "aidd-craft-story-ptbr",
+        "aidd-motion-remotion-core"
+      ]
+    },
+    "aidd-rea-web-saas": {
+      "domain": "rea",
+      "subdomain": "web",
+      "specialization": "saas",
+      "directory": "aidd-skills/aidd-rea-web-saas",
+      "description": "Engenharia reversa profunda de sites, SaaS e web apps extraindo tokens CSS e rotas.",
+      "input_types": [
+        "url:http",
+        "url:https",
+        "text/html"
+      ],
+      "output_contracts": [
+        "TOKENS_DESIGN.json",
+        "EVIDENCIAS_REA.json",
+        "HANDOFF.json"
+      ],
+      "compatible_downstream": [
+        "aidd-motion-remotion-core",
+        "aidd-craft-story-ptbr"
+      ]
+    },
+    "aidd-rea-social-carousel": {
+      "domain": "rea",
+      "subdomain": "social",
+      "specialization": "carousel",
+      "directory": "aidd-skills/aidd-rea-social-carousel",
+      "description": "Engenharia reversa de carrosseis e posts sociais extraindo copywriting e design tokens.",
+      "input_types": [
+        "dir:slides",
+        "url:social_post"
+      ],
+      "output_contracts": [
+        "EVIDENCIAS_REA.json",
+        "TOKENS_DESIGN.json",
+        "HANDOFF.json"
+      ],
+      "compatible_downstream": [
+        "aidd-craft-story-ptbr",
+        "aidd-motion-remotion-core"
+      ]
+    },
+    "aidd-rea-app-android": {
+      "domain": "rea",
+      "subdomain": "app",
+      "specialization": "android",
+      "directory": "aidd-skills/aidd-rea-app-android",
+      "description": "Engenharia reversa estatica de aplicativos APK e binarios extraindo permissoes e rotas.",
+      "input_types": [
+        "file/apk",
+        "application/vnd.android.package-archive"
+      ],
+      "output_contracts": [
+        "EVIDENCIAS_REA.json",
+        "HANDOFF.json"
+      ],
+      "compatible_downstream": [
+        "aidd-craft-story-ptbr",
+        "aidd-orchestrate-pipeline-creator"
+      ]
+    },
+    "aidd-rea-router": {
+      "domain": "rea",
+      "subdomain": "router",
+      "specialization": "universal",
+      "directory": "aidd-skills/aidd-rea-router",
+      "description": "Roteador inteligente de engenharia reversa que despacha entradas para o dissecador REA correto.",
+      "input_types": [
+        "*/*"
+      ],
+      "output_contracts": [
+        "ROUTER_DISPATCH.json",
+        "HANDOFF.json"
+      ],
+      "compatible_downstream": [
+        "aidd-rea-video-youtube",
+        "aidd-rea-web-saas",
+        "aidd-rea-social-carousel",
+        "aidd-rea-app-android"
+      ]
+    },
+    "aidd-craft-story-ptbr": {
+      "domain": "craft",
+      "subdomain": "story",
+      "specialization": "ptbr",
+      "directory": "aidd-skills/aidd-craft-story-ptbr",
+      "description": "Automacao tecnica e governanca deterministica de agentes para roteiros e copy.",
+      "input_types": [
+        "EVIDENCIAS_REA.json",
+        "text/markdown"
+      ],
+      "output_contracts": [
+        "ROTEIRO_FINAL.json",
+        "HANDOFF.json"
+      ],
+      "compatible_downstream": [
+        "aidd-motion-remotion-core",
+        "aidd-materialize-video-synth"
+      ]
+    },
+    "aidd-motion-remotion-core": {
+      "domain": "motion",
+      "subdomain": "remotion",
+      "specialization": "core",
+      "directory": "aidd-skills/aidd-motion-remotion-core",
+      "description": "Automacao didatica e animacoes em codigo derivadas de engenharia reversa metodica.",
+      "input_types": [
+        "ROTEIRO_FINAL.json",
+        "TOKENS_DESIGN.json"
+      ],
+      "output_contracts": [
+        "REMOTION_COMPOSITION.json",
+        "HANDOFF.json"
+      ],
+      "compatible_downstream": [
+        "aidd-materialize-video-synth",
+        "aidd-materialize-tutorial-stitch"
+      ]
+    },
+    "aidd-materialize-video-synth": {
+      "domain": "materialize",
+      "subdomain": "video",
+      "specialization": "synth",
+      "directory": "aidd-skills/aidd-materialize-video-synth",
+      "description": "Materializacao de video sintetica e governanca deterministica audiovisual.",
+      "input_types": [
+        "REMOTION_COMPOSITION.json"
+      ],
+      "output_contracts": [
+        "VIDEO_MANIFEST.json",
+        "HANDOFF.json"
+      ],
+      "compatible_downstream": [
+        "aidd-materialize-tutorial-stitch"
+      ]
+    },
+    "aidd-materialize-tutorial-stitch": {
+      "domain": "materialize",
+      "subdomain": "tutorial",
+      "specialization": "stitch",
+      "directory": "aidd-skills/aidd-materialize-tutorial-stitch",
+      "description": "Maestro universal de tutoriais animados que transforma alvos e codigos em videos.",
+      "input_types": [
+        "VIDEO_MANIFEST.json",
+        "dir:workspace"
+      ],
+      "output_contracts": [
+        "TUTORIAL_FINAL.json",
+        "HANDOFF.json"
+      ],
+      "compatible_downstream": []
+    },
+    "aidd-orchestrate-pipeline-creator": {
+      "domain": "orchestrate",
+      "subdomain": "pipeline",
+      "specialization": "creator",
+      "directory": "aidd-skills/aidd-orchestrate-pipeline-creator",
+      "description": "Garimpa, audita, define e canoniza pipelines composiveis em grafos aciclicos DAG.",
+      "input_types": [
+        "query:text",
+        "PIPELINE.json"
+      ],
+      "output_contracts": [
+        "PIPELINE.json",
+        "pipeline_output.json",
+        "HANDOFF.json"
+      ],
+      "compatible_downstream": [
+        "*"
+      ]
+    },
+    "aidd-orchestrate-skill-creator": {
+      "domain": "orchestrate",
+      "subdomain": "skill",
+      "specialization": "creator",
+      "directory": "aidd-skills/aidd-orchestrate-skill-creator",
+      "description": "Fabrica enterprise autonoma que gera novas skills canonicas a partir de especificacoes.",
+      "input_types": [
+        "spec:markdown",
+        "SKILL.md"
+      ],
+      "output_contracts": [
+        "SKILL_PACKAGE.json",
+        "HANDOFF.json"
+      ],
+      "compatible_downstream": [
+        "aidd-orchestrate-pipeline-creator"
+      ]
+    },
+    "aidd-orchestrate-session-sync": {
+      "domain": "orchestrate",
+      "subdomain": "session",
+      "specialization": "sync",
+      "directory": "aidd-skills/aidd-orchestrate-session-sync",
+      "description": "Sincronizador universal e deterministico de historico factual e turnos literais de sessao em JSON e Markdown.",
+      "input_types": [
+        "file:jsonl",
+        "transcript:session"
+      ],
+      "output_contracts": [
+        "sessao_dialogos_completos.json",
+        "sessao_dialogos_completos.md"
+      ],
+      "compatible_downstream": [
+        "aidd-orchestrate-pipeline-creator"
+      ]
+    }
+  }
+}

@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="timeline.js"></script>
+    <link rel="stylesheet" href="brand/brand.css" />
+    <style>
+      /* Design system do produto: só variáveis --brand-* (geradas por tutorial.py design-tokens) e neutros. */
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--brand-bg); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; color: var(--brand-text); font-family: var(--brand-font-body); }
+      .clip { position: absolute; inset: 0; }
+
+      /* Background: fundo da marca com dois halos suaves e grade de pontos */
+      #bg { background: var(--brand-bg); }
+      .halo { position: absolute; border-radius: 50%; filter: blur(80px); }
+      #h1 { width: 980px; height: 980px; left: 1060px; top: -420px; background: radial-gradient(circle, var(--brand-primary-light), transparent 66%); }
+      #h2 { width: 820px; height: 820px; left: -300px; top: 520px; background: radial-gradient(circle, rgba(2, 132, 199, 0.16), transparent 66%); }
+      #dots { position: absolute; inset: 0; background-image: radial-gradient(rgba(15, 23, 42, 0.08) 1.4px, transparent 1.4px); background-size: 34px 34px;
+        -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 30%, transparent 76%); }
+
+      /* TitleCard */
+      #title { display: flex; flex-direction: column; align-items: center; padding-top: 170px; gap: 26px; }
+      #title img { height: 84px; }
+      .headline { font-family: var(--brand-font-heading); font-weight: 700; font-size: 96px; letter-spacing: -0.03em; line-height: 1.04; text-align: center; }
+      .headline span { display: inline-block; }
+      .headline .brandword { color: var(--brand-primary); }
+      .sub { font-size: 38px; color: var(--brand-text-muted); }
+
+      /* AppWindow: navegador com o portal */
+      #stage { perspective: 1800px; }
+      #win { position: absolute; left: 320px; top: 110px; width: 1280px; height: 760px; border-radius: 16px; overflow: hidden; background: var(--brand-surface);
+        box-shadow: 0 50px 120px rgba(29, 185, 84, 0.22), 0 0 0 1px rgba(15, 23, 42, 0.06); }
+      .bar { height: 40px; background: var(--brand-bg); border-bottom: 1px solid var(--brand-border); display: flex; align-items: center; gap: 8px; padding-left: 16px; }
+      .bar b { width: 12px; height: 12px; border-radius: 50%; display: block; background: var(--brand-border-hover); }
+      .url { margin-left: 18px; padding: 4px 16px; border-radius: 8px; background: var(--brand-surface); border: 1px solid var(--brand-border);
+        color: var(--brand-text-muted); font-size: 15px; }
+      .shot { position: absolute; left: 0; top: 40px; width: 1280px; height: 720px; }
+      /* campos simulados (coordenadas locais da janela: screenshot 1920x1080 exibido a 2/3, abaixo da barra de 40 px) */
+      .field { position: absolute; left: 459px; width: 361px; height: 39px; border-radius: 9px; background: var(--brand-surface);
+        display: flex; align-items: center; padding-left: 13px; font-size: 16px; color: var(--brand-text); white-space: pre; }
+      #f-email { top: 261px; }
+      #f-pass { top: 352px; width: 320px; letter-spacing: 2px; }
+      #f-reset { top: 379px; }
+      .caret { display: inline-block; width: 1.5px; height: 19px; margin-left: 1px; background: var(--brand-primary); }
+      /* estados iniciais invisíveis no CSS (tl.set no tempo 0 não pinta o primeiro frame) */
+      #shot-reset, #f-email, #f-pass, #f-reset, #chip, #co-eye, #co-keep, #b-ok, #b-mail, #ring, #cursor { opacity: 0; }
+      #redact { position: absolute; left: 452px; top: 583px; width: 378px; height: 177px; border-radius: 12px;
+        backdrop-filter: blur(9px); background: rgba(248, 250, 252, 0.55); }
+
+      /* StepChip, Callout, Cursor, selos */
+      #chip { position: absolute; left: 320px; top: 34px; display: flex; align-items: center; gap: 14px; padding: 10px 22px 10px 10px; border-radius: 999px;
+        background: var(--brand-surface); font-size: 30px; font-weight: 600; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12); }
+      #chip em { font-style: normal; width: 46px; height: 46px; border-radius: 50%; background: var(--brand-primary); color: var(--brand-surface);
+        display: grid; place-items: center; font-size: 28px; }
+      .callout { position: absolute; color: #FF5A5F; font-family: 'Circular Std', sans-serif; padding: 16px 24px; border-radius: 12px; background: var(--brand-primary); color: var(--brand-surface);
+        font-size: 30px; font-weight: 600; white-space: nowrap; box-shadow: 0 18px 44px rgba(0, 86, 143, 0.32); }
+      .callout.left::before { content: ""; position: absolute; left: -12px; top: 22px; border: 12px solid transparent; border-left: 0; border-right-color: var(--brand-primary); }
+      #cursor { position: absolute; left: 0; top: 0; width: 46px; height: 46px; filter: drop-shadow(0 6px 8px rgba(15, 23, 42, 0.28)); }
+      .ring { position: absolute; left: 0; top: 0; width: 72px; height: 72px; margin: -36px 0 0 -36px; border-radius: 50%; border: 5px solid var(--brand-accent); }
+      .badge { position: absolute; left: 0; top: 0; white-space: nowrap; display: flex; align-items: center; gap: 14px; padding: 14px 24px 14px 14px; border-radius: 999px; background: var(--brand-surface);
+        font-size: 30px; font-weight: 600; box-shadow: 0 16px 40px rgba(15, 23, 42, 0.16); }
+      .badge i { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; font-style: normal; }
+      #b-ok i { background: var(--brand-success-bg); }
+      #b-mail i { background: var(--brand-primary-light); }
+
+      /* OutroCard */
+      #outro { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; padding-bottom: 90px; }
+      #check { width: 150px; height: 150px; }
+      .done { font-family: var(--brand-font-heading); font-size: 104px; font-weight: 700; letter-spacing: -0.03em; }
+      .done-sub { font-size: 38px; color: var(--brand-text-muted); }
+      #outro img { height: 64px; margin-top: 10px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-scene="all" data-start="0.0" data-duration="52.514" data-width="1920" data-height="1080">
+      <section id="bg" class="clip" data-scene="all" data-start="0.0" data-duration="52.514" data-track-index="0">
+        <div id="h1" class="halo"></div><div id="h2" class="halo"></div><div id="dots"></div>
+      </section>
+
+      <section id="title" class="clip" data-scene="c01" data-start="0.0" data-duration="6.546" data-track-index="1">
+        <img src="brand/logo.png" alt="Conexão Digital Implant" />
+        <h1 class="headline"><span>Como acessar o</span><br /><span class="brandword">Cadastros Conexão</span></h1>
+        <div class="sub">Entrar no portal e recuperar a senha</div>
+      </section>
+
+      <section id="stage" class="clip" data-scene="c01-c08" data-start="0.0" data-duration="48.224" data-track-index="2">
+        <div id="win">
+          <div class="bar"><b></b><b></b><b></b><span class="url" data-layout-ignore data-layout-allow-occlusion>cadastros.vpsconexao.org</span></div>
+          <img id="shot-login" class="shot" src="assets/login.png" alt="" />
+          <img id="shot-reset" class="shot" src="assets/reset.png" alt="" />
+          <div id="redact"></div>
+          <!-- texto dos campos imita a UI do app (textura, não leitura): fora do piso de 28 px -->
+          <div id="f-email" class="field" data-layout-ignore><span id="t-email"></span><i class="caret" id="c-email"></i></div>
+          <div id="f-pass" class="field" data-layout-ignore><span id="t-pass"></span><i class="caret" id="c-pass"></i></div>
+          <div id="f-reset" class="field" data-layout-ignore><span id="t-reset"></span><i class="caret" id="c-reset"></i></div>
+        </div>
+        <div id="chip"><em id="chip-n">1</em><span id="chip-t">E-mail</span></div>
+        <div id="co-eye" class="callout left">Mostrar senha</div>
+        <div id="co-keep" class="callout left">Fica conectado neste navegador</div>
+        <div id="b-ok" class="badge"><i>✔</i>Entrando no portal</div>
+        <div id="b-mail" class="badge"><i>✉</i>Link enviado para o seu e-mail</div>
+        <div id="ring" class="ring"></div>
+        <svg id="cursor" viewBox="0 0 24 24"><path d="M3 2l7.5 19 2.6-7.9L21 10.5z" fill="#0F172A" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      </section>
+
+      <section id="outro" class="clip" data-scene="c09" data-start="48.224" data-duration="4.29" data-track-index="1">
+        <svg id="check" viewBox="0 0 100 100"><circle id="check-c" cx="50" cy="50" r="44" fill="none" stroke="#00568F" stroke-width="7"/>
+          <path id="check-p" d="M30 52 l14 14 l26 -30" fill="none" stroke="#00568F" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="done">Pronto!</div>
+        <div class="done-sub">Agora você já sabe acessar o portal.</div>
+        <img src="brand/logo.png" alt="Conexão Digital Implant" />
+      </section>
+
+      <audio id="vo" src="assets/narration.wav" data-scene="all" data-start="0.0" data-duration="52.514" data-track-index="9"></audio>
+      <audio id="sfx1" src="assets/whoosh.wav" data-scene="c01" data-offset="5.6" data-start="5.6" data-duration="0.55" data-volume="0.45" data-track-index="10"></audio>
+      <audio id="sfx2" src="assets/click.wav" data-scene="c03" data-offset="0.6" data-start="12.948" data-duration="0.04" data-volume="0.9" data-track-index="11"></audio>
+      <audio id="sfx3" src="assets/click.wav" data-scene="c04" data-offset="0.45" data-start="17.904" data-duration="0.04" data-volume="0.9" data-track-index="12"></audio>
+      <audio id="sfx4" src="assets/pop.wav" data-scene="c04" data-offset="2.9" data-start="20.354" data-duration="0.28" data-volume="0.4" data-track-index="13"></audio>
+      <audio id="sfx5" src="assets/pop.wav" data-scene="c05" data-offset="0.5" data-start="24.3" data-duration="0.28" data-volume="0.4" data-track-index="14"></audio>
+      <audio id="sfx6" src="assets/click.wav" data-scene="c06" data-offset="1.2" data-start="30.058" data-duration="0.04" data-volume="0.9" data-track-index="15"></audio>
+      <audio id="sfx7" src="assets/pop.wav" data-scene="c06" data-offset="1.55" data-start="30.408" data-duration="0.28" data-volume="0.45" data-track-index="16"></audio>
+      <audio id="sfx8" src="assets/click.wav" data-scene="c07" data-offset="1.9" data-start="35.104" data-duration="0.04" data-volume="0.9" data-track-index="17"></audio>
+      <audio id="sfx9" src="assets/whoosh.wav" data-scene="c07" data-offset="2.0" data-start="35.204" data-duration="0.55" data-volume="0.35" data-track-index="18"></audio>
+      <audio id="sfx10" src="assets/click.wav" data-scene="c08" data-offset="0.45" data-start="39.72" data-duration="0.04" data-volume="0.9" data-track-index="19"></audio>
+      <audio id="sfx11" src="assets/click.wav" data-scene="c08" data-offset="2.2" data-start="41.47" data-duration="0.04" data-volume="0.9" data-track-index="20"></audio>
+      <audio id="sfx12" src="assets/pop.wav" data-scene="c08" data-offset="2.5" data-start="41.77" data-duration="0.28" data-volume="0.45" data-track-index="21"></audio>
+      <audio id="sfx13" src="assets/whoosh.wav" data-scene="c09" data-offset="-0.35" data-start="47.874" data-duration="0.55" data-volume="0.45" data-track-index="22"></audio>
+      <audio id="sfx14" src="assets/pop.wav" data-scene="c09" data-offset="0.55" data-start="48.774" data-duration="0.28" data-volume="0.5" data-track-index="23"></audio>
+    </div>
+
+    <script>
+      // Tempos: timeline.js (tutorial.py sync-composition). Cliques alinhados à palavra falada (audio/<cena>.words.json).
+      const S = window.TL.scenes;
+      const at = (id, dt) => S[id].start + dt;
+      const len = (id) => S[id].end - S[id].start;
+      // Pontos em coordenadas locais da janela (screenshot 1920x1080 a 2/3 + barra de 40 px).
+      const WIN = { x: 320, y: 110 };
+      const P = {
+        email: { x: 640, y: 281 }, pass: { x: 640, y: 371 }, eye: { x: 801, y: 371 }, keep: { x: 466, y: 420 },
+        enter: { x: 640, y: 480 }, forgot: { x: 640, y: 547 }, rEmail: { x: 640, y: 399 }, rSend: { x: 640, y: 469 },
+        card: { x: 640, y: 380 },
+      };
+      // Câmera por foco: o ponto F fica parado na tela; qualquer ponto Q da janela vai para scr(Q).
+      const cam = { f: { x: 640, y: 380 }, s: 1 };
+      const focus = (f, s, t, d = 0.75) => { tl.to("#win", { x: f.x * (1 - s), y: f.y * (1 - s), scale: s, duration: d, ease: "expo.inOut" }, t); cam.f = f; cam.s = s; };
+      const scr = (q) => ({ x: WIN.x + cam.f.x * (1 - cam.s) + q.x * cam.s, y: WIN.y + cam.f.y * (1 - cam.s) + q.y * cam.s });
+      const cursorTo = (q, t, d = 0.6) => { const p = scr(q); tl.to("#cursor", { x: p.x, y: p.y, duration: d, ease: "power3.inOut" }, t); return p; };
+      const click = (q, t) => { const p = scr(q);
+        tl.set("#ring", { x: p.x, y: p.y }, t);
+        tl.fromTo("#ring", { opacity: 1, scale: 0.35 }, { opacity: 0, scale: 1.5, duration: 0.6, ease: "power2.out", immediateRender: false }, t);
+        tl.fromTo("#cursor", { scale: 1 }, { scale: 0.82, duration: 0.07, yoyo: true, repeat: 1, immediateRender: false }, t); };
+      const type = (sel, text, t, cps = 16) => { for (let i = 1; i <= text.length; i++) tl.set(sel, { textContent: text.slice(0, i) }, t + i / cps); return t + text.length / cps; };
+      const blink = (sel, t0, t1) => { for (let t = t0; t < t1; t += 0.5) { tl.set(sel, { opacity: 0 }, t + 0.25); tl.set(sel, { opacity: 1 }, t + 0.5); } };
+      const chip = (n, txt, t) => { tl.set("#chip-n", { textContent: n }, t); tl.set("#chip-t", { textContent: txt }, t);
+        tl.fromTo("#chip", { scale: 0.92 }, { scale: 1, duration: 0.4, ease: "back.out(2)", immediateRender: false }, t); };
+      // selo à direita do botão (metade da largura do botão na escala atual + margem), fora de qualquer texto da tela
+      const placeBadge = (sel, q, halfW = 182) => { const p = scr(q); tl.set(sel, { x: p.x + halfW * cam.s + 28, y: p.y - 38 }, 0); };
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // estados iniciais
+      tl.set("#cursor", { x: 1620, y: 980 }, 0);
+      tl.set("#win", { transformOrigin: "0 0" }, 0);
+
+      // fundo vivo
+      tl.fromTo("#h1", { x: 0, y: 0 }, { x: -240, y: 140, duration: S.c09.end, ease: "none" }, 0);
+      tl.fromTo("#h2", { x: 0, y: 0 }, { x: 220, y: -160, duration: S.c09.end, ease: "none" }, 0);
+
+      // c01 — título visível no frame 0; janela espia por baixo e sobe (continuidade A→B)
+      tl.fromTo("#title .headline span", { y: 24, opacity: 0.3 }, { y: 0, opacity: 1, duration: 0.7, ease: "expo.out", stagger: 0.14 }, 0);
+      tl.fromTo("#title img", { y: -16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "expo.out" }, 0.3);
+      tl.fromTo("#title .sub", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 1.0);
+      tl.fromTo("#stage", { y: 820, rotationX: 24, scale: 0.86, opacity: 0 }, { y: 600, rotationX: 20, scale: 0.86, opacity: 1, duration: 1.2, ease: "expo.out" }, 1.6);
+      tl.to("#title", { y: -140, opacity: 0, duration: 0.6, ease: "power3.in" }, at("c01", len("c01") - 0.85));
+      tl.to("#stage", { y: 0, rotationX: 0, scale: 1, duration: 0.9, ease: "expo.inOut" }, at("c01", len("c01") - 0.8));
+
+      // c02 — tela de acesso: push-in leve no cartão
+      tl.to("#cursor", { opacity: 1, duration: 0.3 }, at("c02", 0.4));
+      focus(P.card, 1.06, at("c02", 0.2), 3.5);
+      tl.to("#cursor", { x: 1500, y: 760, duration: 1.2, ease: "power2.out" }, at("c02", 0.4));
+
+      // c03 — "No campo E-mail" (@0,55 s): foco no campo, clique, digitação fictícia
+      chip("1", "E-mail", at("c03", 0));
+      tl.fromTo("#chip", { opacity: 0, y: -14 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out", immediateRender: false }, at("c03", 0));
+      focus(P.email, 1.7, at("c03", 0.0));
+      cursorTo(P.email, at("c03", 0.0), 0.55);
+      click(P.email, at("c03", 0.6));
+      tl.to("#f-email", { opacity: 1, duration: 0.1 }, at("c03", 0.62));
+      const e1 = type("#t-email", "maria.souza@empresa.com", at("c03", 0.75), 14);
+      blink("#c-email", at("c03", 0.62), at("c03", len("c03")));
+
+      // c04 — "Em Senha" (@0,26 s): pan para a senha; pontos; "olho" (@2,86 s) destaca Mostrar senha
+      chip("2", "Senha", at("c04", 0));
+      tl.set("#c-email", { opacity: 0 }, at("c04", 0));
+      focus(P.pass, 1.7, at("c04", 0.0), 0.5);
+      cursorTo(P.pass, at("c04", 0.0), 0.45);
+      click(P.pass, at("c04", 0.45));
+      tl.to("#f-pass", { opacity: 1, duration: 0.1 }, at("c04", 0.47));
+      type("#t-pass", "••••••••••", at("c04", 0.6), 9);
+      blink("#c-pass", at("c04", 0.47), at("c04", 2.3));
+      tl.set("#c-pass", { opacity: 0 }, at("c04", 2.3));
+      cursorTo(P.eye, at("c04", 2.25), 0.55);
+      { const p = scr(P.eye); tl.set("#co-eye", { x: p.x + 60, y: p.y - 34 }, 0); }
+      click(P.eye, at("c04", 2.9));
+      tl.fromTo("#co-eye", { opacity: 0, x: "-=20" }, { opacity: 1, x: "+=20", duration: 0.45, ease: "back.out(1.8)", immediateRender: false }, at("c04", 2.95));
+      tl.to("#co-eye", { opacity: 0, duration: 0.3 }, at("c04", len("c04") - 0.35));
+
+      // c05 — "Manter conectado" (@0,46 s): foco menor, anel pulsa, etiqueta explica
+      chip("3", "Manter conectado", at("c05", 0));
+      focus(P.keep, 1.4, at("c05", 0.0), 0.6);
+      cursorTo(P.keep, at("c05", 0.0), 0.5);
+      click(P.keep, at("c05", 0.5));
+      { const p = scr(P.keep); tl.set("#co-keep", { x: p.x + 230, y: p.y - 34 }, 0); }
+      tl.fromTo("#co-keep", { opacity: 0, x: "-=20" }, { opacity: 1, x: "+=20", duration: 0.45, ease: "back.out(1.8)", immediateRender: false }, at("c05", 0.85));
+      tl.to("#co-keep", { opacity: 0, duration: 0.3 }, at("c05", len("c05") - 0.35));
+
+      // c06 — "clique em Entrar" (@1,15 s): clique no botão; selo de confirmação
+      chip("4", "Entrar", at("c06", 0));
+      focus(P.enter, 1.5, at("c06", 0.0), 0.6);
+      cursorTo(P.enter, at("c06", 0.35), 0.75);
+      click(P.enter, at("c06", 1.2));
+      placeBadge("#b-ok", P.enter);
+      tl.fromTo("#b-ok", { opacity: 0, y: "+=16" }, { opacity: 1, y: "-=16", duration: 0.45, ease: "back.out(1.8)", immediateRender: false }, at("c06", 1.55));
+      tl.to("#b-ok", { opacity: 0, duration: 0.3 }, at("c06", len("c06") - 0.35));
+
+      // c07 — "Clique em Esqueci" (@1,85 s): recuo, cursor desce ao link, troca de tela
+      chip("?", "Esqueceu a senha?", at("c07", 0));
+      focus(P.card, 1.0, at("c07", 0.0), 0.7);
+      cursorTo(P.forgot, at("c07", 0.9), 0.85);
+      click(P.forgot, at("c07", 1.9));
+      tl.to(["#f-email", "#f-pass"], { opacity: 0, duration: 0.15 }, at("c07", 1.95));
+      tl.to("#shot-reset", { opacity: 1, duration: 0.35 }, at("c07", 2.05));
+      tl.to("#redact", { opacity: 0, duration: 0.2 }, at("c07", 2.05));
+
+      // c08 — "Informe o seu e-mail" e "Enviar" (@2,09 s): foco no formulário, digitação, envio
+      chip("5", "Recuperar a senha", at("c08", 0));
+      focus(P.rEmail, 1.5, at("c08", 0.0), 0.6);
+      cursorTo(P.rEmail, at("c08", 0.0), 0.45);
+      click(P.rEmail, at("c08", 0.45));
+      tl.to("#f-reset", { opacity: 1, duration: 0.1 }, at("c08", 0.47));
+      type("#t-reset", "maria.souza@empresa.com", at("c08", 0.55), 18);
+      blink("#c-reset", at("c08", 0.47), at("c08", 1.9));
+      tl.set("#c-reset", { opacity: 0 }, at("c08", 1.9));
+      cursorTo(P.rSend, at("c08", 1.75), 0.45);
+      click(P.rSend, at("c08", 2.2));
+      placeBadge("#b-mail", P.rSend);
+      tl.fromTo("#b-mail", { opacity: 0, y: "+=16" }, { opacity: 1, y: "-=16", duration: 0.45, ease: "back.out(1.8)", immediateRender: false }, at("c08", 2.5));
+      tl.to(["#win", "#chip", "#cursor", "#b-mail"], { opacity: 0, duration: 0.45, ease: "power3.in" }, at("c08", len("c08") - 0.5));
+
+      // c09 — fecho
+      tl.fromTo("#check-c", { strokeDasharray: 277, strokeDashoffset: 277 }, { strokeDashoffset: 0, duration: 0.55, ease: "power2.out" }, at("c09", 0.05));
+      tl.fromTo("#check-p", { strokeDasharray: 80, strokeDashoffset: 80 }, { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, at("c09", 0.45));
+      tl.fromTo("#check", { scale: 0.7 }, { scale: 1, duration: 0.6, ease: "back.out(2)" }, at("c09", 0.05));
+      tl.fromTo(".done", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "expo.out" }, at("c09", 0.3));
+      tl.fromTo(".done-sub", { opacity: 0 }, { opacity: 1, duration: 0.45 }, at("c09", 0.5));
+      tl.fromTo("#outro img", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45 }, at("c09", 0.6));
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

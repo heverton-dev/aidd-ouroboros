@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="timeline.js"></script>
+    <style>
+      /* blueprint: clean-product · acento índigo do app (#4f46e5) · fonte da UI Segoe UI */
+      :root {
+        --ground: #f3f4f8;
+        --ink: #12141b;
+        --muted: #5b6070;
+        --accent: #4f46e5;
+        --accent-2: #8b5cf6;
+        --font: "Segoe UI", system-ui, sans-serif;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--ground); }
+      #root { position: relative; width: 100%; height: 100%; font-family: var(--font); color: var(--ink); overflow: hidden; }
+      .clip { position: absolute; inset: 0; }
+
+      /* Background: blobs suaves + grade de pontos */
+      #bg { background: var(--ground); }
+      .blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.55; }
+      #b1 { width: 900px; height: 900px; left: 900px; top: -380px; background: radial-gradient(circle, rgba(79,70,229,.35), transparent 65%); }
+      #b2 { width: 760px; height: 760px; left: -260px; top: 520px; background: radial-gradient(circle, rgba(139,92,246,.28), transparent 65%); }
+      #b3 { width: 620px; height: 620px; left: 1400px; top: 640px; background: radial-gradient(circle, rgba(56,189,248,.22), transparent 65%); }
+      #dots { position: absolute; inset: 0; background-image: radial-gradient(rgba(18,20,27,.08) 1.4px, transparent 1.4px); background-size: 34px 34px;
+        -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 30%, transparent 75%); }
+
+      /* TitleCard */
+      #title { display: flex; flex-direction: column; align-items: center; padding-top: 250px; gap: 22px; }
+      .kicker { display: flex; align-items: center; gap: 12px; padding: 10px 22px; border-radius: 999px; background: #fff;
+        color: var(--accent); font-size: 26px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+        box-shadow: 0 8px 30px rgba(79,70,229,.14); }
+      .kicker i { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); display: block; }
+      .headline { font-size: 116px; font-weight: 800; letter-spacing: -0.035em; display: flex; gap: 26px; line-height: 1.05; }
+      .headline span { display: inline-block; }
+      .grad { background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+      /* AppWindow (vive de c01 a c03: continuidade) */
+      #stage { perspective: 1800px; }
+      #win { position: absolute; left: 320px; top: 110px; width: 1280px; height: 760px; border-radius: 18px; overflow: hidden; background: #fff;
+        box-shadow: 0 50px 120px rgba(24, 26, 60, .26), 0 0 0 1px rgba(18,20,27,.06); transform-origin: 50% 50%; }
+      #win .bar { height: 40px; background: linear-gradient(#f6f7fa, #eceef3); display: flex; align-items: center; gap: 8px; padding-left: 16px; border-bottom: 1px solid #e3e5ea; }
+      #win .bar b { width: 12px; height: 12px; border-radius: 50%; display: block; }
+      #win .bar b:nth-child(1) { background: #ff5f57; } #win .bar b:nth-child(2) { background: #febc2e; } #win .bar b:nth-child(3) { background: #28c840; }
+      #win .url { margin-left: 18px; padding: 4px 16px; border-radius: 8px; background: #fff; color: var(--muted); font-size: 15px; }
+      .shot { position: absolute; left: 0; top: 40px; width: 1280px; height: 720px; }
+      #rows-hl { position: absolute; left: 309px; top: 270px; width: 907px; height: 260px; border-radius: 10px;
+        background: linear-gradient(90deg, transparent, rgba(79,70,229,.14), transparent); }
+
+      /* StepChip, Callout, Cursor */
+      #chip { position: absolute; left: 320px; top: 38px; display: flex; align-items: center; gap: 14px; padding: 10px 20px 10px 10px;
+        border-radius: 999px; background: #fff; font-size: 30px; font-weight: 600; box-shadow: 0 10px 30px rgba(24,26,60,.12); }
+      #chip em { font-style: normal; width: 46px; height: 46px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; font-size: 28px; }
+      #callout { position: absolute; left: 900px; top: 266px; padding: 16px 24px; border-radius: 14px; background: var(--accent); color: #fff;
+        font-size: 32px; font-weight: 700; white-space: nowrap; box-shadow: 0 18px 44px rgba(79,70,229,.38); }
+      #callout::before { content: ""; position: absolute; left: -12px; top: 22px; border: 12px solid transparent; border-left: 0; border-right-color: var(--accent); }
+      #cursor { position: absolute; left: 0; top: 0; width: 46px; height: 46px; filter: drop-shadow(0 6px 8px rgba(0,0,0,.25)); }
+      .ring { position: absolute; left: 0; top: 0; width: 70px; height: 70px; margin: -35px 0 0 -35px; border-radius: 50%; border: 5px solid var(--accent); }
+
+      /* OutroCard */
+      #outro { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; padding-bottom: 80px; }
+      #check { width: 150px; height: 150px; }
+      .done { font-size: 108px; font-weight: 800; letter-spacing: -0.035em; }
+      .sub { font-size: 40px; color: var(--muted); }
+      .brand { display: flex; align-items: center; gap: 14px; font-size: 34px; font-weight: 700; color: var(--accent); }
+      .brand i { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); display: block; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-scene="all" data-start="0.0" data-duration="16.272" data-width="1920" data-height="1080">
+      <section id="bg" class="clip" data-scene="all" data-start="0.0" data-duration="16.272" data-track-index="0">
+        <div id="b1" class="blob"></div><div id="b2" class="blob"></div><div id="b3" class="blob"></div><div id="dots"></div>
+      </section>
+
+      <section id="title" class="clip" data-scene="c01" data-start="0.0" data-duration="4.122" data-track-index="1">
+        <div class="kicker"><i></i>Tutorial rápido · Painel</div>
+        <h1 class="headline"><span>Seu</span><span>primeiro</span><span class="grad">relatório</span></h1>
+      </section>
+
+      <section id="stage" class="clip" data-scene="c01-c03" data-start="0.0" data-duration="13.206" data-track-index="2">
+        <div id="win">
+          <div class="bar"><b></b><b></b><b></b><span class="url" data-layout-ignore data-layout-allow-occlusion>painel.app/relatorios</span></div>
+          <img id="shot0" class="shot" src="assets/s00.png" alt="" />
+          <img id="shot1" class="shot" src="assets/s01.png" alt="" />
+          <img id="shot2" class="shot" src="assets/s02-ready.png" alt="" />
+          <div id="rows-hl"></div>
+        </div>
+        <div id="chip"><em id="chip-n">1</em><span id="chip-t">Abra Relatórios</span></div>
+        <div id="callout">Últimos 30 dias</div>
+        <div id="ring1" class="ring"></div>
+        <div id="ring2" class="ring"></div>
+        <svg id="cursor" viewBox="0 0 24 24"><path d="M3 2l7.5 19 2.6-7.9L21 10.5z" fill="#12141b" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      </section>
+
+      <section id="outro" class="clip" data-scene="c04" data-start="13.206" data-duration="3.066" data-track-index="1">
+        <svg id="check" viewBox="0 0 100 100"><circle id="check-c" cx="50" cy="50" r="44" fill="none" stroke="#4f46e5" stroke-width="7"/>
+          <path id="check-p" d="M30 52 l14 14 l26 -30" fill="none" stroke="#4f46e5" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="done">Pronto!</div>
+        <div class="sub">Seu relatório de 30 dias está na tela.</div>
+        <div class="brand"><i></i>Painel</div>
+      </section>
+
+      <audio id="vo" src="assets/narration.wav" data-scene="all" data-start="0.0" data-duration="16.272" data-track-index="9"></audio>
+      <audio id="sfx1" src="assets/whoosh.wav" data-scene="c01" data-offset="3.45" data-start="3.45" data-duration="0.55" data-volume="0.5" data-track-index="10"></audio>
+      <audio id="sfx2" src="assets/click.wav" data-scene="c02" data-offset="0.8" data-start="4.922" data-duration="0.04" data-volume="0.9" data-track-index="11"></audio>
+      <audio id="sfx3" src="assets/click.wav" data-scene="c03" data-offset="0.65" data-start="8.294" data-duration="0.04" data-volume="0.9" data-track-index="12"></audio>
+      <audio id="sfx4" src="assets/pop.wav" data-scene="c03" data-offset="1.55" data-start="9.194" data-duration="0.28" data-volume="0.45" data-track-index="13"></audio>
+      <audio id="sfx5" src="assets/tick.wav" data-scene="c03" data-offset="2.95" data-start="10.594" data-duration="0.08" data-volume="0.4" data-track-index="14"></audio>
+      <audio id="sfx6" src="assets/whoosh.wav" data-scene="c04" data-offset="-0.35" data-start="12.856" data-duration="0.55" data-volume="0.5" data-track-index="15"></audio>
+      <audio id="sfx7" src="assets/pop.wav" data-scene="c04" data-offset="0.55" data-start="13.756" data-duration="0.28" data-volume="0.5" data-track-index="16"></audio>
+    </div>
+
+    <script>
+      // Tempos vêm de timeline.js (tutorial.py sync-composition): S.<cena>.start/end; nada de número mágico por cena.
+      const S = window.TL.scenes;
+      const at = (id, dt) => S[id].start + dt;
+      // Geometria: screenshot 1920x1080 exibido a 2/3 em #win (left 320, top 110 + barra 40 → origem 320,150).
+      const P_MENU = { x: 442, y: 287, origin: "122px 177px" };   // centro do target_box s01
+      const P_SELECT = { x: 763, y: 299, origin: "443px 189px" }; // centro do target_box s02
+
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // fundo vivo e contínuo
+      tl.fromTo("#b1", { x: 0, y: 0 }, { x: -260, y: 120, duration: S.c04.end, ease: "none" }, 0);
+      tl.fromTo("#b2", { x: 0, y: 0 }, { x: 220, y: -160, duration: S.c04.end, ease: "none" }, 0);
+      tl.fromTo("#b3", { x: 0 }, { x: -200, duration: S.c04.end, ease: "none" }, 0);
+
+      // c01 — título já visível no frame 0 (miniatura), janela espia por baixo e sobe para o lugar (continuidade)
+      tl.fromTo("#title .headline span", { y: 26, opacity: 0.25 }, { y: 0, opacity: 1, duration: 0.7, ease: "expo.out", stagger: 0.12 }, 0);
+      tl.fromTo(".kicker", { y: -14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "expo.out" }, 0.35);
+      tl.fromTo("#win", { y: 640, rotationX: 28, scale: 0.86, opacity: 0 },
+        { y: 430, rotationX: 22, scale: 0.86, opacity: 1, duration: 1.1, ease: "expo.out" }, 0.9);
+      tl.to("#title", { y: -120, opacity: 0, duration: 0.6, ease: "power3.in" }, at("c01", S.c01.end - S.c01.start - 0.75));
+      tl.to("#win", { y: 0, rotationX: 0, scale: 1, duration: 0.85, ease: "expo.inOut" }, at("c01", S.c01.end - S.c01.start - 0.7));
+      tl.set(["#shot1", "#shot2", "#rows-hl", "#callout", "#ring1", "#ring2", "#chip"], { opacity: 0 }, 0);
+      tl.set("#cursor", { x: 1560, y: 900, opacity: 0 }, 0);
+
+      // c02 — "Clique em Relatórios": cursor chega no menu enquanto a palavra é dita; clique em +0,8 s
+      tl.fromTo("#chip", { y: -16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "expo.out" }, at("c02", 0.0));
+      tl.to("#cursor", { opacity: 1, duration: 0.2 }, at("c02", 0.0));
+      tl.to("#cursor", { x: P_MENU.x, y: P_MENU.y, duration: 0.75, ease: "power3.inOut" }, at("c02", 0.02));
+      tl.to("#win", { scale: 1.45, transformOrigin: P_MENU.origin, duration: 0.8, ease: "expo.inOut" }, at("c02", 0.05));
+      tl.set("#ring1", { x: P_MENU.x, y: P_MENU.y }, at("c02", 0.0));
+      tl.fromTo("#ring1", { opacity: 1, scale: 0.35 }, { opacity: 0, scale: 1.5, duration: 0.6, ease: "power2.out" }, at("c02", 0.8));
+      tl.fromTo("#cursor", { scale: 1 }, { scale: 0.82, duration: 0.07, yoyo: true, repeat: 1 }, at("c02", 0.8));
+      tl.to("#shot1", { opacity: 1, duration: 0.2 }, at("c02", 0.86));
+      tl.to("#win", { scale: 1, duration: 0.8, ease: "expo.inOut" }, at("c02", 2.55));
+
+      // c03 — "Em Período, escolha Últimos 30 dias. A tabela se atualiza na hora."
+      tl.set("#chip-n", { textContent: "2" }, at("c03", 0));
+      tl.set("#chip-t", { textContent: "Escolha o período" }, at("c03", 0));
+      tl.fromTo("#chip", { scale: 0.92 }, { scale: 1, duration: 0.4, ease: "back.out(2)" }, at("c03", 0));
+      tl.to("#cursor", { x: P_SELECT.x, y: P_SELECT.y, duration: 0.6, ease: "power3.inOut" }, at("c03", 0.02));
+      tl.to("#win", { scale: 1.5, transformOrigin: P_SELECT.origin, duration: 0.8, ease: "expo.inOut" }, at("c03", 0.05));
+      tl.set("#ring2", { x: P_SELECT.x, y: P_SELECT.y }, at("c03", 0));
+      tl.fromTo("#ring2", { opacity: 1, scale: 0.35 }, { opacity: 0, scale: 1.5, duration: 0.6, ease: "power2.out" }, at("c03", 0.65));
+      tl.fromTo("#cursor", { scale: 1 }, { scale: 0.82, duration: 0.07, yoyo: true, repeat: 1 }, at("c03", 0.65));
+      tl.to("#shot2", { opacity: 1, duration: 0.25 }, at("c03", 1.5));
+      tl.fromTo("#callout", { opacity: 0, x: -24, scale: 0.9 }, { opacity: 1, x: 0, scale: 1, duration: 0.5, ease: "back.out(1.8)" }, at("c03", 1.55));
+      tl.to("#callout", { opacity: 0, x: 16, duration: 0.3, ease: "power2.in" }, at("c03", 2.45));
+      tl.to("#win", { scale: 1, duration: 0.8, ease: "expo.inOut" }, at("c03", 2.45));
+      tl.to("#cursor", { x: 1180, y: 760, duration: 0.8, ease: "power3.inOut" }, at("c03", 2.45));
+      tl.fromTo("#rows-hl", { opacity: 1, xPercent: -100 }, { opacity: 1, xPercent: 100, duration: 1.1, ease: "power2.inOut" }, at("c03", 2.95));
+      tl.to("#rows-hl", { opacity: 0, duration: 0.2 }, at("c03", 4.05));
+      tl.to("#win", { y: -40, scale: 0.94, opacity: 0, duration: 0.5, ease: "power3.in" }, at("c03", S.c03.end - S.c03.start - 0.5));
+      tl.to(["#chip", "#cursor"], { opacity: 0, duration: 0.35 }, at("c03", S.c03.end - S.c03.start - 0.5));
+
+      // c04 — check desenhado + "Pronto!"
+      tl.fromTo("#check-c", { strokeDasharray: 277, strokeDashoffset: 277 }, { strokeDashoffset: 0, duration: 0.55, ease: "power2.out" }, at("c04", 0.05));
+      tl.fromTo("#check-p", { strokeDasharray: 80, strokeDashoffset: 80 }, { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, at("c04", 0.45));
+      tl.fromTo("#check", { scale: 0.7 }, { scale: 1, duration: 0.6, ease: "back.out(2)" }, at("c04", 0.05));
+      tl.fromTo(".done", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "expo.out" }, at("c04", 0.35));
+      tl.fromTo(".sub", { opacity: 0 }, { opacity: 1, duration: 0.45 }, at("c04", 0.55));
+      tl.fromTo(".brand", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45 }, at("c04", 0.6));
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AIDDCanonicalHandoffEnvelope",
+  "description": "Contrato universal de integridade criptográfica HMAC-SHA256 e passagem por ponteiros para skills e pipelines",
+  "type": "object",
+  "required": ["envelope_format", "signature_algorithm", "hmac_sha256", "payload"],
+  "properties": {
+    "envelope_format": { "type": "string", "default": "AIDD-CANONICAL-HANDOFF" },
+    "signature_algorithm": { "type": "string", "default": "HMAC-SHA256" },
+    "hmac_sha256": { "type": "string", "description": "Assinatura HMAC-SHA256 do payload canônico" },
+    "payload": {
+      "type": "object",
+      "required": ["schema_version", "producer_skill", "timestamp", "status", "artifacts_pointers"],
+      "properties": {
+        "schema_version": { "type": "string", "default": "2.0-crypto" },
+        "producer_skill": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "status": { "type": "string", "enum": ["SUCCESS", "FAILED", "PARTIAL"] },
+        "artifacts_pointers": {
+          "type": "object",
+          "description": "Dicionário de ponteiros: cada entrada contém path, sha256 e tamanho_bytes"
+        },
+        "domain_metadata": {
+          "type": "object",
+          "description": "Metadados semânticos compactos para consumo da próxima etapa"
+        }
+      }
+    }
+  }
+}

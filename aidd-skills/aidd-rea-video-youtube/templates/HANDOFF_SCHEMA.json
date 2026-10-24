@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AIDDHandoffEnvelope",
+  "description": "Contrato universal de entrada e saída (Lego Pipe) para comunicação desacoplada entre skills",
+  "type": "object",
+  "required": ["schema_version", "producer_skill", "timestamp", "status", "artifacts"],
+  "properties": {
+    "schema_version": { "type": "string", "default": "1.0" },
+    "producer_skill": { "type": "string" },
+    "producer_version": { "type": "string" },
+    "timestamp": { "type": "string" },
+    "status": { "type": "string", "enum": ["SUCCESS", "FAILED", "PARTIAL"] },
+    "artifacts": {
+      "type": "object",
+      "description": "Caminhos relativos ou absolutos dos artefatos gerados"
+    },
+    "domain_data": {
+      "type": "object",
+      "description": "Metadados semânticos para consumo da próxima skill"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://aidd.framework/schemas/handoff-v1.json",
+  "producer_skill": "aidd-skill-creator",
+  "producer_version": "1.1.0",
+  "timestamp": "2026-10-24T11:00:00Z",
+  "status": "SUCCESS",
+  "artifacts": {
+    "skill_dir": "aidd-dark-storycraft",
+    "skill_md": "aidd-dark-storycraft\\SKILL.md",
+    "agents_md": "aidd-dark-storycraft\\AGENTS.md",
+    "rules_md": "aidd-dark-storycraft\\RULES.md",
+    "dependencies": "aidd-dark-storycraft\\dependencies.json",
+    "sync_script": "aidd-dark-storycraft\\sync.ps1"
+  },
+  "domain_data": {
+    "skill_name": "aidd-dark-storycraft",
+    "author": "Heverton Eduardo Peres",
+    "can_orchestrate": true
+  }
+}

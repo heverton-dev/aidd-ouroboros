@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aidd-rea-web-saas"
+version = "1.0.0"
+description = "Engenharia reversa profunda de sites, SaaS e web apps, extraindo tokens CSS, rotas, APIs e estrutura UX em contratos REA."
+readme = "README.md"
+authors = [{ name = "Heverton Eduardo Peres" }]
+license = { text = "MIT" }
+requires-python = ">=3.10"
+keywords = ["aidd", "web-reengineer", "reverse-engineering", "rea", "design-tokens", "saas-analysis"]
+dependencies = [
+    "beautifulsoup4>=4.12.0",
+    "urllib3>=2.0.0"
+]
+
+[project.scripts]
+web-reengineer = "web_reengineer:main"
+
+[tool.uv]
+managed = true
+package = false

@@ -1,0 +1,41 @@
+{
+  "version": "1.0.0",
+  "meta_pipeline_id": "aidd-ouroboros",
+  "name": "AIDD-OUROBOROS Meta-Engine",
+  "author": "Heverton Eduardo Peres",
+  "architecture": "infinite-flywheel-ipo",
+  "macro_nodes": [
+    {
+      "id": "macro-01-ingestion-rea",
+      "name": "Desconstrucao e Engenharia Reversa",
+      "skill": "aidd-video-reengineer",
+      "lobulo": "esquerdo",
+      "input_contract": "polymorphic-source",
+      "output_contract": "HANDOFF.json"
+    },
+    {
+      "id": "macro-02-synthesis-storycraft",
+      "name": "Transcriacao e Modelagem de Dominio",
+      "skill": "aidd-dark-storycraft",
+      "lobulo": "centro",
+      "input_contract": "HANDOFF.json",
+      "output_contract": "01_roteiro_ptbr.json"
+    },
+    {
+      "id": "macro-03-swarm-and-scaffold",
+      "name": "Orquestracao e Fabrica de Blocos",
+      "skill": "aidd-skill-swarm",
+      "lobulo": "direito",
+      "input_contract": "01_roteiro_ptbr.json",
+      "output_contract": "PIPELINE.json"
+    },
+    {
+      "id": "macro-04-materialization-feedback",
+      "name": "Materializacao e Retroalimentacao",
+      "skill": "aidd-video-materializer",
+      "lobulo": "direito",
+      "input_contract": "PIPELINE.json",
+      "output_contract": "final_delivery_handoff.json"
+    }
+  ]
+}

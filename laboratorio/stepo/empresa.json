@@ -1,0 +1,29 @@
+{
+  "empresa": {
+    "nome": "Conexão",
+    "slug": "conexao"
+  },
+  "marca": {
+    "pasta": "marca",
+    "tokens": "marca/design-tokens.json"
+  },
+  "vitrine": {
+    "proximo_s": 5
+  },
+  "aplicativos": [
+    {
+      "slug": "cadastros",
+      "nome": "Cadastros Conexão",
+      "pasta": "../cadastros-conexao",
+      "descricao": "Portal de cadastro de clientes PF e PJ"
+    }
+  ],
+  "publicacao": {
+    "dominio": "tutoriais.vpsconexao.org",
+    "ssh": "vps_conexao",
+    "pasta_vps": "/opt/tutoriais/cadastros-conexao/site",
+    "automatica": false,
+    "servico": "tutoriais-cadastros-conexao_web",
+    "notas": "pasta montada pelo serviço do Swarm (stack em cadastros-conexao/06-publicacao); atualizar não exige redeploy"
+  }
+}

@@ -1,0 +1,10 @@
+description = "Maestro agnóstico que cria tutoriais animados (MP4 + narração + legendas) de qualquer plataforma a partir de um pedido em linguagem natural."
+prompt = """
+Leia INTEGRALMENTE o arquivo ~/.agents/skills/aidd-tutorial-creator/SKILL.md e siga-o como instrução de operação.
+Se o caminho não existir, procure a pasta aidd-tutorial-creator (contendo references/ e scripts/) em ~/.gemini/skills, ~/.gemini/antigravity/skills, ~/.claude/skills ou ~/.hermes/skills.
+
+Pedido do usuário a executar:
+{{args}}
+
+Passos: classificar o tipo de alvo; anunciar rota e fase em 1 linha; ler ESTADO.md do projeto se existir e retomar; carregar só a referência da fase corrente; executar a fase e parar no gate.
+"""

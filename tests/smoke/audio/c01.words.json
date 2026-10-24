@@ -1,0 +1,43 @@
+[
+ {
+  "text": "Em",
+  "start": 0.098,
+  "end": 0.24
+ },
+ {
+  "text": "poucos",
+  "start": 0.252,
+  "end": 0.562
+ },
+ {
+  "text": "segundos,",
+  "start": 0.574,
+  "end": 1.121
+ },
+ {
+  "text": "você",
+  "start": 1.157,
+  "end": 1.431
+ },
+ {
+  "text": "abre",
+  "start": 1.443,
+  "end": 1.705,
+  "brk": true
+ },
+ {
+  "text": "seu",
+  "start": 1.717,
+  "end": 1.883
+ },
+ {
+  "text": "primeiro",
+  "start": 1.895,
+  "end": 2.24
+ },
+ {
+  "text": "relatório.",
+  "start": 2.252,
+  "end": 2.848
+ }
+]

@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AiddUniversalHandoffEnvelope",
+  "type": "object",
+  "required": ["$schema", "producer_skill", "status", "artifacts", "domain_data"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "producer_skill": { "type": "string" },
+    "producer_version": { "type": "string" },
+    "timestamp": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["SUCCESS", "FAILED", "PARTIAL"]
+    },
+    "artifacts": {
+      "type": "object"
+    },
+    "domain_data": {
+      "type": "object"
+    }
+  }
+}

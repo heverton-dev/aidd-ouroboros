@@ -1,0 +1,20 @@
+{
+  "$schema": "https://aidd.framework/schemas/handoff-v1.json",
+  "producer_skill": "aidd-skill-creator",
+  "producer_version": "1.1.0",
+  "timestamp": "2026-10-24T11:00:00Z",
+  "status": "SUCCESS",
+  "artifacts": {
+    "skill_dir": "aidd-remotion-motion",
+    "skill_md": "aidd-remotion-motion\\SKILL.md",
+    "agents_md": "aidd-remotion-motion\\AGENTS.md",
+    "rules_md": "aidd-remotion-motion\\RULES.md",
+    "dependencies": "aidd-remotion-motion\\dependencies.json",
+    "sync_script": "aidd-remotion-motion\\sync.ps1"
+  },
+  "domain_data": {
+    "skill_name": "aidd-remotion-motion",
+    "author": "Heverton Eduardo Peres",
+    "can_orchestrate": true
+  }
+}

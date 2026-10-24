@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aidd-orchestrate-pipeline-creator"
+version = "1.0.0"
+description = "Garimpa, audita, define e canoniza pipelines composíveis em grafos DAG acíclicos com contratos universais e runners autônomos de IA."
+readme = "README.md"
+authors = [{ name = "Heverton Eduardo Peres" }]
+license = { text = "MIT" }
+requires-python = ">=3.10"
+keywords = ["aidd", "pipeline-creator", "orchestrator", "ai-agents", "agent-pipelines", "dag", "scout"]
+dependencies = [
+    "pyyaml>=6.0.1",
+    "rich>=13.7.0",
+    "networkx>=3.2.1"
+]
+
+[project.scripts]
+pipeline-creator = "pipeline_creator:main"
+
+[tool.uv]
+managed = true
+package = false

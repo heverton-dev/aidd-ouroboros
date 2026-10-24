@@ -1,0 +1,50 @@
+{
+  "$schema": "https://aidd.framework/schemas/dependencies-v1.json",
+  "meta_pipeline": "aidd-ouroboros",
+  "version": "1.0.0",
+  "author": "Heverton Eduardo Peres",
+  "dependencies": {
+    "core_skills": [
+      {
+        "name": "aidd-video-reengineer",
+        "role": "Dissecacao REA de evidencias audiovisuais"
+      },
+      {
+        "name": "aidd-skill-creator",
+        "role": "Fabrica autonoma de novas micro-skills"
+      },
+      {
+        "name": "aidd-skill-swarm",
+        "role": "Orquestrador de enxames e construtor de pipelines DAG"
+      },
+      {
+        "name": "aidd-dark-storycraft",
+        "role": "Roteirizacao e transcriacao com hooks de alta retencao"
+      },
+      {
+        "name": "aidd-remotion-motion",
+        "role": "Gerador de graficos procedurais a 60fps"
+      },
+      {
+        "name": "aidd-video-materializer",
+        "role": "Sintetizador e compositor do produto final MP4"
+      }
+    ],
+    "system_binaries": [
+      { "name": "git", "required": true, "purpose": "Controle de versao e rastreabilidade" },
+      { "name": "python", "required": true, "purpose": "Execucao dos scripts deterministas" },
+      { "name": "ffmpeg", "required": true, "purpose": "Muxing e renderizacao audiovisual" },
+      { "name": "tesseract", "required": true, "purpose": "OCR local em zero tokens" },
+      { "name": "yt-dlp", "required": true, "purpose": "Aquisicao de dados e metadados de video" },
+      { "name": "bun", "required": true, "purpose": "Runtime JavaScript para motor Remotion" },
+      { "name": "edge-tts", "required": true, "purpose": "Sintese de voz neural natural gratuita" },
+      { "name": "gh", "required": false, "purpose": "Consultas autenticadas de alta capacidade no GitHub" }
+    ],
+    "python_packages": [
+      "faster-whisper",
+      "edge-tts",
+      "pyyaml",
+      "rich"
+    ]
+  }
+}

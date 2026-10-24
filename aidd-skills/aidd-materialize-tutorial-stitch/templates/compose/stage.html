@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="{{LANG}}" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="timeline.js"></script>
+    <link rel="stylesheet" href="brand/brand.css" />
+    <!-- gerado por tutorial.py compose a partir de spec.json; edite a spec (ou overrides/<cena>.js), não este arquivo -->
+    <style>
+      /* Design system do produto: só variáveis --brand-* e os neutros já usados em acessar-o-sistema. */
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--brand-bg); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; color: var(--brand-text); font-family: var(--brand-font-body); }
+      .clip { position: absolute; inset: 0; }
+
+      #bg { background: var(--brand-bg); }
+      .halo { position: absolute; border-radius: 50%; filter: blur(80px); }
+      #h1 { width: 980px; height: 980px; left: 1060px; top: -420px; background: radial-gradient(circle, var(--brand-primary-light), transparent 66%); }
+      #h2 { width: 820px; height: 820px; left: -300px; top: 520px; background: radial-gradient(circle, {{ACCENT_16}}, transparent 66%); }
+      #dots { position: absolute; inset: 0; background-image: radial-gradient(rgba(15, 23, 42, 0.08) 1.4px, transparent 1.4px); background-size: 34px 34px;
+        -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 30%, transparent 76%); }
+
+      #title { display: flex; flex-direction: column; align-items: center; padding-top: 170px; gap: 26px; }
+      #title img { height: 84px; }
+      .headline { font-family: var(--brand-font-heading); font-weight: 700; font-size: 96px; letter-spacing: -0.03em; line-height: 1.04; text-align: center; }
+      .headline span { display: inline-block; }
+      .headline .brandword { color: var(--brand-primary); }
+      .sub { font-size: 38px; color: var(--brand-text-muted); }
+
+      /* AppWindow: navegador com o portal; #page rola a captura de página inteira */
+      #stage { perspective: 1800px; }
+      #win { position: absolute; left: 320px; top: 110px; width: 1280px; height: 760px; border-radius: 16px; overflow: hidden; background: var(--brand-bg);
+        box-shadow: 0 50px 120px rgba(15, 23, 42, 0.22), 0 0 0 1px rgba(15, 23, 42, 0.06); }
+      .bar { position: relative; z-index: 2; height: 40px; background: var(--brand-bg); border-bottom: 1px solid var(--brand-border); display: flex; align-items: center; gap: 8px; padding-left: 16px; }
+      .bar b { width: 12px; height: 12px; border-radius: 50%; display: block; background: var(--brand-border-hover); }
+      .url { margin-left: 18px; padding: 4px 16px; border-radius: 8px; background: var(--brand-surface); border: 1px solid var(--brand-border);
+        color: var(--brand-text-muted); font-size: 15px; }
+      #view { position: absolute; left: 0; top: 40px; width: 1280px; height: 720px; overflow: hidden; }
+      #page { position: absolute; left: 0; top: 0; width: 1280px; }
+      .shot { position: absolute; left: 0; top: 0; width: 1280px; height: auto; display: block; }
+      /* campos simulados por cima da captura (coordenadas da página a 2/3) */
+      .field { position: absolute; opacity: 0; border-radius: 8px; background: var(--brand-surface); display: flex; align-items: center;
+        font-size: 15px; color: var(--brand-text); white-space: pre; }
+      .caret { display: inline-block; width: 1.5px; height: 18px; margin-left: 1px; background: var(--brand-primary); }
+
+      #chip { position: absolute; left: 320px; top: 34px; display: flex; align-items: center; gap: 14px; padding: 10px 22px 10px 10px; border-radius: 999px;
+        background: var(--brand-surface); font-size: 30px; font-weight: 600; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12); opacity: 0; }
+      #chip em { font-style: normal; width: 46px; height: 46px; border-radius: 50%; background: var(--brand-primary); color: var(--brand-surface);
+        display: grid; place-items: center; font-size: 28px; }
+      .spot { position: absolute; border-radius: 14px; border: 4px solid var(--brand-accent); box-shadow: 0 0 0 6px var(--brand-primary-light); opacity: 0; }
+      .callout { position: absolute; padding: 16px 24px; border-radius: 12px; background: var(--brand-primary); color: var(--brand-surface);
+        font-size: 30px; font-weight: 600; white-space: nowrap; box-shadow: 0 18px 44px {{PRIMARY_32}}; opacity: 0; }
+      .badge { position: absolute; white-space: nowrap; display: flex; align-items: center; gap: 14px; padding: 14px 24px 14px 14px; border-radius: 999px; background: var(--brand-surface);
+        font-size: 30px; font-weight: 600; box-shadow: 0 16px 40px rgba(15, 23, 42, 0.16); opacity: 0; }
+      .badge i { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; font-style: normal; background: var(--brand-primary-light); color: var(--brand-primary); }
+      #cursor { position: absolute; left: 0; top: 0; width: 46px; height: 46px; filter: drop-shadow(0 6px 8px rgba(15, 23, 42, 0.28)); opacity: 0; }
+      .ring { position: absolute; left: 0; top: 0; width: 72px; height: 72px; margin: -36px 0 0 -36px; border-radius: 50%; border: 5px solid var(--brand-accent); opacity: 0; }
+
+      #outro { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; padding-bottom: 90px; }
+      #check { width: 150px; height: 150px; }
+      .done { font-family: var(--brand-font-heading); font-size: 104px; font-weight: 700; letter-spacing: -0.03em; }
+      .done-sub { font-size: 38px; color: var(--brand-text-muted); }
+      #outro img { height: 64px; margin-top: 10px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-scene="all" data-start="0.0" data-duration="{{DUR}}" data-width="1920" data-height="1080">
+      <section id="bg" class="clip" data-scene="all" data-start="0.0" data-duration="{{DUR}}" data-track-index="0">
+        <div id="h1" class="halo"></div><div id="h2" class="halo"></div><div id="dots"></div>
+      </section>
+
+      <section id="title" class="clip" data-scene="{{TITLE_ID}}" data-start="0.0" data-duration="1" data-track-index="1">
+        <img src="brand/logo.png" alt="{{MARCA}}" />
+        <h1 class="headline"><span>{{L1}}</span><br /><span class="brandword">{{L2}}</span></h1>
+        <div class="sub">{{SUB}}</div>
+      </section>
+
+      <section id="stage" class="clip" data-scene="{{TITLE_ID}}-{{LAST}}" data-start="0.0" data-duration="1" data-track-index="2">
+        <div id="win">
+          <div class="bar"><b></b><b></b><b></b><span class="url" data-layout-ignore data-layout-allow-occlusion>{{URL}}</span></div>
+          <div id="view"><div id="page" data-layout-ignore data-layout-allow-occlusion>
+          {{IMGS}}
+          {{FIELDS}}
+          </div></div>
+        </div>
+        <div id="chip"><em id="chip-n">1</em><span id="chip-t"></span></div>
+        {{OVERLAYS}}
+        <div id="ring" class="ring"></div>
+        <svg id="cursor" viewBox="0 0 24 24"><path d="M3 2l7.5 19 2.6-7.9L21 10.5z" fill="#0F172A" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      </section>
+
+      <section id="outro" class="clip" data-scene="{{OUTRO_ID}}" data-start="0.0" data-duration="1" data-track-index="1">
+        <svg id="check" viewBox="0 0 100 100"><circle id="check-c" cx="50" cy="50" r="44" fill="none" stroke="{{PRIMARY}}" stroke-width="7"/>
+          <path id="check-p" d="M30 52 l14 14 l26 -30" fill="none" stroke="{{PRIMARY}}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="done">{{PRONTO}}</div>
+        <div class="done-sub">{{OUTRO_SUB}}</div>
+        <img src="brand/logo.png" alt="{{MARCA}}" />
+      </section>
+
+      <audio id="vo" src="assets/narration.wav" data-scene="all" data-start="0.0" data-duration="{{DUR}}" data-track-index="9"></audio>
+      {{AUDIO}}
+    </div>
+
+    <script>
+      // Tempos: timeline.js (tutorial.py sync-composition). Geometria pré-calculada em build.py.
+      const S = window.TL.scenes;
+      const at = (id, dt) => S[id].start + dt;
+      const len = (id) => S[id].end - S[id].start;
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const click = (x, y, t) => {
+        tl.set("#ring", { x, y }, t);
+        tl.fromTo("#ring", { opacity: 1, scale: 0.35 }, { opacity: 0, scale: 1.5, duration: 0.6, ease: "power2.out", immediateRender: false }, t);
+        tl.fromTo("#cursor", { scale: 1 }, { scale: 0.82, duration: 0.07, yoyo: true, repeat: 1, immediateRender: false }, t); };
+      const chip = (n, txt, t, first) => { tl.set("#chip-n", { textContent: n }, t); tl.set("#chip-t", { textContent: txt }, t);
+        if (first) tl.fromTo("#chip", { opacity: 0, y: -14 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out", immediateRender: false }, t);
+        else tl.fromTo("#chip", { scale: 0.92 }, { scale: 1, duration: 0.4, ease: "back.out(2)", immediateRender: false }, t); };
+
+      tl.set("#cursor", { x: 1500, y: 900 }, 0);
+      tl.set("#win", { transformOrigin: "0 0" }, 0);
+      tl.fromTo("#h1", { x: 0, y: 0 }, { x: -240, y: 140, duration: {{DUR}}, ease: "none" }, 0);
+      tl.fromTo("#h2", { x: 0, y: 0 }, { x: 220, y: -160, duration: {{DUR}}, ease: "none" }, 0);
+
+      // abertura: título visível no frame 0; janela espia por baixo e sobe (continuidade A→B)
+      tl.fromTo("#title .headline span", { y: 24, opacity: 0.3 }, { y: 0, opacity: 1, duration: 0.7, ease: "expo.out", stagger: 0.14 }, 0);
+      tl.fromTo("#title img", { y: -16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "expo.out" }, 0.3);
+      tl.fromTo("#title .sub", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 1.0);
+      tl.fromTo("#stage", { y: 820, rotationX: 24, scale: 0.86, opacity: 0 }, { y: 600, rotationX: 20, scale: 0.86, opacity: 1, duration: 1.2, ease: "expo.out" }, 1.6);
+      tl.to("#title", { y: -140, opacity: 0, duration: 0.6, ease: "power3.in" }, at("{{TITLE_ID}}", len("{{TITLE_ID}}") - 0.85));
+      tl.to("#stage", { y: 0, rotationX: 0, scale: 1, duration: 0.9, ease: "expo.inOut" }, at("{{TITLE_ID}}", len("{{TITLE_ID}}") - 0.8));
+
+      {{ACTIONS}}{{OVERRIDES}}
+
+      // saída da janela e fecho
+      tl.to(["#win", "#chip", "#cursor"], { opacity: 0, duration: 0.45, ease: "power3.in" }, at("{{LAST}}", len("{{LAST}}") - 0.5));
+      tl.fromTo("#check-c", { strokeDasharray: 277, strokeDashoffset: 277 }, { strokeDashoffset: 0, duration: 0.55, ease: "power2.out" }, at("{{OUTRO_ID}}", 0.05));
+      tl.fromTo("#check-p", { strokeDasharray: 80, strokeDashoffset: 80 }, { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, at("{{OUTRO_ID}}", 0.45));
+      tl.fromTo("#check", { scale: 0.7 }, { scale: 1, duration: 0.6, ease: "back.out(2)" }, at("{{OUTRO_ID}}", 0.05));
+      tl.fromTo(".done", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "expo.out" }, at("{{OUTRO_ID}}", 0.3));
+      tl.fromTo(".done-sub", { opacity: 0 }, { opacity: 1, duration: 0.45 }, at("{{OUTRO_ID}}", 0.5));
+      tl.fromTo("#outro img", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45 }, at("{{OUTRO_ID}}", 0.6));
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

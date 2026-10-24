@@ -1,0 +1,37 @@
+{
+  "$schema": "https://aidd.framework/schemas/dependencies-v1.json",
+  "skill_name": "aidd-orchestrate-skill-creator",
+  "version": "1.1.0",
+  "author": "Heverton Eduardo Peres",
+  "dependencies": {
+    "skills_required": [
+      {
+        "name": "aidd-video-reengineer",
+        "optional": true,
+        "purpose": "Conector para geração de skills a partir de vídeos"
+      }
+    ],
+    "mcp_servers": {
+      "github": {
+        "optional": true,
+        "purpose": "Garimpo e inspeção segura de repositórios e código no GitHub com isolamento de credenciais"
+      }
+    },
+    "system_binaries": [
+      {
+        "name": "git",
+        "required": true,
+        "purpose": "Versionamento e controle de branches"
+      },
+      {
+        "name": "gh",
+        "required": false,
+        "purpose": "GitHub CLI para consultas autenticadas com rate limits elevados"
+      }
+    ],
+    "python_packages": [
+      "pyyaml",
+      "rich"
+    ]
+  }
+}

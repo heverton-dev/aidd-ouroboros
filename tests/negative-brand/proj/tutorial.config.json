@@ -1,0 +1,32 @@
+{
+  "format": "16:9",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "duration": 52.0,
+  "language": "pt-BR",
+  "style": "clean-product",
+  "voice": {
+    "engine": "edge",
+    "voice": "pt-BR-FranciscaNeural",
+    "speed": 1.0,
+    "lang": "pt-br",
+    "direction": ""
+  },
+  "captions": {
+    "style": "highlight",
+    "case": "normal",
+    "font": "Segoe UI",
+    "accent": "#00568F",
+    "position": "bottom",
+    "size": "m",
+    "srt": true
+  },
+  "music": {
+    "file": null,
+    "gain_db": -20
+  },
+  "sfx": true,
+  "quality": "final",
+  "gates": "todos"
+}

@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "title": "Título do tutorial",
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "duration": 12.0,
+    "language": "pt-BR",
+    "style": "clean-product",
+    "voice": "pf_dora",
+    "wps": 2.5,
+    "screen_box": [0, 0, 1920, 1080]
+  },
+  "scenes": [
+    {
+      "id": "c01",
+      "start": 0.0,
+      "end": 4.0,
+      "layout": "title",
+      "steps": [],
+      "narration": "Em doze segundos, você abre seus relatórios.",
+      "audio": "audio/c01.wav",
+      "visual": "Título entra palavra por palavra sobre o mundo do estilo; logo no canto.",
+      "camera": "drift 2 % para dentro",
+      "on_screen_text": ["Seu primeiro relatório"],
+      "keyframe_in": "keyframes/c01-in.png",
+      "keyframe_out": "keyframes/c01-out.png",
+      "transition_out": "whip para a janela do app",
+      "redact": []
+    },
+    {
+      "id": "c02",
+      "start": 4.0,
+      "end": 9.0,
+      "layout": "zoom-focus",
+      "steps": ["s01"],
+      "narration": "Clique em “Relatórios”, no menu da esquerda.",
+      "audio": "audio/c02.wav",
+      "visual": "Janela do app entra com leve rotação; zoom no item Relatórios; cursor entra em curva e clica.",
+      "camera": "zoom 1,8× no target_box s01",
+      "zoom": 1.8,
+      "focus_boxes": [],
+      "on_screen_text": ["Menu → Relatórios"],
+      "keyframe_in": "keyframes/c02-in.png",
+      "keyframe_out": "keyframes/c02-out.png",
+      "transition_out": "corte para o outro",
+      "redact": []
+    },
+    {
+      "id": "c03",
+      "start": 9.0,
+      "end": 12.0,
+      "layout": "outro",
+      "steps": [],
+      "narration": "Pronto. Agora é com você.",
+      "audio": "audio/c03.wav",
+      "visual": "Logo e frase final; CTA com a URL.",
+      "camera": "estática",
+      "on_screen_text": ["app.exemplo.com"],
+      "keyframe_in": "keyframes/c03-in.png",
+      "keyframe_out": "keyframes/c03-out.png",
+      "transition_out": "fade para preto",
+      "redact": []
+    }
+  ]
+}

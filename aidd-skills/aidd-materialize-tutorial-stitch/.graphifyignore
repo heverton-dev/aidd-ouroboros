@@ -1,0 +1,4 @@
+# fora do grafo: biblioteca minificada de terceiros e o próprio grafo
+templates/vendor/
+graphify-out/
+docs/*.pdf

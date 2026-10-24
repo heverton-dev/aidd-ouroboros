@@ -1,0 +1,6 @@
+# Dependências para aidd-skill-swarm
+# Instale com: uv pip install -r requirements.txt OU pip install -r requirements.txt
+
+pyyaml>=6.0.1
+rich>=13.7.0
+networkx>=3.2.1

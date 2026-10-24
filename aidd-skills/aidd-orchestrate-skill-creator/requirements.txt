@@ -1,0 +1,5 @@
+# Dependências para aidd-skill-creator
+# Instale com: pip install -r requirements.txt OU uv pip install -r requirements.txt
+
+pyyaml>=6.0.1
+rich>=13.7.0

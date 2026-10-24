@@ -1,0 +1,23 @@
+{
+  "$schema": "https://aidd.framework/schemas/dependencies-v1.json",
+  "skill_name": "aidd-rea-app-android",
+  "version": "1.0.0",
+  "author": "Heverton Eduardo Peres",
+  "dependencies": {
+    "skills_required": [],
+    "mcp_servers": {},
+    "system_binaries": [
+      {
+        "name": "python",
+        "required": true,
+        "purpose": "Execução do motor de análise estática"
+      },
+      {
+        "name": "git",
+        "required": true,
+        "purpose": "Versionamento e controle de estado"
+      }
+    ],
+    "python_packages": []
+  }
+}

@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aidd-rea-router"
+version = "1.0.0"
+description = "Roteador inteligente de engenharia reversa que classifica qualquer entrada e despacha para o dissecador especialista REA correto."
+readme = "README.md"
+authors = [{ name = "Heverton Eduardo Peres" }]
+license = { text = "MIT" }
+requires-python = ">=3.10"
+keywords = ["aidd", "rea-router", "reverse-engineering", "intent-routing", "rea", "classification"]
+dependencies = []
+
+[project.scripts]
+rea-router = "rea_router:main"
+
+[tool.uv]
+managed = true
+package = false

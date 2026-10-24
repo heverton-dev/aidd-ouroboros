@@ -1,0 +1,44 @@
+{
+  "$schema": "https://aidd.framework/schemas/dependencies-v1.json",
+  "skill_name": "aidd-rea-router",
+  "version": "1.0.0",
+  "author": "Heverton Eduardo Peres",
+  "dependencies": {
+    "skills_required": [
+      {
+        "name": "aidd-video-reengineer",
+        "required": true,
+        "purpose": "Dissecação de vídeos do YouTube e arquivos MP4"
+      },
+      {
+        "name": "aidd-web-reengineer",
+        "required": true,
+        "purpose": "Dissecação de sites e aplicações SaaS"
+      },
+      {
+        "name": "aidd-social-reengineer",
+        "required": true,
+        "purpose": "Dissecação de carrosséis e posts sociais"
+      },
+      {
+        "name": "aidd-app-reengineer",
+        "required": true,
+        "purpose": "Dissecação de APKs e binários nativos"
+      }
+    ],
+    "mcp_servers": {},
+    "system_binaries": [
+      {
+        "name": "python",
+        "required": true,
+        "purpose": "Execução do motor de classificação e despacho"
+      },
+      {
+        "name": "git",
+        "required": true,
+        "purpose": "Versionamento e controle de estado"
+      }
+    ],
+    "python_packages": []
+  }
+}

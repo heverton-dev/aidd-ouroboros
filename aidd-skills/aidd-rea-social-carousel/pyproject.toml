@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aidd-rea-social-carousel"
+version = "1.0.0"
+description = "Engenharia reversa de carrosséis, posts sociais e infográficos, extraindo copywriting slide a slide, ganchos visuais e design tokens REA."
+readme = "README.md"
+authors = [{ name = "Heverton Eduardo Peres" }]
+license = { text = "MIT" }
+requires-python = ">=3.10"
+keywords = ["aidd", "social-reengineer", "carousel-reengineering", "copywriting-extraction", "rea", "design-tokens"]
+dependencies = [
+    "pillow>=10.0.0"
+]
+
+[project.scripts]
+social-reengineer = "social_reengineer:main"
+
+[tool.uv]
+managed = true
+package = false

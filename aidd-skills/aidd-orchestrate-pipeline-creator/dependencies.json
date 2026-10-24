@@ -1,0 +1,33 @@
+{
+  "$schema": "https://aidd.framework/schemas/dependencies-v1.json",
+  "skill_name": "aidd-orchestrate-pipeline-creator",
+  "version": "1.0.0",
+  "author": "Heverton Eduardo Peres",
+  "dependencies": {
+    "skills_required": [
+      {
+        "name": "aidd-skill-creator",
+        "required": true,
+        "purpose": "Fabricar novas micro-skills identificadas como lacunas no pipeline"
+      }
+    ],
+    "mcp_servers": {},
+    "system_binaries": [
+      {
+        "name": "git",
+        "required": true,
+        "purpose": "Versionamento e governança"
+      },
+      {
+        "name": "gh",
+        "required": false,
+        "purpose": "Scout de repositórios e workflows de referência no GitHub"
+      }
+    ],
+    "python_packages": [
+      "pyyaml",
+      "rich",
+      "networkx"
+    ]
+  }
+}

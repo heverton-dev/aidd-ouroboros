@@ -1,0 +1,22 @@
+{
+  "$schema": "https://aidd.framework/schemas/handoff-v1.json",
+  "producer_skill": "aidd-remotion-motion",
+  "producer_version": "1.0.0",
+  "status": "SUCCESS",
+  "artifacts": {
+    "fps": 60,
+    "resolution": [
+      1920,
+      1080
+    ],
+    "physics_preset": "snappy",
+    "scenes_ready": [
+      "cena-02-conceito-remotion"
+    ]
+  },
+  "domain_data": {
+    "source_script": "C:\\Users\\trcnologia\\orca\\workspaces\\proj_stepo\\feature-matt-penny\\aidd-pipelines\\canal-dark-avatar\\context\\handoffs\\01_roteiro_ptbr.json",
+    "render_engine": "remotion-core",
+    "spring_physics": "ViktorKavMethod"
+  }
+}

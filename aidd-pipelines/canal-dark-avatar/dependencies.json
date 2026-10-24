@@ -1,0 +1,47 @@
+{
+  "$schema": "https://aidd.framework/schemas/dependencies-v1.json",
+  "pipeline_name": "canal-dark-avatar",
+  "version": "1.0.0",
+  "author": "Heverton Eduardo Peres",
+  "dependencies": {
+    "skills_required": [
+      {
+        "name": "aidd-video-materializer",
+        "optional": false,
+        "purpose": "Execucao dos nos de aidd-video-materializer"
+      },
+      {
+        "name": "aidd-dark-storycraft",
+        "optional": false,
+        "purpose": "Execucao dos nos de aidd-dark-storycraft"
+      },
+      {
+        "name": "aidd-remotion-motion",
+        "optional": false,
+        "purpose": "Execucao dos nos de aidd-remotion-motion"
+      }
+    ],
+    "mcp_servers": {},
+    "system_binaries": [
+      {
+        "name": "ffmpeg",
+        "required": true,
+        "purpose": "Composição e muxing de vídeo e áudio final"
+      },
+      {
+        "name": "bun",
+        "required": true,
+        "purpose": "Execução e render do motor Remotion"
+      },
+      {
+        "name": "edge-tts",
+        "required": true,
+        "purpose": "Síntese de voz neural natural em português brasileiro"
+      }
+    ],
+    "python_packages": [
+      "argparse",
+      "edge-tts"
+    ]
+  }
+}

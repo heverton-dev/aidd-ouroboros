@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aidd-orchestrate-session-sync"
+version = "1.0.0"
+description = "Sincronizador universal e deterministico de historico de sessao em JSON e Markdown."
+readme = "README.md"
+authors = [{ name = "Heverton Eduardo Peres", email = "dev@aidd.framework" }]
+license = { text = "MIT" }
+requires-python = ">=3.10"
+keywords = ["aidd", "session", "transcript", "history", "vsa", "ai-agents"]
+dependencies = []
+
+[project.scripts]
+faz-session = "session_sync:main"
+aidd-session-sync = "session_sync:main"
+
+[tool.uv]
+managed = true
+package = false

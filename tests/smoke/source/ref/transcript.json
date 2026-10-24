@@ -1,0 +1,206 @@
+{
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 3.54,
+      "text": "Em poucos segundos, você abre seu primeiro relatório.",
+      "words": [
+        {
+          "text": "Em",
+          "start": 0.0,
+          "end": 0.24
+        },
+        {
+          "text": "poucos",
+          "start": 0.24,
+          "end": 0.64
+        },
+        {
+          "text": "segundos,",
+          "start": 0.64,
+          "end": 1.18
+        },
+        {
+          "text": "você",
+          "start": 1.58,
+          "end": 1.82
+        },
+        {
+          "text": "abre",
+          "start": 1.82,
+          "end": 2.12
+        },
+        {
+          "text": "seu",
+          "start": 2.12,
+          "end": 2.36
+        },
+        {
+          "text": "primeiro",
+          "start": 2.36,
+          "end": 2.76
+        },
+        {
+          "text": "relatório.",
+          "start": 2.76,
+          "end": 3.54
+        }
+      ]
+    },
+    {
+      "start": 4.2,
+      "end": 7.3,
+      "text": "Clique em relatórios, no menu da esquerda.",
+      "words": [
+        {
+          "text": "Clique",
+          "start": 4.2,
+          "end": 4.96
+        },
+        {
+          "text": "em",
+          "start": 4.96,
+          "end": 5.12
+        },
+        {
+          "text": "relatórios,",
+          "start": 5.12,
+          "end": 5.9
+        },
+        {
+          "text": "no",
+          "start": 6.18,
+          "end": 6.28
+        },
+        {
+          "text": "menu",
+          "start": 6.28,
+          "end": 6.52
+        },
+        {
+          "text": "da",
+          "start": 6.52,
+          "end": 6.72
+        },
+        {
+          "text": "esquerda.",
+          "start": 6.72,
+          "end": 7.3
+        }
+      ]
+    },
+    {
+      "start": 8.2,
+      "end": 11.12,
+      "text": "Em período, escolha Últimos 30 Dias.",
+      "words": [
+        {
+          "text": "Em",
+          "start": 8.2,
+          "end": 8.54
+        },
+        {
+          "text": "período,",
+          "start": 8.54,
+          "end": 8.9
+        },
+        {
+          "text": "escolha",
+          "start": 9.28,
+          "end": 9.72
+        },
+        {
+          "text": "Últimos",
+          "start": 9.72,
+          "end": 10.2
+        },
+        {
+          "text": "30",
+          "start": 10.2,
+          "end": 10.58
+        },
+        {
+          "text": "Dias.",
+          "start": 10.58,
+          "end": 11.12
+        }
+      ]
+    },
+    {
+      "start": 11.86,
+      "end": 13.7,
+      "text": "A tabela se atualiza na hora.",
+      "words": [
+        {
+          "text": "A",
+          "start": 11.86,
+          "end": 12.12
+        },
+        {
+          "text": "tabela",
+          "start": 12.12,
+          "end": 12.54
+        },
+        {
+          "text": "se",
+          "start": 12.54,
+          "end": 12.76
+        },
+        {
+          "text": "atualiza",
+          "start": 12.76,
+          "end": 13.28
+        },
+        {
+          "text": "na",
+          "start": 13.28,
+          "end": 13.42
+        },
+        {
+          "text": "hora.",
+          "start": 13.42,
+          "end": 13.7
+        }
+      ]
+    },
+    {
+      "start": 14.8,
+      "end": 15.26,
+      "text": "Pronto.",
+      "words": [
+        {
+          "text": "Pronto.",
+          "start": 14.8,
+          "end": 15.26
+        }
+      ]
+    },
+    {
+      "start": 16.1,
+      "end": 17.2,
+      "text": "Agora é com você.",
+      "words": [
+        {
+          "text": "Agora",
+          "start": 16.1,
+          "end": 16.5
+        },
+        {
+          "text": "é",
+          "start": 16.5,
+          "end": 16.7
+        },
+        {
+          "text": "com",
+          "start": 16.7,
+          "end": 16.86
+        },
+        {
+          "text": "você.",
+          "start": 16.86,
+          "end": 17.2
+        }
+      ]
+    }
+  ]
+}

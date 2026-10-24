@@ -1,0 +1,12 @@
+{
+  "$schema": "https://aidd.framework/schemas/dependencies-v1.json",
+  "skill_name": "aidd-materialize-video-synth",
+  "version": "1.0.0",
+  "author": "Heverton Eduardo Peres",
+  "dependencies": {
+    "skills_required": [],
+    "mcp_servers": {},
+    "system_binaries": [],
+    "python_packages": []
+  }
+}

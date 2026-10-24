@@ -1,0 +1,39 @@
+{
+  "pipeline_id": "canal-dark-avatar",
+  "status": "COMPLETED",
+  "created_at": "2026-10-24T15:14:12Z",
+  "nodes": {
+    "node-01-ingest": {
+      "status": "PENDING",
+      "completed_at": null,
+      "error": null
+    },
+    "node-02-creator": {
+      "status": "PENDING",
+      "completed_at": null,
+      "error": null
+    },
+    "node-03-executor": {
+      "status": "PENDING",
+      "completed_at": null,
+      "error": null
+    },
+    "node-01-storycraft": {
+      "status": "PENDING",
+      "completed_at": null,
+      "error": null
+    },
+    "node-02-remotion-motion": {
+      "status": "PENDING",
+      "completed_at": null,
+      "error": null
+    },
+    "node-03-hybrid-stitch": {
+      "status": "PENDING",
+      "completed_at": null,
+      "error": null
+    }
+  },
+  "start_time": "2026-10-24T12:17:37Z",
+  "completed_time": "2026-10-24T13:27:42Z"
+}

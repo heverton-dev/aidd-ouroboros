@@ -1,0 +1,7 @@
+# Dependências Python para aidd-video-reengineer
+# Instale com: pip install -r requirements.txt OU uv pip install -r requirements.txt
+
+yt-dlp>=2024.08.06
+faster-whisper>=1.0.3
+pytesseract>=0.3.10
+ctranslate2>=4.0.0

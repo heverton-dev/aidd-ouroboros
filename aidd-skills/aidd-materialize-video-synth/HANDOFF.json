@@ -1,0 +1,20 @@
+{
+  "$schema": "https://aidd.framework/schemas/handoff-v1.json",
+  "producer_skill": "aidd-skill-creator",
+  "producer_version": "1.1.0",
+  "timestamp": "2026-10-24T11:00:00Z",
+  "status": "SUCCESS",
+  "artifacts": {
+    "skill_dir": "aidd-video-materializer",
+    "skill_md": "aidd-video-materializer\\SKILL.md",
+    "agents_md": "aidd-video-materializer\\AGENTS.md",
+    "rules_md": "aidd-video-materializer\\RULES.md",
+    "dependencies": "aidd-video-materializer\\dependencies.json",
+    "sync_script": "aidd-video-materializer\\sync.ps1"
+  },
+  "domain_data": {
+    "skill_name": "aidd-video-materializer",
+    "author": "Heverton Eduardo Peres",
+    "can_orchestrate": true
+  }
+}

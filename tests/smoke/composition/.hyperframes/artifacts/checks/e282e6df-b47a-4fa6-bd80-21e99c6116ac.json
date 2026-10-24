@@ -1,0 +1,369 @@
+{
+  "ok": true,
+  "strict": false,
+  "browserSkipped": false,
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 4,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"bg\"> is a timeline element that contains nested <div id=\"b1\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#bg",
+        "dataAttributes": {},
+        "sourceFile": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_video_yt_006\\tests\\smoke\\composition\\index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"bg\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"title\"> is a timeline element that contains nested <div>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#title",
+        "dataAttributes": {},
+        "sourceFile": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_video_yt_006\\tests\\smoke\\composition\\index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"title\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"stage\"> is a timeline element that contains nested <div id=\"win\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#stage",
+        "dataAttributes": {},
+        "sourceFile": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_video_yt_006\\tests\\smoke\\composition\\index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"stage\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"outro\"> is a timeline element that contains nested <svg id=\"check\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#outro",
+        "dataAttributes": {},
+        "sourceFile": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_video_yt_006\\tests\\smoke\\composition\\index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"outro\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      }
+    ],
+    "filesScanned": 1
+  },
+  "runtime": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "layout": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 4,
+    "findings": [
+      {
+        "code": "panel_out_of_canvas",
+        "severity": "info",
+        "time": 2.712,
+        "selector": "#win",
+        "message": "Painted panel extends outside the composition canvas.",
+        "rect": {
+          "left": 369.43,
+          "top": 612.09,
+          "right": 1550.57,
+          "bottom": 1272.85,
+          "width": 1181.13,
+          "height": 660.75
+        },
+        "containerSelector": "#root",
+        "text": "painel.app/relatorios",
+        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 1080,
+          "width": 1920,
+          "height": 1080
+        },
+        "overflow": {
+          "bottom": 192.85
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 369.43,
+          "y": 612.09,
+          "width": 1181.13,
+          "height": 660.75
+        },
+        "firstSeen": 2.712,
+        "lastSeen": 2.712,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          2.712
+        ]
+      },
+      {
+        "code": "panel_out_of_canvas",
+        "severity": "info",
+        "time": 6.328,
+        "selector": "div.bar",
+        "message": "Painted panel extends outside the composition canvas.",
+        "rect": {
+          "left": 265.1,
+          "top": 30.35,
+          "right": 2121.1,
+          "bottom": 88.35,
+          "width": 1856,
+          "height": 58
+        },
+        "containerSelector": "#root",
+        "text": "painel.app/relatorios",
+        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 1080,
+          "width": 1920,
+          "height": 1080
+        },
+        "overflow": {
+          "right": 201.1
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 265.1,
+          "y": 30.35,
+          "width": 1856,
+          "height": 58
+        },
+        "firstSeen": 6.328,
+        "lastSeen": 9.944,
+        "occurrences": 2,
+        "heldMs": 0,
+        "times": [
+          6.328,
+          9.944
+        ]
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 11.752,
+        "selector": "#rows-hl",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": 1536,
+          "top": 380,
+          "right": 2443,
+          "bottom": 640,
+          "width": 907,
+          "height": 260
+        },
+        "containerSelector": "#win",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 320,
+          "top": 110,
+          "right": 1600,
+          "bottom": 870,
+          "width": 1280,
+          "height": 760
+        },
+        "overflow": {
+          "right": 843
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1536,
+          "y": 380,
+          "width": 907,
+          "height": 260
+        },
+        "firstSeen": 11.752,
+        "lastSeen": 11.752,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          11.752
+        ]
+      },
+      {
+        "code": "escaped_container",
+        "severity": "info",
+        "time": 11.752,
+        "selector": "#rows-hl",
+        "message": "Positioned element renders far outside its offset parent — its coordinates were likely computed in a different frame (canvas/viewport pixels).",
+        "rect": {
+          "left": 1536,
+          "top": 380,
+          "right": 2443,
+          "bottom": 640,
+          "width": 907,
+          "height": 260
+        },
+        "containerSelector": "#win",
+        "text": "",
+        "fixHint": "Compute left/top in the offset parent's frame (subtract its rect), or mark intentional placement with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 320,
+          "top": 110,
+          "right": 1600,
+          "bottom": 870,
+          "width": 1280,
+          "height": 760
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 1536,
+          "y": 380,
+          "width": 907,
+          "height": 260
+        },
+        "firstSeen": 11.752,
+        "lastSeen": 11.752,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          11.752
+        ]
+      }
+    ],
+    "duration": 16.272,
+    "samples": [
+      0.904,
+      2.712,
+      4.52,
+      6.328,
+      8.136,
+      9.944,
+      11.752,
+      13.56,
+      15.368
+    ],
+    "transitionSamples": [],
+    "transitionSamplesDropped": 0,
+    "tolerance": 2,
+    "totalIssueCount": 4,
+    "truncated": false
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "samples": 0
+  },
+  "contrast": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": true,
+    "samples": [
+      0.904,
+      4.52,
+      8.136,
+      11.752,
+      15.368
+    ],
+    "checked": 12,
+    "passed": 12
+  },
+  "craft": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 1,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "text_below_floor",
+        "severity": "warning",
+        "message": "Type floor is 28 px (2.6% of the 1080 px short side, what a phone can read) and 2 text elements stay under it for 0.5 s or more, the smallest \"1\" at 26 px: set reading text to at least 28 px, or put data-layout-ignore on text that is texture rather than reading; see references/look.md.",
+        "text": "1",
+        "selector": "#chip-n",
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 354.9,
+          "y": 50.5,
+          "width": 14.72,
+          "height": 31.28
+        },
+        "time": 4.223,
+        "times": [
+          0.497,
+          4.223
+        ],
+        "fontPx": 25.76,
+        "floorPx": 28,
+        "seconds": 3.602,
+        "elements": [
+          {
+            "selector": "#chip-n",
+            "text": "1",
+            "fontPx": 25.76,
+            "time": 4.223,
+            "seconds": 3.602
+          },
+          {
+            "selector": "div.kicker",
+            "text": "Tutorial rápido · Painel",
+            "fontPx": 26,
+            "time": 0.497,
+            "seconds": 3.478
+          }
+        ]
+      }
+    ],
+    "enabled": true,
+    "step": 0.12400000000000055,
+    "samples": 131
+  },
+  "hdr": {
+    "autoPromotion": null,
+    "inspection": "available"
+  },
+  "snapshots": {
+    "enabled": false,
+    "files": [],
+    "times": [],
+    "findingFiles": []
+  }
+}

@@ -1,0 +1,1818 @@
+=== [FRAME: frame_0001.png] (Relevância: 1) ===
+TT eS tia DZ ends) OA IIE Th fear TALL JUARA ial EA!
+O ze
+a igual ps5 x86-64 —————. x86-64 [mesma familia]
+mudam de dono wii u PowerPC -» C —> nativo traduzia antes
+— executável — — windows + anyps5 —
+| o o o o o a a a A a A a A | 1 A nn
+eboot.elf x86-64 mm Windows
+= BOE sem tradução 4 la
+> En E ~ Processador do PC E
+mov rbp, rsp —
+sub rsp, 0x40 * | x86-64 E
+lea rdi, [rbp-0x30]
+call qword ptr [rip+0x8a3f12]
+LI L TO TA TA TA LU Lj Y TO TA
+le imports - ligados por NID bibliotecas do AnyPS5
+DP sceKernelGetModuleInfo2 i
+Libkernel.prx sistema
+| sceKernelGetModuleList2 = | |
+“| scePadRead o—| 1ibScePad.prx controle
+.prx = sceAgcFuseShaderHalves [E | 1libSceAgcDriver.prx imagem = en shaders
+. prx | sceAudioOut2UserGetSupportedAttributes SSS i sem implementação |
+AB
+
+=== [FRAME: frame_0002.png] (Relevância: 2) ===
+K viktorkav / Tutorial Remotion + IA introdução
+A viktorkav / reconpitações
+fenyoss tm
+[| comentários 39 / retinkagen = igação do console — retígada = sem resposta
+R . J a instrução fica igual pes 86-64 o 16-64 (neon fonitiel
+? A ETA
+como você faz essas animações? só as ligações mudam de dono Green
+ll mon Em EE windows
+| Joe oxca2070 Re eee
+| mov eax, duord ptr [rbxsOxie] = processador do PC c
+lives Se all E — 5
+O como você faz essas animações? A ee es) eee
+scovernetsettowvteInfo2 E
+scekernelGetHoduleList2 v 1 ee <=
+scePadRead v Ba] Lnscerad.prx contrate
+scekgcFuseShadertatves vB) Tibscengeráver.prx images | — me sasers
+corte recente scohudiodut2Usersetsupportedattributes — E son ispLenentagio
+”“
+como você faz essas animações? [e RA =
+a
+seg5-2-relinkagem-anim.mp4 0:39 / 0:48
+
+=== [FRAME: frame_0003.png] (Relevância: 1) ===
+vK viktorkav / Tutorial Remotion + IA introdução
+El
+17 ago
+Aimpressiotemdata Ho! Dison
+3 ago s
+ee (E)
+Quem corta primeiro não. P
+decide onde é o chão
+geseondecochioR y
+10 ago
+
+=== [FRAME: frame_0004.png] (Relevância: 3) ===
+K viktorkav / Tutorial Remotion + IA introdução
+Nadadissoéo modelo oes ae cand
+a 5S o =n 7 |
+& = = = a E
+17 ago 4 out
+Ajmpressão tem data Eno (Código rodando na Hugging Face = — E
+oa _ im ce ec pear ‘= |
+= = =
+eee Modas som fn =
+Subs 1. 2 e |
+3ago 1 set 19 out
+ece (Be. 92 .— DB J. O...
+skill design outro jeito
+Quem corta primeiro não
+Oo =
+10 ago 22 set
+|O que separa os dois é o consumo = = = = ~ -
+29 ago 13 out
+
+=== [FRAME: frame_0007.png] (Relevância: 1) ===
+vK viktorkav / Tutorial Remotion + IA introdução
+ viktorkav / reconpitações
+~/anypss tmx
+19 / relinkagen
+a instrução fica igual ps5  x86-64 ———.x86-64 [mesma familia]
+só as Ligações mudam de dono wii uv PonerPC > C => nativo traduzia antes
+= eS + sistema — = executável = = windows + anypss =
+eboot elf EE Windows
+Yea roi, [rbp-0x50) rrr
+Less. Gall gun ipeiCraprortesed = processador do PC E N
+corante: Snes erica E mm : ,
+ev cox, chord ptr [rbx+0xi8] a
+Verewee eee eee À
+A.
+É i
+”” s j
+O: anypsse ‘3
+
+=== [FRAME: frame_0008.png] (Relevância: 2) ===
+K viktorkav / Tutorial Remotion + IA introdução
+VA viktorkav / reconpitações
+~/anypsS tmux
+19 / retinkagen = ligação do console — religada — sen resposta
+FE) instrução fica igual ps5 x86-64 ———. x86-64 [mesma familia]
+só as ligações mudam de dono sapstasuzse antes
+= p95 + sistem — = exeoutéyat= = windows + anypss —
+h | eboot.elf mm Windows
+add rsp, oxo on tradução
+> PSS. pop rap | 7 processador do PC E N
+mov rop, rsp
+sub rep, 6x40 Se a
+= reer eerste ADS <A)
+scekernel6etHoduteInto2 ~-
+‘Libkernel.prx is ‘Libkernel.prx sistema x
+sceKerneLGetModuleList2 ”
+TibScePad.prx intro) scePadRead TibScePad.prx controte geo
+‘LibSceAgeDriver.prx sceAgcFuseShaderHalves ‘LibSceAgcDriver.prx imagen — ‘mm shaders
+LibseeAudioout2.prx é scekudio0ut2UserGetSupportedattributes sen inptenentação
+8: anypss+ "8
+
+=== [FRAME: frame_0009.png] (Relevância: 1) ===
+vK viktorkav / Tutorial Remotion + IA introdução
+a o agente escreve
+const frame = useCurrentFrame();
+FT <Arquivo nome="eboot.elf" x={960} />
+<Sequence from={120}>
+<Ligacao de=|
+o você explica
+O arquivo do jogo fica no centro e
+as ligações passam para
+o Windows.
+® Remotion
+MK viktorkay / recospitações i
+a instrução fica igual eC ot sett tnico x P.
+SO ee Sundae tes amu denT des donote ee. :
+- coe EA, EE windows
+il Bers zeros! Ex) as
+
+=== [FRAME: frame_0010.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA introdução
+projeto construção revisão ; nN
+x >
+— () — Vv f
+o ou j
+ie | OS
+so) »
+pedido referências correções
+
+=== [FRAME: frame_0011.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA introdução
+projeto construção revisão
+editor
+Claude Code o o | ?
+pedido referências correções
+
+=== [FRAME: frame_0012.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA introdução
+projeto construção revisão
+editor :
+Claude Code
+sn E
+i)
+! oA
+o —
+| "ÇT
+Esso : rat “= sos nt
+pedido referências correções
+Codex
+
+=== [FRAME: frame_0013.png] (Relevância: 2) ===
+K viktorkav / Tutorial Remotion + IA 1 a explicação precisa ficar visível =
+VA viktorkav / reconpitações
+~/anypsS tmux
+19 / retinkagen = ligação do console — religada — sen resposta
+a instrução fica igual pss x86-64 —————. x86-64 [mesma familia]
+só as ligações mudam de dono panes
+= ps5 + sistema — = executável — = windows + anypss ~
+eboot.elf gm Windows
+do DCEO sem tradução Ss
+mov eax, dword ptr [rbx+0x18] O processador do E S
+console add rsp, Ox40 4 [86-64 | z
+pop = rbp
+ret
+bibliotecas do console ânports - Ligados por NID vibtictecas do AnyPsé
+o-————1_ sceKerne16etModuleInfo2
+‘Libkernel.prx sistema ‘Libkernel.prx sistema ‘
+(E-———— scekernelGetModuleList2 ;
+LibseePad.prx controle, E scePadRead LibseePad.prx controle
+‘LibSceAgcDriver.prx imagen EP) sceAgcFuseShaderHalves ‘LibSceAgcDriver.prx imagen — fer shaders
+LibsceAudiodut2.prx áudio E-———1_sceudiodut2UserGetSupportedattributes sen inptenentação
+8: anyossa "8
+‘ig ggg gS (
+seg5-2-relinkagem-anim.mp4 0:26 / 0:48
+
+=== [FRAME: frame_0014.png] (Relevância: 2) ===
+K viktorkav / Tutorial Remotion + IA 1 a explicação precisa ficar visível =
+VE viktorkav / recompitações
+~/anypsS tmux
+19. / retinkagen = ligação do console — religada — sen resposta
+a instrução fica igual ps5 x86-64 ——— x86-64 [mesma familia]
+só as Ligações mudam de dono ii U PowerPC —> C > nativo traduzia antes
+= psó + sistema — = executágaia = windows + anyoss —
+Nr NES
+i f appodxelt HE windows
+EM cu quord ptr [riproxsasf12] * [86-64 z PA
+ine Axe "Ox
+bibliotecas do console nports + Tigados por NID retinkagen bibliotecas do AnyPss Ás
+M sceKernelGetModuleInfo2 o
+Libkernet.prx Ubkernet.prx sisteno Ge 2
+sceKernelGetModuleList2 ua / e
++ = 7 — "
+LibscePad.prx scePadRead Ha] uinscerad.prx controle
+Libsceagedriver.prx sconacruseshaderHalves Xn insceagepriver.prx imagen — mx shaders TA
+LibsceAvdioout2. prx © scekudiooutzUserGetsupportedattributes — [mM] son inprenentação
+8: anypss+ "8
+| | |
+serviços do console programa do jogo
+ligações
+ro
+seg5-2-relinkagem-anim.mp4 0:30 / 0:48
+
+=== [FRAME: frame_0015.png] (Relevância: 2) ===
+K viktorkav / Tutorial Remotion + IA 1 a explicação precisa ficar visível =
+VA viktorkav / reconpitações
+~/anypsS tmux
+19. / retinkagen = Ligagdo do console — religada — sen resposta
+FE) instrução fica igual ps5 x86-64 ———. x86-64 [mesma familia]
+só as ligações mudam de dono Sos apadedo enter:
+= p95 + sistema — = executável — = windows + anyoss ~
+i { eboot .elf gm Windows
+ret sem tradução
+hers gm che Dp ostenton do e FE q
+fate sud rsp, 6x40 [86-64 r J
+o lea —rdi, [rbp-0x30] a x
+cu  quord ptr [ripsoxeasf12] O
+dd OS BONS US SOS SUS Um Um Um PUTA <2
+ibliotecas do console imports - ligados por NID bibliotecas do AnyPSS f
+© sceKernetGetNoduleInfo2 el = k
+‘Libkernet.prx ‘Libkernel.prx sistena \ AY
+© sceKerneLéettoduteList2 aw 6"
+TibScePad. prx © scePadRead Bo uibscePad.prx —  controte we |
+‘LibSceAgeDriver.prx © sceAgcFuseShaderHalves o ‘LibSceAgcDriver.prx imagen — ‘mm shaders
+LibsceAvdiodut2. prx 5) sceavdioout2Usersetsupportedattributes — E— sen inptenentação o
+8: anyossa
+CC (O
+seg5-2-relinkagem-anim.mpá4 0:29 / 0:48
+
+=== [FRAME: frame_0016.png] (Relevância: 2) ===
+vK viktorkav / Tutorial Remotion + IA 1 a explicação precisa ficar visível —
+VE viktorkav / recompitações
+~/anypsS ‘tmux
+19. / retinkagen = Lisgagdo do console — religada — sen resposta
+a instrução fica igual ps5 x86-64 ——— xB86-64 [mesma familia]
+só as ligações mudam de dono ii v PowerPC - °C => nativo traduzia antes
+= p95 + sistema — = exeoutiyai= = windows + anyoss ~
+..—.—.——A—O—.———————€—NÇ€ÀÇ€NÇI—— el
+t { app.exe HE windows
+fed WL sem tradução
+E ão, à x86-64 Er N
+Vea rdi, (rb9-0x50) = a
+e eo Au o o uu Au Au Ao Ao iu fu «ECOS ay
+bLiotecas do console ânports - Ligados: pon NID relinkagen bibliotecas do AnyPSs i
+MP sceKernelGetModuleInfo2 v a ll
+Tibkernel.prx Tibkernel.prx sistema
+sceKerneLGettoduleList2 + |p————2 o> ?
+LibscePad.prx © scePadkead v |p| Libscerad.prx —  controte —
+‘LibSceAgeDriver.prx © _ sceAgcFuseShaderHalves v [BB — } LibSceAgcDriver.prx imagem — ‘= shaders
+0 préxino trabatho
+E + 1 "8
+| 1 |
+permanece muda problema
+Co————«——————s—--—————————, Wzww.ww.z (FF)
+seg5-2-relinkagem-anim.mp4 0:42 / 0:48
+
+=== [FRAME: frame_0017.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 1 a explicação precisa ficar visível —
+seg5-2-relinkagem-anim.mp4 48 Ss
+| pa— ss sa=a== sss=s= sas OU
+1 arquivo - 4 serviços - 4 destinos - 5 imports - 12 linhas de assembly S
+RelinkagemDemo ~16s
+se cel | To
+1 arquivo - 4 serviços - 4 destinos T )
+Bocconi Reo nr DE espero [fa TO CED [2
+come eo gpooreif 2 7 mm come hootelf come © ghootolf
+imagem oF cmmero 8 > imagem imagem e caem — — CNA nar
+(sais)
+
+=== [FRAME: frame_0018.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 1 a explicação precisa ficar visível —
+@ =| apresentagao da faculdade
+oy
+<i a
+é &—
+
+=== [FRAME: frame_0019.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 1 a explicação precisa ficar visível —
+o pedido
+E cores ‘ W
+= 5
+tamanhos ee
+tempo de cada etapa
+Fe O que o espectador precis
+
+=== [FRAME: frame_0029.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 2 quem faz cada parte = —=
+Claude Code
+eal Animacoes
+~/Animacoes FT)
+G Codex :
+& OpenAl
+
+=== [FRAME: frame_0030.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 2 quem faz cada parte == —=
+Um arquivo no centro, —
+ligado a três serviços.
+gerador de vídeo
+RELINKAGEM
+Relinkagem
+
+=== [FRAME: frame_0031.png] (Relevância: 1) ===
+vK viktorkav / Tutorial Remotion + IA 2 quem faz cada parte = —
+: src/recompilacoes/
+Um arquivo no centro, ly o
+lieadormitresisemicos: <Moldura indice="04" painel="onde termina">
+É e <Moldura indice="12" painel="instruçõe|
+gerador de vídeo
+Sa
+
+À Pasa=s== i =
+\ macia Ju ry as T : ... ’
+\ om ee + =: ~
+
+\ = 3 coy “or |
+
+\
+
+#
+
+fe |
+Relinkagem
+= É
+Y
+N
+N
+\
+x
+x
+J060 À
+[=]
+
+=== [FRAME: frame_0032.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 2 quem faz cada parte == =
+. src/recompilacoes/ O)
+Um arquivo no centro, —>
+. A Moldura indice="04" painel="onde termina">
+ligado a três serviços. .
+8 e <Moldura indice="12" painel="instruções do wii u">
+gerador de video <Moldura indice="19" painel="relinkagem">
+vm
+\ 1 eu rr Bum
+1 i R
+À conmott = Sa} | ‘ee ‘
+' — — =
+\ 1 — ECT
+\ macia ! = a :
+v =
+= = E
+o t Â
+so
+A t = =
+ee a :
+[EE ae Eng”
+= o) de = - =
+Relinkagem b-
+= =
+W É XT
+1
+J060 ~ se ne gs
+reLinkagem_ | =
+He
+
+=== [FRAME: frame_0033.png] (Relevância: 1) ===
+vK viktorkav / Tutorial Remotion + IA 2 quem faz cada parte —
+@ :--
+src/Composition.tsx RelinkagemDemo v e —-B0B OD:
+Monte a placa com o PS5 de um lado e o Windows do outro.
+Editando Composition.tsx
+AR
++ Reply to Claude.. o +
+Auto Opus 5.5 Extra
+
+=== [FRAME: frame_0034.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 2 quem faz cada parte =
+&) agente @ vocé
+src/Composition.tsx RelinkagemDemo v ® >. @8ebt:
+<Placa> Monte a placa com o PS5 de um lado e o Windows do outro.
+<PS5 />
+<Windows /> Pronto: a placa tem os serviços do PS5 a esquerda e as
+implementações do Windows à direita.
+Coloqu (EEN acenda a ligação de sistema e
+escreva “não implementado” no áudio.
+#
+Editando Composition.tsx
+t (
+>
+</Placa>
++ Reply to Claude ® ov
+Auto Opus 5.5 Extra
+
+=== [FRAME: frame_0035.png] (Relevância: 3) ===
+vK viktorkav / Tutorial Remotion + IA 2 quem faz cada parte —
+e oo < | recompilacoes-demo mA (=) (E-)( 8 O —- (A
+Name ~ Date Modified Size ind
+Desktop ene
+Downloads caus)
+' gitignore "
+Documents prettierrc ' À
+, © eslintconfig.mjs 16 Oct 2026 at 05:09 79 bytes JavaScript Ss \
+Movies J
+node_modules Today at 23:24 -- Folder .
+Applications package-lock.json Today at 23:24 191KB JSON Document
+. package.json Today at 23:24 761 bytes JSON Document
+Elcliras, public Today at 23:24 -- Folder
+README.md Today at 23:24 1KB Markdown Document
+E remotion.config.ts 16 Oct 2026 at 05:09 — 371bytes MPEG transport stream (TS) media
+skills-lock,json Today at 23:26 3KB JSON Document a
+sre Today at 23:26 -- Folder
+tsconfig.json 16 Oct 2026 at 05:09 — 368 bytes JSON Document
+W Macintosh HD > [ij Users> [BM viktorkav> [MM Animacoes > [MM recompilacoes-demo
+14 items, 227,04 GB available
+
+=== [FRAME: frame_0036.png] (Relevância: 3) ===
+K viktorkav / Tutorial Remotion + IA 2 quem faz cada parte -
+eo < recompilacoes-demo @® = By AQw- AQ
+vi Name ~ Date Modified Size ind
+© Desktop are
+© Downloads claude
+gitignore
+D Documents prettierrc
+© esli ig.mj ct 2026 at 05:09 79 bytes JavaSc
+(E) Movies © eslint.config.mjs 16 Oct 2026 at 05:09 9 bytes JavaScript
+1B node_modules Today at 23:24 -- Folder
+A, Applications package-lock.json Today at 23:24 191KB JSON Document
+Bi package.json Today at 23:24 761 bytes JSON Document : É
+PR Pictures Er 7 =
+MM public Today at 23:24 -- Folder ss
+README.md Today at 23:24 1KB Markdown Document =,
+remotion.config.ts 16 Oct 2026 at 05:09 371 bytes MPEG transport stream (TS) media > +
+skills-lock,json Today at 23:26 3KB JSON Document 4
+bu src Today at 23:26 -- Folder . 7
+tsconfig.json 16 Oct 2026 at 05:09 — 368 bytes JSON Document " V
+EE Macintosh HD> [RM Users > [BM viktorkav> BM Animacoes> [IM recompilacoes-demo> [É& package.json — i
+1 of 14 selected, 227,04 GB available >
+package. json @
+<P
+recompilacoes-demo/
+1 "dependencies": {
+1 "@remotion/cli": "4.0.536",
+3 "react": "19.2.3",
+4 "peact-dom": "19.2.3",
+"remotion": "4.0.536"
+By
+
+=== [FRAME: frame_0037.png] (Relevância: 1) ===
+vK viktorkav / Tutorial Remotion + IA 2 quem faz cada parte = —
+© .ments/titia/
+N
+io,
+RA
+NR
+
+=== [FRAME: frame_0038.png] (Relevância: 5) ===
+K viktorkav / Tutorial Remotion + IA 2 quem faz cada parte —= =
+
+PD .agents/skills/
+
+e remotion-best-practices sa) remotion-captions e remotion-create e remotion-docs
+
+e remotion-interactivity (cal) remotion-maps (cal) remotion-markup (cal) remotion-multimedia
+
+e remotion-render a) remotion-saas a) remotion-studio e remotion-upgrade
+
+= ES <a . <>
+j.
+t=) SKILL.md t=] SKILL.md i
+-agents/skills/remotion-best-practices/ .Claude/skills/animar/ \ =>
+
+2 name: remotion-best-practices Eg |
+3 description: Router for all Remotion skills
+4 version: 4.0.536 agente
+
+=== [FRAME: frame_0039.png] (Relevância: 5) ===
+K viktorkav / Tutorial Remotion + IA 2 quem faz cada parte ——
+® .agents/skills/
+
+e remotion-best-practices e remotion-captions e remotion-create e remotion-docs
+
+(cal) remotion-interactivity (cal) remotion-maps o remotion-markup (cal) remotion-multimedia
+
+o remotion-render (cal) remotion-saas (cal) remotion-studio (cal) remotion-upgrade
+
+RelLinkagemDemo
+
+o) tokens >
+
+=== [FRAME: frame_0041.png] (Relevância: 1) ===
+<=
+" | [E você vai precisar
+e pp ~ @ =) app do agente
+"Ex
+com EB claude ou © chatcpt
+| 7
+. 7 E. | (v) o) conta com modo de código
+; MO Rã | (v) © Node.js
+Um /
+<= Sa
+= ”» |
+
+=== [FRAME: frame_0042.png] (Relevância: 1) ===
+» SS.
+; i= AO :
+x @ vocé vai precisar
+is é iv) a app do agente
+EB claude ou © chatcpt
+(>) o) conta com modo de código
+* | * VU th Gig) plano Pro ou Max
+= . ! (Vv) © Node.js
+| = E @Q links na descrição
+=
+fe a =
+— E» |
+
+=== [FRAME: frame_0043.png] (Relevância: 1) ===
+viktorkav / Tutorial Remotion + IA 3 preparar a pasta de animação
+O VY O Nodeis— DownloadNodejs X —+
+€ > E O nodeisorgfendownload we)
+New security releases to be made available Wednesday, October 21, 2026
+nodes Learn — About Blog Docs Beta Docs Contribute Q Start typing. “ek OQ x O
+Download Node.js®
+Get Nodejs® v24.22.0 (EB) for @macos + using Wnvm ¥v with Ei npm v
+Info Want new features sooner? Get the latest Nodejs version instead and try the latest improvements! =
+1 # Download and install nvm:
+2 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v@.40.8/install.sh | bash
+3
+4 # in lieu of restarting the shell ~~
+5 \. "$HOME/.nvm/nvm.sh"
+6
+7 # Download and install Node. js: \
+8 nvm install 24
+9
+10 # Verify the Node.js version:
+11 node -v # Should print "v24.22.0".
+12
+13 # Verify npm version:
+14 npm -v # Should print "11.19.1".
+Bash <)> Copy to clipboard
+"num' isa cross-platform Node js version manager. Ifyou encounter any issues please visit nvm's website 7
+Or get a prebuilt Nodejs® for © macos runninga ARM64 > architecture.
+
+=== [FRAME: frame_0044.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 3 preparar a pasta de animação =
+eee nc Q <o
+Q Search
++ New #N
+& Artifacts
+& Customize
+“ More
+Claude
+2é Good evening, Victor =
+How can | help you today?
++
+V. Victor - Max *
+© ~/Animacoes
+
+=== [FRAME: frame_0045.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 3 preparar a pasta de animacao _—
+eco nc QD O — Newsession What'snew > ©
+Q search
++ New FT
+& Artifacts
+& Customize
+* More
+& MacBook Pro 4 TER
+Choose environment à À
+| GS) | ChatGPT
+> Codex
++ Describe a task or ask a question o
+V Victor - Max * & This computer [ © Animacoes | Auto Opus 5.5 Extra O
+@ ~/Animacoes
+
+=== [FRAME: frame_0046.png] (Relevância: 1) ===
+viktorkav / Tutorial Remotion + IA 3 preparar a pasta de animação
+& MacBook Pro
+Choose environment v
+Confirme o caminho dessa pasta e verifique se meu FA ,
+@ conferir caminho
++ computador|
+DB This computer © Animacoes Auto Opus 5.5 Extra O
+
+=== [FRAME: frame_0047.png] (Relevância: 1) ===
+viktorkav / Tutorial Remotion + IA 3 preparar a pasta de animação
+& MacBook Pro
+Choose environment v
+Confirme o caminho dessa pasta e verifique se meu
+computador e a versão do Node atendem aos requisitos do © conferir caminno + Node
+Remotion. Crie aqui dentro um projeto Remotion chamado
++ recompilacoes-demo, usando o modelo vazio, o Criar recompilacoes-demo - modelo vazio
+& This computer © Animacoes Auto Opus 5.5 Extra O
+
+=== [FRAME: frame_0048.png] (Relevância: 7) ===
+K viktorkav / Tutorial Remotion + IA 3 preparar a pasta de animação —
+eee Dc Q o Preparar o projeto Remotion v Be - 960:
+modelo vazio. Instale as skills oficiais do Remotion nesse projeto e
+Q Search abra o Remotion Studio em seguida.
++ New
+So AA pasta é /Users/viktorkav/Animacoes. Vou conferir o Node, criar o projeto e
+& Artifacts
+instalar as skills.
+& Customize
+Ran a command
+“+ More
+$ node -v
+Animacoes +
+v24,22.0
+Preparar o projeto Remotion
+Ran a command
+$ npx create-videoelatest --yes --blank recompilacoes-demo z * ¢
+Installing dependencies... . |)
+added 348 packages, and audited 349 packages in 24s
+Copied to recompilacoes-demo.
+terminal Rene emana
+onde os comandos rodam $ cd recompilacoes-demo && npx remotion skills add
+v .agents/skills/remotion-best-practices
+v .agents/skills/remotion-render
+v .agents/skills/remotion-studio
+Done! Review skills before use; they run with full agent permissions.
+* Instalando as skills do Remotion 2.6k tokens
++ tosend, 2 to queue for later ® 9g
+V Victor - Max * Auto Opus 5.5 Extra O
+
+=== [FRAME: frame_0049.png] (Relevância: 5) ===
+K viktorkav / Tutorial Remotion + IA 3 preparar a pasta de animação -
+eee o¢ Q o Preparar o projeto Remotion V Be - > - 960:
+Q Search
+Ran a command
++ New
+&& Artifacts $ cd recompilacoes-demo && npx remotion skills add
+& Customize v .agents/skills/remotion-best-practices
+v .agents/skills/remotion-render
+More = 4 i
+v .agents/skills/remotion-studio
+Animacoes + Done! Review skills before use; they run with full agent permissions.
+Preparar o projeto Remotion
+Ran a command .
+$ npm run dev 2 á 4
+Server ready - Local: http://localhost:3000 e à
+....- MyComp | fecompliacaes-do 7
+DB Fa nr cenpostin Todi Ha reopened) so
+Todos Asi Mme A ego dae ills
+o or
+EX E nocao
+A asso
+Qn. @» a KK 5 Gras o
+00.08 ao sn e
+V Victor Max ra O
+
+=== [FRAME: frame_0050.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 3 preparar a pasta de animação -
+
+se
+
+Ran a command
+$ nem run dev
+
+=
+| es |
+
++ Reply to Claude. o [A
+Auto Opus 5.5 Extra O
+
+=== [FRAME: frame_0051.png] (Relevância: 3) ===
+K viktorkav / Tutorial Remotion + IA 3 preparar a pasta de animação =
+eee nc Q o Preparar o projeto Remotion v Be - > 960:
+—— = Ran a command
+= + New
+®& Artifacts $ ed recompilacoes-demo && npx remotion skills add
+ome mm . 9g i at dao
+“Morei O O O < > recompilacoes-demo =) Q
+À Name Date Modified
+Animacoêl th full agent permissions.
+Preparar i a
+eslint.config.mjs 18 Oct 2026 at 23:24
+node_modules 18 Oct 2026 at 23:24 %
+package-lock.json 18 Oct 2026 at 23:24 = Ve
+package.json 18 Oct 2026 at 23:24 e
+public 18 Oct 2026 at 23:24 i |
+README.md 18 Oct 2026 at 23:24
+remotion.contig.ts 18 Oct 2026 at 23:24 5 .
+aa BORD ARAEE com o modelo vazio, as 12 skills
+k tsconfig.json 18 Oct 2026 at 23:24 gundo em
+W Macintosh HD > IM Users> [i viktorkav> [MM Animacoes> [lj recompilacoes-demo
+| 1 items, 312,65 GB available dio ay :
++ Reply to Claude. ç
+V Victor - Max * Auto Opus 5.5 Extra O
+
+=== [FRAME: frame_0052.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 3 preparar a pasta de animação —
+eee npc a oe New session Whatsnew > &
+FF AE a aE a
+" = + New we " Name
+& Artifacts B Desktop recompilacoes-demo
+Be re = & Customize Documents k
+More Downloads
+Animacoes +
+[>] mantenha aberta Preparar o projeto Remotion ° ão
+> >
+New Folder Cancel 1
+eS |
+4
++ Describe a task or ask a question +
+V Victor - Max * & Thiscomputer © Choose... Auto Opus5.5 Extra O
+
+=== [FRAME: frame_0053.png] (Relevância: 1) ===
+viktorkav / Tutorial Remotion + IA 4 transformar a fala em três estados
+enc> aq <o< New session What'snew > @
+Q Search
++ New eN
+& Artifacts
+& Customize
+* More
+Animacoes '
+Preparar o projeto Remotion
+recompilacoes-demo '
+RelinkagemDemo ° & MacBook Pro E
+Choose environment ~ (
+7
+ea
+
++ Describe a task or ask a question 2
+
+Vv Victor Max v *  Thiscomputer © recompilacoes-demo Auto Opus5.5 Extra O
+
+=== [FRAME: frame_0054.png] (Relevância: 2) ===
+K viktorkav / Tutorial Remotion + IA 4 transformar a fala em trés estados —
+© SS, SSS
+console jogo
+hardware software
+4
+Simule a troca de dados entre um jogo enquanto software e um console enquanto hardware sendo
++ decompilados e adaptados para rod|
+& Thiscomputer © recompilacoes-demo Auto Opus 5.5 Extra
+
+=== [FRAME: frame_0055.png] (Relevância: 2) ===
+MK viktorkav / Tutorial Remotion + IA 4 transformar a fala em três estados =
+6) o
+rene
+console jogo PC
+hardware software
+serviços mm Windows > O
+do console MM implementações | |
+arquivo do jogo GRE A o
+\ we
+Simule a troca de dados entre um jogo enquanto software e um console enquanto hardware sendo
+decompilados e adaptados para rodar no PC. O arquivo do jogo continua no centro. As ligações que
+iam para os serviços do console passam para implementações no Windows. O trabalho de tradução,
++  noentanto, aind|
+& Thiscomputer © recompilacoes-demo Auto Opus 5.5 Extra ):
+
+=== [FRAME: frame_0056.png] (Relevância: 2) ===
+K viktorkav / Tutorial Remotion + IA 4 transformar a fala em três estados =
+—— Z
+Simule a troca de dados entre um jogo enquanto software e um console enquanto hardware sendo
+decompilados e adaptados para rodar no PC. O arquivo do jogo continua no centro. As ligações que
+iam para os serviços do console passam para implementações no Windows. O trabalho de tradução,
+no entanto, ainda não esta completo. O pedido de áudio, por exemplo, fica sem resposta, mostrando o
++ queainda falta implementar)
+& This computer © recompilacoes-demo Auto Opus 5.5 Extra
+
+=== [FRAME: frame_0057.png] (Relevância: 2) ===
+K viktorkav / Tutorial Remotion + IA 4 transformar a fala em três estados == —= =— —=
+( fe) o)
+pP——==27n o opa eos —
+Pp PS5 Arquivo do jogo mm Windows
+=. serviços do console executável nm implementações no PC
+sistema > | ———= ; @ sistema
+controle . | a boot.elf É & controle À
+| 17 eboot.elf | [ANSA
+imagem O | E ESGIGo doNigo & imagem (|
+audio o Ú J 5: audio : NR
+RELINK-DEMO - REV A
+O o
+(1) ligado ao console 2) passam ao Windows 3) áudio sem conexão
+
+=== [FRAME: frame_0058.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 4 transformar a fala em três estados = = = =
+fo o)
+Pp PS5 Arquivo do jogo mm Windows |
+= serviços do console executável ns implementações no PC |
+|
+sistema o— a E B sistema O
+| IN| ss
+controle o IL B controle o
+| * eboot.elf |
+imagem o =] codigoldojjogo, = —) imagem o
+| (= o. | ¥
+audio e NS ‘=~ áudio ! @ ,
+& não implementado —
+RELINK-DEMO - REV A O — ligação antiga — Ge ligação refeita === sem resposta
+o o)
+1) ligado ao console —— (2) passam ao Windows — ————>
+
+=== [FRAME: frame_0059.png] (Relevância: 2) ===
+K viktorkav / Tutorial Remotion + IA 4 transformar a fala em três estados = = = =
+Compositions Assets Inspector Jobs
+
+Search... BK owe RelinkagemDemo | [6 | nome
+
+[ER] RelinkagemDemo (E Rootisxe
+{} Root.tsx:3
+Metadata
+Dimensions 1920 1080
+Frame rate 30fps er”
+Duration 00:16.00 ] duração
+
+=== [FRAME: frame_0060.png] (Relevância: 6) ===
+K viktorkav / Tutorial Remotion + IA 4 transformar a fala em trés estados =
+Compositions Assets Inspector Jobs
+Search xk = — (RetinkagemDemo | [é nome
+{EB RelinkagemDemo ER Root.tsx:8
+{} Root.tsx:3
+Metadata
+Dimensions 1920 1080
+@ formato
+Frame rate 30fps
+Duration 00:16.00 il duragao
+! 0:02.00 0:04.00 0:06.00 0:08.00 0:10.00 0:12.00 0:14.00
+i
+16s 4
+> )
+Simule a troca de dados entre um jogo enquanto software e um console enquanto hardware sendo
+decompilados e adaptados para rodar no PC. O arquivo do jogo continua no centro. As ligações que
+iam para os serviços do console passam para implementações no Windows. O trabalho de tradução,
+no entanto, ainda não está completo. O pedido de áudio, por exemplo, fica sem resposta, mostrando o
+que ainda falta implementar.
++ Crie uma composição chamada RelinkagemDemo, com 16 segundos de duração, resolução de 19]
+& Thiscomputer © recompilacoes-demo Auto Opus 5.5 Extra
+
+=== [FRAME: frame_0061.png] (Relevância: 7) ===
+MK viktorkav / Tutorial Remotion + IA 4 transformar a fala em três estados =>
+Compositions Assets Inspector Jobs
+Search xk = — C(RetinkagemDemo ] [é nome
+{EB RelinkagemDemo ER Root.tsx:8
+€) Root.tsx:3
+Metadata
+Dimensions 1920 1080
+@ formato
+Frame rate 30fps
+Duration 0:16.00 il © duração
+! 00:02.00 0:04.00 0:06.00 0:08.00 0:10.00 0:12.00 0:14.00 S
+os 4s dis 13s 16s " i
+=
+Simule a troca de dados entre um jogo enquanto software e um console enquanto hardware sendo
+decompilados e adaptados para rodar no PC. O arquivo do jogo continua no centro. As ligações que
+iam para os serviços do console passam para implementações no Windows. O trabalho de tradução,
+no entanto, ainda não está completo. O pedido de áudio, por exemplo, fica sem resposta, mostrando o
+que ainda falta implementar.
+Crie uma composição chamada RelinkagemDemo, com 16 segundos de duração, resolução de 1920 por
+1080 e 30 quadros por segundo. Nos primeiros 4 segundos, apresente o estado inicial. Até o segundo
++ 1,mude as trés ligações, mostre a falha de áu|
+& Thiscomputer © recompilacoes-demo Auto Opus5.5 Extra O
+
+=== [FRAME: frame_0062.png] (Relevância: 6) ===
+K viktorkav / Tutorial Remotion + IA 4 transformar a fala em três estados -
+Compositions Assets Inspector Jobs
+{} Root.tsx:3
+Metadata
+Dimensions 1920 1080
+@ formato
+Duration ] duração
+? 00:02.00 00:04.00 00:06.00 00:08.00 00:10.00 00:12.00 00:14.00
+FS
+os 4s dis 13 s 16 s ‘ - À
+mostrando o que ainda falta implementar. =,
+Crie uma composição chamada RelinkagemDemo, com 16 segundos =
+de duração, resolução de 1920 por 1080 e 30 quadros por segundo.
+Nos primeiros 4 segundos, apresente o estado inicial. Até o segundo
+11, mude as três ligações, mostre a falha de áudio e reserve os três
+segundos finais para a leitura. Antes de produzir, confirme seu
+entendimento e proponha a composição.
+Entendi. A RelinkagemDemo fica com 1920x1080, 30 fps e 16 s (480 quadros):
+0-4 s: estado inicial, o jogo ligado aos serviços do console.
+4-11 s: sistema, controle e imagem passam para o Windows, uma de cada vez. d
+11-13 s: o pedido de áudio sai e fica sem resposta. aprovada
+13-16 s: tudo parado para a leitura.
+Posso produzir?
+
+=== [FRAME: frame_0063.png] (Relevância: 1) ===
+Mn" 6
+| | VOA
+[E quadros por segundo | j N Fr, + A
+imagens em cada segundo de vídeo N TA 3 om
+— a y j
+EEE bal f
+ee | or .
+EEE À à |
+30 quadros =1s S
+60 no canal ) .
+ik TE <=
+p = 5 Pate
+> É
+
+=== [FRAME: frame_0067.png] (Relevância: 2) ===
+vK viktorkav / Tutorial Remotion + IA 5 escolher a cara antes do lote =—=—= — —
+VE viktorkav / recompitações
+~/anypsS ‘tmux
+19 / retinkagen
+a instrução fica igual PSS x86-64 ———. x86-64 [mesma familia]
+só as ligações mudam de dono Wii U PowerPC —> C > nativo traduzia antes
+= psó + sistema — = executável — = windows + anypss =
+eboot.elf gm Windows
+E QE sen tradução À
+ne Ox62079 E :
+add rep, Ox<0
+pop rbp “oe FF. )
+i 5 E sceKerneléettoduleInfo2 . À
+Tibkernel.prx sistena — AB
+5  scekernetGetModuleList2 ay
+ww Ã
+DO scePadRead
+E sceAgcFuseShaderHalves
+8: anyossa "8
+A
+seg5-2-relinkagem-anim.mp4 0:19 / 0:48
+
+=== [FRAME: frame_0068.png] (Relevância: 3) ===
+K viktorkav / Tutorial Remotion + IA 5 escolher a cara antes do lote —
+VÁ viktorkav / reconpitações
+36 / revinaçes — ágação do console — retigada — sem resposte
+a instrução fica igual DS Mec x86-64. {nesna fanítio]
+só as ligações mudam de dono pe
+tet cbootietf o [ees EE Windows
+= E sceternetGetioduteInto2
+meras pra] ubkerneL.prx sístera
+Ei scekerneLGettodstelist2
+UnseePad. pox BL scePadtead LnseePodipr contrate
+seengeorsyf Ds II A scongeruseshodertatves nscengeDeiver.prx.inasen f
+ibsceaudiodu ee mm Cl scoAudiodut2UserSetSupportedAttributes sem inpenentação
+Entendi. A RelinkagemDemo fica com 1920x1080, 30 fps e 16 s (480 quadros)
+0-4 s: estado inicial, o jogo ligado aos serviços do console.
+4-11 s: sistema, controle e imagem passam para o Windows, uma de cada vez.
+11-13 s: o pedido de áudio sai e fica sem resposta.
+13-16 s: tudo parado para a leitura.
+Posso produzir?
++ Reply to Claude e
+Auto Opus 5.5 Extra ©
+
+=== [FRAME: frame_0069.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 5 escolher a cara antes do lote —
+EO OD DIO EIA SSS o SSS SH
+i 1
+1
+Ú
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+| a
+1
+1
+1
+1
+1
+1
+1
+; |
+1
+1
+|
+1
+1
+1
+1
+I | LAS À
+1
+1 ! À
+1
+11-13 s: o pedido de audio sai e fica sem respos sua referência
+13-16 s: tudo parado para a leitura.
+Posso produzir?
++ Reply to Claude. o
+Auto Opus 5.5 Extra O
+
+=== [FRAME: frame_0070.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 5 escolher a cara antes do lote —
+UM viktorkav / reconpitações
+famoss tmx
+19 / setinkagen Agee do console — retágada — sem reposto
+a instrução fica igual pes 16-64 ————— 396-64. [nosno fanítia)
+só as ligações mudam de dono ial
+<a scoternetsettodutetnte?
+nkernet.pre sistema ubkerneL.prx sistema
+<a scetemeteettoduteList2
+Linsceree.prx _cortroie |= sceraatead ubseered.prx _centste
+“inscengeoriver.prx_ ines |E——————H_scengerusesnadertves TibScengenráver.prx Sassen fi
+Lnscehisioout2.prx odio E—————8_scohusioovt2Usercetsunportednttrsbutes tom implementação
+mm. ,
+13-16 s: tudo parado para a leitura.
+Posso produzir?
++ Reply to Claude. o
+Auto Opus 5.5 Extra
+
+=== [FRAME: frame_0071.png] (Relevância: 4) ===
+4 viktorkav / Tutorial Remotion + IA 5 escolher a cara antes do lote —
+(o) o
+Pp PS5 Arquivo do jogo mm Windows
+<> serviços do console executável FF implementações no PC
+sistema o CA ao ee TA sistema o
+controle o & controle o
+* ebootelf ;
+imagem o m código do jogo 7 S| imagem o :
+Ge Ons i
+audio o = áudio Í See ço
+& não implementado ? >
+ro O — ligação antiga — e ligação refeita — === semresposta o J
+: \ A
+Use a ideia de circuitos e conexões. Mantenha o arquivo central
+grande, com textos legíveis e os destinos separados. Diferencie a
++ ligação atendida| Ré
+Auto Opus 5.5 Extra ©
+
+=== [FRAME: frame_0072.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 5 escolher a cara antes do lote = = = = =
+~/design-system
+
+=== [FRAME: frame_0073.png] (Relevância: 3) ===
+K viktorkav / Tutorial Remotion + IA 5 escolher a cara antes do lote = = = —= =
+K design system ~/design-system
+@ fontes E cores O componentes
+#232325 dame À
+IBM Plex Sans ~-bancada-fundo K tokens-bench — a bancada À
+sujeitos e dados
+Be CS . $ tokens-bench --janela 60s 6 »
+JetBrains Mono TEESE cedro-3b 2.410 tok/s ok
+maquina, código e logs || #52a5ba st
+--casa
+#81d3ea pares Se
+--casa-texto [passou [[ressalva [Jf falhou /
+--sintaxe-palavra-chave
+o que mudou
+#58e790 Cache de KV em disco
+
+=== [FRAME: frame_0074.png] (Relevância: 2) ===
+K viktorkav / Tutorial Remotion + IA 5 escolher a cara antes do lote =
+Só as tigações mudam de dono E as À
+placa e circuitos o apps reais
+
+=== [FRAME: frame_0076.png] (Relevância: 1) ===
+vK viktorkav / Tutorial Remotion + IA 5 escolher a cara antes do lote =—=—=— — —
+SA vitorias / testicores dana ee
+um pedido simples ct cet o Dot trabalha num computador dele ach ope — moe egrernto mynd
+aaa) ine
+O EES
+=a A of
+ne 15/10 © seu vot NW
+LS ESC dr
+rs E Q
+(
+© modelo o)
+vans | [SEO] | eu
+Demora Ro á
+eleanor! [ED [rm
+Fresso
+[EFE] o motsicn [Es]
+
+=== [FRAME: frame_0077.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 5 escolher a cara antes do lote =—=— — —
+VA viktorkav / bastidores
+~/bastidores/reuniao-aurora ‘tmux
+OS / 0 pedido entra
+um pedido simples — você cer agente
+faz o agente percorrer seus bastidores
+Fr | gesto
+© seu pedido FA
+confere o que ficou pendente dessa | ( ) \
+| reunião e prepara uma resposta | à ad à
+SS Fi
+vu
+E) Reunião Aurora Ss Or
+13/18 - 10h
+Lia, Bruno, Caio
+fe objeto
+= ea
+O: bastidores* "2
+& bichinho virtual
+assistentes
+
+=== [FRAME: frame_0078.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 5 escolher a cara antes do lote = —=—= —= —
+UM viktorkav / reconpitações
+a instrução fica igual 6S se $$ et, eet
+collasiiUlgacoesinudanidendeno ea ce RO
+H memo o Em HE windows
+Vea rai, (rop-oxão] = processador do PC 5
+{imports + ligados por NID relinkagem bibliotecas do AnyPSS y
+seateratestowtaofe? pao _
+sore ETA com
+EEE »—-a| Fo
+aor
+ibSceAudiodut2. prx sceAudioOut2UserSetSupportedAttributes — E sem inplenentacio. ”
+~~ o
+RCP19 piloto 1
+[” [lS SD) MMNNNED A COSEEEERDO: meme, meme, ooo ecto ooo
+4 if ial Yi mw my Vt
+q ng Yi Yi a Mt Mt
+1 1a Vy Vy ry an mm
+Vence! VISES tle sceseece! Vono Woosscccccc! Wocccccsccc! tesccce
+lote
+
+=== [FRAME: frame_0079.png] (Relevância: 6) ===
+K viktorkav / Tutorial Remotion + IA 5 escolher a cara antes do lote -
+a
+© ® File View Composition Tools Help tecompilacoes-demo ») v
+< Compositions Assets RelinkagemDemo — XX
+Search eK
+ER RelinkagemDemo. o o
+PS5 Arquivo do jogo Windows
+<B> serviços do console iscas HE pementarse no pc
+EE , senado -
+o o
+controle a >
+= eboot.elf ~
+" DD =
+imagem ”, código do jogo “
+> = _— Os
+áudio E áudio OO É
+(ss -
+o o = (i
+s 3
+Qm v Ou v SOL) MPM BAY À \ j
+)
+Construa essa primeira composição usando as skills do Remotion e a
+direção que definimos.
+A primeira versão da RelinkagemDemo está no Studio.
++ Reply to Claude. o
+Auto Opus 5.5 Extra O
+
+=== [FRAME: frame_0080.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 6 revisar o que a tela explica = = — ===
+" 7
+o o {} Rootts
+Metadata
+P PS5 Arquivo do jogo mm Windows
+"> serviços do console executável "= implementações no PC Dimensions
+Frame rate
+sistema CN f Se @| sistema o Duration
+| o 2 of | Actions
+controle o—— & controle o
+| = eboot.elf O asa se ,
+imagem | cédigo do jogo a & imagem A Add ter
+—_— EA À (BB Add co
+áudio a) ©: áudio i
+cic aaacececacaaceaeac aad <> Genere
+& Browse r \
+heLin-pemo-reva — [ —M ligagdo antiga e ligação refeita N J
+O () ;
+Smt] WMMDHN BAY
+Q 0:02.00 0:04.00 0:06.00 N 00:08.00 00:10.00 00:12.
+
+=== [FRAME: frame_0081.png] (Relevância: 1) ===
+vK viktorkav / Tutorial Remotion + IA 6 revisar o que a tela explica == = = = —
+fo o)
+PS5 Arquivo do jogo mm Windows
+L
+“E serviços do console executável MF implementações no PC
+| a a 2 o | nomes legíveis (vy)
+<
+| = eboot.elf * iq :
+áudio a | nn o áudio |
+o nreunKoemo neva — O — ligaçãoantiga e ligação refeita = 7
+Sw ll MD) BAY DT
+00:02.00 00:04.00 00:06.00 00:08.00 00:10.00 N
+EEE
+[a es |
+Ea
+
+=== [FRAME: frame_0082.png] (Relevância: 1) ===
+vK viktorkav / Tutorial Remotion + IA 6 revisar o que a tela explica == —=— = —
+fo o
+PR PS5 Arquivo do jogo — mm Windows
+“E serviços do console | executável MF implementações no PC
+sema a rr o
+nomes legíveis
+“Ne ad e o
+| | * eboot.elf * 6 destinos certos (v)
+ye ee BD wsvivonouser  @
+áudio e — | EE :
+Te NEM B troca acompanhável (v)
+nReunKoemo neva © — ligaçãoantiga e ligação refeita
+o °° |
+TIE OO Z
+2 :
+ow] RENO BAY Dn
+00:02.00 00:04.00 00:06.00 00:08.00 00:10.00 T
+
+=== [FRAME: frame_0083.png] (Relevância: 1) ===
+vK viktorkav / Tutorial Remotion + IA 6 revisar o que a tela explica == —=— — —
+fo o) A
+i vocé pediria
+PS5 | Arquivo do jogo Windows a
+2 serviços do console executável 2 = implementações no PC Separe a mudança das três
+ligações.
+N Ga . H
+=  eboot.elf À
+áudio —— = © áudio | i
+RELINK-DEMO - REV A O — ligação antiga @—@ ligação refeita i j
+1 o o) É >
+os 8s 12s 16 s
+i ’ i i i
+
+=== [FRAME: frame_0084.png] (Relevância: 2) ===
+K viktorkav / Tutorial Remotion + IA 6 revisar o que a tela explica == = = = =
+: Arquivo do jogo mm Windows
+i executável == implementações no PC
+[LE SS E a E a a a sistema o
+eboot.elf e x
+Cm código do jogo a: ea. imagem o Y
+Em ==.
+ums ne De e nes e ue ns us - Co áudio | LS =
+
+H & não implementado
+
+=== [FRAME: frame_0085.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 6 revisar o que a tela explica —
+piloto v1
+KX viktorkav / como eu resolvi 2 oque um agente faz com seus arquivos —= —=
+A-conversa-esquece;
+© codex contexto desta conversa vault
+limite 'rojetos / Tutor
+Monte um plano para a série de S
+tutoriais. an : x.
+Use português brasileiro.
+
+O Read contexto.md =
+Be E contexto.md -
+
+Proposta: dois tutoriais por semana, ENCERRA =a
+
+começando pelo Obsidian. PP)
+
+i ; FP ]
+o nota lida decisoes.md
+contexto. md Prioridade: temas com mais demanda = a
+fein plano.md \
+AGENTS. nd Próximo: tutorial de animações >
+o cangeiito inicio-tutoriais.md ”
+Ideias: Obsidian, animações, homelab
+ff ip
+
+=== [FRAME: frame_0086.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 6 revisar o que a tela explica -
+piloto v2 [vy]
+& viktorkav / Tutorial Obsidian + IA 2 o que um agente faz com seus arquivos = —
+. © Panodaséro 8 £
+contexto
+fp Codex Monte um plano para a série de tutoriais,
+Now cht contexto
+© var ze Já feito: roteiro do primeiro video
+Site (viktorkav.com.br) =
+© Kav
+nota lida
+contexto.ad
+instruções
+O) 05:36-06:14
+
+=== [FRAME: frame_0087.png] (Relevância: 1) ===
+vK viktorkav / Tutorial Remotion + IA 7 reaproveitar o que funcionou = === —=———=—
+variedade
+Ce CPZ: (Sa: oe Gew e E
+rales > ES" == E | | ae =
+TE = renga ss ae Ae. a a uu Ss} GS) pS
+id CX ==) emos >
+ll ares Eles “YEE
+-~ = = | weccd
+Ca VR WE
+
+=== [FRAME: frame_0088.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 7 reaproveitar o que funcionou = = = = = = —
+variedade
+Ce ere 1 | E e E ——=n
+pitoto EMO A E || Em e pe o =
+OSES (O) Te E — erre irr dem =
+1: eee TES nos W
+À = = Des RcPo1 chi gamepl ReP13 estei
+Be > chips com gameplay esteira —
+= s == ————= E
+E = =—- == pf
+RcP19 placa Eis = Tio DE AMO
+J PE =
+Repos sobre a câmera RcP21 documento real
+mesma identidade
+
+=== [FRAME: frame_0089.png] (Relevância: 1) ===
+vK viktorkav / Tutorial Remotion + IA 7 reaproveitar o que funcionou = = = = = = —
+_catalogo.md
+— Z
+src/referencias
+eo
+AA)
+
+P \
+- |
+> |
+— Fe
+
+=== [FRAME: frame_0090.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 7 reaproveitar o que funcionou = = = = = = =
+D ® File View Composition Tools Help
+Compositions Assets RelinkagemDemo — x
+Search... sK
+-—
+| o
+o 2 4 6 8 10 12 14 16 18 s S
+r r 1 “ r “ 1 “ 1 “ 1 CY 1 “ 1 ' 1 '
+
+m Ps
+RelinkagemDemo cas
+or |
+
+/ 4 à
+
+=== [FRAME: frame_0091.png] (Relevância: 2) ===
+vK viktorkav / Tutorial Remotion + IA 7 reaproveitar o que funcionou = == === —=—
+D ® File View Composition Tools Help .
+—., PS seu pedido
+ss Asses penragânDanas 1x Crie uma cópia desta composição chamada ReLinkagemLeitura.
+Seas: os Preserve conteúdo, aparência e movimento; mantenha a|
+[ER] RelinkagemDemo
+É
+o 2 4 6 8 10 12 14 16 18 s N
+i r T x 1 r T r 1 r T x 1 r T ' 1 r 1 S
+RelinkagemDemo : A õ 1 1 _~ _
+E == ee E 3 E 3EFE="2 Emo
+E f- = =WB- = =B- =.= Be =.= Fe = “<> <>
+SS ted = | === = Em RR eS BR SS RS 16 s }
+RelinkagemLeitura cópia ; ; ; ; -
+inicial sistema controle imagem áudio leitura
+
+=== [FRAME: frame_0092.png] (Relevância: 3) ===
+vK viktorkav / Tutorial Remotion + IA 7 reaproveitar o que funcionou = = — — — —
+© © File View Composition Tools Help .
+—___, ———EE seu pedido
+
+Compestion® ceo netiiagemee\ XX Crie uma cópia desta composição chamada ReLinkagemLeitura.
+
+Search = i Preserve conteúdo, aparência e movimento; mantenha a imagem
+
+(Eh RelinkagemDemo final parada por mais dois segundos para uma fala mais lenta.
+tempo
+
+o a 4 6 8 10 12 14 16 18 s
+
+1 r T r T x T r T x T r T x 1 : 1 r 1
+
+RelinkagemDemo @ original | ' b Q
+
+RelinkagemLeitura cópia ; ; ; ; y
+
+inicial sistema controle imagem audio leitura ‘
+Lg | as — = x = —
+= = D i Pe er] |
+
+=== [FRAME: frame_0093.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 7 reaproveitar o que funcionou = = === —
+© © File View Composition Tools Help
+
+Compositions Assets RelinkagemLeitura x
+
+Search... BK
+
+{By RelinkagemDemo
+
+{© RelinkagemLeitura fo
+
+outra relação
+Aaha fonte A B contraste (=) superfície
+
+=== [FRAME: frame_0094.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 8 acertar o tempo e exportar = = = = = = — —
+© © File View Composition Tools Help
+Compositions Assets RelinkagemDemo — x
+SS a voz-exemplo.wav
+roth! ee eecy tnt
+{©} RelinkagemLeitura fo
+|
+tempo
+ic} 2 4 6 8 10 12 14 16 18 s Yy "
+r " 1 " 1 " T " T " 1 ' 1 " 1 ' 1 " i
+RelinkagemDemo + + + + + :
+inicial sistema controle imagem audio leitura
+
+=== [FRAME: frame_0095.png] (Relevância: 3) ===
+A viktorkav / Tutorial Remotion + IA 8 acertar o tempo e exportar —
+& < recompilacoes-demo @® (=)(E-)(6 O - (a
+Desktop agents
+D Downloads lange,
+Documents prettierrc
+a © eslint.config.mjs 16 Oct 2026 at 05:09 — 79bytes JavaScript
+node_modules Today at 23:24 -- Folder
+Applications package-lock.json Today at 23:24 191KB JSON Document
+package.json Today at 23:24 761 bytes JSON Document
+PEMD public Today at 23:24 == Folder 7
+a OOOO Wy a — "a SO — public/voz-exemplo.wav
+README.md Today at 23:24 TRB Markdown Document
+remotion.config.ts 16 Oct 2026 at 05:09 371 bytes MPEG transport stream (TS) media y
+skills-lock.json Today at 23:26 3KB JSON Document
+sre Today at 23:26 -- Folder q
+tsconfig.json 16 Oct 2026 at 05:09 368 bytes JSON Document ce
+ee ã
+<a Y
++ + + + +
+inicial sistema controle imagem áudio leitura
+
+=== [FRAME: frame_0096.png] (Relevância: 2) ===
+K viktorkav / Tutorial Remotion + IA 8 acertar o tempo e exportar —
+A fala está em public/voz-exemplo.wav. Meça os tempos dessa fala.
+Ajuste a composição para que as ligações mudem quando eu descrevo
++ amudançae o pedido de áudio do jogo fique| ç
+Az
+o a 4 6 8 10 12 14 16 18 s
+| arquivo do jogo | ligações | pedido de áudio 4
+voz-exemplo.way — meet lo alface June Ie ce fole fls mtr it Ibi ? )
+OR AAA o o no do o om o nobom 000 00030 0 mM
+¢ ¢ ¢ + +
+pe LADA Es] Babe = ”
+inicial sistema controle imagem áudio leitura
+
+=== [FRAME: frame_0097.png] (Relevância: 2) ===
+vK viktorkav / Tutorial Remotion + IA 8 acertar o tempo e exportar = = = = = = — —
+Metadata
+Dimensions 1920 1080
+Frame rate 30fps
+Duration 00:16.00
+—
+, = on
+=
+o 2 4 6 8 10 12 14 16 18 s É
+r T o T v T . T o T v T 7 T . T r 1 vom — y
+| arquivo do jogo | ligações . . pedido de audio | Es.
+voz-exemplo.wav ota post ato ttm eH XK
+TO a Tr aa a rm rca on NAO: -
+¢ + + L Ç à
+inicial sistema controle imagem áudio leitura
+
+=== [FRAME: frame_0098.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 8 acertar o tempo e exportar = = = = = = — —
+| | | | | | 7
+01:00:00:00 01:00:06:00 01:00:12:00 01:0
+PR
+~~
+Ê
+NINA FA
+* + ¢ he +
+eo Em EE “=| <i ge
+inicial sistema controle imagem audio leitura
+
+=== [FRAME: frame_0099.png] (Relevância: 1) ===
+vK viktorkav / Tutorial Remotion + IA 8 acertar o tempo e exportar == = = = = = —
+gravar antes
+gravar
+© tokens e
+i
+
+=== [FRAME: frame_0100.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 8 acertar o tempo e exportar = ===
+gravar antes
+tempos da fala
+(e) . arquivo ligações áudio
+“(00 =
+ve-lo ot ot ot uci e {hu
+gravar montar no Resolve
+animar antes
+animar gravar voltar e ajustar '
+Ne
+6: —
+
+=== [FRAME: frame_0101.png] (Relevância: 2) ===
+K viktorkav / Tutorial Remotion + IA 8 acertar o tempo e exportar == = = = = = —
+o o
+e O E A AS eo ONT Metadata
+P PSS Arquivo do jogo Windows Dimensions 1920 — 1080
+© serviços do console executável implementações no PC
+Frame rate 30fps
+RNPT Fr Duration 00:17.06
+sistema ao | sistema o
+| = 5 Actions
+controle o— © Add solid
+em o
+eboot.elf A ado text
+S fea, ee (Ei Add composition... 1
+áudio o ——— ‘=-@ áudio | <> Generate with agent... \
+| GS Browse Elements v AE” x
+neuincoemo neva — D —  ligaçãoantiga == ligaçãorefeita  =~=~=® semresposta -
+EMO
+
+=== [FRAME: frame_0102.png] (Relevância: 3) ===
+K viktorkav / Tutorial Remotion + IA 8 acertar o tempo e exportar == —= = = = — —
+Ú
+i
+| Render RelinkagemDemo on the server x
+D General Codec O H.264 v >
+{} Input Props =
+Frame range 0 —————————@ 515 SS
+[&) Picture L “
+Audi Output name | out/RelinkagemDemo.mp4 N
+ie á CF
+(E) Encoding é > oY
+Log Level © Info v
+& Environment
+‘ $8 Other k e
+fo À
+N
+| 0 npx remotion render RelinkagemDemo out/relinkagem-demo.mp4 --codec=h264|--muted
+sem som
+
+=== [FRAME: frame_0103.png] (Relevância: 1) ===
+vK viktorkav / Tutorial Remotion + IA 8 acertar o tempo e exportar = = = = = = — —
+~
+
+=== [FRAME: frame_0104.png] (Relevância: 3) ===
+K viktorkav / Tutorial Remotion + IA 8 acertar o tempo e exportar = = = = = = — —
+codificador de software %
+CPU S
+"> FPS
+oo e |
+=
+i
+render NE “)
+
+=== [FRAME: frame_0105.png] (Relevância: 2) ===
+K viktorkav / Tutorial Remotion + IA 8 acertar o tempo e exportar === = = = = —
+codificador de software
+CPU
+GB GRE © 6h30
+render o o chips dedicados
+do Mac S
+OB ni p
+(
+ms
+
+=== [FRAME: frame_0106.png] (Relevância: 2) ===
+vK viktorkav / Tutorial Remotion + IA 8 acertar o tempo e exportar = = = = = ==
+codificador de software
+a CPU
+render o o chips dedicados !
+do Mac
+D id
+
+=== [FRAME: frame_0108.png] (Relevância: 5) ===
+viktorkav / Tutorial Remotion + IA 9 guardar a próxima correção
+Edited Root.tsx >
+Criei RelinkagemLeitura com 18 segundos: o mesmo conteúdo, com a imagem
+final parada por mais 2 segundos. RelinkagemDemo continua igual.
+Meça os tempos dessa fala. Ajuste a composição para que as ligações
+mudem quando eu descrevo a mudança e o pedido de áudio do jogo
+fique sem resposta quando eu menciono essa limitação. Preserve um
+tempo final de leitura.
+Ran 3 commands, edited 2 files >
+Media fala em voz-exemplo.wav. As três ligações mudam enquanto você <>
+descreve a troca, o pedido de audio fica sem resposta em “fica sem resposta" e o
+fim guarda 2 segundos de leitura.
+Exporte um MP4 só com a imagem, sem qualquer som, em H.264, na dy
+pasta out do projeto, chamado relinkagem-demo.mp4. Confira \ r
+resolução, duração e reprodução do arquivo.
+Ran 2 commands >
+Exportei out/relinkagem-demo.mp4 só com a imagem, em H.264, Conferi o
+arquivo: 1920 por 1080, 17,2 segundos, e ele reproduz do início ao fim.
++ Salveobriefingeas decisões que eu aproveil| eo
+Auto Opus 5.5 Extra (O
+
+=== [FRAME: frame_0109.png] (Relevância: 6) ===
+K viktorkav / Tutorial Remotion + IA 9 guardar a próxima correção =
+LAS REGISTRO .md — recompilacoes-demo
+e pos dessa TATA AJUSTE à COMPOSIÇÃO para que as Tigacoes
+Regi stro do proj eto mudem quando eu descrevo a mudança e o pedido de áudio do jogo
+fique sem resposta quando eu menciono essa limitação. Preserve um
+A tempo final de leitura.
+Briefing
+Simular a troca de dados entre um jogo e um console, il commands. edited 2 files
+adaptados para rodar no PC: o arquivo fica no centro, as Medi a fala em voz-exemplowav. As três ligações mudam enquanto você
+A . Hoe descreve a troca, o pedido de Audio fica sem resposta em “fica sem resposta" e o
+ligações passam ao Windows e o audio fica sem resposta. fim guarda 2 segundos de leitura.
+Decisões aprovadas Exporte um MP4 só com a imagem, sem qualquer som, em H.264, na
+~ RelinkagemDemo: 17,2 s, 1920x1080, 30 fps pasta out do projeto, chamado relinkagem-demo.mp4. Confira 4
+eee resolução, duração e reprodução do arquivo. >
+° Três ligações em sequência: sistema, controle, imagem 2
++ Áudio com o aviso “não implementado” emzcommands as
+Cc A d Exportei out/relinkagem-demo.mp4 só com a imagem, em H.264. Conferi o
+omposi¢ao usada arquivo: 1920 por 1080, 17,2 segundos, e ele reproduz do início ao fim.
+RelinkagemDemo
+Salve o briefing e as decisões que eu aprovei. Registre qual
+Vídeo final composição foi usada, onde ficou o video final e como abrir a prévia,
+Separe as sugestões que eu ainda não confirmei.
+out/relinkagem-demo.mp4
+Como abrir a prévia
+Salvei REGISTRO.md na raiz do projeto: briefing, decisões aprovadas,
+npm run dev composição usada, video final e como abrir a prévia. As sugestões que você
+ainda não confirmou ficaram numa seção separada.
+Sugestões não confirmadas
+* Som de clique a cada ligação refeita
+= 5 + Reply to Claude... Y
++ Versão vertical em 1080x1920 D) k . i
+Auto Opus 5.5 Extra O
+
+=== [FRAME: frame_0110.png] (Relevância: 5) ===
+K viktorkav / Tutorial Remotion + IA 9 guardar a próxima correção =
+eee REGISTRO.md —recompilacoes-demo
+
+Registro do projeto
+
+Briefing
+
+Simular a troca de dados entre um jogo e um console,
+
+adaptados para rodar no PC: o arquivo fica no centro, as v
+
+ligações passam ao Windows e o audio fica sem resposta.
+
+Decisões aprovadas A
+
+- RelinkagemDemo: 17,2 s, 1920x1080, 30 fps 7)
+
+- Três ligações em sequência: sistema, controle, imagem oO) > al
+“= Audio com o aviso “nao implementado” 7) ve |
++ Rótulo de controle maior oO) *
+Composição usada
+
+RelinkagemDemo v
+
+Video final
+
+out/relinkagem-demo.mp4 v
+
+Como abrir a prévia
+
+npm run dev v
+
+Sugestões não confirmadas . =
+
+orientação | outros trabalhos
+* Som de clique a cada ligação refeita D)
+« Versão vertical em 1080x1920 D) Mostrar um rascunho parado antes de animar
+
+=== [FRAME: frame_0111.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 10 colocar a animação na explicação = === —=——=—=—= —==-—-
+o o
+PL PS5 Arquivo do jogo mm Windows
+Ge serviços do console executavel an implementações no PC
+sistema o— Io Ma JO sistema ©
+controle o | o le
+Cm o—
+eboot.elf
+imagem —7 cédigo do jogo ro @ imac
+áudio i 5: áudio i
+RELINCEDEMOMIR ENTE O — ligação antiga @==@ ligação refeita
+o o
+———
+reLinkagem-demo.mp4 0:04 / 0:17
+
+=== [FRAME: frame_0112.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 10 colocar a animação na explicação = = ==
+Ld LU U
+ds q
+n— Oy E <o> «1 < ED O
+=~ @e x eb a ch) oo Ba ¢ é B Av ev FAK
+fel TEEN "Hl AULA ANN rE AAA
+01 :00:06:00 01:00:00:00 01:00:06:00 01:00:12:00
+tata U [E U
+| Video 1
+3 <> [ss MM 20
+Audio 1
+C——==s ss pp eS
+
+=== [FRAME: frame_0113.png] (Relevância: 2) ===
+MK viktorkav / Tutorial Remotion + IA 10 colocar a animação na explicação — = == = ===
+MM Bins + —Master/04 GRAFICOS 00:00:17:06 Exercicio v 01:00:03:12
+Master Clip Name
+
+00.TIMELINE ER berddo
+01. AROLL [© relinkagem-demo.mp4
+> 03 BROLL SI voz-exemplo.wav
+(04. GRAFICOS fo o
+> 05, MUSICA SEX : mm. S
+> o2voz <p PSS Arquivo do jogo | ey Windows
+Serviços do console executável implementações no PC
+sistema ——— | Dm sistema
+\| & lo?
+controle o—_, D controle
+ebootelf ~ |
+agen a7 ™ —cstigo dojogo MD iB timecem
+an = .
+áudio aos © áudio i
+necicoewo neva — D — ligação antiga
+o o
+E) Smart Bins +
+Keywords
+> collections
+. . .
+&S as 4
+= Hy BB <e> Kd < mH Gok
+a @u he a o | oh) Bm e o 8 Av ov | QR |= |
+T !
+01:00:03:12 no [orsnosoo ; - 01:00:1200 VCroossao
+“More Gedee Ge q\e Ge %Ge.Ge se Ge Goa se Ge Goes Ge Gal
+Video
+Gajar sm 2
+Audio 1
+
+=== [FRAME: frame_0114.png] (Relevância: 2) ===
+K viktorkav / Tutorial Remotion + IA 10 colocar a animação na explicação =
+RelinkagemDemo v Br oae@eb:
+Exporte um MP4 sé com a imagem, sem qualquer som, em
+H.264, na pasta out do projeto, chamado
+relinkagem-demo.mp4. Confira resolução, duração e
+reprodução do arquivo.
+Ran 2 commands
+Pronto: out/relinkagem-demo.mp4 tem 1920x1080,17,2s, H.264 e
+nenhuma faixa de áudio. Reproduzi do início ao fim. W
+A
+ideo relinkagem-demo.mp4 17:04 + Reply to Claude. e
+AL) At <
+—.— Auto Opus 5.5 Extra
+
+=== [FRAME: frame_0115.png] (Relevância: 2) ===
+MK viktorkav / Tutorial Remotion + IA 10 colocar a animação na explicação = = = SS
+skill
+(&) resolve-broll
+© obsidian 101 tinerine 1
+pe e EM) a co Baul) ec o Bl nvevjm AT e É
+01:00:00:00 NARA y | 01:06:38:00 | 01:13:16:00 | 01:19:54:00 :
+6) a «rm & =D
+ANIM —_ |
+Bar
+PIP CAMERA
+eee eee
+AROLL 5 Es
+Ea a; BH 2
+VOZ TRATADA VI45 + C... E
+e) <q E Mm 20
+Audio 2
+
+=== [FRAME: frame_0116.png] (Relevância: 1) ===
+K viktorkav / Tutorial Remotion + IA 10 colocar a animação na explicação = = = = = = — — — —
+relinkagem-demo-v2.mp4 |
+\ a SSE)
+@) Smart Bins + >
+Keywords 3 N
++ Collections | a S
+é —
+Oy E <o> M<E> MO = nn H Os” "”
+=
+a @Y » E as chy om ml o é Bl ay ev Bem TE º E.
+À AI
+01:08:54:29 EE ! EE EE | Tome Pp
+EM ,
+Video 4
+Mave
+INSIDER APROVADO
+PB
+Video 2
+oo EEE eee ee ee eee ee EE
+AROLL
+em) <p S) 2.0
+VOZ TRATADA VI45 + C...
+(x) <p EM 20
+INSIDER APROVADO
+
+=== [FRAME: frame_0117.png] (Relevância: 3) ===
+K viktorkav / Tutorial Remotion + IA 10 colocar a animação na explicação == = = =
+00:19:38:21 Timeline 1 v 01:08:55:15 ir]
+jo 1500 1000 500 o 500 1000 1500 ae
+lq e Transform 3
+Zoom x 1.000 @ x 1,000
+2 Position x 0.000 Y 0.000
+© 2 Rotation Angle e 0.000
+) 5 " " ‘Anchor Point x 0.000 0.000 SN
+2 PS5 Arquivo do jogo = Windows iss AESA ”
+- = serviços do console executável implementações no PC Pitch ry 0.000 ~~ —
+= Yaw e 0.000 oe “=>
+sistema o aes | @ sistema Fi E &) á
+controle o E à @ controle > AlSmart Reframe >
+5 ” eboot.elf | = |
+- E 6 © Cropping 4
+imagen ia NM códigodojogo SEA =
+" - * — DynamicZoom 3 j
+3 áudio a © áudio ; O Gass : =
+Composite Mode — Normal v
+- - Opacity e 100.00
+#1 o o © Speed Change +
+© Stabilization 3
+© Lens Correction 3
+= iq
+po e Retime and Scaling :
+O Org ‘Al Super Scal
+super Scale 3
+lly  <e> Pein! my) (o) Gow ,

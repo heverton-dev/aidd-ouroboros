@@ -1,0 +1,58 @@
+[
+ {
+  "text": "Em",
+  "start": 0.098,
+  "end": 0.217
+ },
+ {
+  "text": "Período,",
+  "start": 0.229,
+  "end": 0.669
+ },
+ {
+  "text": "escolha",
+  "start": 0.693,
+  "end": 1.133
+ },
+ {
+  "text": "Últimos",
+  "start": 1.145,
+  "end": 1.514
+ },
+ {
+  "text": "30 dias.",
+  "start": 1.526,
+  "end": 2.36
+ },
+ {
+  "text": "A",
+  "start": 2.607,
+  "end": 2.702
+ },
+ {
+  "text": "tabela",
+  "start": 2.714,
+  "end": 3.155,
+  "brk": true
+ },
+ {
+  "text": "se",
+  "start": 3.167,
+  "end": 3.274
+ },
+ {
+  "text": "atualiza",
+  "start": 3.286,
+  "end": 3.798
+ },
+ {
+  "text": "na",
+  "start": 3.81,
+  "end": 3.952
+ },
+ {
+  "text": "hora.",
+  "start": 3.964,
+  "end": 4.274
+ }
+]

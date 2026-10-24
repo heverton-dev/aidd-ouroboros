@@ -1,0 +1,73 @@
+{
+  "source": {
+    "capture": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_video_yt_006\\cadastros-conexao\\compartilhado\\capture-login",
+    "title": "Cadastros Conexão",
+    "url_assets": [
+      "https://cadastros.vpsconexao.org/icons/logo-conexao-horizontal.png"
+    ]
+  },
+  "colors": {
+    "primary": "#00568F",
+    "primary-hover": "#004370",
+    "primary-light": "#E6F0F7",
+    "accent": "#0284C7",
+    "text": "#0F172A",
+    "text-muted": "#64748B",
+    "bg": "#F8FAFC",
+    "surface": "#FFFFFF",
+    "border": "#E2E8F0",
+    "border-hover": "#CBD5E1",
+    "destructive": "#DC2626",
+    "destructive-bg": "#FEF2F2",
+    "success": "#16A34A",
+    "success-bg": "#F0FDF4",
+    "warning": "#D97706",
+    "warning-bg": "#FFFBEB",
+    "button:Entrar no sistema": "#00568F",
+    "button:Consultor": "#FFFFFF",
+    "button:Studio de Formulários": "#FFFFFF"
+  },
+  "palette": [
+    "#000000",
+    "#004370",
+    "#00568F",
+    "#006045",
+    "#0284C7",
+    "#0F172A",
+    "#0F172B",
+    "#16A34A",
+    "#314158",
+    "#5EE9B5",
+    "#64748B",
+    "#74D4FF",
+    "#CBD5E1",
+    "#D97706",
+    "#DC2626",
+    "#E2E8F0",
+    "#E6F0F7",
+    "#ECFDF5",
+    "#F0FDF4",
+    "#F8FAFC",
+    "#FEF2F2",
+    "#FFFBEB",
+    "#FFFFFF"
+  ],
+  "fonts": {
+    "heading": "Poppins",
+    "body": "Inter"
+  },
+  "font_families": [
+    "Inter",
+    "Poppins"
+  ],
+  "radii": [
+    "12px",
+    "6px",
+    "8px"
+  ],
+  "shadows": {
+    "--shadow-subtle": "0 1px 3px 0 #0000000d, 0 1px 2px -1px #0000000d",
+    "--shadow-card": "0 4px 6px -1px #0000000d, 0 2px 4px -2px #0000000d"
+  },
+  "logo": "brand/logo.png"
+}

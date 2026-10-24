@@ -1,0 +1,35 @@
+1
+00:00:00,098 --> 00:00:01,121
+Em poucos segundos,
+
+2
+00:00:01,157 --> 00:00:02,848
+você abre seu primeiro relatório.
+
+3
+00:00:04,220 --> 00:00:05,291
+Clique em Relatórios,
+
+4
+00:00:05,327 --> 00:00:06,374
+no menu da esquerda.
+
+5
+00:00:07,742 --> 00:00:08,313
+Em Período,
+
+6
+00:00:08,337 --> 00:00:10,004
+escolha Últimos 30 dias.
+
+7
+00:00:10,251 --> 00:00:11,918
+A tabela se atualiza na hora.
+
+8
+00:00:13,304 --> 00:00:13,756
+Pronto.
+
+9
+00:00:14,004 --> 00:00:14,992
+Agora é com você.

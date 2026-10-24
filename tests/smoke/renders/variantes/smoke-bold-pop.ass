@@ -1,0 +1,44 @@
+[Script Info]
+ScriptType: v4.00+
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+PlayResX: 1920
+PlayResY: 1080
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Cap,Segoe UI,84,&H00FFFFFF,&H00FFFFFF,&H00101010,&H80000000,-1,0,0,0,100,100,0,0,1,7,2,2,120,120,150,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.10,0:00:00.25,Cap,,0,0,0,,{\c&H00E5464F\fscx112\fscy112}Em{\r} poucos segundos,
+Dialogue: 0,0:00:00.25,0:00:00.57,Cap,,0,0,0,,Em {\c&H00E5464F\fscx112\fscy112}poucos{\r} segundos,
+Dialogue: 0,0:00:00.57,0:00:01.16,Cap,,0,0,0,,Em poucos {\c&H00E5464F\fscx112\fscy112}segundos,{\r}
+Dialogue: 0,0:00:01.16,0:00:01.44,Cap,,0,0,0,,{\c&H00E5464F\fscx112\fscy112}você{\r} abre seu
+Dialogue: 0,0:00:01.44,0:00:01.72,Cap,,0,0,0,,você {\c&H00E5464F\fscx112\fscy112}abre{\r} seu
+Dialogue: 0,0:00:01.72,0:00:01.90,Cap,,0,0,0,,você abre {\c&H00E5464F\fscx112\fscy112}seu{\r}
+Dialogue: 0,0:00:01.90,0:00:02.25,Cap,,0,0,0,,{\c&H00E5464F\fscx112\fscy112}primeiro{\r} relatório.
+Dialogue: 0,0:00:02.25,0:00:03.10,Cap,,0,0,0,,primeiro {\c&H00E5464F\fscx112\fscy112}relatório.{\r}
+Dialogue: 0,0:00:04.22,0:00:04.53,Cap,,0,0,0,,{\c&H00E5464F\fscx112\fscy112}Clique{\r} em Relatórios,
+Dialogue: 0,0:00:04.53,0:00:04.62,Cap,,0,0,0,,Clique {\c&H00E5464F\fscx112\fscy112}em{\r} Relatórios,
+Dialogue: 0,0:00:04.62,0:00:05.33,Cap,,0,0,0,,Clique em {\c&H00E5464F\fscx112\fscy112}Relatórios,{\r}
+Dialogue: 0,0:00:05.33,0:00:05.42,Cap,,0,0,0,,{\c&H00E5464F\fscx112\fscy112}no{\r} menu da
+Dialogue: 0,0:00:05.42,0:00:05.70,Cap,,0,0,0,,no {\c&H00E5464F\fscx112\fscy112}menu{\r} da
+Dialogue: 0,0:00:05.70,0:00:05.80,Cap,,0,0,0,,no menu {\c&H00E5464F\fscx112\fscy112}da{\r}
+Dialogue: 0,0:00:05.80,0:00:06.62,Cap,,0,0,0,,{\c&H00E5464F\fscx112\fscy112}esquerda.{\r}
+Dialogue: 0,0:00:07.74,0:00:07.87,Cap,,0,0,0,,{\c&H00E5464F\fscx112\fscy112}Em{\r} Período,
+Dialogue: 0,0:00:07.87,0:00:08.34,Cap,,0,0,0,,Em {\c&H00E5464F\fscx112\fscy112}Período,{\r}
+Dialogue: 0,0:00:08.34,0:00:08.79,Cap,,0,0,0,,{\c&H00E5464F\fscx112\fscy112}escolha{\r} Últimos 30 dias.
+Dialogue: 0,0:00:08.79,0:00:09.17,Cap,,0,0,0,,escolha {\c&H00E5464F\fscx112\fscy112}Últimos{\r} 30 dias.
+Dialogue: 0,0:00:09.17,0:00:10.25,Cap,,0,0,0,,escolha Últimos {\c&H00E5464F\fscx112\fscy112}30 dias.{\r}
+Dialogue: 0,0:00:10.25,0:00:10.36,Cap,,0,0,0,,{\c&H00E5464F\fscx112\fscy112}A{\r} tabela se
+Dialogue: 0,0:00:10.36,0:00:10.81,Cap,,0,0,0,,A {\c&H00E5464F\fscx112\fscy112}tabela{\r} se
+Dialogue: 0,0:00:10.81,0:00:10.93,Cap,,0,0,0,,A tabela {\c&H00E5464F\fscx112\fscy112}se{\r}
+Dialogue: 0,0:00:10.93,0:00:11.45,Cap,,0,0,0,,{\c&H00E5464F\fscx112\fscy112}atualiza{\r} na hora.
+Dialogue: 0,0:00:11.45,0:00:11.61,Cap,,0,0,0,,atualiza {\c&H00E5464F\fscx112\fscy112}na{\r} hora.
+Dialogue: 0,0:00:11.61,0:00:12.17,Cap,,0,0,0,,atualiza na {\c&H00E5464F\fscx112\fscy112}hora.{\r}
+Dialogue: 0,0:00:13.30,0:00:14.00,Cap,,0,0,0,,{\c&H00E5464F\fscx112\fscy112}Pronto.{\r}
+Dialogue: 0,0:00:14.00,0:00:14.37,Cap,,0,0,0,,{\c&H00E5464F\fscx112\fscy112}Agora{\r} é com
+Dialogue: 0,0:00:14.37,0:00:14.42,Cap,,0,0,0,,Agora {\c&H00E5464F\fscx112\fscy112}é{\r} com
+Dialogue: 0,0:00:14.42,0:00:14.59,Cap,,0,0,0,,Agora é {\c&H00E5464F\fscx112\fscy112}com{\r}
+Dialogue: 0,0:00:14.59,0:00:15.24,Cap,,0,0,0,,{\c&H00E5464F\fscx112\fscy112}você.{\r}

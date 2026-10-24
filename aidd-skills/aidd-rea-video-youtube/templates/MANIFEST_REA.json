@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "rea_schema_version": "1.0",
+  "video_id": "{{VIDEO_ID}}",
+  "title": "{{TITULO}}",
+  "channel": "{{CANAL}}",
+  "channel_url": "{{CANAL_URL}}",
+  "duration_seconds": 0,
+  "webpage_url": "https://www.youtube.com/watch?v={{VIDEO_ID}}",
+  "artifacts": {
+    "transcript_txt": "transcript.txt",
+    "transcript_tsv": "transcript.tsv",
+    "frames_count": 0,
+    "frames_sample": []
+  },
+  "evidence_ledger": []
+}

@@ -1,0 +1,1 @@
+# Dependências puras da biblioteca padrão Python (zipfile, xml, re, json)

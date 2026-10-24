@@ -1,0 +1,29 @@
+{
+  "$schema": "https://aidd.framework/schemas/dependencies-v1.json",
+  "skill_name": "aidd-rea-web-saas",
+  "version": "1.0.0",
+  "author": "Heverton Eduardo Peres",
+  "dependencies": {
+    "skills_required": [],
+    "mcp_servers": {
+      "playwright": "Navegação e extração de DOM",
+      "chrome-devtools-mcp": "Inspeção de CSS e rede"
+    },
+    "system_binaries": [
+      {
+        "name": "python",
+        "required": true,
+        "purpose": "Execução do motor de análise"
+      },
+      {
+        "name": "git",
+        "required": true,
+        "purpose": "Versionamento e controle de estado"
+      }
+    ],
+    "python_packages": [
+      "beautifulsoup4",
+      "urllib3"
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aidd-rea-video-youtube"
+version = "1.4.0"
+description = "Maestro autônomo e agnóstico de engenharia reversa metodológica para vídeos técnicos do YouTube."
+readme = "README.md"
+authors = [{ name = "AIDD Framework", email = "dev@aidd.framework" }]
+license = { text = "MIT" }
+requires-python = ">=3.10"
+keywords = ["aidd", "reverse-engineering", "remotion", "whisper", "motion-graphics", "ai-agents"]
+dependencies = [
+    "yt-dlp>=2024.08.06",
+    "faster-whisper>=1.0.3",
+    "pytesseract>=0.3.10",
+    "ctranslate2>=4.0.0"
+]
+
+[project.scripts]
+video-reengineer = "video_reengineer:main"
+
+[tool.uv]
+managed = true
+package = false

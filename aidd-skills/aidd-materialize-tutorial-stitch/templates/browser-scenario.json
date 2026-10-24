@@ -1,0 +1,55 @@
+{
+  "browser": {
+    "mode": "connect",
+    "cdp_endpoint": "http://127.0.0.1:9222",
+    "target_id": "TARGET_ID_FROM_list_browser_targets"
+  },
+  "start_url": { "url": "http://localhost:5173/relatorios" },
+  "environment": {
+    "locale": "pt-BR",
+    "timezone": "America/Sao_Paulo",
+    "color_scheme": "light",
+    "reduced_motion": "reduce",
+    "viewport": { "width": 1920, "height": 1080, "device_scale_factor": 2 }
+  },
+  "actions": [
+    {
+      "step_id": "s01",
+      "action": "goto",
+      "destination": { "url": "http://localhost:5173/relatorios" },
+      "wait_until": "load",
+      "timeout_ms": 30000
+    },
+    {
+      "step_id": "s02",
+      "action": "click",
+      "locator": { "kind": "role", "role": "button", "name": "Período" },
+      "timeout_ms": 10000
+    },
+    {
+      "step_id": "s03",
+      "action": "click",
+      "locator": { "kind": "role", "role": "option", "name": "Últimos 30 dias" },
+      "timeout_ms": 10000
+    },
+    {
+      "step_id": "s03-ready",
+      "action": "wait_for",
+      "locator": { "kind": "css", "selector": "table[data-state='ready']" },
+      "state": "visible",
+      "timeout_ms": 15000
+    },
+    {
+      "step_id": "s04",
+      "action": "fill",
+      "locator": { "kind": "role", "role": "textbox", "name": "Nome do relatório" },
+      "value": { "source": "literal", "value": "Vendas de outubro" },
+      "timeout_ms": 10000
+    }
+  ],
+  "capture": {
+    "after_each_step": ["screenshot", "accessibility"],
+    "at_end": ["screenshot", "dom", "url"],
+    "events": []
+  }
+}

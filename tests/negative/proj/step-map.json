@@ -1,0 +1,40 @@
+{
+  "target": {
+    "type": "APP WEB",
+    "route": "W1",
+    "locator": "http://127.0.0.1:8765/",
+    "authorization": "fixture local de teste",
+    "captured_at": "2026-10-21",
+    "capture_resolution": [1920, 1080]
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "title": "Abrir Relatórios",
+      "user_action": "clicar em 'Relatórios' no menu lateral",
+      "result": "a tela de relatórios aparece com a tabela de vendas",
+      "screen": "Relatórios",
+      "evidence": "evidence/s01.png",
+      "box_source": "visual",
+      "target_box": [18, 174, 330, 63],
+      "ui_text": ["Relatórios"],
+      "sensitive": [],
+      "excluded": false,
+      "notes": ""
+    },
+    {
+      "id": "s02",
+      "title": "Escolher o período",
+      "user_action": "abrir 'Período' e escolher 'Últimos 30 dias'",
+      "result": "a tabela recarrega com o novo período",
+      "screen": "Relatórios",
+      "evidence": "evidence/s02-ready.png",
+      "box_source": "visual",
+      "target_box": [552, 194, 226, 60],
+      "ui_text": ["Período", "Últimos 30 dias"],
+      "sensitive": [],
+      "excluded": false,
+      "notes": ""
+    }
+  ]
+}

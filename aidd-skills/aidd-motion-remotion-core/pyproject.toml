@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aidd-motion-remotion-core"
+version = "1.0.0"
+description = "Automação didática e animações em código derivadas de engenharia reversa metodológica de vídeo."
+readme = "README.md"
+authors = [{ name = "Heverton Eduardo Peres" }]
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.uv]
+managed = true
+package = false

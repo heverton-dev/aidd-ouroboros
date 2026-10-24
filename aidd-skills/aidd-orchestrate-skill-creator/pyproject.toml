@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aidd-orchestrate-skill-creator"
+version = "1.0.0"
+description = "Meta-skill enterprise autônoma para geração de novas skills com governança e micro-frontmatter."
+readme = "README.md"
+authors = [{ name = "Heverton Eduardo Peres" }]
+license = { text = "MIT" }
+requires-python = ">=3.10"
+keywords = ["aidd", "agent-skills", "meta-skill", "skill-creator", "ai-agents", "claude-code", "antigravity"]
+dependencies = [
+    "pyyaml>=6.0.1",
+    "rich>=13.7.0"
+]
+
+[project.scripts]
+skill-creator = "skill_creator:main"
+
+[tool.uv]
+managed = true
+package = false

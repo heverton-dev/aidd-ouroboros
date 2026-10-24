@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Painel — Relatórios</title>
+<style>
+  body { margin: 0; font: 16px/1.4 system-ui, sans-serif; background: #f4f5f7; color: #1b1d22; display: flex; height: 100vh; }
+  nav { width: 220px; background: #fff; border-right: 1px solid #e3e5ea; padding: 24px 12px; }
+  nav h1 { font-size: 18px; margin: 0 0 24px 12px; color: #4f46e5; }
+  nav button { display: block; width: 100%; text-align: left; padding: 10px 12px; border: 0; background: none; border-radius: 8px; font: inherit; cursor: pointer; }
+  nav button[aria-current="page"] { background: #eef0ff; color: #4f46e5; font-weight: 600; }
+  main { flex: 1; padding: 32px 40px; }
+  .card { background: #fff; border-radius: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.08); padding: 24px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+  td, th { text-align: left; padding: 10px 8px; border-bottom: 1px solid #eef0f3; }
+  select { font: inherit; padding: 8px 10px; border-radius: 8px; border: 1px solid #d5d8de; }
+  [hidden] { display: none; }
+</style>
+</head>
+<body>
+<nav>
+  <h1>Painel</h1>
+  <button id="nav-home" aria-current="page">Início</button>
+  <button id="nav-reports">Relatórios</button>
+</nav>
+<main>
+  <section id="home" class="card"><h2>Bem-vindo</h2><p>Escolha uma área no menu.</p></section>
+  <section id="reports" class="card" hidden>
+    <h2>Relatórios</h2>
+    <label>Período <select id="period" aria-label="Período">
+      <option value="7">Últimos 7 dias</option>
+      <option value="30">Últimos 30 dias</option>
+    </select></label>
+    <table data-state="ready"><thead><tr><th>Dia</th><th>Vendas</th></tr></thead><tbody id="rows"></tbody></table>
+  </section>
+</main>
+<script>
+  const rows = document.getElementById('rows');
+  const table = rows.closest('table');
+  function render(days) {
+    table.dataset.state = 'loading';
+    rows.innerHTML = '';
+    for (let i = 1; i <= Math.min(days, 6); i++) rows.insertAdjacentHTML('beforeend', `<tr><td>Dia ${i}</td><td>R$ ${(i * 137) % 900 + 100},00</td></tr>`);
+    table.dataset.state = 'ready';
+  }
+  document.getElementById('nav-reports').onclick = () => {
+    document.getElementById('home').hidden = true;
+    document.getElementById('reports').hidden = false;
+    document.getElementById('nav-home').removeAttribute('aria-current');
+    document.getElementById('nav-reports').setAttribute('aria-current', 'page');
+    render(7);
+  };
+  document.getElementById('period').onchange = e => render(Number(e.target.value));
+</script>
+</body>
+</html>

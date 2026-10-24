@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "title": "Seu primeiro relatório",
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "duration": 16.272,
+    "language": "pt-BR",
+    "style": "clean-product",
+    "voice": "Microsoft Maria Desktop",
+    "wps": 2.5
+  },
+  "scenes": [
+    {
+      "id": "c01",
+      "start": 0.0,
+      "end": 4.122,
+      "layout": "title",
+      "steps": [],
+      "narration": "Em poucos segundos, você abre seu primeiro relatório.",
+      "audio": "audio/c01.wav",
+      "visual": "Título entra palavra por palavra sobre gradiente claro do acento índigo.",
+      "camera": "drift 2 % para dentro",
+      "on_screen_text": [
+        "Seu primeiro relatório"
+      ],
+      "transition_out": "janela do app sobe"
+    },
+    {
+      "id": "c02",
+      "start": 4.522,
+      "end": 7.644,
+      "layout": "zoom-focus",
+      "steps": [
+        "s01"
+      ],
+      "narration": "Clique em Relatórios, no menu da esquerda.",
+      "audio": "audio/c02.wav",
+      "visual": "Janela do app entra com leve rotação; zoom no item Relatórios; anel de clique.",
+      "camera": "zoom 1,6× no target_box s01",
+      "on_screen_text": [
+        "Menu → Relatórios"
+      ],
+      "transition_out": "corte"
+    },
+    {
+      "id": "c03",
+      "start": 7.644,
+      "end": 13.206,
+      "layout": "callout",
+      "steps": [
+        "s01"
+      ],
+      "narration": "Em Período, escolha Últimos 30 dias. A tabela se atualiza na hora.",
+      "audio": "audio/c03.wav",
+      "visual": "Tela de relatórios; callout ancorado no seletor Período; tabela com brilho.",
+      "camera": "drift 3 %",
+      "on_screen_text": [
+        "um texto de tela longo demais para qualquer pessoa ler"
+      ],
+      "transition_out": "fade"
+    },
+    {
+      "id": "c04",
+      "start": 13.206,
+      "end": 16.272,
+      "layout": "carrossel",
+      "steps": [],
+      "narration": "palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra",
+      "audio": "audio/c04.wav",
+      "visual": "Logo Painel e frase final.",
+      "camera": "estática",
+      "on_screen_text": [
+        "Pronto!"
+      ],
+      "transition_out": "fim"
+    }
+  ]
+}

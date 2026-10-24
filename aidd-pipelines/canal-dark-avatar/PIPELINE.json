@@ -1,0 +1,36 @@
+{
+  "version": "1.0.0",
+  "pipeline_id": "canal-dark-avatar",
+  "name": "Canal Dark Tech Brasil com Avatar e Remotion",
+  "description": "Pipeline autônomo que transcreve vídeos de IA gringos, adapta o roteiro para PT-BR, gera gráficos Remotion a 60fps e prepara a montagem final com o avatar hiper-realista.",
+  "nodes": [
+    {
+      "id": "node-01-storycraft",
+      "skill": "aidd-dark-storycraft",
+      "description": "Transcriação cultural em PT-BR baseada no hook e ritmo de Keera",
+      "depends_on": [],
+      "input_handoff": "context/input/upstream_handoff.json",
+      "output_handoff": "context/handoffs/01_roteiro_ptbr.json"
+    },
+    {
+      "id": "node-02-remotion-motion",
+      "skill": "aidd-remotion-motion",
+      "description": "Geração procedural dos cards e diagramas conceituais com física de molas (60fps)",
+      "depends_on": [
+        "node-01-storycraft"
+      ],
+      "input_handoff": "context/handoffs/01_roteiro_ptbr.json",
+      "output_handoff": "context/handoffs/02_motion_assets.json"
+    },
+    {
+      "id": "node-03-hybrid-stitch",
+      "skill": "aidd-video-materializer",
+      "description": "Síntese de voz neural em PT-BR, renderização Remotion 60fps e composição FFmpeg do MP4 final",
+      "depends_on": [
+        "node-02-remotion-motion"
+      ],
+      "input_handoff": "context/handoffs/02_motion_assets.json",
+      "output_handoff": "context/output/final_dark_video.json"
+    }
+  ]
+}

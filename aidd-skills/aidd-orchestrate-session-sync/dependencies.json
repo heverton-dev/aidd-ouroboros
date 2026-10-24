@@ -1,0 +1,18 @@
+{
+  "$schema": "https://aidd.framework/schemas/dependencies-v1.json",
+  "skill_name": "aidd-orchestrate-session-sync",
+  "version": "1.0.0",
+  "author": "Heverton Eduardo Peres",
+  "dependencies": {
+    "skills_required": [],
+    "mcp_servers": {},
+    "system_binaries": [
+      {
+        "name": "python",
+        "required": true,
+        "purpose": "Execucao deterministica do motor de extracao de turnos"
+      }
+    ],
+    "python_packages": []
+  }
+}

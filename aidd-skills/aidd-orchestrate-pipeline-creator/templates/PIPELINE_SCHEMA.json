@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AiddSwarmPipelineSchema",
+  "type": "object",
+  "required": ["version", "pipeline_id", "name", "nodes"],
+  "properties": {
+    "version": { "type": "string" },
+    "pipeline_id": { "type": "string" },
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "skill", "depends_on"],
+        "properties": {
+          "id": { "type": "string" },
+          "skill": { "type": "string" },
+          "description": { "type": "string" },
+          "depends_on": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "input_handoff": { "type": ["string", "null"] },
+          "output_handoff": { "type": "string" }
+        }
+      }
+    }
+  }
+}

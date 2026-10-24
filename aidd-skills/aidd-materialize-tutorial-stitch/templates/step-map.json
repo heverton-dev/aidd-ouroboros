@@ -1,0 +1,27 @@
+{
+  "target": {
+    "type": "APP WEB",
+    "route": "W1",
+    "locator": "http://localhost:5173/relatorios",
+    "authorization": "produto próprio",
+    "captured_at": "YYYY-MM-DD",
+    "capture_resolution": [1920, 1080]
+  },
+  "steps": [
+    {
+      "id": "s01",
+      "title": "Abrir Relatórios",
+      "user_action": "clicar em 'Relatórios' no menu lateral",
+      "result": "a lista de relatórios aparece",
+      "screen": "Relatórios",
+      "evidence_before": "evidence/scenario_start.png",
+      "evidence": "evidence/s01.png",
+      "box_source": "accessibility",
+      "target_box": [24, 312, 200, 44],
+      "ui_text": ["Relatórios"],
+      "sensitive": [],
+      "excluded": false,
+      "notes": ""
+    }
+  ]
+}

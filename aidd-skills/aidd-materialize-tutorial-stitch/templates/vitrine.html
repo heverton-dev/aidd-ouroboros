@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{{TITULO}}</title>
+<meta name="description" content="{{DESCRICAO}}" />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" href="assets/marca/simbolo.png" />
+<link rel="stylesheet" href="assets/marca/fontes.css" />
+<!-- gerado por tutorial.py vitrine a partir de empresa.json e do catalogo.json de cada aplicativo; não edite à mão -->
+<style>
+  /* Identidade: cores e fontes vêm do design system da empresa (marca/design-tokens.json, ou "cores" no empresa.json);
+     o layout de streaming é o mesmo para toda empresa. */
+  :root {
+{{CORES}}
+    --gutter: clamp(16px, 4vw, 60px); --card-w: clamp(220px, 21vw, 320px);
+    --ease: cubic-bezier(.2, .8, .2, 1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* sem barra de rolagem em nenhum tamanho de tela (página, linhas, modal, player): a rolagem continua por roda,
+     toque, teclado e setas das linhas; só a barra some */
+  * { scrollbar-width: none; }
+  *::-webkit-scrollbar { display: none; width: 0; height: 0; }
+  html { background: var(--ink); color-scheme: dark; scroll-behavior: smooth; }
+  body { background: var(--ink); color: var(--text); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+  img, video { display: block; }
+  :focus-visible { outline: 3px solid var(--glow); outline-offset: 3px; border-radius: 6px; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+  /* ---------- topo ---------- */
+  header { position: fixed; inset: 0 0 auto; z-index: 40; display: flex; align-items: center; gap: 36px; padding: 18px var(--gutter);
+    background: linear-gradient(180deg, rgba(0,0,0,.85), rgba(0,0,0,0)); transition: background .4s var(--ease); }
+  header.solid { background: rgba(0,0,0,.94); box-shadow: 0 1px 0 rgba(255,255,255,.06); }
+  .logo { height: 34px; width: auto; }
+  .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--text); }
+  .brand span { font-family: var(--font-head); font-weight: 600; font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: var(--soft);
+    padding-left: 14px; border-left: 1px solid var(--slate); }
+  nav { display: flex; gap: 22px; flex: 1; overflow-x: auto; }
+  nav a { color: var(--soft); text-decoration: none; font-size: 15px; white-space: nowrap; transition: color .2s; }
+  nav a:hover, nav a.on { color: var(--text); }
+  .search { display: flex; align-items: center; gap: 8px; border: 1px solid transparent; padding: 6px 8px; border-radius: 6px; transition: all .3s var(--ease); }
+  .search.open, .search:focus-within { border-color: var(--soft); background: rgba(0,0,0,.7); }
+  .search input { width: 0; background: none; border: 0; color: var(--text); font: inherit; font-size: 15px; outline: none; transition: width .3s var(--ease); }
+  .search.open input, .search:focus-within input { width: min(240px, 40vw); }
+  .search svg { width: 22px; height: 22px; flex: none; }
+
+  /* ---------- destaque ---------- */
+  .hero { position: relative; height: min(88vh, 56.25vw + 120px); min-height: 520px; overflow: hidden; }
+  .hero video, .hero .poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.62) saturate(1.08); }
+  .hero .poster { transition: opacity .8s var(--ease); }
+  .hero.playing .poster { opacity: 0; }
+  .hero::before { content: ""; position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(77deg, rgba(0,0,0,.94) 0%, rgba(0,0,0,.62) 36%, rgba(0,0,0,.18) 72%, rgba(0,0,0,.3) 100%); }
+  .hero::after { content: ""; position: absolute; inset: auto 0 0; height: 32%; z-index: 1; background: linear-gradient(0deg, var(--ink), rgba(0,0,0,0)); }
+  .hero-info { position: absolute; z-index: 2; left: var(--gutter); bottom: 22%; width: min(560px, 86vw); }
+  .kicker { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--glow); }
+  .kicker img { height: 22px; }
+  .hero h1 { font-family: var(--font-head); font-weight: 600; font-size: clamp(34px, 4.6vw, 68px); line-height: 1.04; letter-spacing: -.02em; margin: 14px 0 16px;
+    text-shadow: 0 2px 24px rgba(0,0,0,.5); text-wrap: balance; }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 15px; color: var(--soft); }
+  .meta .tag { border: 1px solid var(--soft); padding: 1px 7px; border-radius: 3px; font-size: 13px; }
+  .meta .new { color: var(--new); font-weight: 600; }
+  .hero p { font-size: clamp(16px, 1.35vw, 20px); line-height: 1.5; color: var(--text); margin: 14px 0 26px; text-shadow: 0 1px 12px rgba(0,0,0,.6); }
+  .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 26px 12px 20px; border-radius: 6px; font-weight: 600; font-size: 18px;
+    transition: transform .15s var(--ease), background .2s; }
+  .btn svg { width: 26px; height: 26px; }
+  .btn.play { background: var(--text); color: var(--ink); }
+  .btn.play:hover { background: var(--soft); }
+  .btn.more { background: color-mix(in srgb, var(--muted) 55%, transparent); color: var(--text); backdrop-filter: blur(6px); }
+  .btn.more:hover { background: color-mix(in srgb, var(--muted) 38%, transparent); }
+  .btn:active { transform: scale(.97); }
+
+  /* ---------- linhas ---------- */
+  main { position: relative; z-index: 3; margin-top: -9vw; padding-bottom: 80px; }
+  .row { margin: 0 0 4.2vw; }
+  .row-head { display: flex; align-items: baseline; gap: 14px; padding: 0 var(--gutter); margin-bottom: 12px; }
+  .row-head h2 { font-family: var(--font-head); font-weight: 600; font-size: clamp(19px, 1.6vw, 26px); }
+  .row-head small { color: var(--muted); font-size: 14px; }
+  .track-wrap { position: relative; }
+  /* folga abaixo dos cartões para o painel do hover (o overflow-x corta o que passa da caixa); a folga não captura o mouse */
+  .row { position: relative; z-index: 1; }
+  .row:hover, .row:focus-within { z-index: 10; }
+  .track { display: flex; gap: 10px; overflow-x: auto; overflow-y: hidden; padding: 60px var(--gutter) 240px; margin: -60px 0 -240px;
+    scroll-snap-type: x mandatory; scroll-padding: 0 var(--gutter); pointer-events: none; }
+  .track > * { pointer-events: auto; }
+  .arrow { position: absolute; top: 0; bottom: 0; z-index: 6; width: var(--gutter); min-width: 44px; display: grid; place-items: center;
+    background: rgba(0,0,0,.55); opacity: 0; transition: opacity .25s; }
+  .arrow svg { width: 34px; height: 34px; transition: transform .2s; }
+  .arrow:hover svg { transform: scale(1.25); }
+  .arrow.l { left: 0; border-radius: 0 6px 6px 0; } .arrow.r { right: 0; border-radius: 6px 0 0 6px; }
+  .track-wrap:hover .arrow:not([hidden]) { opacity: 1; }
+
+  .card { position: relative; flex: 0 0 var(--card-w); aspect-ratio: 16 / 9; scroll-snap-align: start; border-radius: var(--radius);
+    transition: transform .35s var(--ease) .12s, z-index 0s .35s; z-index: 1; }
+  .card .thumb { position: relative; width: 100%; height: 100%; border-radius: var(--radius); overflow: hidden; background: var(--night); }
+  .card img, .card video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .card video { opacity: 0; transition: opacity .4s; }
+  .card.previewing video { opacity: 1; }
+  .num { position: absolute; left: 10px; top: 8px; z-index: 2; font-family: var(--font-head); font-weight: 600; font-size: 13px; letter-spacing: .06em;
+    background: rgba(0,0,0,.6); padding: 2px 8px; border-radius: 4px; }
+  .dur { position: absolute; right: 10px; bottom: 10px; z-index: 2; font-size: 13px; font-weight: 600; background: rgba(0,0,0,.72); padding: 2px 7px; border-radius: 4px; }
+  .badge-new { position: absolute; right: 10px; top: 8px; z-index: 2; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    background: var(--new); color: var(--ink); padding: 2px 8px; border-radius: 4px; }
+  .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 4px; z-index: 2; background: color-mix(in srgb, var(--muted) 60%, transparent); }
+  .bar i { display: block; height: 100%; background: var(--glow); }
+  .card-title { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding: 30px 12px 10px; font-weight: 600; font-size: 15px; line-height: 1.25;
+    background: linear-gradient(0deg, rgba(0,0,0,.88), rgba(0,0,0,0)); transition: opacity .25s; }
+  .pop { position: absolute; left: 0; right: 0; top: 100%; padding: 12px 14px 14px; background: var(--night); border-radius: 0 0 var(--radius) var(--radius);
+    box-shadow: 0 18px 40px rgba(0,0,0,.6); opacity: 0; pointer-events: none; transform: translateY(-6px); transition: opacity .25s .12s, transform .25s .12s; }
+  .pop .ctl { display: flex; gap: 8px; margin-bottom: 10px; }
+  .circle { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; border: 2px solid var(--muted); transition: border-color .2s, background .2s; }
+  .circle svg { width: 20px; height: 20px; }
+  .circle:hover { border-color: var(--text); }
+  .circle.solid { background: var(--text); color: var(--ink); border-color: var(--text); }
+  .circle.solid:hover { background: var(--soft); }
+  .circle.info { margin-left: auto; }
+  .pop h3 { font-size: 15px; font-weight: 600; line-height: 1.3; margin-bottom: 6px; }
+  .pop .meta { font-size: 13px; gap: 8px; }
+  .pop p { font-size: 13px; line-height: 1.45; color: var(--soft); margin-top: 8px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  @media (hover: hover) and (min-width: 900px) {
+    .card:hover, .card:focus-within { transform: scale(1.32) translateY(-14%); z-index: 20; transition: transform .35s var(--ease) .12s, z-index 0s; }
+    .card:hover .thumb, .card:focus-within .thumb { border-radius: var(--radius) var(--radius) 0 0; }
+    .card:hover .pop, .card:focus-within .pop { opacity: 1; pointer-events: auto; transform: none; }
+    .card:hover .card-title, .card:focus-within .card-title { opacity: 0; }
+    .track .card:first-child:hover, .track .card:first-child:focus-within { transform-origin: left center; }
+    .track .card:last-child:hover, .track .card:last-child:focus-within { transform-origin: right center; }
+  }
+  .card.soon .thumb { display: grid; place-items: center; background: radial-gradient(circle at 30% 20%, var(--primary-hover), var(--night) 70%); }
+  .card.soon .thumb img.mark { position: static; width: 34%; height: auto; opacity: .22; filter: grayscale(1); }
+  .card.soon .soon-tag { position: absolute; left: 10px; top: 8px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--glow); }
+  .card.soon .card-title { color: var(--soft); }
+
+  .row-head a { color: var(--soft); font-size: 14px; text-decoration: none; margin-left: auto; }
+  .row-head a:hover { color: var(--text); }
+  .row-head .app-note { color: var(--muted); font-size: 14px; }
+
+  /* ---------- busca ---------- */
+  #results { display: none; padding: 110px var(--gutter) 80px; min-height: 70vh; }
+  body.searching #results { display: block; }
+  body.searching .hero, body.searching main { display: none; }
+  #results h2 { font-family: var(--font-head); font-weight: 600; font-size: 22px; margin-bottom: 22px; color: var(--soft); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--card-w), 1fr)); gap: 46px 10px; }
+  .grid .card { flex: none; width: 100%; }
+
+  /* ---------- modal de detalhes ---------- */
+  dialog { border: 0; padding: 0; background: transparent; color: var(--text); max-width: none; max-height: none; }
+  dialog::backdrop { background: rgba(0,0,0,.72); backdrop-filter: blur(2px); }
+  #details { width: min(880px, 94vw); margin: 4vh auto; border-radius: 10px; overflow: hidden; background: var(--night); box-shadow: 0 30px 90px rgba(0,0,0,.8); }
+  #details[open] { animation: rise .35s var(--ease); }
+  @keyframes rise { from { opacity: 0; transform: translateY(26px) scale(.98); } }
+  .d-media { position: relative; aspect-ratio: 16 / 9; background: var(--ink); }
+  .d-media video, .d-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.8); }
+  .d-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, var(--night) 0%, color-mix(in srgb, var(--night) 0%, transparent) 55%); }
+  .d-head { position: absolute; z-index: 2; left: 44px; right: 44px; bottom: 34px; }
+  .d-head h2 { font-family: var(--font-head); font-weight: 600; font-size: clamp(24px, 3.2vw, 40px); line-height: 1.1; margin-bottom: 18px; }
+  .x { position: absolute; z-index: 3; right: 16px; top: 16px; width: 40px; height: 40px; border-radius: 50%; background: var(--night); display: grid; place-items: center; }
+  .x svg { width: 22px; height: 22px; }
+  .d-body { padding: 8px 44px 40px; display: grid; grid-template-columns: 1.7fr 1fr; gap: 28px; }
+  .d-body p { font-size: 16px; line-height: 1.6; }
+  .d-body dl { font-size: 14px; color: var(--muted); line-height: 1.7; }
+  .d-body dd { color: var(--soft); margin-bottom: 6px; }
+  .d-list { padding: 0 44px 40px; }
+  .d-list h3 { font-family: var(--font-head); font-weight: 600; font-size: 20px; margin-bottom: 14px; }
+  .ep { display: grid; grid-template-columns: 36px 150px 1fr auto; gap: 16px; align-items: center; width: 100%; text-align: left; padding: 14px 12px;
+    border-bottom: 1px solid var(--line); border-radius: 6px; transition: background .2s; }
+  .ep:hover { background: color-mix(in srgb, var(--slate) 45%, transparent); }
+  .ep .n { font-family: var(--font-head); font-size: 22px; color: var(--soft); text-align: center; }
+  .ep img { width: 150px; aspect-ratio: 16/9; object-fit: cover; border-radius: 4px; }
+  .ep b { display: block; font-size: 15px; margin-bottom: 4px; }
+  .ep span { font-size: 13px; color: var(--soft); line-height: 1.4; }
+  .ep em { font-style: normal; font-size: 14px; color: var(--soft); }
+  .ep.cur { background: color-mix(in srgb, var(--primary) 28%, transparent); }
+
+  /* ---------- player ---------- */
+  #player { width: 100vw; height: 100vh; margin: 0; background: var(--ink); }
+  #player::backdrop { background: var(--ink); }
+  #player video { width: 100%; height: 100%; object-fit: contain; background: var(--ink); }
+  #pstage { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--ink); }
+  #pstage:fullscreen { width: 100vw; height: 100vh; }
+  #pstage::backdrop { background: var(--ink); }
+  .p-top { position: absolute; z-index: 2; inset: 0 0 auto; display: flex; align-items: center; gap: 18px; padding: 20px 26px;
+    background: linear-gradient(180deg, rgba(0,0,0,.8), rgba(0,0,0,0)); transition: opacity .4s; }
+  .p-top.hide { opacity: 0; pointer-events: none; }
+  .p-top button { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; }
+  .p-top button:hover { background: rgba(255,255,255,.12); }
+  .p-top svg { width: 28px; height: 28px; }
+  .p-top div { font-size: 15px; color: var(--soft); } .p-top div b { display: block; color: var(--text); font-size: 18px; font-family: var(--font-head); font-weight: 600; }
+  /* idiomas: botão "Áudio e legendas" no topo do player, painel em duas colunas e legenda desenhada pela página */
+  .p-top .plang { margin-left: auto; }
+  .lang { position: absolute; z-index: 5; right: 26px; top: 78px; display: none; grid-template-columns: repeat(2, minmax(150px, auto)); gap: 8px 34px;
+    padding: 20px 24px 22px; border-radius: 12px; background: color-mix(in srgb, var(--night) 96%, transparent); backdrop-filter: blur(10px);
+    box-shadow: 0 24px 70px rgba(0,0,0,.7), 0 0 0 1px color-mix(in srgb, var(--text) 10%, transparent); }
+  .lang.open { display: grid; animation: rise .25s var(--ease); }
+  .lang h4 { font-family: var(--font-head); font-weight: 600; font-size: 18px; margin-bottom: 10px; }
+  .lang button { display: flex; align-items: center; gap: 10px; width: 100%; padding: 8px 10px 8px 4px; border-radius: 6px; font-size: 16px;
+    color: var(--soft); text-align: left; transition: color .15s, background .15s; }
+  .lang button:hover { color: var(--text); background: rgba(255,255,255,.06); }
+  .lang button i { width: 18px; height: 18px; flex: none; display: grid; place-items: center; }
+  .lang button i svg { width: 18px; height: 18px; }
+  .lang button.on { color: var(--text); font-weight: 600; }
+  .lang button small { color: var(--muted); font-size: 12px; font-weight: 400; }
+  .cc { position: absolute; z-index: 3; left: 50%; bottom: max(9%, 76px); transform: translateX(-50%); width: min(86%, 1100px); text-align: center;
+    pointer-events: none; font-family: var(--font-body); font-weight: 600; font-size: clamp(16px, 2.15vw, 32px); line-height: 1.35; }
+  .cc span { display: inline; padding: .14em .5em; border-radius: 6px; background: rgba(0,0,0,.76); color: #fff;
+    -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  #player:has(.next.show) .cc, #player:has(.next.show) .lang { display: none; }
+
+  /* fim do vídeo: tela "a seguir" sobre o player (miniatura grande + anel de contagem), como nos serviços de streaming */
+  .next { position: absolute; inset: 0; z-index: 4; display: none; align-items: center; justify-content: center; padding: 8vh var(--gutter);
+    background: radial-gradient(ellipse at 65% 50%, rgba(0,0,0,.6), rgba(0,0,0,.94) 75%); backdrop-filter: blur(8px); }
+  .next.show { display: flex; animation: fade .35s var(--ease); }
+  @keyframes fade { from { opacity: 0; } }
+  .nx { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(22px, 3.4vw, 52px); align-items: center; width: min(1120px, 100%);
+    animation: rise .45s var(--ease); }
+  .nx-thumb { position: relative; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: var(--night);
+    box-shadow: 0 30px 90px rgba(0,0,0,.75), 0 0 0 1px color-mix(in srgb, var(--text) 16%, transparent); }
+  .nx-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
+  .nx-thumb::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,.38); transition: background .25s; }
+  .nx-thumb:hover img { transform: scale(1.04); } .nx-thumb:hover::after { background: rgba(0,0,0,.2); }
+  .ring { position: absolute; z-index: 1; left: 50%; top: 50%; width: clamp(86px, 9vw, 124px); aspect-ratio: 1; transform: translate(-50%, -50%);
+    border-radius: 50%; background: rgba(0,0,0,.35); }
+  .ring svg.arc { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+  .ring circle { fill: none; stroke-width: 5; }
+  .ring .rail { stroke: rgba(255,255,255,.22); }
+  .ring .fill { stroke: var(--text); stroke-linecap: round; stroke-dasharray: 289.03; stroke-dashoffset: 289.03; }
+  .ring .mid { position: absolute; inset: 0; display: grid; place-items: center; }
+  .ring .mid svg { width: 40%; height: 40%; margin-left: 6%; }
+  .nx-info small { color: var(--glow); font-size: 13px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+  .nx-info h2 { font-family: var(--font-head); font-weight: 600; font-size: clamp(24px, 2.8vw, 42px); line-height: 1.1; letter-spacing: -.01em; margin: 10px 0 14px; text-wrap: balance; }
+  .nx-info p { color: var(--soft); font-size: clamp(15px, 1.15vw, 17px); line-height: 1.5; margin-top: 14px;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .nx-info .when { margin: 22px 0 16px; font-size: 15px; color: var(--soft); } .nx-info .when b { color: var(--text); font-variant-numeric: tabular-nums; }
+  .btn.ghost { background: color-mix(in srgb, var(--muted) 45%, transparent); color: var(--text); }
+  .btn.ghost:hover { background: color-mix(in srgb, var(--muted) 30%, transparent); }
+
+  footer { padding: 40px var(--gutter) 60px; color: var(--muted); font-size: 13px; display: flex; flex-wrap: wrap; align-items: center; gap: 18px 30px;
+    border-top: 1px solid color-mix(in srgb, var(--slate) 50%, transparent); }
+  footer img { height: 26px; opacity: .8; }
+
+  @media (max-width: 760px) {
+    header { gap: 14px; padding-top: 12px; padding-bottom: 12px; }
+    .logo { height: 26px; } .brand span { display: none; }
+    nav { display: none; }
+    .search { margin-left: auto; }
+    .hero { height: 72vh; min-height: 460px; }
+    .hero::before { background: linear-gradient(0deg, rgba(0,0,0,.96) 22%, rgba(0,0,0,.7) 62%, rgba(0,0,0,.45) 100%); }
+    .hero video, .hero .poster { filter: brightness(.5); }
+    .hero-info { bottom: 16%; }
+    main { margin-top: -60px; }
+    .btn { font-size: 16px; padding: 10px 20px 10px 16px; }
+    .d-body { grid-template-columns: 1fr; padding: 8px 22px 30px; } .d-head { left: 22px; right: 22px; bottom: 20px; }
+    .d-list { padding: 0 22px 30px; }
+    .ep { grid-template-columns: 110px 1fr; } .ep .n, .ep em { display: none; } .ep img { width: 110px; }
+    .arrow { display: none; }
+    .next { align-items: flex-start; overflow-y: auto; padding-top: 72px; }
+    .nx { grid-template-columns: 1fr; gap: 18px; }
+    .nx-info .when { margin: 14px 0 12px; }
+    .lang { left: 12px; right: 12px; top: 72px; grid-template-columns: 1fr 1fr; gap: 4px 14px; padding: 16px; }
+    .lang button { font-size: 15px; }
+    .p-top { padding: 14px 12px; gap: 10px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<header id="top">
+  <a class="brand" href="#/" aria-label="Início"><img class="logo" src="assets/marca/logo.webp" alt="{{EMPRESA}}" /><span>Tutoriais</span></a>
+  <nav id="nav" aria-label="Categorias"></nav>
+  <label class="search" id="search"><span class="sr">Buscar tutoriais</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="q" type="search" placeholder="Títulos, telas, assuntos" autocomplete="off" />
+  </label>
+</header>
+
+<section class="hero" id="hero" aria-label="Destaque"></section>
+<main id="rows"></main>
+<section id="results" aria-live="polite"><h2 id="results-title"></h2><div class="grid" id="results-grid"></div></section>
+
+<footer>
+  <img src="assets/marca/logo.webp" alt="{{EMPRESA}}" />
+  <span>{{EMPRESA}} · tutoriais em vídeo</span>
+  <span id="count"></span>
+  <span>Atualizado em {{ATUALIZADO}}</span>
+</footer>
+
+<dialog id="details" aria-labelledby="d-title"></dialog>
+<dialog id="player" aria-label="Player">
+  <!-- #pstage é o que vai para tela cheia: o navegador recusa tela cheia de um <dialog> modal, e a do <video> sozinho
+       esconde legenda, botões e a tela "A seguir" -->
+  <div id="pstage">
+  <div class="p-top" id="ptop">
+    <button id="pback" aria-label="Fechar o vídeo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <div id="ptitle"></div>
+    <button id="plang" class="plang" aria-label="Áudio e legendas" aria-expanded="false" aria-controls="lang" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h3M13 10h3M8 13h6"/></svg></button>
+    <button id="pfull" class="pfull" aria-label="Tela cheia" title="Tela cheia (F)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+  </div>
+  <div class="lang" id="lang" role="group" aria-label="Áudio e legendas"></div>
+  <!-- o botão de tela cheia nativo continua onde a pessoa procura; quando ele põe só o <video> em tela cheia, a página
+       troca na hora pela tela cheia do #pstage (vídeo + legenda + botões) -->
+  <video id="pv" controls controlslist="noremoteplayback" playsinline preload="metadata"></video>
+  <div class="cc" id="cc"></div>
+  <div class="next" id="next" role="region" aria-label="A seguir" aria-live="polite"></div>
+  </div>
+</dialog>
+
+
+<script id="data" type="application/json">{{DATA}}</script>
+<script>
+(() => {
+  const D = JSON.parse(document.getElementById("data").textContent);
+  const APPS = D.aplicativos, MULTI = APPS.length > 1;
+  const APP = Object.fromEntries(APPS.map(a => [a.slug, a]));
+  const ALL = D.tutoriais, READY = ALL.filter(t => t.video);
+  ALL.forEach(t => t.objetivo = t.objetivo ? t.objetivo[0].toUpperCase() + t.objetivo.slice(1) : "");
+  // no lançamento de um aplicativo tudo é novo: aí o selo não informa nada e some
+  APPS.forEach(a => { const r = READY.filter(t => t.app === a.slug); if (r.length && r.every(t => t.novo)) r.forEach(t => t.novo = false); });
+  const $ = (s, el = document) => el.querySelector(s);
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const ICON = {
+    play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>',
+    info: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.5"/></svg>',
+    down: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m6 9 6 6 6-6"/></svg>',
+    left: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6-6 6-6"/></svg>',
+    right: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m9 18 6-6-6-6"/></svg>',
+    x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+  };
+  const fmt = s => { s = Math.round(s || 0); return s < 60 ? `${s} s` : `${Math.floor(s / 60)} min ${String(s % 60).padStart(2, "0")} s`; };
+  const appName = t => APP[t.app]?.nome || "";
+  const tags = t => `${MULTI ? `<span class="tag">${esc(appName(t))}</span>` : ""}<span class="tag">${esc(t.jornada)}</span>`;
+
+  // progresso por pessoa, só neste navegador (falha silenciosa em modo privado)
+  const KEY = "tutoriais:" + D.empresa_slug;
+  const store = { get() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; } },
+                  set(v) { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch {} } };
+  // vitrine antiga de um aplicativo só: o progresso ficava em "tutoriais:<pasta>" com o slug puro como chave
+  (() => { const all = store.get(); let moved = false;
+    APPS.forEach(a => { if (!a.legado) return; try { const old = JSON.parse(localStorage.getItem("tutoriais:" + a.legado)) || {};
+      Object.entries(old).forEach(([k, v]) => { const id = `${a.slug}/${k}`; if (!all[id]) { all[id] = v; moved = true; } }); } catch {} });
+    if (moved) store.set(all); })();
+  const prog = id => store.get()[id] || { t: 0, done: false };
+  const saveProg = (id, t, dur) => { const all = store.get(); all[id] = { t, done: dur && t / dur > 0.92, at: Date.now() }; store.set(all); };
+
+  // ---------- rota: #/ (todos os aplicativos), #/<app> e #/<app>/<tutorial> ----------
+  let view = MULTI ? null : APPS[0]?.slug;
+  const inView = list => view ? list.filter(t => t.app === view) : list;
+
+  // ---------- cartões ----------
+  function card(t) {
+    const el = document.createElement("div");
+    if (!t.video) {
+      el.className = "card soon";
+      el.innerHTML = `<div class="thumb"><img class="mark" src="assets/marca/simbolo.png" alt="" /><span class="soon-tag">Em breve</span>
+        <div class="card-title">${esc(t.titulo)}</div></div>`;
+      el.setAttribute("aria-label", `${t.titulo}: em breve`);
+      return el;
+    }
+    const p = prog(t.id), pct = p.done ? 100 : t.duracao ? Math.min(100, p.t / t.duracao * 100) : 0;
+    el.className = "card";
+    el.innerHTML = `<div class="thumb">
+        <img src="${t.poster}" alt="" loading="lazy" />
+        <span class="num">${String(t.numero).padStart(2, "0")}</span>
+        ${t.novo && !p.t ? '<span class="badge-new">Novo</span>' : ""}
+        <span class="dur">${fmt(t.duracao)}</span>
+        ${pct > 2 ? `<div class="bar"><i style="width:${pct}%"></i></div>` : ""}
+      </div>
+      <div class="pop">
+        <div class="ctl">
+          <button class="circle solid" data-act="play" aria-label="Assistir ${esc(t.titulo)}">${ICON.play}</button>
+          <button class="circle info" data-act="info" aria-label="Mais informações sobre ${esc(t.titulo)}">${ICON.down}</button>
+        </div>
+        <h3>${esc(t.titulo)}</h3>
+        <div class="meta">${t.novo ? '<span class="new">Novo</span>' : ""}<span>${fmt(t.duracao)}</span>${tags(t)}</div>
+        <p>${esc(t.objetivo)}</p>
+      </div>`;
+    const thumb = $(".thumb", el);
+    thumb.tabIndex = 0; thumb.setAttribute("role", "button"); thumb.setAttribute("aria-label", `${t.titulo}, ${fmt(t.duracao)}`);
+    let timer, vid;
+    const start = () => { if (!matchMedia("(hover: hover) and (min-width: 900px)").matches || !t.preview) return;
+      timer = setTimeout(() => { if (!vid) { vid = document.createElement("video"); vid.muted = true; vid.loop = true; vid.playsInline = true;
+        vid.src = t.preview; thumb.insertBefore(vid, thumb.children[1]); } vid.currentTime = 0; vid.play().catch(() => {}); el.classList.add("previewing"); }, 650); };
+    const stop = () => { clearTimeout(timer); el.classList.remove("previewing"); vid?.pause(); };
+    el.addEventListener("mouseenter", start); el.addEventListener("mouseleave", stop);
+    thumb.addEventListener("click", () => matchMedia("(hover: hover) and (min-width: 900px)").matches ? play(t) : details(t));
+    thumb.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); details(t); } });
+    $('[data-act="play"]', el).addEventListener("click", () => { stop(); play(t); });
+    $('[data-act="info"]', el).addEventListener("click", () => { stop(); details(t); });
+    return el;
+  }
+
+  function row(title, list, id, link) {
+    const sec = document.createElement("section");
+    sec.className = "row"; if (id) sec.id = id;
+    const ready = list.filter(t => t.video).length;
+    sec.innerHTML = `<div class="row-head"><h2>${esc(title)}</h2><small>${ready ? `${ready} ${ready > 1 ? "vídeos" : "vídeo"}` : ""}${ready < list.length ? ` · ${list.length - ready} em breve` : ""}</small>${link ? `<a href="${link}">Ver tudo ›</a>` : ""}</div>
+      <div class="track-wrap"><button class="arrow l" aria-label="Anterior" hidden>${ICON.left}</button><div class="track"></div><button class="arrow r" aria-label="Próximos">${ICON.right}</button></div>`;
+    const track = $(".track", sec), l = $(".arrow.l", sec), r = $(".arrow.r", sec);
+    list.forEach(t => track.appendChild(card(t)));
+    const upd = () => { l.hidden = track.scrollLeft < 8; r.hidden = track.scrollLeft + track.clientWidth >= track.scrollWidth - 8; };
+    track.addEventListener("scroll", upd, { passive: true }); requestAnimationFrame(upd); addEventListener("resize", upd);
+    l.onclick = () => track.scrollBy({ left: -track.clientWidth * .9, behavior: "smooth" });
+    r.onclick = () => track.scrollBy({ left: track.clientWidth * .9, behavior: "smooth" });
+    return sec;
+  }
+
+  // ---------- destaque ----------
+  function hero() {
+    const h = $("#hero"), pool = inView(READY);
+    const cont = pool.filter(t => { const p = prog(t.id); return p.t > 5 && !p.done; }).sort((a, b) => prog(b.id).at - prog(a.id).at)[0];
+    const t = cont || pool.find(x => !prog(x.id).done) || pool[0];
+    if (!t) { h.innerHTML = ""; h.style.height = "40vh"; return; }
+    h.style.height = "";
+    const kicker = cont ? "Continue de onde parou" : t.numero === 1 ? (MULTI ? `Comece pelo ${appName(t)}` : "Comece por aqui") : t.novo ? "Novo tutorial" : "Em destaque";
+    h.innerHTML = `${t.preview ? `<video muted loop playsinline autoplay preload="auto" src="${t.preview}" aria-hidden="true"></video>` : ""}
+      <img class="poster" src="${t.hero || t.poster}" alt="" />
+      <div class="hero-info">
+        <div class="kicker"><img src="assets/marca/simbolo.png" alt="" />${esc(kicker)}</div>
+        <h1>${esc(t.titulo)}</h1>
+        <div class="meta">${t.novo ? '<span class="new">Novo</span>' : ""}<span>${fmt(t.duracao)}</span>${tags(t)}<span>Tutorial ${String(t.numero).padStart(2, "0")}</span></div>
+        <p>${esc(t.objetivo)}</p>
+        <div class="actions"><button class="btn play">${ICON.play}${cont ? "Continuar" : "Assistir"}</button><button class="btn more">${ICON.info}Mais informações</button></div>
+      </div>`;
+    h.classList.remove("playing");
+    const v = $("video", h);
+    if (v && !matchMedia("(prefers-reduced-motion: reduce)").matches) v.addEventListener("playing", () => h.classList.add("playing"), { once: true });
+    else v?.remove();
+    $(".btn.play", h).onclick = () => play(t);
+    $(".btn.more", h).onclick = () => details(t);
+  }
+
+  // ---------- detalhes ----------
+  const dlg = $("#details");
+  function details(t) {
+    const irmaos = ALL.filter(x => x.app === t.app && x.jornada === t.jornada);
+    dlg.innerHTML = `<div class="d-media">${t.preview ? `<video muted loop playsinline autoplay src="${t.preview}"></video>` : t.poster ? `<img src="${t.hero || t.poster}" alt="" />` : ""}
+        <button class="x" aria-label="Fechar">${ICON.x}</button>
+        <div class="d-head"><h2 id="d-title">${esc(t.titulo)}</h2>
+          ${t.video ? `<div class="actions"><button class="btn play">${ICON.play}${prog(t.id).t > 5 && !prog(t.id).done ? "Continuar" : "Assistir"}</button></div>` : '<div class="kicker">Em breve</div>'}</div></div>
+      <div class="d-body"><div><div class="meta" style="margin-bottom:14px">${t.novo ? '<span class="new">Novo</span>' : ""}${t.video ? `<span>${fmt(t.duracao)}</span>` : ""}<span class="tag">Tutorial ${String(t.numero).padStart(2, "0")}</span></div>
+          <p>${esc(t.objetivo)}</p></div>
+        <dl>${MULTI ? `<dt>Aplicativo</dt><dd>${esc(appName(t))}</dd>` : ""}<dt>Categoria</dt><dd>${esc(t.jornada)}</dd><dt>Para quem</dt><dd>${esc(t.perfil)}</dd></dl></div>
+      <div class="d-list"><h3>${esc(MULTI ? `${appName(t)} · ${t.jornada}` : t.jornada)}</h3>${irmaos.map(x => `<button class="ep${x.id === t.id ? " cur" : ""}" data-id="${x.id}" ${x.video ? "" : "disabled"}>
+          <span class="n">${x.numero}</span>${x.poster ? `<img src="${x.poster}" alt="" loading="lazy" />` : `<img src="assets/marca/simbolo.png" alt="" style="object-fit:contain;padding:14px;background:var(--ink)" />`}
+          <div><b>${esc(x.titulo)}</b><span>${esc(x.objetivo)}</span></div><em>${x.video ? fmt(x.duracao) : "Em breve"}</em></button>`).join("")}</div>`;
+    $(".x", dlg).onclick = () => dlg.close();
+    $(".btn.play", dlg)?.addEventListener("click", () => { dlg.close(); play(t); });
+    dlg.querySelectorAll(".ep:not([disabled])").forEach(b => b.onclick = () => { dlg.close(); play(ALL.find(x => x.id === b.dataset.id)); });
+    if (!dlg.open) dlg.showModal();
+    dlg.scrollTop = 0;
+  }
+  dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+  dlg.addEventListener("close", () => dlg.querySelectorAll("video").forEach(v => v.pause()));
+
+  // ---------- player ----------
+  const P = $("#player"), pv = $("#pv"), nextBox = $("#next"), ptop = $("#ptop");
+  let cur = null, lastSave = 0, hideT, countdown, playToken = 0;
+
+  // ---------- idiomas: uma imagem, uma faixa de áudio e uma legenda por idioma (HLS, como nos serviços de streaming) ----------
+  const plang = $("#plang"), langEl = $("#lang"), ccEl = $("#cc"), LKEY = KEY + ":idioma";
+  const CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="m5 12 5 5 9-10"/></svg>';
+  let hls = null, hlsLoading = null, curLang = { audio: null, legenda: "off" }, cues = [], cueReq = 0, ccRaf;
+  const prefLang = () => { try { return JSON.parse(localStorage.getItem(LKEY)) || {}; } catch { return {}; } };
+  const savePref = () => { try { localStorage.setItem(LKEY, JSON.stringify(curLang)); } catch {} };
+  // escolha salva > idioma do navegador > idioma original; a legenda acompanha o áudio, salvo se a pessoa desligou
+  function pickLang(t) {
+    const codes = t.idiomas.map(x => x.idioma), p = prefLang(), nav = (navigator.language || "").toLowerCase().slice(0, 2);
+    const audio = codes.includes(p.audio) ? p.audio : codes.find(c => c.toLowerCase().startsWith(nav)) || t.origem || codes[0];
+    const legenda = p.legenda === "off" ? "off" : codes.includes(p.legenda) ? p.legenda : audio;
+    return { audio, legenda };
+  }
+  const loadHls = () => hlsLoading ||= new Promise((ok, no) => {
+    const s = document.createElement("script"); s.src = "assets/js/hls.min.js"; s.onload = ok; s.onerror = no; document.head.appendChild(s); });
+  async function attach(t) {
+    hls?.destroy(); hls = null;
+    if (!t.stream) { pv.src = t.video; return; }
+    try { await loadHls(); } catch {}
+    if (window.Hls?.isSupported()) {
+      hls = new Hls({ capLevelToPlayerSize: true });
+      hls.on(Hls.Events.AUDIO_TRACKS_UPDATED, () => setAudio(curLang.audio));
+      hls.loadSource(t.stream); hls.attachMedia(pv);
+    } else {   // iPhone: HLS nativo, faixas em video.audioTracks
+      pv.src = t.stream;
+      pv.addEventListener("loadedmetadata", () => setAudio(curLang.audio), { once: true });
+    }
+  }
+  function setAudio(code) {
+    curLang.audio = code;
+    if (hls) { const i = hls.audioTracks.findIndex(a => a.lang === code); if (i >= 0 && hls.audioTrack !== i) hls.audioTrack = i; }
+    else if (pv.audioTracks) for (const tr of pv.audioTracks) tr.enabled = tr.language === code;
+  }
+  const parseVtt = txt => txt.replace(/\r/g, "").split(/\n{2,}/).map(b => b.match(/([\d:.]+)\s*-->\s*([\d:.]+)[^\n]*\n([\s\S]+)/))
+    .filter(Boolean).map(m => { const s = v => v.split(":").reduce((a, x) => a * 60 + Number(x), 0); return { a: s(m[1]), b: s(m[2]), text: m[3].trim() }; });
+  async function setLegenda(t, code) {
+    // um novo pedido invalida o anterior ainda em voo, e a faixa nativa sai já (desligar vale também em PiP/iPhone)
+    const req = ++cueReq;
+    curLang.legenda = code; cues = []; drawCc(); nativeTrack(null);
+    const src = code !== "off" && t?.idiomas?.find(x => x.idioma === code)?.legenda;
+    if (!src) return;
+    const txt = await fetch(src).then(r => r.ok ? r.text() : "").catch(() => "");
+    if (req === cueReq) { cues = parseVtt(txt); drawCc(); nativeTrack(txt, code, t); }
+  }
+
+  // ---------- legenda em qualquer modo de tela ----------
+  // Tela cheia é sempre a do player inteiro (vídeo + legenda + botões). Se o navegador puser só o <video> em tela
+  // cheia (atalho do sistema, Firefox), troca na hora pela do player. Nos modos que a página não alcança (tela cheia
+  // nativa do iPhone, picture-in-picture), entra a faixa de legenda do próprio navegador, no mesmo idioma.
+  const pfull = $("#pfull"), PS = $("#pstage");
+  let trackUrl = null;
+  const fsEl = () => document.fullscreenElement || document.webkitFullscreenElement || null;
+  const nativeMode = () => fsEl() === pv || document.pictureInPictureElement === pv || !!pv.webkitDisplayingFullscreen;
+  function applyTrackMode() {
+    const on = nativeMode();
+    for (const tt of pv.textTracks) tt.mode = on ? "showing" : "hidden";
+    ccEl.style.visibility = on ? "hidden" : "";
+  }
+  function nativeTrack(txt, code, t) {
+    pv.querySelectorAll("track").forEach(x => x.remove());
+    if (trackUrl) URL.revokeObjectURL(trackUrl);
+    trackUrl = null;
+    if (txt) {   // blob com tipo text/vtt: não depende do tipo que o servidor manda para .vtt
+      trackUrl = URL.createObjectURL(new Blob([txt], { type: "text/vtt" }));
+      const tr = document.createElement("track");
+      Object.assign(tr, { kind: "subtitles", srclang: code, label: t?.idiomas?.find(x => x.idioma === code)?.nome || code, src: trackUrl });
+      pv.appendChild(tr);
+    }
+    applyTrackMode();
+  }
+  function toggleFull() {
+    if (fsEl()) (document.exitFullscreen || document.webkitExitFullscreen)?.call(document)?.catch?.(() => {});
+    else if (PS.requestFullscreen || PS.webkitRequestFullscreen) (PS.requestFullscreen || PS.webkitRequestFullscreen).call(PS)?.catch?.(() => {});
+    else pv.webkitEnterFullscreen?.();   // iPhone: só o vídeo tem tela cheia; a legenda vai pela faixa nativa
+  }
+  pfull.onclick = e => { e.stopPropagation(); toggleFull(); };
+  // duplo clique: o do próprio navegador põe o <video> em tela cheia e o onFs troca pela do player (sem disputa)
+  const onFs = () => {
+    if (fsEl() === pv) (document.exitFullscreen ? document.exitFullscreen() : Promise.resolve())
+      .then(() => PS.requestFullscreen?.()).catch(() => {}).finally(applyTrackMode);
+    pfull.setAttribute("aria-label", fsEl() ? "Sair da tela cheia" : "Tela cheia");
+    applyTrackMode();
+  };
+  document.addEventListener("fullscreenchange", onFs);
+  document.addEventListener("webkitfullscreenchange", onFs);
+  ["webkitbeginfullscreen", "webkitendfullscreen", "enterpictureinpicture", "leavepictureinpicture"]
+    .forEach(ev => pv.addEventListener(ev, applyTrackMode));
+  function drawCc() {
+    const now = pv.currentTime, c = cues.find(x => now >= x.a && now <= x.b), s = c ? c.text : "";
+    if (ccEl.dataset.s !== s) { ccEl.dataset.s = s; ccEl.innerHTML = s ? `<span>${esc(s)}</span>` : ""; }
+  }
+  const ccLoop = () => { drawCc(); ccRaf = requestAnimationFrame(ccLoop); };
+  pv.addEventListener("play", () => { cancelAnimationFrame(ccRaf); ccLoop(); });
+  pv.addEventListener("pause", () => cancelAnimationFrame(ccRaf));
+  pv.addEventListener("seeked", drawCc);
+  function langPanel() {
+    const t = cur; if (!t?.idiomas) return;
+    const opt = (attr, code, label, on, extra = "") => `<button ${attr}="${code}" class="${on ? "on" : ""}" aria-pressed="${on}"><i>${on ? CHECK : ""}</i>${esc(label)}${extra}</button>`;
+    langEl.innerHTML = `<div><h4>Áudio</h4>${t.idiomas.map(x => opt("data-a", x.idioma, x.nome, x.idioma === curLang.audio,
+        x.idioma === t.origem ? " <small>original</small>" : "")).join("")}</div>
+      <div><h4>Legendas</h4>${opt("data-l", "off", "Desligadas", curLang.legenda === "off")}${t.idiomas.map(x => opt("data-l", x.idioma, x.nome, x.idioma === curLang.legenda)).join("")}</div>`;
+    langEl.querySelectorAll("[data-a]").forEach(b => b.onclick = () => {
+      // trocar o áudio leva a legenda junto (se estiver ligada): narração e legenda no mesmo idioma
+      setAudio(b.dataset.a); if (curLang.legenda !== "off") setLegenda(t, b.dataset.a); savePref(); langPanel(); });
+    langEl.querySelectorAll("[data-l]").forEach(b => b.onclick = () => { setLegenda(t, b.dataset.l); savePref(); langPanel(); });
+  }
+  function closeLang() { langEl.classList.remove("open"); plang.setAttribute("aria-expanded", "false"); }
+  plang.onclick = e => { e.stopPropagation(); const open = !langEl.classList.contains("open");
+    if (open) { langPanel(); langEl.classList.add("open"); plang.setAttribute("aria-expanded", "true"); langEl.querySelector("button.on")?.focus(); }
+    else closeLang(); };
+  P.addEventListener("click", e => { if (langEl.classList.contains("open") && !langEl.contains(e.target) && e.target !== plang) closeLang(); });
+  function play(t) {
+    if (!t?.video) return;
+    $("#hero video")?.pause();
+    cur = t; hideNext();
+    $("#ptitle").innerHTML = `<b>${esc(t.titulo)}</b>${MULTI ? `${esc(appName(t))} · ` : ""}${esc(t.jornada)} · ${fmt(t.duracao)}`;
+    pv.poster = t.hero || t.poster || "";
+    curLang = t.idiomas ? pickLang(t) : { audio: null, legenda: "off" };
+    plang.hidden = !t.idiomas; closeLang();
+    const p = prog(t.id);
+    pv.addEventListener("loadedmetadata", () => { if (p.t > 5 && !p.done && p.t < pv.duration - 3) pv.currentTime = p.t; }, { once: true });
+    if (!P.open) P.showModal();
+    const token = ++playToken;
+    attach(t).then(() => { if (token === playToken) pv.play().catch(() => {}); });
+    setLegenda(t, curLang.legenda);
+    wake();
+  }
+  function close() {
+    // grava antes de soltar o vídeo: ao esvaziar o src o navegador dispara timeupdate com tempo 0
+    const c = cur; cur = null;
+    if (c) saveProg(c.id, pv.currentTime, pv.duration);
+    hideNext(); closeLang(); playToken++; pv.pause(); hls?.destroy(); hls = null; cues = []; drawCc(); nativeTrack(null);
+    pv.removeAttribute("src"); pv.load();
+    if (fsEl()) (document.exitFullscreen || document.webkitExitFullscreen)?.call(document)?.catch?.(() => {});
+    if (pv.webkitDisplayingFullscreen) pv.webkitExitFullscreen?.();
+    if (P.open) P.close(); hero(); refresh(); }
+  function wake() { ptop.classList.remove("hide"); clearTimeout(hideT); hideT = setTimeout(() => !pv.paused && !langEl.classList.contains("open") && ptop.classList.add("hide"), 2600); }
+  $("#pback").onclick = close;
+  // Esc com a tela "a seguir" aberta só cancela a contagem; sem ela, fecha o player
+  P.addEventListener("keydown", e => {
+    if ((e.key === "f" || e.key === "F") && !e.ctrlKey && !e.metaKey && !e.altKey) { e.preventDefault(); toggleFull(); return; }
+    if (e.key !== "Escape") return;
+    if (langEl.classList.contains("open")) { e.preventDefault(); e.stopPropagation(); closeLang(); }
+    else if (nextBox.classList.contains("show")) { e.preventDefault(); e.stopPropagation(); hideNext(); }
+  });
+  P.addEventListener("cancel", e => { e.preventDefault(); nextBox.classList.contains("show") ? hideNext() : close(); });
+  // o navegador pode fechar o diálogo por conta própria (Esc sem interação recente): limpa igual ao botão voltar
+  P.addEventListener("close", () => { if (cur) close(); });
+  P.addEventListener("mousemove", wake);
+  pv.addEventListener("timeupdate", () => { if (cur && Date.now() - lastSave > 3000) { lastSave = Date.now(); saveProg(cur.id, pv.currentTime, pv.duration); } });
+
+  // ---------- a seguir: miniatura grande do próximo com anel de contagem (D.proximo_s; 0 = sem contagem) ----------
+  const RING = 289.03;   // 2πr do círculo r=46
+  function hideNext() {
+    cancelAnimationFrame(countdown); countdown = null;
+    nextBox.className = "next"; nextBox.innerHTML = ""; pv.controls = true; ptop.classList.remove("hide");
+  }
+  function showNext(nx) {
+    const secs = nx ? D.proximo_s ?? 5 : 0, auto = secs > 0, t = nx || cur;
+    const fim = MULTI ? `${appName(cur)} · ${cur.jornada}` : cur.jornada;
+    nextBox.innerHTML = `<div class="nx">
+        <button class="nx-thumb" aria-label="${nx ? `Assistir agora: ${esc(nx.titulo)}` : `Assistir de novo: ${esc(cur.titulo)}`}">
+          <img src="${t.hero || t.poster}" alt="" />
+          <span class="ring">${auto ? `<svg class="arc" viewBox="0 0 100 100" aria-hidden="true"><circle class="rail" cx="50" cy="50" r="46"/><circle class="fill" cx="50" cy="50" r="46"/></svg>` : ""}
+            <span class="mid">${ICON.play}</span></span>
+        </button>
+        <div class="nx-info">
+          <small>${nx ? "A seguir" : "Você concluiu"}</small>
+          <h2>${esc(nx ? nx.titulo : fim)}</h2>
+          <div class="meta">${nx ? `<span>${fmt(nx.duracao)}</span>${tags(nx)}<span>Tutorial ${String(nx.numero).padStart(2, "0")}</span>` : `<span>${esc(cur.titulo)}</span>`}</div>
+          ${nx ? `<p>${esc(nx.objetivo)}</p>` : ""}
+          ${auto ? `<div class="when">Começa em <b class="cd">${secs}</b> s</div>` : '<div class="when"></div>'}
+          <div class="actions">
+            <button class="btn play" data-go>${ICON.play}${nx ? "Assistir agora" : "Assistir de novo"}</button>
+            <button class="btn ghost" data-stop>${nx && auto ? "Cancelar" : "Voltar aos tutoriais"}</button>
+          </div>
+        </div></div>`;
+    nextBox.className = "next show"; pv.controls = false; ptop.classList.add("hide");
+    const go = () => play(t);
+    $(".nx-thumb", nextBox).onclick = go; $("[data-go]", nextBox).onclick = go;
+    $("[data-stop]", nextBox).onclick = () => nx && auto ? hideNext() : close();
+    $("[data-go]", nextBox).focus({ preventScroll: true });
+    if (!auto) return;
+    // contagem pelo relógio do quadro: o anel anda liso e o número troca a cada segundo; aba escondida pausa junto
+    const fill = $(".fill", nextBox), cd = $(".cd", nextBox);
+    let t0 = null, last = secs;
+    const tick = now => {
+      t0 ??= now;
+      const p = Math.min(1, (now - t0) / (secs * 1000));
+      fill.style.strokeDashoffset = RING * (1 - p);
+      const left = Math.ceil(secs * (1 - p));
+      if (left !== last) { last = left; cd.textContent = left; }
+      if (p >= 1) { countdown = null; play(nx); return; }
+      countdown = requestAnimationFrame(tick);
+    };
+    countdown = requestAnimationFrame(tick);
+  }
+  pv.addEventListener("ended", () => {
+    if (!cur) return;
+    saveProg(cur.id, pv.duration, pv.duration);
+    // próximo: a mesma jornada do mesmo aplicativo; acabou a jornada, o próximo do aplicativo; acabou o app, tela de fim
+    const doApp = READY.filter(x => x.app === cur.app), seq = doApp.filter(x => x.jornada === cur.jornada);
+    showNext(seq[seq.indexOf(cur) + 1] || doApp[doApp.indexOf(cur) + 1]);
+  });
+
+  // ---------- montagem ----------
+  function refresh() {
+    const rows = $("#rows"); rows.innerHTML = "";
+    const pool = inView(READY), all = inView(ALL);
+    const cont = pool.filter(t => { const p = prog(t.id); return p.t > 5 && !p.done; }).sort((a, b) => prog(b.id).at - prog(a.id).at);
+    if (cont.length) rows.appendChild(row("Continuar assistindo", cont));
+    const novos = pool.filter(t => t.novo);
+    if (novos.length >= 2) rows.appendChild(row("Novidades", novos));
+    if (!view) {
+      // início com vários aplicativos: uma linha por aplicativo, vídeos prontos primeiro
+      APPS.forEach(a => { const list = ALL.filter(t => t.app === a.slug); if (list.length)
+        rows.appendChild(row(a.nome, [...list.filter(t => t.video), ...list.filter(t => !t.video)], "app-" + a.slug, `#/${a.slug}`)); });
+      return;
+    }
+    APP[view].jornadas.forEach((j, i) => { const list = all.filter(t => t.jornada === j); if (list.length) rows.appendChild(row(j, list, "j" + i)); });
+  }
+  function nav() {
+    const n = $("#nav");
+    if (MULTI) {
+      n.innerHTML = `<a href="#/"${view ? "" : ' class="on"'}>Início</a>` + APPS.map(a => `<a href="#/${a.slug}"${view === a.slug ? ' class="on"' : ""}>${esc(a.nome)}</a>`).join("");
+      return;
+    }
+    n.innerHTML = APP[view].jornadas.map((j, i) => ALL.some(t => t.jornada === j) ? `<a href="#/${view}" data-jump="j${i}">${esc(j)}</a>` : "").join("");
+    n.querySelectorAll("[data-jump]").forEach(a => a.onclick = e => { e.preventDefault(); document.getElementById(a.dataset.jump)?.scrollIntoView({ behavior: "smooth" }); });
+  }
+  function route() {
+    const [, a = "", s = ""] = location.hash.match(/^#\/([^/]*)\/?(.*)$/) || [];
+    const prev = view;
+    view = MULTI ? (APP[a] ? a : null) : APPS[0]?.slug;
+    const pool = inView(READY);
+    $("#count").textContent = `${pool.length} ${pool.length === 1 ? "vídeo disponível" : "vídeos disponíveis"}`
+      + (MULTI && !view ? ` em ${APPS.length} aplicativos` : "");
+    nav(); hero(); refresh();
+    if (prev !== view) scrollTo({ top: 0 });
+    const t = s && ALL.find(x => x.app === (view || a) && x.slug === decodeURIComponent(s));
+    if (t) details(t);
+  }
+  addEventListener("hashchange", route);
+  route();
+
+  const q = $("#q");
+  q.addEventListener("input", () => {
+    const s = q.value.trim().toLowerCase().normalize("NFD").replace(/\p{M}/gu, "");
+    document.body.classList.toggle("searching", !!s);
+    if (!s) return;
+    const norm = x => x.toLowerCase().normalize("NFD").replace(/\p{M}/gu, "");
+    // a busca vale para todos os aplicativos, de qualquer página
+    const hits = ALL.filter(t => norm(`${t.titulo} ${t.objetivo} ${t.jornada} ${t.perfil} ${appName(t)}`).includes(s));
+    $("#results-title").textContent = hits.length ? `Resultados para “${q.value.trim()}”` : `Nada encontrado para “${q.value.trim()}”`;
+    const g = $("#results-grid"); g.innerHTML = ""; hits.forEach(t => g.appendChild(card(t)));
+  });
+  $("#search").addEventListener("click", () => { $("#search").classList.add("open"); q.focus(); });
+  q.addEventListener("keydown", e => { if (e.key === "Escape") { q.value = ""; q.dispatchEvent(new Event("input")); q.blur(); } });
+  addEventListener("scroll", () => $("#top").classList.toggle("solid", scrollY > 40), { passive: true });
+})();
+</script>
+</body>
+</html>

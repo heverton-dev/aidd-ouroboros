@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DesignTokensMetodologia",
+  "description": "Tokens de animação, física, tipografia e cores extraídos da metodologia de vídeo",
+  "motion": {
+    "framerate": 60,
+    "spring": {
+      "stiffness": 100,
+      "damping": 10,
+      "mass": 0.5
+    },
+    "easing": {
+      "default": "cubic-bezier(0.16, 1, 0.3, 1)",
+      "whip": "cubic-bezier(0.85, 0, 0.15, 1)",
+      "smooth": "cubic-bezier(0.4, 0, 0.2, 1)"
+    },
+    "transitions_ms": {
+      "cut_fast": 150,
+      "fade_standard": 300,
+      "scene_whip": 450
+    }
+  },
+  "typography": {
+    "font_title": "Inter, system-ui, sans-serif",
+    "font_code": "'JetBrains Mono', monospace",
+    "scale": {
+      "hero": "48px",
+      "h1": "36px",
+      "h2": "28px",
+      "body": "18px",
+      "caption": "14px"
+    }
+  },
+  "palette": {
+    "background": "#0b0f19",
+    "surface": "#161e2e",
+    "border": "#273349",
+    "text_primary": "#f8fafc",
+    "text_secondary": "#94a3b8",
+    "accent_primary": "#38bdf8",
+    "accent_success": "#34d399",
+    "accent_warning": "#f59e0b"
+  }
+}
