@@ -306,3 +306,25 @@
 - **Contagem Regressiva:** 1 ticket restante (NT-16).
 - **Commit:** `68bd0db`
 
+### NT-16: Robustez do audit_runner.py (Root Dinâmico, Banner Limpo e Exit Codes)
+- **Status:** DONE
+- **Data:** 2026-10-25
+- **Escopo:** `motores/governanca/audit_runner.py`, `tests/test_audit_runner.py`, `docs/v2-execution/LEDGER.md`.
+- **Plano:**
+  1. Adicionar resolução dinâmica de `root` em `motores/governanca/audit_runner.py` com fallback canônico `Path(__file__).resolve().parent.parent.parent` e flag CLI `--root <path>`.
+  2. Implementar flag `--print-root` para imprimir o root absoluto resolvido e sair imediatamente com exit code 0.
+  3. Substituir banner estático por dinâmico, eliminando strings hardcoded e detectando branch via Git ou fallback.
+  4. Implementar matriz de exit codes canônicos: `0` (sucesso), `1` (falha bloqueante), `2` (avisos/pendências).
+  5. Suportar `--workspace <path>` para verificação criptográfica de integridade de envelopes HMAC-SHA256 via `handoff_crypto.abrir`.
+  6. Suportar `--skip-circuit-breaker` para auditoria modular e testes isolados.
+  7. Criar suíte de testes `tests/test_audit_runner.py` cobrindo `--print-root`, root customizado, ausência de strings proibidas no banner, auditoria de envelopes válidos e inválidos em workspace.
+  8. Validar conformidade AST com `gate_ast.py` e executar suíte de testes (5 passed).
+- **Red-Before-Green Evidence:**
+  1. *Teste RED:* `test_audit_runner.py` falhou inicialmente por ausência de flags `--root`, `--print-root`, `--workspace` e `--skip-circuit-breaker`.
+  2. *Gate RED:* N/A (validado pré-commit).
+- **Green Verification Evidence:**
+  1. *Teste GREEN:* `python -m pytest -q tests/test_audit_runner.py` -> 5 passed in 2.74s (exit 0).
+  2. *Gate GREEN:* `python motores/governanca/gate_ast.py motores/governanca/audit_runner.py` -> 0 violações, 100% sintaxe válida e zero stubs (exit 0).
+- **Contagem Regressiva:** 0 tickets restantes (16/16 concluídos - 100%).
+- **Commit:** `1446e22`
+
