@@ -284,4 +284,25 @@
   1. *Teste GREEN:* `python -m pytest -q tests/test_dependency_resolver.py` -> 7 passed in 0.45s (exit 0).
   2. *Gate GREEN:* `python motores/governanca/gate_ast.py motores/governanca/dependency_resolver.py` -> 0 violações, 100% sintaxe válida e zero stubs (exit 0).
 - **Contagem Regressiva:** 2 tickets restantes (NT-15, NT-16).
-- **Commit:** `e53e88a`
+- **Commit:** `cf196d0`
+
+### NT-15: Offline Deterministic Dry-Run Plan Synthesis
+- **Status:** DONE
+- **Data:** 2026-10-25
+- **Escopo:** `ouroboros.py`, `schemas/PLAN.schema.json`, `tests/test_kernel_plan.py`, `docs/v2-execution/LEDGER.md`.
+- **Plano:**
+  1. Definir e criar `schemas/PLAN.schema.json` segundo especificação Draft-07 rigorosa para planos determinísticos do kernel.
+  2. Implementar função pura e determinística `sintetizar_plano(target, goal, taxonomy_path)` em `ouroboros.py` mapeando extensões e intenções para skills canônicas sem chamadas de rede.
+  3. Adicionar validação estrita com `jsonschema.validate` contra `schemas/PLAN.schema.json` e geração de `plan_id` reproduzível baseado em SHA-256.
+  4. Expandir CLI do kernel com flags `--target`, `--goal`, `--dry-run` e `--output-plan`.
+  5. Criar suíte `tests/test_kernel_plan.py` cobrindo alvos APK, ZIP, desconhecido, validação de schema e opções do CLI.
+  6. Validar testes unitários e Quality Gate AST anti-stubs (exit 0).
+- **Red-Before-Green Evidence:**
+  1. *Teste RED:* `test_kernel_plan.py` falhou inicialmente com ausência de `schemas/PLAN.schema.json` e `AttributeError: module 'ouroboros' has no attribute 'sintetizar_plano'`.
+  2. *Gate RED:* N/A (validado pré-commit).
+- **Green Verification Evidence:**
+  1. *Teste GREEN:* `python -m pytest -q tests/test_kernel_plan.py` -> 6 passed in 0.73s (exit 0).
+  2. *Gate GREEN:* `python motores/governanca/gate_ast.py ouroboros.py` -> 0 violações, zero stubs (exit 0).
+- **Contagem Regressiva:** 1 ticket restante (NT-16).
+- **Commit:** `68bd0db`
+

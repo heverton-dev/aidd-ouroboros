@@ -17,12 +17,17 @@ Capacidades:
 from __future__ import annotations
 
 import argparse
+import datetime
+import hashlib
+import json
 import os
 from pathlib import Path
 import shutil
 import subprocess
 import sys
 import time
+
+import jsonschema
 
 from motores.governanca.credentials import carregar_env_local, obter_credenciais_ia, verificar_prontidao_live
 
@@ -161,6 +166,60 @@ def run_pipeline(pipeline_name: str, force: bool = False, live: bool = False) ->
     return res.returncode == 0
 
 
+def sintetizar_plano(target: str, goal: str, taxonomy_path: Path | None = None) -> dict:
+    target_clean = target.strip()
+    target_lower = target_clean.lower()
+    goal_clean = goal.strip()
+    combined_text = f"{target_lower} {goal_clean.lower()}"
+
+    primary_skill = None
+    input_type = None
+
+    if target_lower.endswith(".apk") or (target_lower.endswith(".zip") and any(k in combined_text for k in ["apk", "app", "android"])):
+        primary_skill = "aidd-rea-app-android"
+        input_type = "file/apk"
+    elif target_lower.endswith(".mp4") or "youtube.com" in target_lower or "youtu.be" in target_lower:
+        primary_skill = "aidd-rea-video-youtube"
+        input_type = "video/mp4"
+    elif target_lower.startswith(("http://", "https://")) or target_lower.endswith(".html"):
+        primary_skill = "aidd-rea-web-saas"
+        input_type = "text/html"
+    elif "slides" in combined_text or target_lower.endswith((".pdf", ".pptx")):
+        primary_skill = "aidd-rea-social-carousel"
+        input_type = "dir:slides"
+    else:
+        raise ValueError("Não foi possível mapear o target para uma skill canônica.")
+
+    plan_hash = hashlib.sha256(f"{target_clean}{goal_clean}".encode("utf-8")).hexdigest()[:16]
+    plan_id = f"plan-{plan_hash}"
+    now_iso = datetime.datetime.now(datetime.timezone.utc).isoformat()
+
+    plano = {
+        "plan_id": plan_id,
+        "version": "1.0.0",
+        "target": target_clean,
+        "goal": goal_clean,
+        "steps": [
+            {
+                "step_index": 1,
+                "skill": primary_skill,
+                "input_type": input_type,
+                "output_contract": "HANDOFF.json"
+            }
+        ],
+        "deterministic": True,
+        "created_at": now_iso
+    }
+
+    schema_path = Path(__file__).resolve().parent / "schemas" / "PLAN.schema.json"
+    if schema_path.is_file():
+        with open(schema_path, "r", encoding="utf-8") as f:
+            schema = json.load(f)
+        jsonschema.validate(instance=plano, schema=schema)
+
+    return plano
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="AIDD OUROBOROS — A Meta-Fábrica Universal Autônoma",
@@ -172,6 +231,7 @@ Exemplos de Uso:
   python ouroboros.py --audit                    # Executa Quality Gates fractais da branch
   python ouroboros.py --pipeline commercial-spec-flow # Executa o pipeline em modo DRY_RUN
   python ouroboros.py --pipeline commercial-spec-flow --live # Executa chamando APIs reais
+  python ouroboros.py --target app.apk --goal "Engenharia reversa" --dry-run
         """
     )
     parser.add_argument("--doctor", action="store_true", help="Diagnóstico dos pré-requisitos de ambiente e IA")
@@ -181,8 +241,32 @@ Exemplos de Uso:
     parser.add_argument("--pipeline", metavar="NOME", help="Executa o runner de um pipeline específico em aidd-pipelines/")
     parser.add_argument("--force", action="store_true", help="Força reexecução de nós já concluídos no pipeline")
     parser.add_argument("--live", action="store_true", help="Executa chamadas reais para as APIs de IA (requer .env configurado)")
+    parser.add_argument("--target", help="Alvo de entrada para síntese e execução do plano (arquivo, URL ou diretório)")
+    parser.add_argument("--goal", help="Objetivo funcional do plano a ser sintetizado")
+    parser.add_argument("--dry-run", action="store_true", help="Gera o plano deterministicamente sem executar efeitos colaterais")
+    parser.add_argument("--output-plan", metavar="CAMINHO", help="Caminho para salvar o plano sintetizado em formato JSON")
 
     args = parser.parse_args()
+
+    if args.target and args.goal:
+        try:
+            plano = sintetizar_plano(args.target, args.goal)
+        except Exception as exc:
+            print(f"[!] Erro ao sintetizar plano: {exc}", file=sys.stderr)
+            sys.exit(1)
+
+        plan_json = json.dumps(plano, indent=2, ensure_ascii=False)
+        if args.output_plan:
+            out_p = Path(args.output_plan)
+            out_p.parent.mkdir(parents=True, exist_ok=True)
+            out_p.write_text(plan_json, encoding="utf-8")
+
+        if args.dry_run or not args.pipeline:
+            print(plan_json)
+            sys.exit(0)
+    elif args.target or args.goal or (args.dry_run and not args.pipeline):
+        print("[!] --target e --goal são necessários para síntese de plano.", file=sys.stderr)
+        sys.exit(1)
 
     if args.doctor:
         sys.exit(0 if check_doctor() else 1)
