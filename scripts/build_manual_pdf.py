@@ -1,0 +1,701 @@
+"""
+Script gerador do Manual do Arquiteto de Pipelines & Templates Imprimíveis em PDF de Alta Qualidade.
+"""
+from pathlib import Path
+from playwright.sync_api import sync_playwright
+
+HTML_CONTENT = """<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Manual do Arquiteto de Pipelines & Flywheels</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  @page {
+    size: A4;
+    margin: 20mm 16mm 20mm 16mm;
+    @bottom-right {
+      content: counter(page);
+      font-family: 'Inter', sans-serif;
+      font-size: 9pt;
+      color: #718096;
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: #1a202c;
+    background: #ffffff;
+    line-height: 1.55;
+    font-size: 10.5pt;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1, h2, h3, h4 {
+    color: #0f172a;
+    font-weight: 700;
+    margin-top: 1.4em;
+    margin-bottom: 0.5em;
+    page-break-after: avoid;
+  }
+
+  h1 { font-size: 22pt; line-height: 1.2; }
+  h2 { font-size: 15pt; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; margin-top: 1.8em; }
+  h3 { font-size: 12pt; color: #1e293b; }
+  h4 { font-size: 10.5pt; color: #334155; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  p { margin: 0.6em 0; text-align: justify; }
+  ul, ol { margin: 0.6em 0; padding-left: 24px; }
+  li { margin-bottom: 0.4em; }
+
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9pt;
+    background: #f1f5f9;
+    padding: 2px 5px;
+    border-radius: 4px;
+    color: #0f172a;
+    border: 1px solid #e2e8f0;
+  }
+
+  pre {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5pt;
+    background: #0f172a;
+    color: #f8fafc;
+    padding: 12px 14px;
+    border-radius: 6px;
+    overflow-x: auto;
+    page-break-inside: avoid;
+  }
+
+  .cover {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+    page-break-after: always;
+  }
+
+  .cover-badge {
+    background: #0284c7;
+    color: white;
+    font-size: 9pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  .cover-title {
+    font-size: 30pt;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.15;
+    margin-bottom: 15px;
+  }
+
+  .cover-subtitle {
+    font-size: 14pt;
+    color: #475569;
+    line-height: 1.4;
+    margin-bottom: 40px;
+    max-width: 650px;
+  }
+
+  .cover-meta {
+    border-top: 2px solid #e2e8f0;
+    padding-top: 20px;
+    font-size: 10pt;
+    color: #64748b;
+    width: 100%;
+  }
+
+  .page-break {
+    page-break-after: always;
+  }
+
+  .avoid-break {
+    page-break-inside: avoid;
+  }
+
+  .box-callout {
+    background: #f8fafc;
+    border-left: 4px solid #0284c7;
+    padding: 12px 16px;
+    margin: 14px 0;
+    border-radius: 0 6px 6px 0;
+    page-break-inside: avoid;
+  }
+
+  .box-alert {
+    background: #fef2f2;
+    border-left: 4px solid #ef4444;
+    padding: 12px 16px;
+    margin: 14px 0;
+    border-radius: 0 6px 6px 0;
+    page-break-inside: avoid;
+  }
+
+  .box-success {
+    background: #f0fdf4;
+    border-left: 4px solid #10b981;
+    padding: 12px 16px;
+    margin: 14px 0;
+    border-radius: 0 6px 6px 0;
+    page-break-inside: avoid;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 9.5pt;
+    page-break-inside: avoid;
+  }
+
+  th, td {
+    padding: 9px 12px;
+    text-align: left;
+    border: 1px solid #cbd5e1;
+  }
+
+  th {
+    background: #0f172a;
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  tr:nth-child(even) td {
+    background: #f8fafc;
+  }
+
+  /* ESTILOS DE FICHA / WORKSHEET IMPRIMÍVEL */
+  .worksheet-card {
+    border: 2px solid #334155;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    background: #ffffff;
+    page-break-inside: avoid;
+  }
+
+  .worksheet-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px dashed #94a3b8;
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+  }
+
+  .worksheet-title {
+    font-size: 13pt;
+    font-weight: 800;
+    color: #0f172a;
+  }
+
+  .fill-row {
+    margin-bottom: 14px;
+  }
+
+  .fill-label {
+    font-weight: 700;
+    font-size: 9pt;
+    color: #334155;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+
+  .fill-line {
+    border-bottom: 1px dotted #94a3b8;
+    height: 24px;
+    width: 100%;
+    margin-top: 2px;
+  }
+
+  .fill-box {
+    border: 1px dashed #94a3b8;
+    border-radius: 4px;
+    height: 70px;
+    width: 100%;
+    background: #fafafa;
+    margin-top: 4px;
+  }
+
+  .checkbox-group {
+    display: flex;
+    gap: 20px;
+    margin-top: 6px;
+  }
+
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 9.5pt;
+    font-weight: 500;
+  }
+
+  .check-square {
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid #475569;
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+</style>
+</head>
+<body>
+
+<!-- CAPA -->
+<div class="cover">
+  <div class="cover-badge">METODOLOGIA AIDD & OUROBOROS</div>
+  <div class="cover-title">Manual Prático do Arquiteto de Pipelines</div>
+  <div class="cover-subtitle">
+    O Método Definitivo para Descompor Qualquer Problema em Fluxos Determinísticos, 
+    Neutralizar os Vícios da Inteligência Artificial e Criar Sistemas que Nunca Falham.
+  </div>
+  <div class="cover-meta">
+    <strong>Autor:</strong> Engenharia AIDD Ouroboros<br>
+    <strong>Propósito:</strong> Guia de Estudo, Formação de Raciocínio & Caderno de Fichas de Preenchimento<br>
+    <strong>Versão:</strong> 1.0 (Edição Canônica)
+  </div>
+</div>
+
+<!-- MÓDULO 1 -->
+<h2>MÓDULO 1: Por Que Nos Sentimos Perdidos? (A Psicologia do Arquiteto)</h2>
+
+<p>
+Quando tentamos criar um sistema ou automação moderna, é comum sentirmos que "quanto mais pensamos, menos entendemos". Esse sentimento não ocorre por falta de inteligência. Ele ocorre por um fenômeno neurocientífico e técnico chamado <strong>Sobrecarga de Espaço de Estados</strong>.
+</p>
+
+<p>
+Quando você olha para o objetivo final — por exemplo, <em>"pegar um vídeo do YouTube e transformá-lo num pipeline completo com código e animações"</em> —, o cérebro humano tenta processar o início, o meio, o fim, os erros de digitação, a linguagem de programação, a API que pode cair e o prompt da IA <strong>ao mesmo tempo</strong>.
+</p>
+
+<div class="box-callout">
+  <strong>O Segredo dos Grandes Engenheiros:</strong> Ninguém resolve um sistema complexo inteiro de uma vez. O trabalho do Arquiteto não é programar; é <strong>cortar o elefante em bifes tão pequenos que cada um deles se torne óbvio</strong>.
+</div>
+
+<h3>Os Dois Vícios Estruturais das LLMs</h3>
+<p>
+Para piorar a confusão, quando pedimos ajuda a uma Inteligência Artificial sem rédeas curtas, ela ativa dois vícios de fábrica que nos desorientam ainda mais:
+</p>
+
+<div class="box-alert">
+  <strong>1. A Ânsia da Entrega Simulada:</strong> A IA tem pavor de dizer "não sei" ou "preciso de um arquivo físico". Ela prefere inventar dados falsos (mocks), fingir que conectou numa API e cuspir um texto bonito que não funciona na prática.
+</div>
+
+<div class="box-alert">
+  <strong>2. O Loop de Autocorreção Cega:</strong> Ao encontrar um erro num código sem evidência física, a IA tenta adivinhar o motivo. Ela mexe em arquivos aleatórios, quebra o que já funcionava e entra em um turbilhão sem fim de remendos.
+</div>
+
+<p>
+Para anular esses dois vícios e blindar sua própria mente contra a confusão, você só precisa de um princípio: <strong>O Princípio dos Dois Baldes</strong>.
+</p>
+
+<div class="page-break"></div>
+
+<!-- MÓDULO 2 -->
+<h2>MÓDULO 2: O Princípio dos Dois Baldes (A Linha Divisória Sagrada)</h2>
+
+<p>
+Toda e qualquer tarefa no universo da computação pertence obrigatoriamente a um dos dois baldes abaixo. Nunca misture os dois:
+</p>
+
+<div class="grid-2">
+  <div style="background: #f0fdf4; border: 2px solid #10b981; padding: 14px; border-radius: 8px;">
+    <h3 style="margin-top:0; color:#065f46;">BALDE 1: Determinístico (Zero IA)</h3>
+    <p style="font-size:9.5pt;">
+      <strong>Regra:</strong> Se existe uma fórmula matemática, um utilitário do sistema operacional ou uma resposta exata (0 ou 1), <strong>a IA é estritamente proibida de raciocinar</strong>.
+    </p>
+    <ul style="font-size:9pt; padding-left:18px;">
+      <li>Baixar arquivos da internet</li>
+      <li>Cortar e converter vídeos ou áudios</li>
+      <li>Transcrever fala para texto</li>
+      <li>Ler texto em imagens (OCR)</li>
+      <li>Criar pastas e checar se arquivos existem</li>
+      <li>Calcular hashes criptográficos (SHA-256)</li>
+    </ul>
+    <p style="font-size:9pt; font-weight:700; color:#047857;">Custo: 0 Tokens | Confiabilidade: 100%</p>
+  </div>
+
+  <div style="background: #eff6ff; border: 2px solid #3b82f6; padding: 14px; border-radius: 8px;">
+    <h3 style="margin-top:0; color:#1e40af;">BALDE 2: Probabilístico (Usa IA)</h3>
+    <p style="font-size:9.5pt;">
+      <strong>Regra:</strong> A IA só é acionada onde existe <strong>julgamento humano, ambiguidade, síntese ou criação de linguagem</strong>.
+    </p>
+    <ul style="font-size:9pt; padding-left:18px;">
+      <li>Interpretar a didática e intenção de um autor</li>
+      <li>Resumir e catalogar o método principal</li>
+      <li>Redigir um roteiro em tom persuasivo</li>
+      <li>Decompor uma metodologia em tarefas de código</li>
+      <li>Formular hipóteses sobre dúvidas do código</li>
+      <li>Explicar um erro para o operador humano</li>
+    </ul>
+    <p style="font-size:9pt; font-weight:700; color:#1d4ed8;">Custo: Tokens Pagos | Confiabilidade: Depende de Coleira</p>
+  </div>
+</div>
+
+<h3>O Catálogo de Ferramentas de Prateleira (Não Reinvente a Roda)</h3>
+<p>
+Um dos maiores erros do iniciante é pedir para a IA criar um código do zero para algo que o mundo open-source já resolveu com perfeição há 15 anos. Decore este catálogo:
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Necessidade do Pipeline</th>
+      <th>Ferramenta Consagrada (CLI / Binário)</th>
+      <th>Por Que Usar?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Baixar vídeos de qualquer site</strong></td>
+      <td><code>yt-dlp</code></td>
+      <td>Padrão mundial. Baixa MP4, extrai MP3, legendas e miniaturas.</td>
+    </tr>
+    <tr>
+      <td><strong>Manipular áudio e vídeo</strong></td>
+      <td><code>ffmpeg</code></td>
+      <td>Corta cenas, extrai frames a cada X segundos, ajusta bitrate.</td>
+    </tr>
+    <tr>
+      <td><strong>Transcrever áudio offline</strong></td>
+      <td><code>faster-whisper</code></td>
+      <td>Roda no seu processador local. Transcreve com carimbo de tempo exato.</td>
+    </tr>
+    <tr>
+      <td><strong>Ler texto de telas e códigos</strong></td>
+      <td><code>Tesseract OCR</code></td>
+      <td>Extrai texto de imagens sem gastar nenhum token de visão.</td>
+    </tr>
+    <tr>
+      <td><strong>Renderizar animações em código</strong></td>
+      <td><code>Remotion</code> / <code>Bun</code></td>
+      <td>Programa vídeos em React de forma 100% determinística.</td>
+    </tr>
+    <tr>
+      <td><strong>Garantir integridade de arquivos</strong></td>
+      <td><code>hashlib</code> (SHA-256)</td>
+      <td>Gera assinatura digital para provar que nenhum arquivo foi corrompido.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<!-- MÓDULO 3 -->
+<h2>MÓDULO 3: O Contrato de Caixa-Preta (Input ➔ Processo ➔ Saída)</h2>
+
+<p>
+Um pipeline robusto é uma cadeia de <strong>Caixas-Pretas</strong>. Uma Caixa-Preta não se importa com quem veio antes nem com quem vem depois. Ela só se importa com o seu próprio <strong>Contrato de 4 Elementos</strong>:
+</p>
+
+```
+┌────────────────────────────────────────────────────────┐
+│                   A CAIXA-PRETA DO PASSO               │
+│                                                        │
+│   [ENTRADA / INPUT] ────────► [PROCESSAMENTO FÍSICO]   │
+│                                       │                │
+│                                       ▼                │
+│   [SAÍDA / OUTPUT]  ◄──────── [PORTÃO DE ERRO / GATE]  │
+└────────────────────────────────────────────────────────┘
+```
+
+<div class="box-callout">
+  <h4>Os 4 Elementos Inegociáveis de Todo Passo:</h4>
+  <ol>
+    <li><strong>ENTRADA (Input):</strong> O que exatamente chega na mão deste passo? (Deve ser um dado físico: arquivo, caminho no disco ou parâmetro textual validado).</li>
+    <li><strong>PROCESSAMENTO:</strong> Qual ferramenta executa a transformação? (Se for Balde 1, script de terminal; se for Balde 2, LLM com restrição estrita).</li>
+    <li><strong>PORTÃO DE ERRO (Guardrail / Circuit Breaker):</strong> Como o sistema prova que o passo falhou <em>sem perguntar a opinião da IA</em>? (Ex: o arquivo final não existe? o código de saída é diferente de zero? a linha de texto não tem a tag obrigatória?). Se falhar, o sistema desliga a esteira na hora.</li>
+    <li><strong>SAÍDA (Output):</strong> O que é gerado fisicamente no disco? Esta saída torna-se a entrada imediata do próximo passo.</li>
+  </ol>
+</div>
+
+<hr style="border:0; border-top: 1px solid #e2e8f0; margin: 25px 0;">
+
+<!-- MÓDULO 4 -->
+<h2>MÓDULO 4: O Caso Real Dissecado Passo a Passo (Engenharia Reversa de Vídeo)</h2>
+
+<p>
+Veja agora como os 4 passos da nossa skill <code>aidd-rea-video-youtube</code> aplicam essa ciência na prática:
+</p>
+
+<h3>PASSO 1: A Coleta Física</h3>
+<ul>
+  <li><strong>Input:</strong> Uma URL de vídeo em texto (ex: <code>https://youtube.com/watch?v=123</code>).</li>
+  <li><strong>Processamento:</strong> <code>100% Determinístico</code>. Script Python chama o binário local <code>yt-dlp</code>.</li>
+  <li><strong>Portão de Erro:</strong> Se o download retornar código de erro ou a pasta <code>raw/</code> estiver vazia, o script aborta com <code>sys.exit(1)</code>. A IA nem acorda.</li>
+  <li><strong>Output:</strong> <code>raw/video.mp4</code> e <code>raw/audio.mp3</code> salvos no disco.</li>
+</ul>
+
+<h3>PASSO 2: A Visão e Audição Local</h3>
+<ul>
+  <li><strong>Input:</strong> Os arquivos <code>raw/video.mp4</code> e <code>raw/audio.mp3</code>.</li>
+  <li><strong>Processamento:</strong> <code>100% Determinístico</code>. 
+    1) <code>faster-whisper</code> transcreve a fala com minutagem; 
+    2) <code>ffmpeg</code> tira fotos a cada 10 segundos; 
+    3) <code>Tesseract</code> lê os códigos na tela das imagens.
+  </li>
+  <li><strong>Portão de Erro:</strong> Se <code>transcript.tsv</code> tiver tamanho 0 bytes ou a pasta <code>visual/</code> tiver menos de 3 imagens, a esteira trava.</li>
+  <li><strong>Output:</strong> <code>transcricao/transcript.tsv</code> e imagens em <code>visual/</code>.</li>
+</ul>
+
+<div class="page-break"></div>
+
+<h3>PASSO 3: A Dissecação Técnica da Metodologia</h3>
+<ul>
+  <li><strong>Input:</strong> O texto da transcrição com carimbo de tempo + os textos lidos pelo OCR.</li>
+  <li><strong>Processamento:</strong> <code>Híbrido (LLM sob Coleira de Aço)</code>. A IA é convocada para ler os dados e explicar a metodologia do criador.</li>
+  <li><strong>Portão de Erro (A Barreira Anti-Alucinação):</strong> A IA é <strong>obrigada</strong> a rotular cada conclusão:
+    <ul>
+      <li><code>[OBSERVADO NO FRAME]</code> (vi na imagem X)</li>
+      <li><code>[DITO NO ÁUDIO]</code> (ouvi no minuto mm:ss)</li>
+      <li><code>[DERIVADO]</code> (conclusão lógica direta)</li>
+      <li><code>[DESCONHECIDO REA]</code> (o autor escondeu; proibido inventar!)</li>
+    </ul>
+    <em>Um script Python lê o documento gerado: se houver 1 parágrafo sem evidência, o texto é recusado e apagado na hora.</em>
+  </li>
+  <li><strong>Output:</strong> <code>metodologia.md</code> aprovado e certificado.</li>
+</ul>
+
+<h3>PASSO 4: A Decomposição em Nano-Tickets</h3>
+<ul>
+  <li><strong>Input:</strong> O arquivo auditado <code>metodologia.md</code>.</li>
+  <li><strong>Processamento:</strong> <code>Híbrido</code>. A IA fatia a metodologia em pequenos cartões de trabalho (nano-tickets).</li>
+  <li><strong>Portão de Erro (Regra Zero Mock):</strong> Todo ticket DEVE conter a seção <code>Validation Command</code> apontando para um script de teste real que falhe caso o código não exista. Mocks como <code>echo ok</code> são reprovados.</li>
+  <li><strong>Output:</strong> Fichas <code>tickets/nano-tickets/TK-01.md</code> e o manifesto assinado <code>manifest.json</code>.</li>
+</ul>
+
+<hr style="border:0; border-top: 1px solid #e2e8f0; margin: 25px 0;">
+
+<!-- MÓDULO 5 -->
+<h2>MÓDULO 5: Como Comandar a IA Sem Deixá-la Reinventar a Roda</h2>
+
+<p>
+Use estes dois modelos de prompt prontos para assumir a postura de Diretor de Fábrica:
+</p>
+
+<div class="box-callout">
+  <h4>Prompt Modelo 1: A Consulta de Ferramentas de Prateleira</h4>
+  <p style="font-family:'JetBrains Mono', monospace; font-size:9pt; margin:0;">
+    "Estou desenhando um passo do meu pipeline para realizar: [DESCREVA O QUE QUER FAZER].<br><br>
+    NÃO escreva código novo ainda e NÃO reinvente a roda. Me responda exclusivamente:<br>
+    1. Essa tarefa é do Balde 1 (Determinística) ou do Balde 2 (Probabilística)?<br>
+    2. Quais são as ferramentas de prateleira, utilitários CLI ou bibliotecas consagradas de mercado que resolvem isso?<br>
+    3. Qual é o comando de terminal padrão para executar essa tarefa?"
+  </p>
+</div>
+
+<div class="box-callout">
+  <h4>Prompt Modelo 2: O Alinhamento Pré-Código (O Esboço)</h4>
+  <p style="font-family:'JetBrains Mono', monospace; font-size:9pt; margin:0;">
+    "Vamos desenhar o pipeline de [NOME DO PROJETO].<br>
+    Não gere nenhuma implementação agora.<br>
+    Quero que você monte uma tabela contendo as etapas com 4 colunas:<br>
+    [Etapa] | [Input Físico] | [Ferramenta/Balde] | [Portão de Erro Binário] | [Output Físico].<br>
+    Aguarde minha aprovação antes de propor qualquer script."
+  </p>
+</div>
+
+<div class="page-break"></div>
+
+<!-- MÓDULO 6: CADERNO DE FICHAS IMPRIMÍVEIS -->
+<div style="text-align: center; margin-bottom: 25px;">
+  <div class="cover-badge" style="display:inline-block;">CADERNO DE TRABALHO PRÁTICO</div>
+  <h1 style="margin-top: 10px;">Fichas de Desenho de Pipeline</h1>
+  <p style="color: #64748b; font-size: 10pt;">Imprima estas páginas para rascunhar suas ideias antes de abrir o editor de código.</p>
+</div>
+
+<!-- FICHA 1 -->
+<div class="worksheet-card">
+  <div class="worksheet-header">
+    <div class="worksheet-title">FICHA 1: Diagnóstico e Objetivo Central</div>
+    <div style="font-size: 9pt; color: #64748b;">DATA: ____/____/________</div>
+  </div>
+
+  <div class="fill-row">
+    <div class="fill-label">1. Nome do Pipeline / Ideia:</div>
+    <div class="fill-line"></div>
+  </div>
+
+  <div class="fill-row">
+    <div class="fill-label">2. Qual é o Input Inicial Bruto que o usuário entrega?</div>
+    <div class="fill-line"></div>
+  </div>
+
+  <div class="fill-row">
+    <div class="fill-label">3. Qual é o Produto Final Físico que deve sair pronto no disco?</div>
+    <div class="fill-line"></div>
+  </div>
+
+  <div class="fill-row">
+    <div class="fill-label">4. Critério de Sucesso do Cliente (Como o humano sabe que ficou bom?):</div>
+    <div class="fill-box"></div>
+  </div>
+</div>
+
+<!-- FICHA 2 -->
+<div class="worksheet-card">
+  <div class="worksheet-header">
+    <div class="worksheet-title">FICHA 2: Matriz dos Dois Baldes (Separação Prévia)</div>
+    <div style="font-size: 9pt; color: #64748b;">FILTRAGEM DE RISCO</div>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <div class="fill-label" style="color: #047857;">BALDE 1: O Que é 100% Determinístico? (Script)</div>
+      <div style="font-size:8pt; color:#64748b; margin-bottom:6px;">Downloads, cortes, conversões, pastas, checagens:</div>
+      <div class="fill-line"></div>
+      <div class="fill-line"></div>
+      <div class="fill-line"></div>
+      <div class="fill-line"></div>
+    </div>
+
+    <div>
+      <div class="fill-label" style="color: #1d4ed8;">BALDE 2: O Que Precisa de Julgamento? (LLM)</div>
+      <div style="font-size:8pt; color:#64748b; margin-bottom:6px;">Resumos, roteiros, síntese criativa, tradução:</div>
+      <div class="fill-line"></div>
+      <div class="fill-line"></div>
+      <div class="fill-line"></div>
+      <div class="fill-line"></div>
+    </div>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- FICHA 3 -->
+<div class="worksheet-card">
+  <div class="worksheet-header">
+    <div class="worksheet-title">FICHA 3: Contrato de Caixa-Preta (Para Cada Passo)</div>
+    <div style="font-size: 9pt; color: #0284c7; font-weight:700;">PASSO Nº: [ &nbsp;&nbsp;&nbsp;&nbsp; ]</div>
+  </div>
+
+  <div class="fill-row">
+    <div class="fill-label">Nome da Etapa:</div>
+    <div class="fill-line"></div>
+  </div>
+
+  <div class="fill-row">
+    <div class="fill-label">Classificação da Operação:</div>
+    <div class="checkbox-group">
+      <div class="checkbox-item"><span class="check-square"></span> [Balde 1] 100% Determinístico</div>
+      <div class="checkbox-item"><span class="check-square"></span> [Balde 2] Híbrido com LLM</div>
+    </div>
+  </div>
+
+  <div class="fill-row">
+    <div class="fill-label">1. ENTRADA (Input Físico que este passo recebe):</div>
+    <div class="fill-line"></div>
+  </div>
+
+  <div class="fill-row">
+    <div class="fill-label">2. PROCESSAMENTO (Qual ferramenta de mercado ou script executa?):</div>
+    <div class="fill-line"></div>
+  </div>
+
+  <div class="fill-row">
+    <div class="fill-label">3. PORTÃO DE ERRO (Como testar se deu erro sem perguntar para a IA?):</div>
+    <div class="fill-box" style="height: 50px;"></div>
+  </div>
+
+  <div class="fill-row">
+    <div class="fill-label">4. SAÍDA (Output Físico gerado no disco para o próximo passo):</div>
+    <div class="fill-line"></div>
+  </div>
+</div>
+
+<!-- CÓPIA DA FICHA 3 PARA OUTRO PASSO -->
+<div class="worksheet-card">
+  <div class="worksheet-header">
+    <div class="worksheet-title">FICHA 3: Contrato de Caixa-Preta (Para Cada Passo)</div>
+    <div style="font-size: 9pt; color: #0284c7; font-weight:700;">PASSO Nº: [ &nbsp;&nbsp;&nbsp;&nbsp; ]</div>
+  </div>
+
+  <div class="fill-row">
+    <div class="fill-label">Nome da Etapa:</div>
+    <div class="fill-line"></div>
+  </div>
+
+  <div class="fill-row">
+    <div class="fill-label">Classificação da Operação:</div>
+    <div class="checkbox-group">
+      <div class="checkbox-item"><span class="check-square"></span> [Balde 1] 100% Determinístico</div>
+      <div class="checkbox-item"><span class="check-square"></span> [Balde 2] Híbrido com LLM</div>
+    </div>
+  </div>
+
+  <div class="fill-row">
+    <div class="fill-label">1. ENTRADA (Input Físico que este passo recebe):</div>
+    <div class="fill-line"></div>
+  </div>
+
+  <div class="fill-row">
+    <div class="fill-label">2. PROCESSAMENTO (Qual ferramenta de mercado ou script executa?):</div>
+    <div class="fill-line"></div>
+  </div>
+
+  <div class="fill-row">
+    <div class="fill-label">3. PORTÃO DE ERRO (Como testar se deu erro sem perguntar para a IA?):</div>
+    <div class="fill-box" style="height: 50px;"></div>
+  </div>
+
+  <div class="fill-row">
+    <div class="fill-label">4. SAÍDA (Output Físico gerado no disco para o próximo passo):</div>
+    <div class="fill-line"></div>
+  </div>
+</div>
+
+</body>
+</html>
+"""
+
+def generate_pdf():
+    docs_dir = Path("docs")
+    docs_dir.mkdir(parents=True, exist_ok=True)
+    
+    html_path = docs_dir / "manual_arquiteto_pipelines.html"
+    pdf_path = docs_dir / "Manual_do_Arquiteto_de_Pipelines.pdf"
+    
+    html_path.write_text(HTML_CONTENT, encoding="utf-8")
+    print(f"[+] HTML salvo em: {html_path.resolve()}")
+    
+    with sync_playwright() as p:
+        browser = p.chromium.launch()
+        page = browser.new_page()
+        page.goto(html_path.resolve().as_uri(), wait_until="networkidle")
+        page.pdf(
+            path=str(pdf_path.resolve()),
+            format="A4",
+            print_background=True,
+            margin={"top": "15mm", "bottom": "15mm", "left": "15mm", "right": "15mm"}
+        )
+        browser.close()
+        
+    print(f"[OK] PDF gerado com sucesso em: {pdf_path.resolve()}")
+
+if __name__ == "__main__":
+    generate_pdf()
