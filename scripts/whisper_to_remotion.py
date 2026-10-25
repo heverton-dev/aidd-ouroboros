@@ -13,17 +13,24 @@ import sys
 from typing import Any, Dict, List
 
 
-def parse_timestamp_to_seconds(raw_val: str) -> float:
+def parse_timestamp_to_seconds(raw_val: str, units: str = "ms") -> float:
     """Converte string de timestamp (ms ou s) em float de segundos."""
     val = float(raw_val.strip())
-    # Heurística: se for maior que 1000 e inteiro provável, é ms do faster-whisper TSV
-    if val > 1000.0:
+    u = units.strip().lower()
+    if u == "ms":
         return val / 1000.0
-    return val
+    elif u == "s":
+        return val
+    elif u == "auto":
+        if val > 1000.0:
+            return val / 1000.0
+        return val
+    else:
+        raise ValueError(f"Unidade inválida: {units}. Escolha entre 'ms', 's' ou 'auto'.")
 
 
 def convert_whisper_tsv_to_remotion_props(
-    tsv_path: Path, fps: int = 60
+    tsv_path: Path, fps: int = 60, units: str = "ms"
 ) -> Dict[str, Any]:
     """Lê TSV do Whisper e gera objeto de propriedades para a timeline do Remotion."""
     tsv_path = Path(tsv_path)
@@ -40,6 +47,7 @@ def convert_whisper_tsv_to_remotion_props(
         start_col = 0
         end_col = 1
         text_col = 2
+        line_num = 1 if header else 0
 
         if header:
             for idx, col in enumerate(header):
@@ -52,34 +60,38 @@ def convert_whisper_tsv_to_remotion_props(
                     text_col = idx
 
         for row_idx, row in enumerate(reader):
+            line_num += 1
             if not row or len(row) <= max(start_col, end_col):
                 continue
 
             try:
-                start_sec = parse_timestamp_to_seconds(row[start_col])
-                end_sec = parse_timestamp_to_seconds(row[end_col])
-                text = row[text_col].strip() if len(row) > text_col else ""
-
-                start_frame = int(round(start_sec * fps))
-                end_frame = int(round(end_sec * fps))
-                duration = max(1, end_frame - start_frame)
-
-                if end_frame > max_frame:
-                    max_frame = end_frame
-
-                events.append(
-                    {
-                        "id": f"ev-{row_idx:03d}",
-                        "text": text,
-                        "startSeconds": round(start_sec, 3),
-                        "endSeconds": round(end_sec, 3),
-                        "startFrame": start_frame,
-                        "endFrame": end_frame,
-                        "durationInFrames": duration,
-                    }
-                )
-            except ValueError:
+                start_sec = parse_timestamp_to_seconds(row[start_col], units=units)
+                end_sec = parse_timestamp_to_seconds(row[end_col], units=units)
+            except (ValueError, TypeError):
                 continue
+
+            if end_sec < start_sec:
+                raise ValueError(f"Linha {line_num}: end ({end_sec}) < start ({start_sec})")
+
+            text = row[text_col].strip() if len(row) > text_col else ""
+            start_frame = int(round(start_sec * fps))
+            end_frame = int(round(end_sec * fps))
+            duration = max(1, end_frame - start_frame)
+
+            if end_frame > max_frame:
+                max_frame = end_frame
+
+            events.append(
+                {
+                    "id": f"ev-{row_idx:03d}",
+                    "text": text,
+                    "startSeconds": round(start_sec, 3),
+                    "endSeconds": round(end_sec, 3),
+                    "startFrame": start_frame,
+                    "endFrame": end_frame,
+                    "durationInFrames": duration,
+                }
+            )
 
     return {
         "fps": fps,
@@ -112,17 +124,26 @@ def main():
         default=60,
         help="Framerate do vídeo alvo (padrão: 60).",
     )
+    parser.add_argument(
+        "--units",
+        choices=["ms", "s", "auto"],
+        default="ms",
+        help="Unidade dos timestamps no TSV (ms, s, auto). Padrão: ms.",
+    )
 
     args = parser.parse_args()
 
     try:
-        props = convert_whisper_tsv_to_remotion_props(args.input, fps=args.fps)
+        props = convert_whisper_tsv_to_remotion_props(
+            args.input, fps=args.fps, units=args.units
+        )
         args.output.parent.mkdir(parents=True, exist_ok=True)
         with open(args.output, "w", encoding="utf-8") as f:
             json.dump(props, f, indent=2, ensure_ascii=False)
         print(f"[OK] Gerado {args.output} com {len(props['events'])} eventos ({props['totalDurationInFrames']} frames @ {args.fps}fps)")
     except Exception as e:
         print(f"[ERRO] Falha na conversão: {e}", file=sys.stderr)
+        sys.exit(1)
         sys.exit(1)
 
 

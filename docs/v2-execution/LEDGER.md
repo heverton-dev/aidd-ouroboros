@@ -246,4 +246,23 @@
   1. *Teste GREEN:* \python -m pytest -q tests/test_storycraft_contract.py\ -> 5 passed in 0.36s (exit 0).
   2. *Gate GREEN:* \python motores/governanca/gate_ast.py aidd-skills/aidd-craft-story-ptbr/scripts/dark_storycraft.py\ -> 0 violações, 100% sintaxe e zero stubs (exit 0).
 - **Contagem Regressiva:** 4 tickets restantes (NT-12, NT-14, NT-15, NT-16).
-- **Commit:** \49b8dc
+- **Commit:** 9ff8456
+
+### NT-12: Whisper to Remotion Units Flag e Strict Temporal Validation
+- **Status:** DONE
+- **Data:** 2026-10-25
+- **Escopo:** `scripts/whisper_to_remotion.py`, `tests/test_whisper_units.py`, `tests/test_whisper_to_remotion.py` e `docs/v2-execution/LEDGER.md`.
+- **Plano:**
+  1. Adicionar flag `--units {ms,s,auto}` em `scripts/whisper_to_remotion.py` com valor padrão `ms`.
+  2. Implementar função determinística `parse_timestamp_to_seconds(raw_val, units)` com suporte a conversão explícita para segundos e detecção heurística segura em módo `auto`.
+  3. Adicionar validação temporal estrita garantindo que timestamps não sejam invertidos (`end >= start`), levantando `ValueError` indicando o número da linha no TSV.
+  4. Manter compatibilidade com pipelines existentes (`tests/test_whisper_to_remotion.py`) e cobrir novos cenários unitários em `tests/test_whisper_units.py`.
+  5. Validar suite de testes e Quality Gate AST anti-stubs (exit 0).
+- **Red-Before-Green Evidence:**
+  1. *Teste RED:* `test_whisper_units.py` falhou inicialmente com `NameError: name 'parse_timestamp_to_seconds' is not defined` e `unrecognized arguments: --units`.
+  2. *Gate RED:* N/A (coédigo validado antes de commit).
+- **Green Verification Evidence:**
+  1. *Teste GREEN:* `python -m pytest -q tests/test_whisper_units.py tests/test_whisper_to_remotion.py` -> 7 passed in 0.33s (exit 0).
+  2. *Gate GREEN:* `python motores/governanca/gate_ast.py scripts/whisper_to_remotion.py` -> 0 violações, 100% sintaxe valida e zero stubs (exit 0).
+- **Contagem Regressiva:** 3 tickets restantes (NT-14, NT-15, NT-16).
+- **Commit:** e35eaed
