@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "StoryCraftTemplate",
+  "type": "object",
+  "required": ["hook", "retention_nodes", "climax", "cta"],
+  "properties": {
+    "hook": {
+      "type": "object",
+      "required": ["text", "visual_cue", "duration_sec"],
+      "properties": {
+        "text": { "type": "string" },
+        "visual_cue": { "type": "string" },
+        "duration_sec": { "type": "number", "minimum": 1 }
+      }
+    },
+    "retention_nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["beat", "narration", "pacing"],
+        "properties": {
+          "beat": { "type": "integer" },
+          "narration": { "type": "string" },
+          "pacing": { "type": "string", "enum": ["slow", "normal", "fast"] }
+        }
+      }
+    },
+    "climax": { "type": "string" },
+    "cta": { "type": "string" }
+  }
+}
