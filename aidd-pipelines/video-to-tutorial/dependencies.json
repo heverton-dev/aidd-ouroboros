@@ -1,0 +1,10 @@
+{
+  "pipeline": "video-to-tutorial",
+  "version": "1.0.0",
+  "description": "Pipeline de engenharia reversa de vídeo para tutorial técnico",
+  "dependencies": [
+    "aidd-rea-video-youtube",
+    "aidd-craft-story-ptbr",
+    "aidd-materialize-tutorial-stitch"
+  ]
+}

@@ -327,4 +327,54 @@
   2. *Gate GREEN:* `python motores/governanca/gate_ast.py motores/governanca/audit_runner.py` -> 0 violações, 100% sintaxe válida e zero stubs (exit 0).
 - **Contagem Regressiva:** 0 tickets restantes (16/16 concluídos - 100%).
 - **Commit:** `40f2767`
+### NT-17: Suprimento de Templates Canônicos em Skills REA Legadas
+- **Status:** DONE
+- **Data:** 2026-10-25
+- **Escopo:** `aidd-skills/aidd-rea-app-android/templates/apk_extract_template.json`, `aidd-skills/aidd-rea-router/templates/router_dispatch_template.json`, `aidd-skills/aidd-rea-social-carousel/templates/carousel_tokens_template.json`, `aidd-skills/aidd-rea-web-saas/templates/web_saas_tokens_template.json`.
+- **Plano:**
+  1. Suprir pastas `templates/` com arquivos JSON canônicos e tipados para eliminar a violação de "pasta vazia" em skills REA (`gate_factory_completeness.py:70`).
+  2. Implementar schema de extração APK para Android (`apk_extract_template.json`).
+  3. Implementar schema de despacho e roteamento para o router REA (`router_dispatch_template.json`).
+  4. Implementar tokens de layout, tipografia e cores para extração de carrossel social (`carousel_tokens_template.json`).
+  5. Implementar tokens de design system, rotas e componentes para web SaaS (`web_saas_tokens_template.json`).
+- **Green Verification Evidence:**
+  1. *Circuit Breaker:* 4 violações de templates vazios em skills REA eliminadas.
+- **Commit:** `54be531`
 
+### NT-18: Suprimento de Templates Canônicos em Skills Narrativas e Audiovisuais Legadas
+- **Status:** DONE
+- **Data:** 2026-10-25
+- **Escopo:** `aidd-skills/aidd-craft-story-ptbr/templates/roteiro_story_template.json`, `aidd-skills/aidd-materialize-video-synth/templates/synth_composition_template.json`.
+- **Plano:**
+  1. Suprir `templates/` da skill `aidd-craft-story-ptbr` com template estruturado de roteiro dramático, ganchos e CTA em PT-BR.
+  2. Suprir `templates/` da skill `aidd-materialize-video-synth` com template de composição Remotion/audiovisual sintética com trilha, locução e assets.
+- **Green Verification Evidence:**
+  1. *Circuit Breaker:* 2 violações de templates vazios em skills narrativas/audiovisuais eliminadas.
+- **Commit:** `0800241`
+
+### NT-19: Suprimento de Referências e Templates em Skills de Orquestração Legadas
+- **Status:** DONE
+- **Data:** 2026-10-25
+- **Escopo:** `aidd-skills/aidd-orchestrate-pipeline-creator/references/pipeline_dag_spec.md`, `aidd-skills/aidd-orchestrate-session-sync/references/session_sync_spec.md`, `aidd-skills/aidd-orchestrate-session-sync/templates/session_envelope_template.json`.
+- **Plano:**
+  1. Suprir `references/` da skill `aidd-orchestrate-pipeline-creator` com especificação completa de topologia de DAG acíclico, validação de nós e handoffs HMAC-SHA256.
+  2. Suprir `references/` da skill `aidd-orchestrate-session-sync` com especificação técnica do protocolo de sincronização e replay factual de sessão.
+  3. Suprir `templates/` da skill `aidd-orchestrate-session-sync` com schema JSON para envelopes e turnos de telemetria.
+- **Green Verification Evidence:**
+  1. *Circuit Breaker:* 3 violações de diretórios vazios em skills de orquestração eliminadas.
+- **Commit:** `4d49be8`
+
+### NT-20: Suprimento de Metadados e Anatomia Canônica de Pipelines Legados (Zero Anomia)
+- **Status:** DONE
+- **Data:** 2026-10-25
+- **Escopo:** `aidd-skills/aidd-materialize-tutorial-stitch/RULES.md`, `aidd-skills/aidd-materialize-tutorial-stitch/LICENSE`, `aidd-pipelines/video-to-tutorial/RULES.md`, `aidd-pipelines/video-to-tutorial/dependencies.json`, `aidd-pipelines/video-to-tutorial/LICENSE`.
+- **Plano:**
+  1. Criar `RULES.md` e `LICENSE` canônicos para `aidd-skills/aidd-materialize-tutorial-stitch`.
+  2. Criar `RULES.md`, `dependencies.json` e `LICENSE` canônicos para `aidd-pipelines/video-to-tutorial`.
+  3. Executar o Circuit Breaker de Fábrica (`gate_factory_completeness.py`) isolado para certificar 0 erros.
+  4. Executar Auditoria Universal Completa (`python ouroboros.py --audit`) sem nenhuma flag de bypass (`--skip-circuit-breaker`), atestando aprovação de 100% dos 5 Quality Gates em exit code 0.
+- **Green Verification Evidence:**
+  1. *Circuit Breaker:* `executar_circuit_breaker(Path('.'))` retornou `OK: True` com 0 erros (14/14 anomias resolvidas).
+  2. *Auditoria Universal:* `python ouroboros.py --audit` executou todos os 5 gates com Exit Code 0 em 85.32s.
+- **Contagem Regressiva:** 0 pendências legadas. Todas as 20 metas do plano Ouroboros v2 concluídas com sucesso.
+- **Commit:** `e0de4c1`
