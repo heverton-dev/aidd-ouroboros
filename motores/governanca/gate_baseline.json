@@ -1,0 +1,66 @@
+{
+  "aidd-pipelines/canal-dark-avatar/run_pipeline.py": [
+    "SILENT_EXCEPT_PASS:198"
+  ],
+  "aidd-pipelines/video-to-tutorial/run_pipeline.py": [
+    "SILENT_EXCEPT_PASS:198"
+  ],
+  "aidd-skills/aidd-craft-story-ptbr/scripts/dark_storycraft.py": [
+    "SILENT_EXCEPT_PASS:46"
+  ],
+  "aidd-skills/aidd-materialize-tutorial-stitch/scripts/tutorial.py": [
+    "SILENT_EXCEPT_PASS:3668",
+    "SILENT_EXCEPT_PASS:68",
+    "SILENT_EXCEPT_PASS:788",
+    "SILENT_EXCEPT_PASS:790"
+  ],
+  "aidd-skills/aidd-materialize-video-synth/scripts/video_materializer.py": [
+    "SILENT_EXCEPT_PASS:263"
+  ],
+  "aidd-skills/aidd-motion-remotion-core/scripts/remotion_motion.py": [
+    "FAKE_VERIFIER:12"
+  ],
+  "aidd-skills/aidd-orchestrate-pipeline-creator/scripts/pipeline_creator.py": [
+    "SILENT_EXCEPT_PASS:180",
+    "SILENT_EXCEPT_PASS:790",
+    "SILENT_EXCEPT_PASS:804"
+  ],
+  "aidd-skills/aidd-orchestrate-pipeline-creator/templates/RUN_PIPELINE_TEMPLATE.py": [
+    "SILENT_EXCEPT_PASS:198"
+  ],
+  "aidd-skills/aidd-orchestrate-session-sync/scripts/session_sync.py": [
+    "SILENT_EXCEPT_PASS:178",
+    "SILENT_EXCEPT_PASS:230",
+    "SILENT_EXCEPT_PASS:375",
+    "SILENT_EXCEPT_PASS:464",
+    "SILENT_EXCEPT_PASS:755",
+    "SILENT_EXCEPT_PASS:774",
+    "SILENT_EXCEPT_PASS:842",
+    "SILENT_EXCEPT_PASS:89"
+  ],
+  "aidd-skills/aidd-orchestrate-skill-creator/scripts/skill_creator.py": [
+    "SILENT_EXCEPT_PASS:596",
+    "SILENT_EXCEPT_PASS:830"
+  ],
+  "aidd-skills/aidd-rea-app-android/scripts/app_reengineer.py": [
+    "SILENT_EXCEPT_PASS:198"
+  ],
+  "aidd-skills/aidd-rea-social-carousel/scripts/social_reengineer.py": [
+    "SILENT_EXCEPT_PASS:172"
+  ],
+  "motores/governanca/gate_ast.py": [
+    "SILENT_EXCEPT_PASS:254"
+  ],
+  "tests/gates/fixtures/bad_except_pass.py": [
+    "SILENT_EXCEPT_PASS:4"
+  ],
+  "tests/gates/fixtures/bad_fake_doctor.py": [
+    "FAKE_VERIFIER:1"
+  ],
+  "tests/gates/fixtures/bad_pass_body.py": [
+    "STUB_PASS:1"
+  ],
+  "tests/gates/fixtures/bad_todo_comment.py": [
+    "FORBIDDEN_COMMENT:2"
+  ]
+}

@@ -75,3 +75,23 @@
   - *Full Suite Regression:* 107 passed in 40.65s (`pytest -q --ignore=tests/negative --ignore=tests/negative-brand`) (exit 0).
 - **Contagem Regressiva:** 13 tickets restantes.
 - **Commit:** `3b602a7`
+
+### NT-07: AST Quality Gate v2 (Detecção Silenciosa de Pass e Baseline Decrescente)
+- **Status:** DONE
+- **Escopo:** `motores/governanca/gate_ast.py`, `motores/governanca/gate_baseline.json`, `tests/gates/fixtures/*`, `tests/test_gate_ast.py`.
+- **Plano:**
+  1. Criar fixtures `tests/gates/fixtures/{bad_pass_body.py, bad_except_pass.py, bad_todo_comment.py, bad_fake_doctor.py, good_real.py}` e suite de teste `tests/test_gate_ast.py`.
+  2. Executar teste e comprovar RED (`AssertionError: ModuleNotFoundError / falta de visitors específicos de silent pass e baseline`).
+  3. Implementar `AntiStubVisitor`, `ExceptPassVisitor`, `FakeVerifierVisitor`, checagem de tokens proibidos e suporte a baseline regressiva com `--baseline` e `--generate-baseline`.
+  4. Gerar baseline canônica com 30 dívidas técnicas históricas em `gate_baseline.json`.
+  5. Validar testes unitários (6 passed) e suíte combinada de governança fractal (9 passed).
+  6. Rodar regressão completa (113 passed) e gate do `ouroboros.py --audit`.
+- **Red-Before-Green Evidence:**
+  - *Teste RED:* `python -m pytest -q tests/test_gate_ast.py` falhou inicialmente com faltas de visitors e classes de baseline.
+  - *Gate RED:* Fixtures com stubs intencionais e passes silenciosos foram detectadas como violações.
+- **Green Verification Evidence:**
+  - *Teste GREEN:* `python -m pytest -q tests/test_gate_ast.py tests/test_governanca_fractal.py` -> 9 passed in 0.96s (exit 0).
+  - *Gate GREEN:* `python ouroboros.py --audit` -> `[1/5] Executando Quality Gate de AST e Zero-Stubs... [OK] 68 arquivos Python validados com 100% de sintaxe e zero stubs`.
+  - *Full Suite Regression:* 113 passed in 40.21s (`pytest -q --ignore=tests/negative --ignore=tests/negative-brand`) (exit 0).
+- **Contagem Regressiva:** 12 tickets restantes.
+- **Commit:** `2c713c6`
