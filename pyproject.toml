@@ -15,3 +15,9 @@ dependencies = [
     "pydantic>=2.0.0",
     "requests>=2.31.0"
 ]
+
+[tool.pytest.ini_options]
+markers = [
+    "e2e: End-to-end pipeline integration tests with real fixtures",
+    "integration: Integration tests"
+]

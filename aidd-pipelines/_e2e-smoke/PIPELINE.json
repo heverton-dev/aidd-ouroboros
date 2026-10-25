@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0",
+  "id": "pipeline-e2e-smoke",
+  "name": "E2E Smoke Test Pipeline",
+  "description": "Pipeline E2E real conectando aidd-rea-router a aidd-rea-app-android",
+  "nodes": [
+    {
+      "id": "node-01-router",
+      "skill": "aidd-rea-router",
+      "input": "tests/fixtures/sample_app.apk",
+      "output_handoff": "handoff.json"
+    },
+    {
+      "id": "node-02-app",
+      "skill": "aidd-rea-app-android",
+      "depends_on": ["node-01-router"],
+      "input_handoff": "node-01-router",
+      "output_handoff": "handoff.json"
+    }
+  ]
+}

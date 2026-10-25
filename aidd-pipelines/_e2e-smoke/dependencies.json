@@ -1,0 +1,6 @@
+{
+  "dependencies": [],
+  "dev_dependencies": [
+    "pytest"
+  ]
+}

@@ -314,6 +314,43 @@ def verificar_envelope_handoff(
     return False, motivo
 
 
+def verify_handoff(
+    envelope_ou_path: Any,
+    chave: Optional[str] = None,
+    verificar_integridade_disco: bool = True,
+    **kwargs: Any
+) -> bool:
+    """
+    Função canônica para verificação booleana estrita de integridade e assinatura de handoff.
+    """
+    valido, _, _ = abrir(
+        envelope_ou_path,
+        chave=chave,
+        verificar_disco=verificar_integridade_disco,
+        **kwargs
+    )
+    return bool(valido)
+
+
+def selar_handoff(
+    dados: Dict[str, Any],
+    chave: Optional[str] = None,
+    destino: Optional[Path | str] = None,
+    key_id: str = "ouroboros-v2"
+) -> Dict[str, Any]:
+    """
+    Função de conveniência canônica para selar envelope de handoff e opcionalmente persistir em disco.
+    """
+    envelope = selar(dados, chave=chave, key_id=key_id)
+    if destino:
+        p = Path(destino)
+        p.parent.mkdir(parents=True, exist_ok=True)
+        with open(p, "w", encoding="utf-8") as f:
+            json.dump(envelope, f, indent=2, ensure_ascii=False)
+    return envelope
+
+
+
 def main():
     parser = argparse.ArgumentParser(description="Utilitário CLI de Integridade HMAC-SHA256 e Pointer Passing")
     subparsers = parser.add_subparsers(dest="command")

@@ -174,4 +174,23 @@
 - **Contagem Regressiva:** 8 tickets restantes.
 - **Commit:** `8a695f2`
 
-
+### NT-08: Teste E2E de Pipeline Real Conectando Skills Reais (C-06)
+- **Status:** DONE
+- **Escopo:** `tests/fixtures/sample_app.apk`, `aidd-pipelines/_e2e-smoke/PIPELINE.json`, `aidd-pipelines/_e2e-smoke/run_pipeline.py`, `aidd-pipelines/_e2e-smoke/AGENTS.md`, `aidd-pipelines/_e2e-smoke/RULES.md`, `aidd-pipelines/_e2e-smoke/dependencies.json`, `aidd-pipelines/_e2e-smoke/LICENSE`, `aidd-pipelines/_e2e-smoke/state.json`, `motores/governanca/handoff_crypto.py`, `pyproject.toml`, `tests/e2e/test_pipeline_real.py`.
+- **Plano:**
+  1. Criar fixture real `tests/fixtures/sample_app.apk` contendo `AndroidManifest.xml` binário/zip válido com permissões reais (`INTERNET`, `ACCESS_FINE_LOCATION`).
+  2. Implementar topologia de pipeline `aidd-pipelines/_e2e-smoke/PIPELINE.json` encadeando `aidd-rea-router` -> `aidd-rea-app-android`.
+  3. Implementar runner `aidd-pipelines/_e2e-smoke/run_pipeline.py` com selagem HMAC-SHA256 e gravação de estado `state.json`.
+  4. Adicionar utilitários criptográficos `selar_handoff` e `verify_handoff` em `motores/governanca/handoff_crypto.py`.
+  5. Registrar marcador `e2e` em `pyproject.toml`.
+  6. Implementar `tests/e2e/test_pipeline_real.py` validando as 4 asserções obrigatórias (exit 0, state.json COMPLETED, HMAC íntegro, permissões reais sem dados inventados).
+  7. Garantir conformidade com governança fractal (`AGENTS.md` < 400 palavras e anatomia enterprise).
+- **Red-Before-Green Evidence:**
+  - *Teste RED:* Marcador `e2e` inexistente e funções `verify_handoff` e `selar_handoff` ausentes (`ImportError`).
+  - *Gate RED:* Governança AGENTS.md apontando ausência de `AGENTS.md` em `_e2e-smoke`.
+- **Green Verification Evidence:**
+  - *Teste GREEN:* `$env:AIDD_HANDOFF_KEY="test"; python -m pytest -q -m e2e tests/e2e` -> 1 passed in 0.58s (exit 0).
+  - *Gate GREEN:* `python motores/governanca/gate_ast.py` -> 26 <= 30 baseline (exit 0).
+  - *Governança AGENTS.md:* 100% de conformidade com todos os módulos possuindo AGENTS.md compacto (< 450 palavras).
+- **Contagem Regressiva:** 7 tickets restantes.
+- **Commit:** `01f440c`
