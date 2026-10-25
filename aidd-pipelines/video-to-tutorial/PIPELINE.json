@@ -6,7 +6,7 @@
   "nodes": [
     {
       "id": "node-01-ingest",
-      "skill": "aidd-video-reengineer",
+      "skill": "aidd-rea-video-youtube",
       "description": "Extração de evidências e análise de entrada",
       "depends_on": [],
       "input_handoff": "context/input/source_input.json",
@@ -14,7 +14,7 @@
     },
     {
       "id": "node-02-creator",
-      "skill": "aidd-skill-creator",
+      "skill": "aidd-orchestrate-skill-creator",
       "description": "Geração da skill hiper-especializada do domínio",
       "depends_on": [
         "node-01-ingest"
@@ -24,7 +24,7 @@
     },
     {
       "id": "node-03-executor",
-      "skill": "aidd-remotion-motion",
+      "skill": "aidd-motion-remotion-core",
       "description": "Execução da entrega procedimental em código",
       "depends_on": [
         "node-02-creator"

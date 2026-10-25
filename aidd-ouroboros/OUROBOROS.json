@@ -8,7 +8,7 @@
     {
       "id": "macro-01-ingestion-rea",
       "name": "Desconstrucao e Engenharia Reversa",
-      "skill": "aidd-video-reengineer",
+      "skill": "aidd-rea-video-youtube",
       "lobulo": "esquerdo",
       "input_contract": "polymorphic-source",
       "output_contract": "HANDOFF.json"
@@ -16,7 +16,7 @@
     {
       "id": "macro-02-synthesis-storycraft",
       "name": "Transcriacao e Modelagem de Dominio",
-      "skill": "aidd-dark-storycraft",
+      "skill": "aidd-craft-story-ptbr",
       "lobulo": "centro",
       "input_contract": "HANDOFF.json",
       "output_contract": "01_roteiro_ptbr.json"
@@ -24,7 +24,7 @@
     {
       "id": "macro-03-swarm-and-scaffold",
       "name": "Orquestracao e Fabrica de Blocos",
-      "skill": "aidd-skill-swarm",
+      "skill": "aidd-orchestrate-pipeline-creator",
       "lobulo": "direito",
       "input_contract": "01_roteiro_ptbr.json",
       "output_contract": "PIPELINE.json"
@@ -32,7 +32,7 @@
     {
       "id": "macro-04-materialization-feedback",
       "name": "Materializacao e Retroalimentacao",
-      "skill": "aidd-video-materializer",
+      "skill": "aidd-materialize-video-synth",
       "lobulo": "direito",
       "input_contract": "PIPELINE.json",
       "output_contract": "final_delivery_handoff.json"

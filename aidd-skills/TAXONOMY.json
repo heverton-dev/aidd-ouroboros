@@ -262,5 +262,14 @@
         "aidd-orchestrate-pipeline-creator"
       ]
     }
+  },
+  "aliases": {
+    "aidd-video-reengineer": "aidd-rea-video-youtube",
+    "aidd-skill-creator": "aidd-orchestrate-skill-creator",
+    "aidd-pipeline-creator": "aidd-orchestrate-pipeline-creator",
+    "aidd-remotion-motion": "aidd-motion-remotion-core",
+    "aidd-dark-storycraft": "aidd-craft-story-ptbr",
+    "aidd-video-materializer": "aidd-materialize-video-synth",
+    "aidd-tutorial-creator": "aidd-materialize-tutorial-stitch"
   }
 }

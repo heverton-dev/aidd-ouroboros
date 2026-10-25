@@ -95,3 +95,22 @@
   - *Full Suite Regression:* 113 passed in 40.21s (`pytest -q --ignore=tests/negative --ignore=tests/negative-brand`) (exit 0).
 - **Contagem Regressiva:** 12 tickets restantes.
 - **Commit:** `2c713c6`
+
+### NT-04: Nomes Canônicos em Pipelines e Fábrica (C-01)
+- **Status:** DONE
+- **Escopo:** `aidd-skills/TAXONOMY.json`, `aidd-pipelines/canal-dark-avatar/PIPELINE.json`, `aidd-pipelines/video-to-tutorial/PIPELINE.json`, `aidd-skills/aidd-orchestrate-pipeline-creator/scripts/pipeline_creator.py`, `aidd-ouroboros/dependencies.json`, `aidd-ouroboros/OUROBOROS.json`, `motores/governanca/taxonomy.py`, `tests/test_canonical_names.py`.
+- **Plano:**
+  1. Criar teste `tests/test_canonical_names.py` validando canonicidade dos nós dos pipelines, ausência de literais obsoletos em `pipeline_creator.py`, mapa de aliases em `TAXONOMY.json` e resolução com fail-closed/warning.
+  2. Executar teste e comprovar RED.
+  3. Mapear aliases legados em `TAXONOMY.json` e implementar resolvedor canônico em `motores/governanca/taxonomy.py`.
+  4. Atualizar pipelines, `pipeline_creator.py`, `dependencies.json` e `OUROBOROS.json` para os nomes canônicos das 12 skills.
+  5. Validar testes unitários (4 passed), binary gate inline (exit 0) e regressão completa (117 passed).
+- **Red-Before-Green Evidence:**
+  - *Teste RED:* `test_all_pipeline_nodes_use_canonical_skill_names` falhou apontando 5 skills legadas (`aidd-video-reengineer`, `aidd-dark-storycraft`, etc.); `test_pipeline_creator_uses_canonical_names` falhou encontrando strings legadas no código gerador.
+  - *Gate RED:* Binary gate inline retornou lista com violadores em `PIPELINE.json` e `pipeline_creator.py`.
+- **Green Verification Evidence:**
+  - *Teste GREEN:* `python -m pytest tests/test_canonical_names.py -v` -> 4 passed in 0.30s (exit 0).
+  - *Gate GREEN:* Binary gate inline exit 0 (0 violadores em pipelines e scripts geradores).
+  - *Full Suite Regression:* 117 passed in 41.19s (`pytest -q --ignore=tests/negative --ignore=tests/negative-brand`) (exit 0).
+- **Contagem Regressiva:** 11 tickets restantes.
+- **Commit:** `pending`

@@ -6,7 +6,7 @@
   "nodes": [
     {
       "id": "node-01-storycraft",
-      "skill": "aidd-dark-storycraft",
+      "skill": "aidd-craft-story-ptbr",
       "description": "Transcriação cultural em PT-BR baseada no hook e ritmo de Keera",
       "depends_on": [],
       "input_handoff": "context/input/upstream_handoff.json",
@@ -14,7 +14,7 @@
     },
     {
       "id": "node-02-remotion-motion",
-      "skill": "aidd-remotion-motion",
+      "skill": "aidd-motion-remotion-core",
       "description": "Geração procedural dos cards e diagramas conceituais com física de molas (60fps)",
       "depends_on": [
         "node-01-storycraft"
@@ -24,7 +24,7 @@
     },
     {
       "id": "node-03-hybrid-stitch",
-      "skill": "aidd-video-materializer",
+      "skill": "aidd-materialize-video-synth",
       "description": "Síntese de voz neural em PT-BR, renderização Remotion 60fps e composição FFmpeg do MP4 final",
       "depends_on": [
         "node-02-remotion-motion"

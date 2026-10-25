@@ -362,7 +362,7 @@ def scaffold_autonomous_pipeline(
     default_nodes = [
         {
             "id": "node-01-ingest",
-            "skill": "aidd-video-reengineer",
+            "skill": "aidd-rea-video-youtube",
             "description": "Extracao de evidencias e analise de entrada",
             "depends_on": [],
             "input_handoff": "context/input/pipeline_input.json",
@@ -370,7 +370,7 @@ def scaffold_autonomous_pipeline(
         },
         {
             "id": "node-02-creator",
-            "skill": "aidd-skill-creator",
+            "skill": "aidd-orchestrate-skill-creator",
             "description": "Geracao da skill hiper-especializada do dominio",
             "depends_on": ["node-01-ingest"],
             "input_handoff": "context/handoffs/01_evidence_handoff.json",
@@ -378,7 +378,7 @@ def scaffold_autonomous_pipeline(
         },
         {
             "id": "node-03-executor",
-            "skill": "aidd-remotion-motion",
+            "skill": "aidd-motion-remotion-core",
             "description": "Execucao da entrega procedimental em codigo",
             "depends_on": ["node-02-creator"],
             "input_handoff": "context/handoffs/02_skill_handoff.json",
@@ -663,21 +663,21 @@ def plan_swarm_pipeline(input_source_str: str, output_plan: Path | None = None) 
             {
                 "id": "ETAPA-01-DISCOVERY",
                 "role": "Mapeamento e Ingestao de Dados",
-                "skill": "aidd-video-reengineer",
+                "skill": "aidd-rea-video-youtube",
                 "status": "AVAILABLE_IN_INVENTORY",
                 "blocked_by": []
             },
             {
                 "id": "ETAPA-02-CREATOR",
                 "role": "Geracao de Modulos Especificos",
-                "skill": "aidd-skill-creator",
+                "skill": "aidd-orchestrate-skill-creator",
                 "status": "AVAILABLE_IN_INVENTORY",
                 "blocked_by": ["ETAPA-01-DISCOVERY"]
             },
             {
                 "id": "ETAPA-03-MOTION-ENGINE",
                 "role": "Geracao Procedural de Animacao",
-                "skill": "aidd-remotion-motion",
+                "skill": "aidd-motion-remotion-core",
                 "status": "AVAILABLE_IN_INVENTORY",
                 "blocked_by": ["ETAPA-02-CREATOR"]
             }

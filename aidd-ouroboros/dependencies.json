@@ -6,27 +6,27 @@
   "dependencies": {
     "core_skills": [
       {
-        "name": "aidd-video-reengineer",
+        "name": "aidd-rea-video-youtube",
         "role": "Dissecacao REA de evidencias audiovisuais"
       },
       {
-        "name": "aidd-skill-creator",
+        "name": "aidd-orchestrate-skill-creator",
         "role": "Fabrica autonoma de novas micro-skills"
       },
       {
-        "name": "aidd-skill-swarm",
+        "name": "aidd-orchestrate-pipeline-creator",
         "role": "Orquestrador de enxames e construtor de pipelines DAG"
       },
       {
-        "name": "aidd-dark-storycraft",
+        "name": "aidd-craft-story-ptbr",
         "role": "Roteirizacao e transcriacao com hooks de alta retencao"
       },
       {
-        "name": "aidd-remotion-motion",
+        "name": "aidd-motion-remotion-core",
         "role": "Gerador de graficos procedurais a 60fps"
       },
       {
-        "name": "aidd-video-materializer",
+        "name": "aidd-materialize-video-synth",
         "role": "Sintetizador e compositor do produto final MP4"
       }
     ],
