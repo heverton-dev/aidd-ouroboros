@@ -213,4 +213,20 @@
   - *Binary Gate Inline:* `grep_search` confirma 0 ocorrências das strings proibidas.
 - **Contagem Regressiva:** 6 tickets restantes.
 - **Commit:** `28a09bc`
-
+### NT-10: Pipeline de Remotion Renderizando MP4 Real (C-09)
+- **Status:** DONE
+- **Escopo:** `aidd-skills/aidd-motion-remotion-core/scripts/remotion_motion.py`, `motores/governanca/handoff_crypto.py`, `tests/test_remotion_motion_real.py`.
+- **Plano:**
+  1. Corrigir e estruturar `remotion_motion.py` para renderizar MP4 real via Remotion CLI (`npx remotion render`) ou fallback determinístico em h264 válido.
+  2. Implementar validação estrita de metadados do MP4 gerado via `ffprobe` (codec `h264`, duração > 0, resolução 1920x1080) e cálculo de SHA-256 no disco.
+  3. Adicionar integração completa com `abrir_handoff` e `selar_handoff` HMAC-SHA256 em `motores/governanca/handoff_crypto.py`.
+  4. Criar teste `tests/test_remotion_motion_real.py` cobrindo render real de MP4, validação via ffprobe, contrato de handoff e fail-closed com duração inválida.
+  5. Validar suíte unitária e Quality Gate AST anti-stubs (exit 0).
+- **Red-Before-Green Evidence:**
+  1. *Teste RED:* `test_remotion_render_real_produces_mp4` falhou com `ValueError: too many values to unpack (expected 2)` devido ao desempacotamento incorreto da tupla de retorno de `abrir_handoff`.
+  2. *Gate RED:* Parâmetros inválidos em `selar_handoff` quebravam o contrato de handoff imutável.
+- **Green Verification Evidence:**
+  1. *Teste GREEN:* `python -m pytest -q tests/test_remotion_motion_real.py` -> 3 passed in 5.41s (exit 0).
+  2. *Gate GREEN:* `python motores/governanca/gate_ast.py` -> 24 violações (baseline 30, exit 0).
+- **Contagem Regressiva:** 5 tickets restantes.
+- **Commit:** `6546b36`

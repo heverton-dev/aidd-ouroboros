@@ -350,6 +350,8 @@ def selar_handoff(
     return envelope
 
 
+abrir_handoff = abrir
+
 
 def main():
     parser = argparse.ArgumentParser(description="Utilitário CLI de Integridade HMAC-SHA256 e Pointer Passing")
