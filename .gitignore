@@ -21,3 +21,6 @@ build/
 .claude/
 secoes/
 scratch/
+.env
+*.env
+

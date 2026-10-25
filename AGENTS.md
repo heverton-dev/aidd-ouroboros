@@ -16,16 +16,17 @@
 4. **Handoffs Criptográficos Imutáveis:** Toda passagem de bastão entre skills de pipeline ou agentes deve ser assinada via HMAC-SHA256 e conter verificação de integridade no disco.
 5. **Micro-Frontmatter Obrigatório:** O campo `description:` em qualquer `SKILL.md` gerado deve conter no máximo 25 palavras.
 6. **Governança Fractal:** Toda nova skill (`aidd-orchestrate-skill-creator`) ou pipeline (`aidd-orchestrate-pipeline-creator`) gerado deve herdar seu próprio `AGENTS.md` compacto (< 400 palavras) e testes de gate correspondentes.
+7. **Proibição de Criação Ad-Hoc (Flywheel Soberano):** É estritamente proibido criar ou editar skills ou pipelines de forma artesanal/ad-hoc via LLM. Toda nova skill ou pipeline deve ser provisionada exclusivamente através dos criadores canônicos (`pipeline_creator.py` e `skill_creator.py`) com anatomia enterprise completa (`references/`, `templates/`, `scripts/`, `dependencies.json`, `RULES.md`, `sync.ps1`).
 
 ---
 
 ## 2. Comandos Canônicos do Ouroboros
 
 ```bash
-# Executar todos os Quality Gates
+# Executar todos os Quality Gates (incluindo Circuit Breaker)
 python ouroboros.py --audit
 
-# Diagnóstico de pré-voo
+# Diagnóstico de pré-voo e credenciais
 python ouroboros.py --doctor
 
 # Setup e sincronização multi-harness
