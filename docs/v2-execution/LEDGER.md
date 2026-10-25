@@ -113,4 +113,22 @@
   - *Gate GREEN:* Binary gate inline exit 0 (0 violadores em pipelines e scripts geradores).
   - *Full Suite Regression:* 117 passed in 41.19s (`pytest -q --ignore=tests/negative --ignore=tests/negative-brand`) (exit 0).
 - **Contagem Regressiva:** 11 tickets restantes.
-- **Commit:** `pending`
+- **Commit:** `1077670`
+
+### NT-05: Contrato Único `body` + `seal` nos Handoffs Criptográficos (C-02)
+- **Status:** DONE
+- **Escopo:** `motores/governanca/handoff_crypto.py`, `tests/test_handoff_contract.py`.
+- **Plano:**
+  1. Criar `tests/test_handoff_contract.py` cobrindo 6 cenários (formato canônico body+seal, abertura íntegra, detecção de adulteração no body, proteção contra re-envelope, retrocompatibilidade com envelopes legados e suporte em `criar_envelope_handoff`).
+  2. Executar teste e comprovar RED (NameError: `selar` e `abrir` não existiam).
+  3. Implementar `selar()` e `abrir()` canônicos em `motores/governanca/handoff_crypto.py`, adicionando validação de integridade cruzada e `DeprecationWarning` para envelopes legados.
+  4. Executar testes unitários (17 passed) e regressão completa (123 passed).
+- **Red-Before-Green Evidence:**
+  - *Teste RED:* `python -m pytest tests/test_handoff_contract.py` falhou com `NameError: name 'selar' is not defined` (exit 1).
+  - *Gate RED:* Falha de execução imediata por ausência da API contratual.
+- **Green Verification Evidence:**
+  - *Teste GREEN:* `python -m pytest tests/test_handoff_contract.py tests/test_handoff_crypto.py tests/test_governanca_fractal.py -v` -> 17 passed, 1 warning in 1.03s (exit 0).
+  - *Gate GREEN:* `python motores/governanca/gate_ast.py` -> SUCESSO: Todos os 73 arquivos atendem à regra de Zero Stubs (exit 0).
+  - *Full Suite Regression:* 123 passed, 1 warning in 61.49s (`pytest -q --ignore=tests/negative --ignore=tests/negative-brand`) (exit 0).
+- **Contagem Regressiva:** 10 tickets restantes.
+- **Commit:** pendente
