@@ -1,8 +1,9 @@
 # Sincronização multi-harness para aidd-craft-story-ptbr
-param([switch]$DryRun)
+param([string]$HarnessRoot = $HOME, [switch]$DryRun)
+$ErrorActionPreference = "Stop"
 $name = 'aidd-craft-story-ptbr'
 $src = $PSScriptRoot
-$h = $HOME
+$h = $HarnessRoot
 $skillDirs = @(
   "$h\.agents\skills", "$h\.claude\skills", "$h\.config\opencode\skills", "$h\.opencode\skills",
   "$h\.gemini\skills", "$h\.gemini\antigravity\skills", "$h\.gemini\antigravity-cli\skills",
@@ -17,5 +18,8 @@ foreach ($t in $skillDirs) {
   if ($DryRun) { Write-Output "DRY $dest"; continue }
   New-Item -ItemType Directory -Force $dest | Out-Null
   Copy-Item -Recurse -Force "$src\*" $dest -Exclude '__pycache__'
+  $markerPath = Join-Path $dest ".aidd-managed"
+  $markerJson = @{ name = $name; managed_by = "aidd-ouroboros"; version = "1.0.0" } | ConvertTo-Json -Compress
+  [System.IO.File]::WriteAllText($markerPath, $markerJson, (New-Object System.Text.UTF8Encoding $false))
   Write-Output "OK  $dest"
 }

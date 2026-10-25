@@ -32,3 +32,28 @@
   - *Gate GREEN:* Exit code 0, 0 arquivos violadores.
   - *Full Suite Regression:* 93 passed in 46.30s (exit 0).
 - **Commit:** `4d175a3`
+
+### NT-02: Safety & Dry-Run em Scripts de Sincronização
+- **Status:** DONE
+- **Escopo:** `aidd-skills/sync_all.ps1`, 12 skills `sync.ps1`, marcadores `.aidd-managed`, parâmetro `-HarnessRoot` e `$ErrorActionPreference = "Stop"`.
+- **Plano:**
+  1. Criar teste `tests/test_sync_safety.py`.
+  2. Executar teste e comprovar RED (falha em `$ErrorActionPreference`, falta de `-HarnessRoot`, falta de `.aidd-managed`).
+  3. Implementar proteções e marcadores `.aidd-managed` via UTF8 sem BOM.
+  4. Executar teste (GREEN) e Binary Gate.
+  5. Rodar regressão completa (99 passed).
+- **Red-Before-Green Evidence:**
+  - *Teste RED:* `pytest -v tests/test_sync_safety.py` falhou com 4 failed, 2 passed (exit 1).
+    - `test_sync_all_error_action_preference_is_stop`: FAILED (encontrou SilentlyContinue)
+    - `test_sync_all_accepts_harness_root_parameter`: FAILED (ausência de bloco param)
+    - `test_sync_all_removes_legacy_folder_with_marker`: FAILED (não removeu pois falta -HarnessRoot)
+    - `test_sync_skill_creates_managed_marker`: FAILED (não gerou `.aidd-managed`)
+  - *Gate RED:* `python -m pytest -q tests/test_sync_safety.py` exit 1.
+- **Green Verification Evidence:**
+  - *Teste GREEN:* `pytest -v tests/test_sync_safety.py` -> 6 passed in 9.84s (exit 0).
+  - *Gate GREEN:* `python -m pytest -q tests/test_sync_safety.py` -> 6 passed in 10.47s (exit 0).
+  - *Full Suite Regression:* 99 passed in 42.93s (`pytest -q --ignore=tests/negative --ignore=tests/negative-brand`) (exit 0).
+- **Contagem Regressiva:** 14 tickets restantes.
+- **Commit:** pendente
+
+
