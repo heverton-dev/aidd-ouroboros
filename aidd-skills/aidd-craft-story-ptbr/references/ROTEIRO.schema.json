@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RoteiroSchema",
+  "type": "object",
+  "required": [
+    "version",
+    "canal_target",
+    "avatar",
+    "titulo_ptbr",
+    "hook_retencao_15s",
+    "scenes"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "canal_target": {
+      "type": "string",
+      "minLength": 3
+    },
+    "avatar": {
+      "type": "object",
+      "required": ["nome", "idioma", "tom_de_voz"],
+      "properties": {
+        "nome": { "type": "string" },
+        "idioma": { "type": "string", "enum": ["pt-BR"] },
+        "tom_de_voz": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "titulo_ptbr": {
+      "type": "string",
+      "minLength": 5
+    },
+    "hook_retencao_15s": {
+      "type": "string",
+      "minLength": 10
+    },
+    "scenes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "scene_id",
+          "tipo",
+          "duracao_estimada_s",
+          "fala_avatar"
+        ],
+        "properties": {
+          "scene_id": { "type": "string" },
+          "tipo": { "type": "string" },
+          "duracao_estimada_s": { "type": "number", "minimum": 0.5 },
+          "fala_avatar": { "type": "string", "minLength": 1 },
+          "diretivas_visuais": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

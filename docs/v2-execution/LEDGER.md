@@ -230,3 +230,20 @@
   2. *Gate GREEN:* `python motores/governanca/gate_ast.py` -> 24 violações (baseline 30, exit 0).
 - **Contagem Regressiva:** 5 tickets restantes.
 - **Commit:** `6546b36`
+### NT-11: Storycraft Híbrido e Contido com Schema e Criptografia (C-04)
+- **Status:** DONE
+- **Escopo:** \idd-skills/aidd-craft-story-ptbr/scripts/dark_storycraft.py\, \idd-skills/aidd-craft-story-ptbr/references/ROTEIRO.schema.json\, \schemas/ROTEIRO.schema.json\, \	ests/test_storycraft_contract.py\.
+- **Plano:**
+  1. Definir e sincronizar \ROTEIRO.schema.json\ canônico contendo metadados de vídeo, blocos temporais (gancho, retenção, cta), validação estrita de tipos e restrições.
+  2. Implementar \dark_storycraft.py\ com suporte híbrido (CLI / LLM / offline), modo fallback estruturado com status \PARTIAL\ quando offline sem inventar dados, e validação contra \ROTEIRO.schema.json\.
+  3. Integrar com \brir_handoff\ e \selar_handoff\ HMAC-SHA256 em \motores/governanca/handoff_crypto.py\.
+  4. Criar suite de testes \	ests/test_storycraft_contract.py\ cobrindo validação de schema, geração offline, selagem de handoff, fail-closed para entradas inválidas e verificação de integridade no disco.
+  5. Validar suite de testes (5 passed) e conformidade no Quality Gate AST anti-stubs (0 violações, exit 0).
+- **Red-Before-Green Evidence:**
+  1. *Teste RED:* \	est_storycraft_contract.py\ falhou com \TypeError: selar_handoff() got an unexpected keyword argument 'segredo'\ e falta de alinhamento com a assinatura de \handoff_crypto.py\.
+  2. *Gate RED:* Falha em \dark_storycraft.py\ com erro de chave incorreta e tentativa de uso de mock não-autorizado.
+- **Green Verification Evidence:**
+  1. *Teste GREEN:* \python -m pytest -q tests/test_storycraft_contract.py\ -> 5 passed in 0.36s (exit 0).
+  2. *Gate GREEN:* \python motores/governanca/gate_ast.py aidd-skills/aidd-craft-story-ptbr/scripts/dark_storycraft.py\ -> 0 violações, 100% sintaxe e zero stubs (exit 0).
+- **Contagem Regressiva:** 4 tickets restantes (NT-12, NT-14, NT-15, NT-16).
+- **Commit:** \49b8dc
