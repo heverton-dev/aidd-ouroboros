@@ -326,5 +326,5 @@
   1. *Teste GREEN:* `python -m pytest -q tests/test_audit_runner.py` -> 5 passed in 2.74s (exit 0).
   2. *Gate GREEN:* `python motores/governanca/gate_ast.py motores/governanca/audit_runner.py` -> 0 violações, 100% sintaxe válida e zero stubs (exit 0).
 - **Contagem Regressiva:** 0 tickets restantes (16/16 concluídos - 100%).
-- **Commit:** `1446e22`
+- **Commit:** `40f2767`
 
