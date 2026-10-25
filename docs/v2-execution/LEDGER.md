@@ -265,4 +265,23 @@
   1. *Teste GREEN:* `python -m pytest -q tests/test_whisper_units.py tests/test_whisper_to_remotion.py` -> 7 passed in 0.33s (exit 0).
   2. *Gate GREEN:* `python motores/governanca/gate_ast.py scripts/whisper_to_remotion.py` -> 0 violações, 100% sintaxe valida e zero stubs (exit 0).
 - **Contagem Regressiva:** 3 tickets restantes (NT-14, NT-15, NT-16).
-- **Commit:** e35eaed
+- **Commit:** `9a6fbd0`
+
+### NT-14: Static Matrix Check e Non-Interactive Install no DependencyResolver
+- **Status:** DONE
+- **Data:** 2026-10-25
+- **Escopo:** `motores/governanca/dependency_resolver.py`, `tests/test_dependency_resolver.py`, `docs/v2-execution/LEDGER.md`.
+- **Plano:**
+  1. Criar suite de testes `tests/test_dependency_resolver.py` cobrindo checagem estática, itens ausentes, proteção contra vazamento de segredos em variáveis de ambiente, recusa de `--install` sem `--yes`, e exigência de versões estritamente fixadas (`==`).
+  2. Implementar `motores/governanca/dependency_resolver.py` com CLI canônica (`--manifest`, `--check`, `--install`, `--yes`).
+  3. Suportar auditoria de `system_binaries`, `python_packages`, `env_vars` (checagem de presença sem nunca expor conteúdo) e `core_skills`.
+  4. Suportar passagem de arquivo de manifesto ou diretório com fallback automático para `dependencies.json`.
+  5. Validar testes e Quality Gate AST anti-stubs (exit 0).
+- **Red-Before-Green Evidence:**
+  1. *Teste RED:* `test_dependency_resolver.py` falhou inicialmente com `ModuleNotFoundError: No module named 'motores.governanca.dependency_resolver'` antes da implementação.
+  2. *Gate RED:* N/A (validado pré-commit).
+- **Green Verification Evidence:**
+  1. *Teste GREEN:* `python -m pytest -q tests/test_dependency_resolver.py` -> 7 passed in 0.45s (exit 0).
+  2. *Gate GREEN:* `python motores/governanca/gate_ast.py motores/governanca/dependency_resolver.py` -> 0 violações, 100% sintaxe válida e zero stubs (exit 0).
+- **Contagem Regressiva:** 2 tickets restantes (NT-15, NT-16).
+- **Commit:** `e53e88a`
