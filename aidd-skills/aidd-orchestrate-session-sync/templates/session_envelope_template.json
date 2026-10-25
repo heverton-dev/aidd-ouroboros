@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SessionEnvelopeTemplate",
+  "type": "object",
+  "required": ["session_id", "turn_index", "source", "timestamp", "content_pointer"],
+  "properties": {
+    "session_id": { "type": "string" },
+    "turn_index": { "type": "integer", "minimum": 0 },
+    "source": { "type": "string", "enum": ["user", "model", "system"] },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "content_pointer": {
+      "type": "object",
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "type": "string" },
+        "sha256": { "type": "string" }
+      }
+    }
+  }
+}
