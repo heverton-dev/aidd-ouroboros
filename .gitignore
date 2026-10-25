@@ -24,3 +24,12 @@ scratch/
 .env
 *.env
 
+# Ouroboros runtime & artifacts
+workspace/
+aidd-pipelines/*/state.json
+aidd-pipelines/*/context/
+**/.hyperframes/video-state.json
+*.mp4
+*.wav
+*.mp3
+

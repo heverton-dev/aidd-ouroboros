@@ -1,0 +1,2 @@
+# Lista de fixtures de mídia permitidas no git (se alguma for estritamente necessária).
+# Linhas vazias ou iniciadas com # são ignoradas.
