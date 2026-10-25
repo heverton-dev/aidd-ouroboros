@@ -17,11 +17,27 @@ import datetime
 import hashlib
 import hmac
 import json
+import os
 from pathlib import Path
 import sys
 from typing import Any, Dict, Optional, Tuple
 
-DEFAULT_SECRET = "aidd-secret-penny-harness-2026"
+
+def obter_chave(chave_opcional: Optional[str] = None) -> str:
+    """
+    Obtém a chave secreta HMAC a partir do parâmetro explícito ou do ambiente AIDD_HANDOFF_KEY.
+    Lança RuntimeError se não estiver configurada (fail-closed).
+    """
+    if chave_opcional:
+        return chave_opcional
+
+    chave_env = os.environ.get("AIDD_HANDOFF_KEY")
+    if chave_env and chave_env.strip():
+        return chave_env.strip()
+
+    raise RuntimeError(
+        "Chave de assinatura HMAC não configurada. Defina a variável de ambiente AIDD_HANDOFF_KEY."
+    )
 
 
 def calcular_sha256_arquivo(caminho: Path | str) -> str:
@@ -35,10 +51,11 @@ def calcular_sha256_arquivo(caminho: Path | str) -> str:
     return h.hexdigest()
 
 
-def calcular_hmac_dict(dados: Dict[str, Any], chave: str = DEFAULT_SECRET) -> str:
+def calcular_hmac_dict(dados: Dict[str, Any], chave: Optional[str] = None) -> str:
+    chave_resolvida = obter_chave(chave)
     conteudo_canonico = json.dumps(dados, sort_keys=True, ensure_ascii=False)
     return hmac.new(
-        chave.encode("utf-8"),
+        chave_resolvida.encode("utf-8"),
         conteudo_canonico.encode("utf-8"),
         hashlib.sha256
     ).hexdigest()
@@ -50,12 +67,13 @@ def criar_envelope_handoff(
     artefatos: Optional[Dict[str, str | Path]] = None,
     metadados: Optional[Dict[str, Any]] = None,
     caminho_saida: Optional[Path | str] = None,
-    chave: str = DEFAULT_SECRET
+    chave: Optional[str] = None
 ) -> Dict[str, Any]:
     """
     Gera um envelope canônico com hashes SHA-256 de todos os artefatos apontados
     e assina todo o payload via HMAC-SHA256.
     """
+    chave_resolvida = obter_chave(chave)
     artefatos_processados: Dict[str, Dict[str, Any]] = {}
     if artefatos:
         for nome_chave, caminho in artefatos.items():
@@ -83,7 +101,7 @@ def criar_envelope_handoff(
         "domain_metadata": metadados or {}
     }
 
-    assinatura = calcular_hmac_dict(payload, chave)
+    assinatura = calcular_hmac_dict(payload, chave_resolvida)
     envelope = {
         "envelope_format": "AIDD-CANONICAL-HANDOFF",
         "signature_algorithm": "HMAC-SHA256",
@@ -102,13 +120,18 @@ def criar_envelope_handoff(
 
 def verificar_envelope_handoff(
     envelope_ou_path: Dict[str, Any] | Path | str,
-    chave: str = DEFAULT_SECRET,
+    chave: Optional[str] = None,
     verificar_integridade_disco: bool = True
 ) -> Tuple[bool, str]:
     """
     Verifica se a assinatura HMAC bate com o payload e se os arquivos referenciados
     não foram adulterados no disco.
     """
+    try:
+        chave_resolvida = obter_chave(chave)
+    except RuntimeError as exc:
+        return False, str(exc)
+
     if isinstance(envelope_ou_path, (str, Path)):
         p = Path(envelope_ou_path)
         if not p.is_file():
@@ -129,9 +152,9 @@ def verificar_envelope_handoff(
 
     payload = envelope["payload"]
     assinatura_esperada = envelope["hmac_sha256"]
-    assinatura_calculada = calcular_hmac_dict(payload, chave)
+    assinatura_calculada = calcular_hmac_dict(payload, chave_resolvida)
 
-    if assinatura_calculada != assinatura_esperada:
+    if not hmac.compare_digest(assinatura_calculada, assinatura_esperada):
         return False, "Violação de Integridade: assinatura HMAC-SHA256 não confere (payload foi adulterado)."
 
     if verificar_integridade_disco:
@@ -166,7 +189,8 @@ def main():
             print(f"[!] ERRO: {msg}", file=sys.stderr)
             sys.exit(1)
     else:
-        parser.print_help()
+        parser.print_help(sys.stderr)
+        sys.exit(2)
 
 
 if __name__ == "__main__":

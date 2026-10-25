@@ -54,6 +54,24 @@
   - *Gate GREEN:* `python -m pytest -q tests/test_sync_safety.py` -> 6 passed in 10.47s (exit 0).
   - *Full Suite Regression:* 99 passed in 42.93s (`pytest -q --ignore=tests/negative --ignore=tests/negative-brand`) (exit 0).
 - **Contagem Regressiva:** 14 tickets restantes.
-- **Commit:** pendente
+- **Commit:** `2fe5adc`
 
-
+### NT-03: Chave HMAC a Partir de Env Var & Fail-Closed
+- **Status:** DONE
+- **Escopo:** `motores/governanca/handoff_crypto.py`, `tests/test_handoff_crypto.py`, `tests/conftest.py`.
+- **Plano:**
+  1. Criar teste `tests/test_handoff_crypto.py` cobrindo 8 cenários (sem chave, tamper, adulteração de conteúdo, chave incorreta, fluxo válido, fail-closed, CLI sem args e timing attack protection).
+  2. Executar teste e comprovar RED (falhou em 4 cenários devido ao segredo hardcoded `DEFAULT_SECRET`).
+  3. Eliminar `DEFAULT_SECRET`, exigir `AIDD_HANDOFF_KEY` no ambiente ou chave explícita (fail-closed), usar `hmac.compare_digest`.
+  4. Tratar `verificar_envelope_handoff` para retornar `(False, "...")` em caso de erro de chave.
+  5. Adicionar fixture autouse em `tests/conftest.py` para isolamento de ambiente da suíte.
+  6. Executar testes unitários (8 passed) e regressão completa (107 passed).
+- **Red-Before-Green Evidence:**
+  - *Teste RED:* `test_criar_envelope_sem_chave_lanca_excecao`, `test_validar_envelope_sem_chave_falha_fechado`, `test_verificar_envelope_tampered_metadata_falha` e `test_cli_sem_argumentos_retorna_erro` falharam com `DEFAULT_SECRET` presente.
+  - *Gate RED:* Falha em `test_criar_envelope_sem_chave_lanca_excecao` quando `AIDD_HANDOFF_KEY` estava desmarcada.
+- **Green Verification Evidence:**
+  - *Teste GREEN:* `python -m pytest -q tests/test_handoff_crypto.py` -> 8 passed in 0.36s (exit 0).
+  - *Gate GREEN:* `python -m pytest -q tests/test_handoff_crypto.py` exit code 0.
+  - *Full Suite Regression:* 107 passed in 40.65s (`pytest -q --ignore=tests/negative --ignore=tests/negative-brand`) (exit 0).
+- **Contagem Regressiva:** 13 tickets restantes.
+- **Commit:** `3b602a7`
