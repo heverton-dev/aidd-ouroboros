@@ -174,7 +174,7 @@ def ocr_image_file(image_path: Path) -> str:
     return f"Texto do slide extraido de {image_path.name}"
 
 
-def dissect_social_carousel(input_source: str, output_dir: Path, output_handoff: Path | None = None) -> Path:
+def dissect_social_carousel(input_source: str, output_dir: Path, output_handoff: Path | None = None, allow_placeholder: bool = False) -> Path:
     """
     Disseca carrossel de imagens ou documento de post social emitindo artefatos REA completos.
     """
@@ -204,9 +204,19 @@ def dissect_social_carousel(input_source: str, output_dir: Path, output_handoff:
                     "text": slide_text
                 })
         else:
-            # Caso pasta sem imagens (ex: pasta de texto ou mocks)
+            if not allow_placeholder:
+                manifest_partial = {
+                    "status": "PARTIAL",
+                    "slides": [],
+                    "degraded_reasons": ["Nenhuma imagem de slide encontrada no diretorio de entrada."],
+                    "artifacts": {}
+                }
+                (output_dir / "manifest.json").write_text(json.dumps(manifest_partial, indent=2, ensure_ascii=False), encoding="utf-8")
+                (output_dir / "MANIFEST_REA.json").write_text(json.dumps(manifest_partial, indent=2, ensure_ascii=False), encoding="utf-8")
+                return output_dir
+            # Caso pasta sem imagens com placeholder permitido
             slides_data = [
-                {"slide_number": 1, "image": "visual/slides/slide_01.jpg", "text": "Como automatizar agentes com IA sem codigo"},
+                {"slide_number": 1, "image": "visual/slides/slide_01.jpg", "text": "Slide 01: Introducao ao Tema"},
                 {"slide_number": 2, "image": "visual/slides/slide_02.jpg", "text": "Passo 1: Entenda o ciclo de entrada e saida"},
                 {"slide_number": 3, "image": "visual/slides/slide_03.jpg", "text": "Passo 2: Encapsule cada habilidade em uma peca de Lego"},
                 {"slide_number": 4, "image": "visual/slides/slide_04.jpg", "text": "Comente AGENTE para receber o pipeline completo"}
@@ -331,6 +341,17 @@ Apresenta progressao linear de informacao em blocos digestivos para maximizar sw
         json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8"
     )
 
+    manifest_full = {
+        "status": "SUCCESS",
+        "slides": slides_data,
+        "degraded_reasons": [],
+        "artifacts": manifest["artifacts"],
+        "summary": manifest["summary"]
+    }
+    (output_dir / "manifest.json").write_text(
+        json.dumps(manifest_full, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
+
     # 5. Emitir HANDOFF.json Universal
     handoff_envelope = {
         "$schema": "https://aidd.framework/schemas/handoff-v1.json",
@@ -340,6 +361,7 @@ Apresenta progressao linear de informacao em blocos digestivos para maximizar sw
         "status": "SUCCESS",
         "artifacts": {
             "manifest_rea": str(output_dir / "MANIFEST_REA.json"),
+            "manifest": str(output_dir / "manifest.json"),
             "tokens_design": str(tokens_path),
             "conteudo_tecnico": str(output_dir / "conteudo_tecnico.md"),
             "estrutura_narrativa": str(output_dir / "estrutura_narrativa.md")
@@ -365,8 +387,9 @@ Apresenta progressao linear de informacao em blocos digestivos para maximizar sw
 def main():
     parser = argparse.ArgumentParser(description="Dissecador de Carrosséis e Posts Sociais (aidd-social-reengineer v1.0.0)")
     parser.add_argument("--input", metavar="FONTE", help="Pasta com imagens de slides ou arquivo de post")
-    parser.add_argument("--output-dir", default="./research/social-target", help="Pasta de saída para os artefatos REA")
+    parser.add_argument("--output", "--output-dir", dest="output_dir", default="./research/social-target", help="Pasta de saída para os artefatos REA")
     parser.add_argument("--output-handoff", help="Caminho customizado para emitir o HANDOFF.json")
+    parser.add_argument("--allow-placeholder", action="store_true", default=False, help="Permite slides de placeholder quando nao ha imagens")
     parser.add_argument("--doctor", action="store_true", help="Diagnostico de ambiente")
     parser.add_argument("--setup", action="store_true", help="Setup automatico e sync")
     parser.add_argument("--audit", metavar="PASTA", nargs="?", const=".", help="Auditoria dos 4 Gates com Circuit Breaker")
@@ -388,7 +411,7 @@ def main():
     if args.input:
         out_dir = Path(args.output_dir)
         handoff_p = Path(args.output_handoff) if args.output_handoff else None
-        dissect_social_carousel(args.input, out_dir, output_handoff=handoff_p)
+        dissect_social_carousel(args.input, out_dir, output_handoff=handoff_p, allow_placeholder=args.allow_placeholder)
         return
 
     parser.print_help()

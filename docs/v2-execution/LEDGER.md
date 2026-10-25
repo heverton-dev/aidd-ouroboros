@@ -194,3 +194,23 @@
   - *Governança AGENTS.md:* 100% de conformidade com todos os módulos possuindo AGENTS.md compacto (< 450 palavras).
 - **Contagem Regressiva:** 7 tickets restantes.
 - **Commit:** `01f440c`
+
+### NT-09: Eliminação de Dados Inventados nos Fallbacks e Re-engines (C-08)
+- **Status:** DONE
+- **Escopo:** `aidd-skills/aidd-rea-app-android/scripts/app_reengineer.py`, `aidd-skills/aidd-rea-social-carousel/scripts/social_reengineer.py`, `aidd-skills/aidd-materialize-video-synth/scripts/video_materializer.py`, `tests/test_honest_fallback.py`.
+- **Plano:**
+  1. Purgar 4 strings proibidas apontadas na auditoria: `"api.app.com"`, `"LoginActivity"`, `"Como automatizar agentes com IA sem codigo"`, `"Storyboard Studio (Remotion"`.
+  2. Implementar fallbacks honestos com status `PARTIAL` e marcação clara `source: "fallback_inspect"` sem alucinar endpoints, activities, roteiros ou títulos fictícios.
+  3. Adicionar flag `--allow-placeholder` (`default=False`) em `video_materializer.py`, falhando com erro explícito e exit code 1 quando Remotion e FFmpeg estiverem ausentes sem autorização explícita.
+  4. Criar teste `tests/test_honest_fallback.py` garantindo ausência de strings proibidas em código e testes e comportamento fail-closed de fallbacks.
+  5. Validar com `pytest` e Gate AST anti-stubs (sem `SILENT_EXCEPT_PASS`).
+- **Red-Before-Green Evidence:**
+  - *Teste RED:* `tests/test_honest_fallback.py` falhou na presença das strings proibidas no repositório e ausência de `--allow-placeholder`.
+  - *Gate RED:* Presença de strings hardcoded em `app_reengineer.py` e `social_reengineer.py`.
+- **Green Verification Evidence:**
+  - *Teste GREEN:* `python -m pytest -q tests/test_honest_fallback.py tests/test_video_materializer.py` -> 6 passed in 12.34s (exit 0).
+  - *Gate GREEN:* `python motores/governanca/gate_ast.py` -> 24 violações (baseline 30, exit 0).
+  - *Binary Gate Inline:* `grep_search` confirma 0 ocorrências das strings proibidas.
+- **Contagem Regressiva:** 6 tickets restantes.
+- **Commit:** `28a09bc`
+

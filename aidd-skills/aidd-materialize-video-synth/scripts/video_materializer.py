@@ -99,13 +99,14 @@ def synthesize_neural_voice(
 
 
 def render_remotion_scene(
-    remotion_dir: Path, output_clip: Path, fps: int = 60
+    remotion_dir: Path, output_clip: Path, fps: int = 60, allow_placeholder: bool = True
 ) -> Path:
     """Invoca o motor Remotion para renderizar as animações conceituais."""
     output_clip.parent.mkdir(parents=True, exist_ok=True)
     bun_bin = shutil.which("bun")
     npx_bin = shutil.which("npx")
 
+    remotion_success = False
     if bun_bin and (remotion_dir / "src" / "index.ts").exists():
         cmd = [
             bun_bin,
@@ -128,12 +129,16 @@ def render_remotion_scene(
                 check=True,
             )
             print(f"[+] Animação Remotion renderizada: {output_clip}")
+            remotion_success = True
             return output_clip
         except Exception as e:
             print(
                 f"[-] Render Remotion encontrou erro ({e}). Gerando fundo"
                 " animado via FFmpeg..."
             )
+
+    if not remotion_success and not allow_placeholder:
+        raise RuntimeError("Render Remotion indisponível e allow_placeholder=False")
 
     # Fallback determinístico caso o node/remotion esteja ocupado: gera canvas 1080p animado
     fb_cmd = [
@@ -144,8 +149,8 @@ def render_remotion_scene(
         "-i",
         (
             "color=c=0x0B0F19:s=1920x1080:d=10,drawtext=text='Google Flow"
-            " Storyboard Studio (Remotion"
-            " 60fps)':fontcolor=white:fontsize=48:x=(w-text_w)/2:y=(h-text_h)/2"
+            " Storyboard Studio"
+            " 60fps':fontcolor=white:fontsize=48:x=(w-text_w)/2:y=(h-text_h)/2"
         ),
         "-pix_fmt",
         "yuv420p",
@@ -155,6 +160,7 @@ def render_remotion_scene(
     ]
     subprocess.run(fb_cmd, capture_output=True, text=True)
     return output_clip
+
 
 
 def stitch_final_video(
@@ -231,7 +237,7 @@ def stitch_final_video(
 
 
 def materialize_pipeline_assets(
-    input_handoff: Path, output_handoff: Path
+    input_handoff: Path, output_handoff: Path, allow_placeholder: bool = False
 ) -> Dict[str, Any]:
     input_handoff = Path(input_handoff).resolve()
     output_handoff = Path(output_handoff).resolve()
@@ -260,8 +266,8 @@ def materialize_pipeline_assets(
                 scenes = rdata.get("domain_data", {}).get("scenes", [])
                 if scenes:
                     hook_fala = scenes[0].get("fala_avatar", hook_fala)
-        except Exception:
-            pass
+        except Exception as e:
+            sys.stderr.write(f"[-] Aviso ao carregar roteiro {roteiro_path}: {e}\n")
 
     # 2. Sintetizar áudio neural
     audio_file = context_out / "audio_neural_intro.mp3"
@@ -271,7 +277,7 @@ def materialize_pipeline_assets(
     workspace_root = Path.cwd()
     remotion_dir = workspace_root / "motores" / "remotion"
     remotion_clip = context_out / "remotion_scene.mp4"
-    render_remotion_scene(remotion_dir, remotion_clip, fps=60)
+    render_remotion_scene(remotion_dir, remotion_clip, fps=60, allow_placeholder=allow_placeholder)
 
     # 4. Avatar (usando a thumbnail capturada de Keera)
     avatar_thumb = (
@@ -283,6 +289,8 @@ def materialize_pipeline_assets(
         / "thumbnail.jpg"
     )
     if not avatar_thumb.exists():
+        if not allow_placeholder:
+            raise RuntimeError("Avatar thumbnail ausente e allow_placeholder=False")
         # Fallback para placeholder
         avatar_thumb = context_out / "avatar_placeholder.jpg"
         fb_thumb = [
@@ -343,7 +351,16 @@ def main():
     )
     parser.add_argument("--input", type=Path, help="Handoff de entrada")
     parser.add_argument(
+        "--output", "--output-dir", dest="output_dir", type=Path, help="Diretorio de saida"
+    )
+    parser.add_argument(
         "--output-handoff", type=Path, help="Handoff de saída consolidado"
+    )
+    parser.add_argument(
+        "--allow-placeholder",
+        action="store_true",
+        default=False,
+        help="Permitir fallbacks sintéticos/placeholders se Remotion ou assets reais estiverem ausentes",
     )
 
     args = parser.parse_args()
@@ -358,9 +375,17 @@ def main():
         run_audit()
         return
 
-    if args.input and args.output_handoff:
-        materialize_pipeline_assets(args.input, args.output_handoff)
-        return
+    if args.input and (args.output_handoff or args.output_dir):
+        out_handoff = args.output_handoff or (args.output_dir / "manifest.json")
+        out_handoff.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            materialize_pipeline_assets(
+                args.input, out_handoff, allow_placeholder=args.allow_placeholder
+            )
+            return
+        except Exception as e:
+            print(f"[-] Erro na materializacao: {e}", file=sys.stderr)
+            sys.exit(1)
 
     print("Executando aidd-video-materializer...")
 

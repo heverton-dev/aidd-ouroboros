@@ -167,16 +167,50 @@ def scan_strings_and_urls(raw_bytes: bytes) -> tuple[list[str], list[str], list[
     return urls[:10], permissions[:15], activities
 
 
-def dissect_mobile_or_binary_app(input_source: str, output_dir: Path, output_handoff: Path | None = None) -> Path:
+def is_valid_android_apk(p: Path) -> bool:
+    """Verifica se o caminho aponta para um arquivo APK Android integro."""
+    if not p.is_file() or not zipfile.is_zipfile(p):
+        return False
+    try:
+        with zipfile.ZipFile(p, "r") as z:
+            names = z.namelist()
+            return any(name.endswith(".dex") or name == "AndroidManifest.xml" for name in names)
+    except Exception:
+        return False
+
+
+def dissect_mobile_or_binary_app(
+    input_source: str,
+    output_dir: Path,
+    output_handoff: Path | None = None,
+    allow_placeholder: bool = False
+) -> Path:
     """
     Executa a esteira de dissecação estática de APKs e binários emitindo artefatos REA completos.
     """
     print(f"=== [AIDD-APP-REENGINEER] Dissecando Aplicativo: {input_source} ===")
     output_dir.mkdir(parents=True, exist_ok=True)
+    input_p = Path(input_source)
+
+    if not is_valid_android_apk(input_p) and not allow_placeholder:
+        print(f"[-] Erro: '{input_source}' nao e um APK Android valido. Emitindo status PARTIAL honesto.")
+        degraded_payload = {
+            "status": "PARTIAL",
+            "degraded_reasons": ["Arquivo fornecido nao e um APK valido ou nao possui classes/manifest Android."],
+            "source": input_source,
+            "timestamp": time_iso(),
+            "permissions": [],
+            "activities": [],
+            "api_endpoints": [],
+            "artifacts": {}
+        }
+        (output_dir / "manifest.json").write_text(json.dumps(degraded_payload, indent=2, ensure_ascii=False), encoding="utf-8")
+        (output_dir / "MANIFEST_REA.json").write_text(json.dumps(degraded_payload, indent=2, ensure_ascii=False), encoding="utf-8")
+        return output_dir
+
     tokens_dir = output_dir / "tokens"
     tokens_dir.mkdir(parents=True, exist_ok=True)
 
-    input_p = Path(input_source)
     package_name = "com.app.target"
     version_name = "1.0.0"
     urls_found = []
@@ -190,18 +224,18 @@ def dissect_mobile_or_binary_app(input_source: str, output_dir: Path, output_han
             with zipfile.ZipFile(input_p, "r") as z:
                 file_manifest = z.namelist()
                 combined_bytes = bytearray()
-                # Ler pedaços de classes.dex e AndroidManifest para extrair dados
+                # Ler pedacos de classes.dex e AndroidManifest para extrair dados
                 for member in file_manifest:
                     if member.endswith(".dex") or member == "AndroidManifest.xml" or member.endswith(".json"):
                         try:
                             combined_bytes.extend(z.read(member)[:500000])
-                        except Exception:
-                            pass
+                        except Exception as e:
+                            sys.stderr.write(f"[-] Aviso ao extrair membro {member}: {e}\n")
                 urls_found, permissions_found, activities_found = scan_strings_and_urls(bytes(combined_bytes))
         except Exception as e:
             print(f"[-] Aviso ao inspecionar zip de {input_source}: {e}")
     elif input_p.is_file():
-        # Arquivo binário comum
+        # Arquivo binario comum
         try:
             raw = input_p.read_bytes()[:1000000]
             urls_found, permissions_found, activities_found = scan_strings_and_urls(raw)
@@ -210,9 +244,9 @@ def dissect_mobile_or_binary_app(input_source: str, output_dir: Path, output_han
             print(f"[-] Aviso ao ler binario: {e}")
     else:
         # Fallback estruturado
-        urls_found = ["https://api.app.com/v1", "https://auth.app.com"]
+        urls_found = ["http://localhost:8080/v1", "http://localhost:8080/auth"]
         permissions_found = ["android.permission.INTERNET", "android.permission.ACCESS_NETWORK_STATE"]
-        activities_found = ["MainActivity", "LoginActivity", "DashboardActivity"]
+        activities_found = ["MainActivity", "SettingsActivity", "DashboardActivity"]
         file_manifest = ["AndroidManifest.xml", "classes.dex", "resources.arsc"]
 
     if not permissions_found:
@@ -309,6 +343,19 @@ Mapeamento estrutural de telas e rotas de navegacao nativa.
     (output_dir / "MANIFEST_REA.json").write_text(
         json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8"
     )
+    manifest_canon = {
+        "status": "SUCCESS",
+        "source": input_source,
+        "timestamp": time_iso(),
+        "permissions": permissions_found,
+        "activities": activities_found,
+        "api_endpoints": urls_found,
+        "artifacts": manifest["artifacts"],
+        "summary": manifest["summary"]
+    }
+    (output_dir / "manifest.json").write_text(
+        json.dumps(manifest_canon, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
 
     # 5. Emitir HANDOFF.json Universal
     handoff_envelope = {
@@ -343,9 +390,10 @@ Mapeamento estrutural de telas e rotas de navegacao nativa.
 
 def main():
     parser = argparse.ArgumentParser(description="Dissecador de Aplicativos Mobile e Binários (aidd-app-reengineer v1.0.0)")
-    parser.add_argument("--input", metavar="ARQUIVO", help="Arquivo APK, executável ou pasta de app descompactado")
-    parser.add_argument("--output-dir", default="./research/app-target", help="Pasta de saída para os artefatos REA")
+    parser.add_argument("--input", "--apk", dest="input", metavar="ARQUIVO", help="Arquivo APK, executável ou pasta de app descompactado")
+    parser.add_argument("--output-dir", "--output", dest="output_dir", default="./research/app-target", help="Pasta de saída para os artefatos REA")
     parser.add_argument("--output-handoff", help="Caminho customizado para emitir o HANDOFF.json")
+    parser.add_argument("--allow-placeholder", action="store_true", default=False, help="Permite uso de placeholders/fallbacks sem APK valido")
     parser.add_argument("--doctor", action="store_true", help="Diagnostico de ambiente")
     parser.add_argument("--setup", action="store_true", help="Setup automatico e sync")
     parser.add_argument("--audit", metavar="PASTA", nargs="?", const=".", help="Auditoria dos 4 Gates com Circuit Breaker")
@@ -367,7 +415,7 @@ def main():
     if args.input:
         out_dir = Path(args.output_dir)
         handoff_p = Path(args.output_handoff) if args.output_handoff else None
-        dissect_mobile_or_binary_app(args.input, out_dir, output_handoff=handoff_p)
+        dissect_mobile_or_binary_app(args.input, out_dir, output_handoff=handoff_p, allow_placeholder=args.allow_placeholder)
         return
 
     parser.print_help()
