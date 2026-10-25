@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RouterDispatchTemplate",
+  "type": "object",
+  "required": ["target_type", "dissector_skill", "parameters", "output_format"],
+  "properties": {
+    "target_type": {
+      "type": "string",
+      "enum": ["android_apk", "web_saas", "social_carousel", "video_youtube", "binary_elf", "unknown"]
+    },
+    "dissector_skill": { "type": "string" },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "output_format": {
+      "type": "string",
+      "enum": ["json_manifest", "markdown_report"]
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CarouselTokensTemplate",
+  "type": "object",
+  "required": ["platform", "slides_count", "design_tokens", "slides"],
+  "properties": {
+    "platform": { "type": "string", "enum": ["instagram", "linkedin", "tiktok"] },
+    "slides_count": { "type": "integer", "minimum": 1 },
+    "design_tokens": {
+      "type": "object",
+      "required": ["palette", "typography", "aspect_ratio"],
+      "properties": {
+        "palette": { "type": "object" },
+        "typography": { "type": "object" },
+        "aspect_ratio": { "type": "string" }
+      }
+    },
+    "slides": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["index", "headline", "body", "cta"],
+        "properties": {
+          "index": { "type": "integer" },
+          "headline": { "type": "string" },
+          "body": { "type": "string" },
+          "cta": { "type": "string" }
+        }
+      }
+    }
+  }
+}

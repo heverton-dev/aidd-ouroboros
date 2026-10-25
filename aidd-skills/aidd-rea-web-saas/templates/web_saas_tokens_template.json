@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WebSaasTokensTemplate",
+  "type": "object",
+  "required": ["site_url", "routes", "design_tokens", "api_endpoints"],
+  "properties": {
+    "site_url": { "type": "string", "format": "uri" },
+    "routes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "design_tokens": {
+      "type": "object",
+      "required": ["colors", "fonts", "spacing", "shadows"],
+      "properties": {
+        "colors": { "type": "object" },
+        "fonts": { "type": "object" },
+        "spacing": { "type": "object" },
+        "shadows": { "type": "object" }
+      }
+    },
+    "api_endpoints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["method", "path"],
+        "properties": {
+          "method": { "type": "string" },
+          "path": { "type": "string" }
+        }
+      }
+    }
+  }
+}
