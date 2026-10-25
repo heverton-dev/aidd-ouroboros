@@ -8,6 +8,7 @@ Valida:
 """
 
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -73,11 +74,14 @@ def test_entrypoints_cli_contract_executable():
         if not ep_path.is_file():
             continue
             
+        env = os.environ.copy()
+        env["PYTHONPATH"] = str(ROOT) + (os.pathsep + env["PYTHONPATH"] if "PYTHONPATH" in env else "")
         res = subprocess.run(
             [sys.executable, str(ep_path), "--help"],
             capture_output=True,
             text=True,
-            cwd=str(SKILLS_DIR / s)
+            cwd=str(SKILLS_DIR / s),
+            env=env
         )
         assert res.returncode == 0, f"Entrypoint {ep_path} falhou ao responder --help: {res.stderr}"
         help_out = res.stdout + res.stderr
