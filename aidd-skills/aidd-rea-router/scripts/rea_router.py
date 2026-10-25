@@ -303,6 +303,7 @@ def route_and_execute(target: str, output_dir: Path | None = None, output_handof
 def main():
     parser = argparse.ArgumentParser(description="Roteador Universal de Engenharia Reversa (aidd-rea-router v1.0.0)")
     parser.add_argument("target_pos", nargs="?", help="Entrada para dissecação (URL, arquivo ou pasta)")
+    parser.add_argument("-i", "--input", dest="input_opt", help="Entrada para dissecação (contrato CLI padrao)")
     parser.add_argument("--target", dest="target_opt", help="Alias para o alvo de dissecação")
     parser.add_argument("--route", dest="route_opt", help="Alias para roteamento")
     parser.add_argument("--classify", metavar="INPUT", help="Apenas classifica o tipo de mídia sem executar")
@@ -331,7 +332,7 @@ def main():
         print(json.dumps(result, indent=2, ensure_ascii=False))
         return
 
-    chosen_target = args.target_pos or args.target_opt or args.route_opt
+    chosen_target = args.input_opt or args.target_pos or args.target_opt or args.route_opt
     if chosen_target:
         out_d = Path(args.output_dir) if args.output_dir else None
         handoff_p = Path(args.output_handoff) if args.output_handoff else None

@@ -131,4 +131,23 @@
   - *Gate GREEN:* `python motores/governanca/gate_ast.py` -> SUCESSO: Todos os 73 arquivos atendem à regra de Zero Stubs (exit 0).
   - *Full Suite Regression:* 123 passed, 1 warning in 61.49s (`pytest -q --ignore=tests/negative --ignore=tests/negative-brand`) (exit 0).
 - **Contagem Regressiva:** 10 tickets restantes.
-- **Commit:** pendente
+- **Commit:** 424cc68
+
+### NT-06: Entrypoint Explícito e CLI Contract Padronizado (C-03)
+- **Status:** DONE
+- **Escopo:** `dependencies.json` das 12 skills canônicas, scripts CLI (`--input` / `-i`, `--output-handoff`), eliminação de `glob("*.py")` nos runners de pipeline (`RUN_PIPELINE_TEMPLATE.py`, `canal-dark-avatar/run_pipeline.py`, `video-to-tutorial/run_pipeline.py`), `tests/test_entrypoints.py`.
+- **Plano:**
+  1. Criar teste `tests/test_entrypoints.py` validando presença de `dependencies.json`, schemas com `entrypoint` e `cli_contract`, execução via CLI (`--help` / exit 0) e ausência de `glob("*.py")` nos runners.
+  2. Executar teste e comprovar RED.
+  3. Criar/completar `dependencies.json` e normalizar argumentos CLI em scripts de skills.
+  4. Substituir detecção ad-hoc por leitura determinística de `entrypoint` nos runners.
+  5. Validar gate AST v2 e suíte de testes (4 passed).
+- **Red-Before-Green Evidence:**
+  - *Teste RED:* `pytest tests/test_entrypoints.py` falhou inicialmente com ausência de `dependencies.json` em `aidd-materialize-tutorial-stitch` e presença de `glob("*.py")` nos runners.
+  - *Gate RED:* Runners continham `glob("*.py")` não-determinístico.
+- **Green Verification Evidence:**
+  - *Teste GREEN:* `pytest tests/test_entrypoints.py -v` -> 4 passed in 1.57s (exit 0).
+  - *Gate GREEN:* `python motores/governanca/gate_ast.py` -> exit 0 (26 <= baseline).
+- **Contagem Regressiva:** 9 tickets restantes.
+- **Commit:** `0d6574c`
+

@@ -25,5 +25,10 @@
       "beautifulsoup4",
       "urllib3"
     ]
+  },
+  "entrypoint": "scripts/web_reengineer.py",
+  "cli_contract": {
+    "input_flag": "--input",
+    "output_flag": "--output-handoff"
   }
 }

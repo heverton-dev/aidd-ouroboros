@@ -26,5 +26,10 @@
     "python_packages": [
       "pillow"
     ]
+  },
+  "entrypoint": "scripts/social_reengineer.py",
+  "cli_contract": {
+    "input_flag": "--input",
+    "output_flag": "--output-handoff"
   }
 }

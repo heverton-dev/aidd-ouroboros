@@ -14,5 +14,10 @@
       }
     ],
     "python_packages": []
+  },
+  "entrypoint": "scripts/session_sync.py",
+  "cli_contract": {
+    "input_flag": "--input",
+    "output_flag": "--output-handoff"
   }
 }

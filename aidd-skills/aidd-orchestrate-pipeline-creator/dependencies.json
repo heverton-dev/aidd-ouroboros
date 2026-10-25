@@ -29,5 +29,10 @@
       "rich",
       "networkx"
     ]
+  },
+  "entrypoint": "scripts/pipeline_creator.py",
+  "cli_contract": {
+    "input_flag": "--input",
+    "output_flag": "--output-handoff"
   }
 }

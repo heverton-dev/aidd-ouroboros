@@ -970,6 +970,8 @@ def run_audit(target_dir_str: str = ".") -> bool:
 
 def main():
     parser = argparse.ArgumentParser(description="Sincronizador Deterministico Universal de Historico de Sessao (faz-session)")
+    parser.add_argument("-i", "--input", help="Caminho do arquivo ou diretorio de entrada / handoff de entrada")
+    parser.add_argument("--output-handoff", help="Caminho do arquivo de handoff gerado")
     parser.add_argument("--transcript", help="Caminho explicito para o arquivo transcript (.jsonl)")
     parser.add_argument("--id", dest="session_id", help="UUID da sessao a exportar")
     parser.add_argument("--project", dest="project_name", help="Filtrar ou forcar nome de projeto")

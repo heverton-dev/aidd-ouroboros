@@ -612,7 +612,7 @@ Análise aprofundada da pedagogia, retenção, ritmo de corte e persona do ânco
     return out_file
 
 
-def generate_evidence_manifest(video_id: str, canonical_dir: Path, info_path: Path, txt_out: Path, frames_dir: Path):
+def generate_evidence_manifest(video_id: str, canonical_dir: Path, info_path: Path, txt_out: Path, frames_dir: Path, output_handoff_override: Optional[str] = None):
     with open(info_path, "r", encoding="utf-8") as f:
         info = json.load(f)
 
@@ -707,11 +707,19 @@ def generate_evidence_manifest(video_id: str, canonical_dir: Path, info_path: Pa
         json.dump(handoff_envelope, f, indent=2, ensure_ascii=False)
     print(f"[+] Envelope Universal de Handoff gerado: {handoff_path}")
 
+    if output_handoff_override:
+        out_p = Path(output_handoff_override)
+        out_p.parent.mkdir(parents=True, exist_ok=True)
+        with open(out_p, "w", encoding="utf-8") as f:
+            json.dump(handoff_envelope, f, indent=2, ensure_ascii=False)
+        print(f"[+] Envelope Universal de Handoff copiado para: {out_p}")
+
     return manifest_path
 
 def main():
     parser = argparse.ArgumentParser(description="Automação de Engenharia Reversa de Vídeos (Universal AIDD / REA v1.6.0)")
     parser.add_argument("target", nargs="?", help="URL do YouTube ou ID do vídeo")
+    parser.add_argument("--input", "-i", dest="input_opt", help="Entrada canônica (URL ou arquivo)")
     parser.add_argument("--analise", choices=["conteudo", "estrutura", "full"], default="full",
                         help="Modo de análise: 'conteudo' (técnico/código), 'estrutura' (storytelling/hook/thumbnail) ou 'full' (ambos)")
     parser.add_argument("--setup", action="store_true", help="Instalação one-liner automática (dependências e sync)")
@@ -738,11 +746,12 @@ def main():
         check_doctor()
         return
 
-    if not args.target:
+    target_val = args.input_opt or args.target
+    if not target_val:
         parser.print_help()
         sys.exit(1)
 
-    video_id = get_video_id(args.target)
+    video_id = get_video_id(target_val)
     out_base = Path(args.output_dir)
     target_dir = resolve_target_dir(video_id, out_base)
 
@@ -781,7 +790,7 @@ def main():
     if args.analise in ("estrutura", "full"):
         generate_estrutura_narrativa(canonical_dir, video_info, tsv_out, visual_dir)
 
-    generate_evidence_manifest(video_id, canonical_dir, info_path, txt_out, frames_dir)
+    generate_evidence_manifest(video_id, canonical_dir, info_path, txt_out, frames_dir, output_handoff_override=args.output_handoff)
     print(f"\n[OK] Scaffolding canônico estruturado com sucesso em: {canonical_dir}")
 
 

@@ -153,10 +153,20 @@ def execute_pipeline(pipeline_dir: Path, force: bool = False) -> bool:
             skill_dir = root_dir / "aidd-skills" / n_skill
 
         script_file = None
+        input_flag = "--input"
+        output_flag = "--output-handoff"
         if skill_dir.exists():
-            scripts = list((skill_dir / "scripts").glob("*.py"))
-            if scripts:
-                script_file = scripts[0]
+            dep_file = skill_dir / "dependencies.json"
+            if dep_file.is_file():
+                dep_data = json.loads(dep_file.read_text(encoding="utf-8"))
+                entrypoint = dep_data.get("entrypoint")
+                if entrypoint:
+                    cand = skill_dir / entrypoint
+                    if cand.is_file():
+                        script_file = cand
+                cli_contract = dep_data.get("cli_contract", {})
+                input_flag = cli_contract.get("input_flag", input_flag)
+                output_flag = cli_contract.get("output_flag", output_flag)
 
         if not script_file or not script_file.exists():
             # REGRA ZERO MOCKS: Erro explícito
@@ -169,9 +179,9 @@ def execute_pipeline(pipeline_dir: Path, force: bool = False) -> bool:
 
         cmd = [sys.executable, str(script_file)]
         if in_path:
-            cmd.extend(["--input", str(in_path)])
+            cmd.extend([input_flag, str(in_path)])
         if out_path:
-            cmd.extend(["--output-handoff", str(out_path)])
+            cmd.extend([output_flag, str(out_path)])
 
         res = subprocess.run(cmd, cwd=str(skill_dir))
         if res.returncode != 0:
@@ -194,9 +204,8 @@ def execute_pipeline(pipeline_dir: Path, force: bool = False) -> bool:
                         metadados={"node_id": n_id, "original": dados_out},
                         caminho_saida=out_path
                     )
-                    print(f"  [🛡️ INTEGRIDADE] Saída do nó {n_id} assinada com HMAC-SHA256.")
-            except Exception:
-                pass
+            except Exception as exc:
+                print(f"  [WARN] Assinatura automática de saída ignorada: {exc}")
 
         node_state["status"] = "COMPLETED"
         node_state["completed_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ")

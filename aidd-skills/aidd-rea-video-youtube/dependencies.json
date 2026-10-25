@@ -33,5 +33,10 @@
       "pytesseract",
       "ctranslate2"
     ]
+  },
+  "entrypoint": "scripts/video_reengineer.py",
+  "cli_contract": {
+    "input_flag": "--input",
+    "output_flag": "--output-handoff"
   }
 }

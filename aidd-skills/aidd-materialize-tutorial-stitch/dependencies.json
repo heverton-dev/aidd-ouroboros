@@ -1,0 +1,7 @@
+{
+  "entrypoint": "scripts/tutorial.py",
+  "cli_contract": {
+    "input_flag": "--input",
+    "output_flag": "--output-handoff"
+  }
+}

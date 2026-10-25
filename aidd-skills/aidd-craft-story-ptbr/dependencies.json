@@ -8,5 +8,10 @@
     "mcp_servers": {},
     "system_binaries": [],
     "python_packages": []
+  },
+  "entrypoint": "scripts/dark_storycraft.py",
+  "cli_contract": {
+    "input_flag": "--input",
+    "output_flag": "--output-handoff"
   }
 }

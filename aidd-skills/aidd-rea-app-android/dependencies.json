@@ -19,5 +19,10 @@
       }
     ],
     "python_packages": []
+  },
+  "entrypoint": "scripts/app_reengineer.py",
+  "cli_contract": {
+    "input_flag": "--input",
+    "output_flag": "--output-handoff"
   }
 }

@@ -3689,7 +3689,9 @@ def main(argv=None) -> int:
     argv = extract_global_flags(raw_argv)
 
     p = argparse.ArgumentParser(prog="tutorial.py", description=__doc__.splitlines()[0])
-    sub = p.add_subparsers(dest="cmd", required=True)
+    p.add_argument("-i", "--input", help="Caminho do arquivo de entrada / manifesto de handoff")
+    p.add_argument("--output-handoff", help="Caminho do arquivo de saida / handoff gerado")
+    sub = p.add_subparsers(dest="cmd", required=False)
 
     sub.add_parser("doctor", help="verifica dependências (somente leitura)").set_defaults(fn=cmd_doctor)
 

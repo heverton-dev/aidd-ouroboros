@@ -827,6 +827,8 @@ def evolve_pipeline(
 
 def main():
     parser = argparse.ArgumentParser(description="Criador e Garimpador de Pipelines Composíveis (aidd-pipeline-creator v1.0.0)")
+    parser.add_argument("-i", "--input", help="Caminho do arquivo de entrada / spec / briefing / handoff de entrada")
+    parser.add_argument("--output-handoff", help="Caminho do arquivo de handoff gerado")
     parser.add_argument("--inventory", action="store_true", help="Descobre e mapeia todas as skills da máquina e almoxarifado")
     parser.add_argument("--scout-local", action="store_true", help="Garimpa pipelines e workflows locais")
     parser.add_argument("--scout-github", metavar="QUERY", help="Garimpa pipelines de autoridade no GitHub com cache e anti-ban")
