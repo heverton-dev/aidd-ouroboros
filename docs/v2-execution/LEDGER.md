@@ -378,3 +378,16 @@
   2. *Auditoria Universal:* `python ouroboros.py --audit` executou todos os 5 gates com Exit Code 0 em 85.32s.
 - **Contagem Regressiva:** 0 pendências legadas. Todas as 20 metas do plano Ouroboros v2 concluídas com sucesso.
 - **Commit:** `e0de4c1`
+
+### NT-21: Preservação Anatômica Enterprise dos Pipelines e Fechamento V2
+- **Status:** DONE
+- **Data:** 2026-10-25
+- **Escopo:** `.gitignore`, `aidd-pipelines/canal-dark-avatar/state.json`, `aidd-pipelines/canal-dark-avatar/context/`, `aidd-pipelines/video-to-tutorial/state.json`, `aidd-pipelines/video-to-tutorial/context/`, `aidd-pipelines/_e2e-smoke/state.json`, `aidd-pipelines/_e2e-smoke/context/`.
+- **Plano:**
+  1. Ajustar `.gitignore` para rastrear `state.json` inicial canônico e `.gitkeep` estruturais em `context/{input,handoffs,output}` sem rastrear artefatos transitórios de execução.
+  2. Suprir subpastas de contexto com `.gitkeep` e arquivos `state.json` canônicos em todos os pipelines (`canal-dark-avatar`, `video-to-tutorial`, `_e2e-smoke`).
+  3. Validar circuit breaker e auditoria universal completa.
+- **Green Verification Evidence:**
+  1. *Circuit Breaker:* `python motores/governanca/gate_factory_completeness.py` -> exit 0 (0 erros).
+  2. *Auditoria Universal:* `python ouroboros.py --audit` -> 5/5 gates verdes, 0 falhas em 89.11s (exit 0).
+- **Commit:** `f1c236d`
