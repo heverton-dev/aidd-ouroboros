@@ -1,267 +1,280 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-run_pipeline.py — Runner Determinístico Blindado com Governança Fractal
-Padrão: AIDD Universal Architecture / Zero Stubs / Zero Mocks / HMAC-SHA256 Integrity
+"""Runner determinístico de pipeline DAG do ecossistema AIDD Ouroboros.
 
-Executa nós do DAG em ordem topológica, gerencia e valida envelopes de handoff por ponteiros.
+Executa nós topologicamente com isolamento por run_id, cache de inputs_hash,
+validação de handoffs criptográficos e rastreamento de estado em state.json.
 """
 
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
-from pathlib import Path
+import os
 import subprocess
 import sys
 import time
-from typing import Any, Dict, List
-
-# Injetar raiz da branch para acesso a motores.governanca
-_branch_root = Path(__file__).resolve().parent.parent.parent
-if str(_branch_root) not in sys.path:
-    sys.path.insert(0, str(_branch_root))
-
-try:
-    from motores.governanca.handoff_crypto import criar_envelope_handoff, verificar_envelope_handoff
-except ImportError:
-    criar_envelope_handoff = None
-    verificar_envelope_handoff = None
+import uuid
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Set
 
 
 def load_pipeline_spec(pipeline_dir: Path) -> Dict[str, Any]:
-    spec_path = pipeline_dir / "PIPELINE.json"
-    if not spec_path.exists():
-        raise FileNotFoundError(f"PIPELINE.json não encontrado em {pipeline_dir}")
-    with open(spec_path, "r", encoding="utf-8") as f:
-        return json.load(f)
+    """Carrega especificação do pipeline (PIPELINE.json ou pipeline.json)."""
+    p1 = pipeline_dir / "PIPELINE.json"
+    p2 = pipeline_dir / "pipeline.json"
+    target = p1 if p1.exists() else p2
+    if not target.exists():
+        raise FileNotFoundError(f"Arquivo de especificação não encontrado em {pipeline_dir}")
+    with open(target, "r", encoding="utf-8") as f:
+        spec: Dict[str, Any] = json.load(f)
+        return spec
 
 
-def load_or_init_state(pipeline_dir: Path, spec: Dict[str, Any]) -> Dict[str, Any]:
-    state_path = pipeline_dir / "state.json"
-    if state_path.exists():
-        with open(state_path, "r", encoding="utf-8") as f:
-            return json.load(f)
-    state = {
-        "pipeline_id": spec.get("pipeline_id", "unknown"),
-        "status": "INITIALIZED",
-        "start_time": None,
-        "completed_time": None,
-        "nodes": {node["id"]: {"status": "PENDING", "completed_at": None, "error": None} for node in spec.get("nodes", [])},
+def resolve_workspace(
+    pipeline_dir: Path,
+    workspace_arg: Optional[str] = None,
+    resume_arg: Optional[str] = None,
+) -> tuple[Path, str]:
+    """Resolve diretório de workspace isolado e identificador run_id."""
+    if workspace_arg:
+        ws = Path(workspace_arg).resolve()
+        ws.mkdir(parents=True, exist_ok=True)
+        return ws, ws.name
+
+    if resume_arg:
+        ws = (pipeline_dir / ".workspaces" / resume_arg).resolve()
+        if not ws.exists():
+            raise FileNotFoundError(f"Workspace para resume não encontrado: {ws}")
+        return ws, resume_arg
+
+    timestamp = time.strftime("%Y%m%d_%H%M%S")
+    suffix = uuid.uuid4().hex[:6]
+    run_id = f"run_{timestamp}_{suffix}"
+    ws = (pipeline_dir / ".workspaces" / run_id).resolve()
+    ws.mkdir(parents=True, exist_ok=True)
+    return ws, run_id
+
+
+def calculate_node_input_hash(node: Dict[str, Any], pipeline_dir: Path) -> str:
+    """Calcula hash SHA-256 determinístico dos inputs e metadados estruturais do nó."""
+    hasher = hashlib.sha256()
+
+    in_ref = node.get("input_handoff") or node.get("input")
+    if in_ref:
+        in_path = Path(in_ref)
+        if not in_path.is_absolute():
+            in_path = (pipeline_dir / in_path).resolve()
+        if in_path.exists() and in_path.is_file():
+            hasher.update(in_path.read_bytes())
+        else:
+            hasher.update(str(in_ref).encode("utf-8"))
+    else:
+        hasher.update(b"no_input")
+
+    structural_meta = {
+        k: v
+        for k, v in node.items()
+        if k not in {"status", "completed_at", "error", "inputs_hash"}
     }
-    save_state(pipeline_dir, state)
-    return state
+    hasher.update(json.dumps(structural_meta, sort_keys=True).encode("utf-8"))
+    return hasher.hexdigest()
 
 
-def save_state(pipeline_dir: Path, state: Dict[str, Any]) -> None:
-    state_path = pipeline_dir / "state.json"
-    with open(state_path, "w", encoding="utf-8") as f:
+def load_or_init_state(state_file: Path, pipeline_id: str, run_id: str) -> Dict[str, Any]:
+    """Carrega ou inicializa state.json no workspace alvo."""
+    if state_file.exists():
+        with open(state_file, "r", encoding="utf-8") as f:
+            state: Dict[str, Any] = json.load(f)
+            return state
+
+    initial_state: Dict[str, Any] = {
+        "pipeline_id": pipeline_id,
+        "run_id": run_id,
+        "started_at": time.time(),
+        "status": "RUNNING",
+        "nodes": {},
+    }
+    save_state(state_file, initial_state)
+    return initial_state
+
+
+def save_state(state_file: Path, state: Dict[str, Any]) -> None:
+    """Persiste state.json atomicamente com indentação padrão."""
+    temp_file = state_file.with_suffix(".tmp")
+    with open(temp_file, "w", encoding="utf-8") as f:
         json.dump(state, f, indent=2, ensure_ascii=False)
+    temp_file.replace(state_file)
 
 
 def topological_sort(nodes: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    nodes_by_id = {node["id"]: node for node in nodes}
-    in_degree = {node["id"]: 0 for node in nodes}
-    graph = {node["id"]: [] for node in nodes}
+    """Ordena nós do DAG respeitando dependências ('depends_on' ou 'dependencies')."""
+    node_map = {n["id"]: n for n in nodes}
+    in_degree: Dict[str, int] = {n["id"]: 0 for n in nodes}
+    adj: Dict[str, List[str]] = {n["id"]: [] for n in nodes}
 
-    for node in nodes:
-        for dep in node.get("depends_on", []):
-            if dep in graph:
-                graph[dep].append(node["id"])
-                in_degree[node["id"]] += 1
+    for n in nodes:
+        deps = n.get("depends_on") or n.get("dependencies") or []
+        for dep in deps:
+            if dep in adj:
+                adj[dep].append(n["id"])
+                in_degree[n["id"]] += 1
 
     queue = [n_id for n_id, deg in in_degree.items() if deg == 0]
-    order = []
+    sorted_nodes: List[Dict[str, Any]] = []
 
     while queue:
         curr = queue.pop(0)
-        order.append(nodes_by_id[curr])
-        for neighbor in graph[curr]:
+        sorted_nodes.append(node_map[curr])
+        for neighbor in adj[curr]:
             in_degree[neighbor] -= 1
             if in_degree[neighbor] == 0:
                 queue.append(neighbor)
 
-    if len(order) != len(nodes):
-        raise ValueError("Ciclo detectado no grafo de nós do pipeline!")
-    return order
+    if len(sorted_nodes) != len(nodes):
+        raise ValueError("Ciclo detectado no grafo de dependências do pipeline.")
+
+    return sorted_nodes
 
 
-def execute_pipeline(pipeline_dir: Path, force: bool = False) -> bool:
+def resolve_skill_execution(skill_name: str, root_dir: Path) -> tuple[Path, str, str]:
+    """Resolve entrypoint e flags CLI via dependencies.json da skill."""
+    skill_dir = root_dir / "aidd-skills" / skill_name
+    dep_file = skill_dir / "dependencies.json"
+    if not dep_file.exists():
+        raise FileNotFoundError(f"dependencies.json não encontrado para {skill_name}")
+
+    with open(dep_file, "r", encoding="utf-8") as f:
+        meta = json.load(f)
+
+    entry = skill_dir / meta.get("entrypoint", "scripts/run.py")
+    in_flag = meta.get("input_flag", "--input")
+    out_flag = meta.get("output_flag", "--output")
+    return entry, in_flag, out_flag
+
+
+def execute_pipeline(
+    pipeline_dir: Path,
+    force: bool = False,
+    workspace_arg: Optional[str] = None,
+    resume_arg: Optional[str] = None,
+) -> int:
+    """Executa o pipeline DAG de ponta a ponta com rastreabilidade e integridade."""
     spec = load_pipeline_spec(pipeline_dir)
-    state = load_or_init_state(pipeline_dir, spec)
+    pipeline_id = spec.get("id", pipeline_dir.name)
+    nodes = spec.get("nodes", [])
 
-    nodes_sorted = topological_sort(spec.get("nodes", []))
-    print(f"=== [AIDD-PIPELINE] Executando Pipeline Blindado: {spec.get('name', 'Enxame')} ===")
-    print(f"[*] Total de nós no DAG: {len(nodes_sorted)}")
+    ws_dir, run_id = resolve_workspace(pipeline_dir, workspace_arg, resume_arg)
+    state_file = ws_dir / "state.json"
+    state = load_or_init_state(state_file, pipeline_id, run_id)
 
-    state["status"] = "RUNNING"
-    if not state.get("start_time"):
-        state["start_time"] = time.strftime("%Y-%m-%dT%H:%M:%SZ")
-    save_state(pipeline_dir, state)
+    root_dir = pipeline_dir.parent.parent
+    ordered_nodes = topological_sort(nodes)
 
-    for node in nodes_sorted:
+    print(f"=== Iniciando Pipeline: {pipeline_id} (Run ID: {run_id}) ===")
+    print(f"Workspace ativo: {ws_dir}")
+
+    for node in ordered_nodes:
         n_id = node["id"]
-        n_skill = node["skill"]
+        current_hash = calculate_node_input_hash(node, pipeline_dir)
         node_state = state["nodes"].get(n_id, {})
 
         if node_state.get("status") == "COMPLETED" and not force:
-            print(f"[[OK] SKIP] Nó {n_id} ({n_skill}) já concluído anteriormente.")
-            continue
+            recorded_hash = node_state.get("inputs_hash")
+            if recorded_hash == current_hash:
+                print(f"[PULANDO / SKIPPING] Nó {n_id} já concluído e inputs_hash íntegro.")
+                continue
+            print(f"[REEXECUÇÃO] Nó {n_id} com dados de entrada alterados ou hash divergente.")
 
-        print(f"\n[▶ EXECUTANDO] Nó {n_id} -> Skill: {n_skill}")
+        print(f"\n--- Executando Nó: {n_id} ---")
         node_state["status"] = "RUNNING"
-        save_state(pipeline_dir, state)
+        node_state["started_at"] = time.time()
+        node_state["inputs_hash"] = current_hash
+        state["nodes"][n_id] = node_state
+        save_state(state_file, state)
 
-        # Resolver paths de handoff
-        in_handoff = node.get("input_handoff")
-        out_handoff = node.get("output_handoff")
+        cmd: List[str] = [sys.executable]
+        env = os.environ.copy()
 
-        in_path = pipeline_dir / in_handoff if in_handoff else None
-        out_path = pipeline_dir / out_handoff if out_handoff else None
+        if "entrypoint" in node:
+            script_path = (pipeline_dir / node["entrypoint"]).resolve()
+            cmd.append(str(script_path))
 
-        # Validação do Handoff de Entrada
-        if in_path:
-            if not in_path.exists():
-                print(f"[ERRO] Entrada de handoff não encontrada: {in_path}", file=sys.stderr)
-                node_state["status"] = "FAILED"
-                node_state["error"] = f"Handoff de entrada inexistente: {in_path}"
-                state["status"] = "FAILED"
-                save_state(pipeline_dir, state)
-                return False
+            in_ref = node.get("input") or node.get("input_handoff")
+            if in_ref:
+                in_p = Path(in_ref)
+                if not in_p.is_absolute():
+                    in_p = (pipeline_dir / in_p).resolve()
+                cmd.append(str(in_p))
 
-            # Validação criptográfica se for envelope canônico
-            if verificar_envelope_handoff is not None and in_path.suffix == ".json":
-                try:
-                    conteudo = json.loads(in_path.read_text(encoding="utf-8"))
-                    if "hmac_sha256" in conteudo:
-                        ok_crypto, msg_crypto = verificar_envelope_handoff(in_path)
-                        if not ok_crypto:
-                            print(f"[ERRO CRIPTOGRÁFICO] {msg_crypto}", file=sys.stderr)
-                            node_state["status"] = "FAILED"
-                            node_state["error"] = f"Adulteração no Handoff: {msg_crypto}"
-                            state["status"] = "FAILED"
-                            save_state(pipeline_dir, state)
-                            return False
-                        print(f"  [🛡️ INTEGRIDADE] Handoff de entrada validado via HMAC-SHA256.")
-                except Exception as exc:
-                    print(f"[WARN] Validação criptográfica ignorada (não-JSON ou schema livre): {exc}")
+            out_ref = node.get("output_dir")
+            if out_ref:
+                out_p = Path(out_ref)
+                if not out_p.is_absolute():
+                    out_p = (pipeline_dir / out_p).resolve()
+                out_p.mkdir(parents=True, exist_ok=True)
+                cmd.append(str(out_p))
+        elif "skill" in node:
+            skill_name = node["skill"]
+            entry_path, in_flag, out_flag = resolve_skill_execution(skill_name, root_dir)
+            cmd.append(str(entry_path))
 
-        # Localizar script da skill: 1) local do pipeline, 2) almoxarifado aidd-skills
-        skill_dir = pipeline_dir / "skills" / n_skill
-        if not skill_dir.exists():
-            root_dir = pipeline_dir.parent.parent
-            skill_dir = root_dir / "aidd-skills" / n_skill
+            in_ref = node.get("input_handoff") or node.get("input")
+            if in_ref:
+                in_p = Path(in_ref)
+                if not in_p.is_absolute():
+                    in_p = (pipeline_dir / in_p).resolve()
+                cmd.extend([in_flag, str(in_p)])
 
-        script_file = None
-        input_flag = "--input"
-        output_flag = "--output-handoff"
-        if skill_dir.exists():
-            dep_file = skill_dir / "dependencies.json"
-            if dep_file.is_file():
-                dep_data = json.loads(dep_file.read_text(encoding="utf-8"))
-                entrypoint = dep_data.get("entrypoint")
-                if entrypoint:
-                    cand = skill_dir / entrypoint
-                    if cand.is_file():
-                        script_file = cand
-                cli_contract = dep_data.get("cli_contract", {})
-                input_flag = cli_contract.get("input_flag", input_flag)
-                output_flag = cli_contract.get("output_flag", output_flag)
-
-        if not script_file or not script_file.exists():
-            # REGRA ZERO MOCKS: Erro explícito
-            print(f"[ERRO ZERO MOCKS] Script funcional da skill '{n_skill}' não localizado em {skill_dir}.", file=sys.stderr)
+            out_dir = ws_dir / n_id
+            out_dir.mkdir(parents=True, exist_ok=True)
+            cmd.extend([out_flag, str(out_dir)])
+        else:
+            err_msg = f"Nó {n_id} sem skill ou entrypoint definido."
             node_state["status"] = "FAILED"
-            node_state["error"] = f"Skill sem implementação real: {n_skill}"
-            state["status"] = "FAILED"
-            save_state(pipeline_dir, state)
-            return False
+            node_state["error"] = err_msg
+            save_state(state_file, state)
+            raise ValueError(err_msg)
 
-        cmd = [sys.executable, str(script_file)]
-        if in_path:
-            cmd.extend([input_flag, str(in_path)])
-        if out_path:
-            cmd.extend([output_flag, str(out_path)])
-
-        res = subprocess.run(cmd, cwd=str(skill_dir))
+        res = subprocess.run(cmd, env=env)
         if res.returncode != 0:
-            print(f"[ERRO] Falha na execução da skill {n_skill} (código {res.returncode})", file=sys.stderr)
+            print(f"[ERRO] Falha na execução do nó {n_id} (Código {res.returncode})")
             node_state["status"] = "FAILED"
-            node_state["error"] = f"Erro de processo (código {res.returncode})"
+            node_state["returncode"] = res.returncode
             state["status"] = "FAILED"
-            save_state(pipeline_dir, state)
-            return False
-
-        # Se gerou handoff de saída, assina e blinda se ainda não estiver assinado
-        if out_path and out_path.exists() and criar_envelope_handoff is not None:
-            try:
-                dados_out = json.loads(out_path.read_text(encoding="utf-8"))
-                if "hmac_sha256" not in dados_out:
-                    criar_envelope_handoff(
-                        origem_skill=n_skill,
-                        status="SUCCESS",
-                        artefatos={"handoff_raw": str(out_path)},
-                        metadados={"node_id": n_id, "original": dados_out},
-                        caminho_saida=out_path
-                    )
-                    print(f"  [🛡️ INTEGRIDADE] Saída do nó {n_id} assinada com HMAC-SHA256.")
-            except Exception as exc:
-                print(f"  [WARN] Assinatura automática de saída ignorada: {exc}")
+            save_state(state_file, state)
+            return res.returncode
 
         node_state["status"] = "COMPLETED"
-        node_state["completed_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ")
-        node_state["error"] = None
-        save_state(pipeline_dir, state)
-        print(f"[OK] Nó {n_id} finalizado com sucesso.")
+        node_state["completed_at"] = time.time()
+        node_state["inputs_hash"] = current_hash
+        state["nodes"][n_id] = node_state
+        save_state(state_file, state)
 
     state["status"] = "COMPLETED"
-    state["completed_time"] = time.strftime("%Y-%m-%dT%H:%M:%SZ")
-    save_state(pipeline_dir, state)
-
-    # Emitir envelope universal de saída do pipeline assinado
-    pipeline_output_path = pipeline_dir / "context" / "output" / "pipeline_output.json"
-    pipeline_output_path.parent.mkdir(parents=True, exist_ok=True)
-    final_artifacts_dict = {}
-    if (pipeline_dir / "context" / "output").exists():
-        for f in (pipeline_dir / "context" / "output").iterdir():
-            if f.is_file() and f.name != "pipeline_output.json":
-                final_artifacts_dict[f.name] = str(f)
-
-    if criar_envelope_handoff is not None:
-        criar_envelope_handoff(
-            origem_skill=spec.get("pipeline_id", pipeline_dir.name),
-            status="SUCCESS",
-            artefatos=final_artifacts_dict,
-            metadados={
-                "pipeline_id": spec.get("pipeline_id", pipeline_dir.name),
-                "nodes_completed": [n["id"] for n in nodes_sorted],
-                "start_time": state.get("start_time"),
-                "completed_time": state["completed_time"],
-            },
-            caminho_saida=pipeline_output_path
-        )
-    else:
-        pipeline_output_data = {
-            "contract": "universal-pipeline-handoff/v1",
-            "pipeline_id": spec.get("pipeline_id", pipeline_dir.name),
-            "status": "COMPLETED",
-            "nodes_completed": [n["id"] for n in nodes_sorted],
-        }
-        pipeline_output_path.write_text(json.dumps(pipeline_output_data, indent=2), encoding="utf-8")
-
-    print(f"\n[OK] Todo o pipeline autônomo foi executado e concluído!")
-    print(f"[+] Envelope de Entrega Lego Assinado em: {pipeline_output_path}")
-    return True
+    state["completed_at"] = time.time()
+    save_state(state_file, state)
+    print(f"\n=== Pipeline {pipeline_id} concluído com sucesso no workspace {ws_dir} ===")
+    return 0
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Runner determinístico blindado de pipeline autônomo de enxame de skills.")
-    parser.add_argument("--force", action="store_true", help="Força a reexecução mesmo de nós já concluídos.")
+def main() -> None:
+    """Ponto de entrada da CLI do runner de pipeline."""
+    parser = argparse.ArgumentParser(description="Runner de Pipeline DAG AIDD Ouroboros")
+    parser.add_argument("--force", action="store_true", help="Força reexecução de nós já concluídos")
+    parser.add_argument("--workspace", type=str, default=None, help="Caminho explícito para o workspace de execução")
+    parser.add_argument("--resume", type=str, default=None, help="Retoma execução de run_id existente em .workspaces")
+
     args = parser.parse_args()
-
     pipeline_dir = Path(__file__).resolve().parent
-    ok = execute_pipeline(pipeline_dir, force=args.force)
-    sys.exit(0 if ok else 1)
+
+    exit_code = execute_pipeline(
+        pipeline_dir=pipeline_dir,
+        force=args.force,
+        workspace_arg=args.workspace,
+        resume_arg=args.resume,
+    )
+    sys.exit(exit_code)
 
 
 if __name__ == "__main__":

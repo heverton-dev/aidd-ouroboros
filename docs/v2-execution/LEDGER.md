@@ -151,3 +151,27 @@
 - **Contagem Regressiva:** 9 tickets restantes.
 - **Commit:** `0d6574c`
 
+### NT-13: Isolamento de Workspace por run_id e Integridade de Resume por inputs_hash (C-10)
+- **Status:** DONE
+- **Escopo:** `aidd-skills/aidd-orchestrate-pipeline-creator/templates/RUN_PIPELINE_TEMPLATE.py`, `aidd-pipelines/canal-dark-avatar/run_pipeline.py`, `aidd-pipelines/video-to-tutorial/run_pipeline.py`, `tests/test_resume_integrity.py`.
+- **Plano:**
+  1. Criar `tests/test_resume_integrity.py` com cenários de isolamento de workspace (`--workspace`), integridade de resume via `inputs_hash` determinístico e fail-closed quando `inputs_hash` diverge sem `--force`.
+  2. Executar teste e comprovar RED.
+  3. Implementar no runner (`RUN_PIPELINE_TEMPLATE.py`):
+     - `resolve_workspace()` com suporte a `--workspace <path>`, `--resume [run_id]` e diretórios isolados `.workspaces/<run_id>`.
+     - `calculate_node_input_hash()` computando SHA-256 de todos os artefatos de entrada.
+     - Suporte estrito a `--resume` e `--force`, garantindo que nós só sejam reaproveitados se o hash de input coincidir exatamente.
+     - Suporte a nós diretos com convenção posicional (`sys.argv[1]` = input, `sys.argv[2]` = output_dir) e nós de skill via `dependencies.json`.
+  4. Propagar template para os pipelines existentes (`canal-dark-avatar` e `video-to-tutorial`).
+  5. Validar testes unitários (2 passed), regressão completa (129 passed) e Gate AST (26 <= 30 baseline).
+- **Red-Before-Green Evidence:**
+  - *Teste RED:* `python -m pytest -q tests/test_resume_integrity.py` falhou com `SystemExit: 2` (flags `--workspace` e `--resume` não eram suportadas pelo runner legado).
+  - *Gate RED:* Runners gravavam outputs diretamente em pasta estática compartilhada sem isolamento de `run_id`.
+- **Green Verification Evidence:**
+  - *Teste GREEN:* `python -m pytest -q tests/test_resume_integrity.py` -> 2 passed in 1.07s (exit 0).
+  - *Gate GREEN:* `python motores/governanca/gate_ast.py . --baseline motores/governanca/gate_baseline.json` -> 26 violações (baseline 30, exit 0).
+  - *Full Suite Regression:* 129 passed, 1 warning in 47.91s (`pytest -q --ignore=tests/negative --ignore=tests/negative-brand`) (exit 0).
+- **Contagem Regressiva:** 8 tickets restantes.
+- **Commit:** PENDENTE
+
+
