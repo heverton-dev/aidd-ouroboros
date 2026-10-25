@@ -172,6 +172,6 @@
   - *Gate GREEN:* `python motores/governanca/gate_ast.py . --baseline motores/governanca/gate_baseline.json` -> 26 violações (baseline 30, exit 0).
   - *Full Suite Regression:* 129 passed, 1 warning in 47.91s (`pytest -q --ignore=tests/negative --ignore=tests/negative-brand`) (exit 0).
 - **Contagem Regressiva:** 8 tickets restantes.
-- **Commit:** PENDENTE
+- **Commit:** `8a695f2`
 
 
