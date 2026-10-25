@@ -27,7 +27,8 @@ scratch/
 # Ouroboros runtime & artifacts
 workspace/
 aidd-pipelines/*/context/*/*
-!aidd-pipelines/*/context/*/.gitkeep
+!aidd-pipelines/*/context/*/README.md
+**/state.json
 **/.hyperframes/video-state.json
 *.mp4
 *.wav

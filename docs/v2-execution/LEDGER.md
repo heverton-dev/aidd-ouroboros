@@ -391,3 +391,19 @@
   1. *Circuit Breaker:* `python motores/governanca/gate_factory_completeness.py` -> exit 0 (0 erros).
   2. *Auditoria Universal:* `python ouroboros.py --audit` -> 5/5 gates verdes, 0 falhas em 89.11s (exit 0).
 - **Commit:** `f1c236d`
+
+### NT-22: Substituição de .gitkeep por Contratos Canônicos README.md e Purga de state.json
+- **Status:** DONE
+- **Data:** 2026-10-25
+- **Escopo:** `.gitignore`, `tests/test_repo_hygiene.py`, 9 contratos `README.md` canônicos em `aidd-pipelines/*/context/{input,handoffs,output}`, desindexação de 9 arquivos `.gitkeep` e 3 arquivos transitórios `state.json`.
+- **Plano:**
+  1. Criar contratos canônicos estruturados `README.md` nos diretórios de contexto (`input`, `handoffs`, `output`) de todos os pipelines com especificações de schema de dados e validação HMAC-SHA256, substituindo sentinelas vazios (`.gitkeep`).
+  2. Purgar do rastreamento do Git os arquivos transitórios de execução `state.json` dos pipelines.
+  3. Atualizar `.gitignore` com exceção explícita para versionamento dos contratos (`!aidd-pipelines/*/context/*/README.md`) e ignorar `**/state.json`.
+  4. Ajustar `tests/test_repo_hygiene.py` para permitir que contratos canônicos `README.md` vivam na árvore de contexto sem falhar na detecção de lixo de runtime ou mídias binárias.
+  5. Executar Universal Quality Gate (`python ouroboros.py --audit`) atestando 5/5 gates verdes.
+- **Green Verification Evidence:**
+  1. *Universal Quality Gate:* `python ouroboros.py --audit` executou todos os 5 gates com Exit Code 0 em 65.74s (Circuit Breaker: 0 erros, Pytest: 104 passed).
+  2. *Higiene de Repositório:* 0 arquivos de runtime, 0 binários ou sentinelas vazios rastreados no Git.
+- **Commit:** `pending`
+

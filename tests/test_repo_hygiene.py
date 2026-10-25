@@ -32,7 +32,9 @@ def test_no_runtime_or_heavy_media_tracked_in_git() -> None:
 
     violations = [
         f for f in tracked_files
-        if f not in allowlist and pattern.search(f.replace("\\", "/"))
+        if f not in allowlist
+        and pattern.search(f.replace("\\", "/"))
+        and not f.replace("\\", "/").endswith("/README.md")
     ]
 
     assert not violations, (
