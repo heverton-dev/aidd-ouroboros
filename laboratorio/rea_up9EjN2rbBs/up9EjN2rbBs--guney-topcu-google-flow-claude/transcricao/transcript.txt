@@ -1,0 +1,295 @@
+[00:00] Everything you've just watched came from one idea I typed into cloud code and I never
+[00:18] touched the timeline in CapCut.
+[00:20] Normally putting together something like that means hours of manual editing, recording
+[00:23] a voiceover separately and keyframing every picture by hand in CapCut or any editing tool.
+[00:28] So today I'll show you how to set up my free skill that does all of it and then we'll make
+[00:32] a brand new long form video together, all for free.
+[00:35] If you're not familiar, the skill is a set of instructions and tools that cloud code loads
+[00:39] when you ask for a certain type of job.
+[00:41] This one turns a single idea into a finished CapCut video.
+[00:44] Cloud writes the story, records the narration, generates the pictures in Google Flow, builds
+[00:49] the motion graphics and the soundtrack and then writes the whole edit straight into
+[00:54] CapCut with every clip, keyframe and caption already on the timeline.
+[00:58] None of this is made from a generated video clip.
+[01:00] Every scene is once still picture and the skill brings those pictures to life with camera
+[01:04] moves, light and sound, the way a good documentary treats photographs.
+[01:08] This skill keeps your characters consistent from scene to scene and it keeps the cost
+[01:11] at zero because pictures are free to create in Google Flow.
+[01:14] To follow along you need cloud code, the free CapCut desktop app, Google Chrome and
+[01:19] a Google account for Flow.
+[01:20] And yes, the skill should also work on Windows but I haven't tested it there yet so
+[01:24] let me know in the comments if you run into any issues and I'll fix them.
+[01:27] This setup takes about 10 minutes and you only need to do it once.
+[01:30] Let's get started.
+[01:31] First, you need cloud code and no, you don't need a terminal for it.
+[01:35] Download the cloud desktop app from cloud.com forward slash download and click the code
+[01:39] tab.
+[01:40] Then download CapCut from CapCut.com.
+[01:42] Once it's installed, open it, go to settings, then general and under software update
+[01:47] choose get notified about updates instead of automatic updates.
+[01:50] The skill writes projects for the CapCut version it was built on so you don't want
+[01:54] CapCut updating itself in the middle of a project.
+[01:56] If it ever pops up an update window, just close it.
+[01:59] Next get the skill zip file from my Builders Club community.
+[02:02] The link is in the video description.
+[02:04] Download it and leave it in your downloads folder.
+[02:06] Make an empty folder on your desktop called storyfilms.
+[02:09] Then open cloud code, start a new conversation, click the folder icon below the
+[02:13] chat box and pick that folder.
+[02:15] Now, ask cloud to install the skill from the zip in your downloads folder and it
+[02:19] puts it in your cloud code skills folder.
+[02:21] Then ask it to set up the skill.
+[02:23] Cloud runs a check and shows you a table of everything the skill needs.
+[02:26] That's already there and what's missing.
+[02:28] That list can include homebrew, node, python, ffmpeg, the speech-to-text model that
+[02:33] times the edits to the voice and the flow mcp, which is a connector I also built
+[02:37] that list cloud drive google for you.
+[02:39] It does a lot more than that by the way.
+[02:41] So check out the video linked in the description as well for it to see
+[02:44] everything it can do for you for free.
+[02:47] So yeah, just say yes to install what's missing.
+[02:49] If you're on a Mac it might ask for your password along the way because
+[02:52] homebrew's installer needs it.
+[02:53] When it's done, create the cloud app and open it again and go to the session
+[02:57] you installed the skill from.
+[02:58] The reason we restart cloud code is to load the flow mcp connector that was
+[03:02] also installed.
+[03:03] Then ask cloud to check flow mcp connection.
+[03:05] It opens a Chrome window and you sign into your Google account there.
+[03:08] You only need to do it once and cloud never sees or types your password.
+[03:12] Flow mcp can also use Google AI Studio's premium voices, which
+[03:15] sounds so much better and all you need is a free Google AI Studio key.
+[03:18] To get one, go to aistudio.google.com forward slash api dash keys
+[03:23] and click create api key in the top right corner.
+[03:26] If you don't have a project, create one, name your key, click create key
+[03:30] and copy it.
+[03:31] Then ask cloud code to open flow studio.
+[03:33] It will open on your browser.
+[03:34] Go to the voice tab and paste the key in and click save.
+[03:37] By the way, never paste your key into the chat.
+[03:39] Without a key, cloud can still use your computer's built-in voices
+[03:42] by they don't sound human.
+[03:44] So I highly recommend that you use AI Studio voices.
+[03:46] The last step is to give the cloud app screen recording and accessibility
+[03:50] access in system settings right under privacy and security.
+[03:53] Cloud uses that at the end to open the project in CapCut and check it for you.
+[03:57] Once you do that, ask cloud if the skill is ready to be used.
+[04:00] If no issues are found, you're ready to make your first film.
+[04:03] To start a film, you just tell cloud to use the CapCut story film
+[04:06] skill to make a new film.
+[04:07] Before it does anything, it asks you six things in one message.
+[04:10] How long the film should be, the genre, the visual style,
+[04:14] white screen or vertical, a male or a female narrator
+[04:17] and what kind of an ending you want.
+[04:19] If you don't have an idea yet, you can ask it to suggest some.
+[04:22] And it gives you seven and ranks the best three.
+[04:24] For this video, I asked for a three-minute sci-fi film,
+[04:27] photo realistic, white screen with a male narrator
+[04:30] and a twist ending and I let it suggest ideas.
+[04:33] I picked the one called The Voice Under Europa.
+[04:35] It's about a woman who has spent 700 days alone
+[04:37] in research station under the ice of Jupiter's moon Europa
+[04:40] and every night she plays a recording of her daughter
+[04:43] knocking on her bedroom door.
+[04:44] Then one night, something knocks on the hall
+[04:46] in her daughter's rhythm.
+[04:47] Claude then writes a full storyboard.
+[04:49] For the three-minute film, that's about 30 scenes
+[04:51] and each one comes with a picture prompt.
+[04:53] A camera mode, the narration line and the sound.
+[04:56] It follows one or that the whole system depends on.
+[04:59] Every scene has to work as a single still picture.
+[05:02] A line like he walks to the door, opens it
+[05:04] and looks inside, can't be one picture.
+[05:06] So Claude picks the strongest moment to illustrate it
+[05:09] instead, like her hands on the handle
+[05:11] and lets the narration carry the rest.
+[05:13] This is a good moment to read it properly
+[05:15] and ask for changes because nothing has been generated yet.
+[05:18] Next we have to do The Voice
+[05:19] and it comes before any pictures
+[05:21] because the narration decides how long your film really is.
+[05:24] For this film, I planned three minutes
+[05:26] and the narration came at around three and a half.
+[05:28] So Claude timed the whole edit to The Voice
+[05:31] instead of the plan.
+[05:32] You want that because it's what makes
+[05:33] every cut land on the words.
+[05:35] Claude will start with one test line
+[05:36] and read it in the style the storyboard described
+[05:39] so you can hear The Voice before committing to it.
+[05:41] Here it picked a low, gravely male voice
+[05:43] and asked it to read slowly.
+[05:44] Like a quite documentary storyteller.
+[05:46] Once you approve it, Claude records the full narration
+[05:49] and tells you the real runtime against the plan one.
+[05:51] The pictures happen in two rounds.
+[05:53] First, Claude makes one reference image
+[05:55] for every recurring character, place and important object.
+[05:58] For this film that was six,
+[06:00] the woman, her daughter, the station,
+[06:02] the room she lives in,
+[06:03] the recorder she plays every night and the creature.
+[06:06] You need these because these are what makes your characters
+[06:08] looking the same scene after scene.
+[06:10] So look closely and ask to redo anything
+[06:12] if something feels off
+[06:13] because rest of your scenes will depend on these.
+[06:15] That review paid off for me here
+[06:17] because in the first version,
+[06:18] the woman was shown head to toe.
+[06:20] So her face was too small to hold up in close-ups
+[06:23] and the creature looked like a monster
+[06:25] when this story needed wonder.
+[06:26] Claude flagged both and once I said go,
+[06:29] it remade them and show me the old
+[06:31] and the new side by side before moving on.
+[06:33] Then Claude tells you what the scene pictures
+[06:35] will cost and waits for your yes.
+[06:37] Pictures are free but follow MCP
+[06:39] can also make video clips and those do cost credits.
+[06:42] So I set it up in a way where anytime the MCP is used,
+[06:46] Claude reads the price from flow before it does anything.
+[06:48] Flow then generates all of the scenes in bulk
+[06:51] in a single request with the reference characters attached.
+[06:54] So every scene comes back with the same faces,
+[06:56] same station and the same creature.
+[06:58] It can also put several characters in one picture.
+[07:01] Claude used that to remake two scenes.
+[07:03] The photo on the wall now shows the mother and the daughter
+[07:05] and the memory on the bedroom door now shows
+[07:07] the mother kneeling as her daughter peeks out
+[07:09] to say good night.
+[07:10] After the batch is done,
+[07:11] Claude lays every scene out on a contact sheet
+[07:14] and checks for gaps.
+[07:15] If a scene comes back wrong from the pictures
+[07:17] or the face doesn't look just right,
+[07:19] it regenerates just those scenes.
+[07:21] This time, Altered came back on the first pass for me.
+[07:24] All right, now that we have the images,
+[07:26] Claude can go ahead and build the whole thing without you.
+[07:29] And it will work through the whole thing
+[07:30] just like an editor.
+[07:31] First it listens.
+[07:32] It transcribes the narration word by word
+[07:35] so it knows the exact moment every word is spoken
+[07:37] and it reads the transcript back like a proof reader.
+[07:40] In this video, it caught that speech recognition
+[07:43] heard the name Innes Innes with a Z
+[07:45] and it fixed it so the captions are right.
+[07:47] It also noticed that the pause before the big reveal
+[07:49] was too short for the biggest moment in the film
+[07:52] and stretched that to about five seconds of silence.
+[07:55] Then it directs the camera.
+[07:56] It looks at every picture, finds where the face,
+[07:58] the hands or the important objects sit.
+[08:01] And plans a move for each shot.
+[08:03] So one picture gets a slow push in for tension,
+[08:06] the next append that reveals something
+[08:08] and the transitions follow the story
+[08:10] with dissolves where time passes,
+[08:11] a dip to black between acts
+[08:13] and a match cut at the end that echoes an early shot.
+[08:16] When a line runs long,
+[08:17] it splits it across two pictures
+[08:19] instead of holding one too long.
+[08:21] Then it builds the motion graphics with hyperframes.
+[08:23] Titles build word by word.
+[08:25] The key line is stamped on the screen
+[08:26] as the narrator says it
+[08:28] and there is film grain over the memory
+[08:30] and drifting particles in the water.
+[08:32] It really thinks of every little detail
+[08:34] to bring these images to life.
+[08:36] My favorite part is the lights inside the pictures
+[08:38] which switch on exactly on a spoken word.
+[08:41] In this one we are making
+[08:42] which we're gonna watch soon.
+[08:43] The narrator says she played Lucia's voice again.
+[08:45] The lights on the speaker panel switch on one by one.
+[08:48] And when he says something answered,
+[08:50] a tiny gold light appears far below the station.
+[08:53] All right, then Claude composes the music
+[08:55] and the sound effects encode following the story.
+[08:57] Before it builds the CapCut project,
+[08:59] Claude sends you a preview of the soundtrack
+[09:01] so you can say if the mood is wrong.
+[09:02] Finally, if CapCut is open,
+[09:04] Claude asks you to close it
+[09:05] and then it writes the project.
+[09:06] Every clip, keyframe, graphic layer,
+[09:09] caption and audio track is already on the timeline
+[09:11] and it only uses CapCut's free features.
+[09:14] So the export button never asks you to pay.
+[09:16] Then it opens the project in CapCut itself
+[09:18] and scrubs through the key moments
+[09:20] to check that everything shows up
+[09:21] before handing it over to you.
+[09:22] Once everything is done,
+[09:23] Claude will ask you to review the video in CapCut.
+[09:26] Open the project and watch it.
+[09:27] If something is off,
+[09:28] just tell Claude to fix or change it
+[09:30] and it builds the project under a new name
+[09:32] so your previous version is still there.
+[09:33] Now the big moment.
+[09:34] Let's take a look at what we just made.
+[09:37] 20 kilometers beneath the ice of Europa,
+[09:42] there is an ocean no human has ever seen.
+[09:47] Hodel station hangs in that darkness
+[09:50] like a lantern on a string.
+[09:53] It was built to listen.
+[09:56] Its whole hull is one giant microphone
+[10:00] and one giant speaker pressed against the ocean.
+[10:05] For 700 days, it has had a crew of one.
+[10:10] Inez Calder came here to study the water.
+[10:15] Mostly she came here to be far away from everything.
+[10:20] Her daughter, Lucia, was eight.
+[10:24] Every night Inez plays the same recording,
+[10:28] Lucia at her bedroom door.
+[10:30] Two quick knocks and one slow.
+[10:34] Then her voice, goodnight mama.
+[10:37] It is the only way Inez can sleep.
+[10:41] She has never once skipped it.
+[10:45] On the 700 and first night,
+[10:48] something knocked on the hull.
+[10:51] Not the ice, not the pumps,
+[10:54] something outside.
+[10:59] She checked every sensor twice.
+[11:02] The hull was sealed, the ocean.
+[11:06] As always, was empty.
+[11:10] The next night it came again, closer and it had changed.
+[11:19] Two quick, one slow, Lucia's knock.
+[11:26] Inez cut the speakers.
+[11:29] She told herself it was the cold
+[11:31] and the grief and the dark.
+[11:35] For three nights, there was nothing at all.
+[11:40] Only the hum of the pumps.
+[11:44] On the fourth, she couldn't sleep.
+[11:48] She played Lucia's voice again.
+[11:53] And far below, in the black, something answered.
+[12:00] Then she understood.
+[12:03] For two years, every recording had gone out through the hull,
+[12:08] into the ocean, into the dark,
+[12:12] where something was listening.
+[12:15] Inez switched on the floodlights.
+[12:20] It had learned her daughter's knock.
+[12:27] And then the hull began to hum, softly.
+[12:33] In a voice it had heard seven hundred times.
+[12:39] Good night, mama.
+[12:44] Humanity had waited centuries for its first words with another mind.
+[12:50] Inez raised her hand to the glass and knocked back.
+[12:59] The first thing it ever said to us was good night.
+[13:12] I think that came out pretty good for how little direction it needed from me.
+[13:16] It took about twenty-two shots and twenty-one motion graphic layers.
+[13:19] It runs about three and a half minutes.
+[13:21] It cost me nothing and I never opened Capcom to edit any of this.
+[13:25] Isn't it amazing?
+[13:26] The skill that did this is free in my Builders Club community
+[13:29] and the link is in the description.
+[13:31] The checklist inside walks you through every step we just did.
+[13:34] Oh, by the way, if you want to learn how I make character-consistent AI videos
+[13:37] for free in Google Flow,
+[13:39] watch the video on your screen right now.
+[13:41] I'll see you in the next one.

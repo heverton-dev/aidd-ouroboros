@@ -1,0 +1,65 @@
+{
+  "version": "1.0.0",
+  "pipeline_id": "google-flow-story-video",
+  "name": "google-flow-story-video",
+  "description": "Pipeline autonomo composivel para google-flow-story-video",
+  "pipeline_type": "autonomous_lego_pipeline",
+  "input_contract": "context/input/pipeline_input.json",
+  "output_contract": "context/output/pipeline_output.json",
+  "upstream_reference": null,
+  "nodes": [
+    {
+      "id": "node-01-story-script",
+      "skill": "aidd-craft-story-ptbr",
+      "entrypoint": "nodes/node_01_story_script.py",
+      "description": "Geracao de roteiro e estrutura dramatica em 30 cenas",
+      "depends_on": [],
+      "input": "context/input/pipeline_input.json",
+      "output_dir": "context/handoffs/01_story_script"
+    },
+    {
+      "id": "node-02-tts-voiceover",
+      "skill": "aidd-materialize-video-synth",
+      "entrypoint": "nodes/node_02_tts_voiceover.py",
+      "description": "Audio-first timing e metricas de locucao por cena",
+      "depends_on": [
+        "node-01-story-script"
+      ],
+      "input": "context/handoffs/01_story_script/HANDOFF.json",
+      "output_dir": "context/handoffs/02_tts_voiceover"
+    },
+    {
+      "id": "node-03-visual-assets",
+      "skill": "aidd-materialize-video-synth",
+      "entrypoint": "nodes/node_03_visual_assets.py",
+      "description": "Geracao de prompts visuais em 2 fases com ancoragem e seed locking",
+      "depends_on": [
+        "node-02-tts-voiceover"
+      ],
+      "input": "context/handoffs/02_tts_voiceover/HANDOFF.json",
+      "output_dir": "context/handoffs/03_visual_assets"
+    },
+    {
+      "id": "node-04-motion-synthesis",
+      "skill": "aidd-motion-remotion-core",
+      "entrypoint": "nodes/node_04_motion_synthesis.py",
+      "description": "Sintese de movimento cinetico e trajetorias de camera",
+      "depends_on": [
+        "node-03-visual-assets"
+      ],
+      "input": "context/handoffs/03_visual_assets/HANDOFF.json",
+      "output_dir": "context/handoffs/04_motion_synthesis"
+    },
+    {
+      "id": "node-05-timeline-assembly",
+      "skill": "aidd-materialize-video-synth",
+      "entrypoint": "nodes/node_05_timeline_assembly.py",
+      "description": "Montagem da timeline multipista, exportacao SRT e fechamento do pipeline",
+      "depends_on": [
+        "node-04-motion-synthesis"
+      ],
+      "input": "context/handoffs/04_motion_synthesis/HANDOFF.json",
+      "output_dir": "context/handoffs/05_timeline_assembly"
+    }
+  ]
+}

@@ -9,6 +9,7 @@ from motores.governanca import handoff_crypto
 
 def test_obter_chave_sem_env_e_sem_parametro(monkeypatch):
     monkeypatch.delenv("AIDD_HANDOFF_KEY", raising=False)
+    monkeypatch.delenv("OUROBOROS_HMAC_SECRET", raising=False)
     with pytest.raises(RuntimeError) as exc_info:
         handoff_crypto.obter_chave()
     assert "AIDD_HANDOFF_KEY" in str(exc_info.value)

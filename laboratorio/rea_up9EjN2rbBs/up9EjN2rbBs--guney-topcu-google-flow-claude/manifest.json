@@ -1,0 +1,59 @@
+{
+  "rea_schema_version": "1.4",
+  "video_id": "up9EjN2rbBs",
+  "title": "Google Flow + Claude Code Make Complete Videos From One Idea (Free)",
+  "channel": "Guney Topcu | AI Made Easy",
+  "channel_url": "https://www.youtube.com/channel/UCxh5da7n_d5IWhHB42STmSg",
+  "duration_seconds": 829,
+  "webpage_url": "https://www.youtube.com/watch?v=up9EjN2rbBs",
+  "scaffolding": {
+    "raw": "raw/",
+    "transcricao": "transcricao/",
+    "visual": "visual/"
+  },
+  "artifacts": {
+    "transcript_txt": "transcricao/transcript.txt",
+    "transcript_tsv": "transcricao/transcript.tsv",
+    "key_moments": "transcricao/key_moments.txt",
+    "prompts_detectados": "visual/prompts_detectados.txt",
+    "frames_count": 41,
+    "frames_sample": [
+      "frame_0001.png",
+      "frame_0002.png",
+      "frame_0003.png",
+      "frame_0004.png",
+      "frame_0005.png",
+      "frame_0006.png",
+      "frame_0007.png",
+      "frame_0008.png",
+      "frame_0009.png",
+      "frame_0010.png"
+    ]
+  },
+  "evidence_ledger": [
+    {
+      "evidence_id": "EVD-up9EjN2rbBs-META",
+      "type": "OBSERVATION",
+      "source": "raw/info.json",
+      "notes": "Título: Google Flow + Claude Code Make Complete Videos From One Idea (Free), Duração: 829s"
+    },
+    {
+      "evidence_id": "EVD-up9EjN2rbBs-AUDIO",
+      "type": "OBSERVATION",
+      "source": "transcricao/transcript.tsv",
+      "notes": "Transcrição fonética completa sincronizada em minutos e segundos."
+    },
+    {
+      "evidence_id": "EVD-up9EjN2rbBs-HEURISTIC",
+      "type": "DERIVATION",
+      "source": "transcricao/key_moments.txt",
+      "notes": "Segmentos de maior densidade de conhecimento técnico indexados via keywords."
+    },
+    {
+      "evidence_id": "EVD-up9EjN2rbBs-OCR-LOCAL",
+      "type": "OBSERVATION",
+      "source": "visual/prompts_detectados.txt",
+      "notes": "Extração local determinística de código e textos das telas em zero tokens via Tesseract."
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://aidd.framework/schemas/handoff-v1.json",
+  "producer_skill": "aidd-rea-video-youtube",
+  "producer_version": "1.6.0",
+  "timestamp": "20261025",
+  "status": "SUCCESS",
+  "artifacts": {
+    "canonical_dir": "laboratorio\\rea_up9EjN2rbBs\\up9EjN2rbBs--guney-topcu-google-flow-claude",
+    "metodologia": "laboratorio\\rea_up9EjN2rbBs\\up9EjN2rbBs--guney-topcu-google-flow-claude\\metodologia.md",
+    "gap_analysis": "laboratorio\\rea_up9EjN2rbBs\\up9EjN2rbBs--guney-topcu-google-flow-claude\\gap_analysis.md",
+    "prompts_detectados": "laboratorio\\rea_up9EjN2rbBs\\up9EjN2rbBs--guney-topcu-google-flow-claude\\visual\\prompts_detectados.txt",
+    "thumbnail": "laboratorio\\rea_up9EjN2rbBs\\up9EjN2rbBs--guney-topcu-google-flow-claude\\visual\\thumbnail.jpg",
+    "manifest": "laboratorio\\rea_up9EjN2rbBs\\up9EjN2rbBs--guney-topcu-google-flow-claude\\manifest.json",
+    "conteudo_tecnico": "laboratorio\\rea_up9EjN2rbBs\\up9EjN2rbBs--guney-topcu-google-flow-claude\\conteudo_tecnico.md"
+  },
+  "domain_data": {
+    "video_id": "up9EjN2rbBs",
+    "title": "Google Flow + Claude Code Make Complete Videos From One Idea (Free)",
+    "author": "Guney Topcu | AI Made Easy",
+    "duration_seconds": 829
+  }
+}

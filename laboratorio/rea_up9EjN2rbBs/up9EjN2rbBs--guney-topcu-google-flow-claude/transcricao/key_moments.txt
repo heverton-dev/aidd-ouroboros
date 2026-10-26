@@ -1,0 +1,86 @@
+=== MOMENTOS DE ALTA DENSIDADE TÉCNICA (Total: 28) ===
+
+[01:00] [Score: 2] [Chaves: skill, still]
+  Every scene is once still picture and the skill brings those pictures to life with camera
+
+[02:19] [Score: 2] [Chaves: skills, skill]
+  puts it in your cloud code skills folder.
+
+[00:18] [Score: 1] [Chaves: timeline]
+  touched the timeline in CapCut.
+
+[00:28] [Score: 1] [Chaves: skill]
+  So today I'll show you how to set up my free skill that does all of it and then we'll make
+
+[00:35] [Score: 1] [Chaves: skill]
+  If you're not familiar, the skill is a set of instructions and tools that cloud code loads
+
+[00:54] [Score: 1] [Chaves: timeline]
+  CapCut with every clip, keyframe and caption already on the timeline.
+
+[01:08] [Score: 1] [Chaves: skill]
+  This skill keeps your characters consistent from scene to scene and it keeps the cost
+
+[01:20] [Score: 1] [Chaves: skill]
+  And yes, the skill should also work on Windows but I haven't tested it there yet so
+
+[01:31] [Score: 1] [Chaves: terminal]
+  First, you need cloud code and no, you don't need a terminal for it.
+
+[01:50] [Score: 1] [Chaves: skill]
+  The skill writes projects for the CapCut version it was built on so you don't want
+
+[01:59] [Score: 1] [Chaves: skill]
+  Next get the skill zip file from my Builders Club community.
+
+[02:15] [Score: 1] [Chaves: skill]
+  Now, ask cloud to install the skill from the zip in your downloads folder and it
+
+[02:21] [Score: 1] [Chaves: skill]
+  Then ask it to set up the skill.
+
+[02:23] [Score: 1] [Chaves: skill]
+  Cloud runs a check and shows you a table of everything the skill needs.
+
+[02:57] [Score: 1] [Chaves: skill]
+  you installed the skill from.
+
+[03:12] [Score: 1] [Chaves: studio]
+  Flow mcp can also use Google AI Studio's premium voices, which
+
+[03:15] [Score: 1] [Chaves: studio]
+  sounds so much better and all you need is a free Google AI Studio key.
+
+[03:18] [Score: 1] [Chaves: studio]
+  To get one, go to aistudio.google.com forward slash api dash keys
+
+[03:31] [Score: 1] [Chaves: studio]
+  Then ask cloud code to open flow studio.
+
+[03:39] [Score: 1] [Chaves: still]
+  Without a key, cloud can still use your computer's built-in voices
+
+[03:44] [Score: 1] [Chaves: studio]
+  So I highly recommend that you use AI Studio voices.
+
+[03:57] [Score: 1] [Chaves: skill]
+  Once you do that, ask cloud if the skill is ready to be used.
+
+[04:06] [Score: 1] [Chaves: skill]
+  skill to make a new film.
+
+[04:51] [Score: 1] [Chaves: prompt]
+  and each one comes with a picture prompt.
+
+[04:59] [Score: 1] [Chaves: still]
+  Every scene has to work as a single still picture.
+
+[09:09] [Score: 1] [Chaves: timeline]
+  caption and audio track is already on the timeline
+
+[09:32] [Score: 1] [Chaves: still]
+  so your previous version is still there.
+
+[13:26] [Score: 1] [Chaves: skill]
+  The skill that did this is free in my Builders Club community
+

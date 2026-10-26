@@ -33,7 +33,7 @@ def obter_chave(chave_opcional: Optional[str] = None) -> str:
     if chave_opcional:
         return chave_opcional
 
-    chave_env = os.environ.get("OUROBOROS_HMAC_SECRET") or os.environ.get("AIDD_HANDOFF_KEY")
+    chave_env = os.environ.get("AIDD_HANDOFF_KEY") or os.environ.get("OUROBOROS_HMAC_SECRET")
     if chave_env and chave_env.strip():
         return chave_env.strip()
 
@@ -348,6 +348,33 @@ def selar_handoff(
         with open(p, "w", encoding="utf-8") as f:
             json.dump(envelope, f, indent=2, ensure_ascii=False)
     return envelope
+
+
+def create_handoff_envelope(
+    source_skill: str,
+    target_skill: Optional[str] = None,
+    payload_data: Optional[Dict[str, Any]] = None,
+    local_artifacts: Optional[List[str]] = None,
+    metadata: Optional[Dict[str, Any]] = None,
+    **kwargs: Any
+) -> Dict[str, Any]:
+    """Cria envelope de handoff com assinatura compatível com nós em inglês."""
+    meta_combinado = dict(metadata or {})
+    if payload_data:
+        meta_combinado["data"] = payload_data
+    if target_skill:
+        meta_combinado["target_skill"] = target_skill
+    return criar_envelope_handoff(
+        origem_skill=source_skill,
+        status_ou_artefatos=local_artifacts or [],
+        artefatos_ou_metadados=meta_combinado,
+        **kwargs
+    )
+
+
+def verify_handoff_envelope(envelope_ou_path: Any, **kwargs: Any) -> Tuple[bool, str]:
+    """Verifica autenticidade e integridade do envelope de handoff."""
+    return verificar_envelope_handoff(envelope_ou_path, **kwargs)
 
 
 abrir_handoff = abrir

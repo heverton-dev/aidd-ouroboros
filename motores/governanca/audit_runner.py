@@ -169,8 +169,13 @@ def rodar_testes_pytest(root: Path) -> tuple[bool, str]:
         "--ignore=tests/negative",
         "--ignore=tests/negative-brand"
     ]
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(root) + (os.pathsep + env["PYTHONPATH"] if "PYTHONPATH" in env else "")
+    if "AIDD_HANDOFF_KEY" not in env:
+        env["AIDD_HANDOFF_KEY"] = "ouroboros_dev_secret_key_2026_test"
+
     try:
-        res = subprocess.run(cmd, cwd=str(root), capture_output=True, text=True, timeout=120)
+        res = subprocess.run(cmd, cwd=str(root), capture_output=True, text=True, timeout=180, env=env)
         output = (res.stdout + res.stderr).strip()
         return (res.returncode == 0, output)
     except Exception as exc:

@@ -1,0 +1,284 @@
+[
+  {
+    "timestamp": "[01:00]",
+    "start_s": 60.65,
+    "end_s": 64.49,
+    "score": 2,
+    "keywords": [
+      "skill",
+      "still"
+    ],
+    "text": "Every scene is once still picture and the skill brings those pictures to life with camera"
+  },
+  {
+    "timestamp": "[02:19]",
+    "start_s": 139.09,
+    "end_s": 141.41,
+    "score": 2,
+    "keywords": [
+      "skills",
+      "skill"
+    ],
+    "text": "puts it in your cloud code skills folder."
+  },
+  {
+    "timestamp": "[00:18]",
+    "start_s": 18.33,
+    "end_s": 20.09,
+    "score": 1,
+    "keywords": [
+      "timeline"
+    ],
+    "text": "touched the timeline in CapCut."
+  },
+  {
+    "timestamp": "[00:28]",
+    "start_s": 28.97,
+    "end_s": 32.53,
+    "score": 1,
+    "keywords": [
+      "skill"
+    ],
+    "text": "So today I'll show you how to set up my free skill that does all of it and then we'll make"
+  },
+  {
+    "timestamp": "[00:35]",
+    "start_s": 35.41,
+    "end_s": 39.77,
+    "score": 1,
+    "keywords": [
+      "skill"
+    ],
+    "text": "If you're not familiar, the skill is a set of instructions and tools that cloud code loads"
+  },
+  {
+    "timestamp": "[00:54]",
+    "start_s": 54.21,
+    "end_s": 58.25,
+    "score": 1,
+    "keywords": [
+      "timeline"
+    ],
+    "text": "CapCut with every clip, keyframe and caption already on the timeline."
+  },
+  {
+    "timestamp": "[01:08]",
+    "start_s": 68.25,
+    "end_s": 71.73,
+    "score": 1,
+    "keywords": [
+      "skill"
+    ],
+    "text": "This skill keeps your characters consistent from scene to scene and it keeps the cost"
+  },
+  {
+    "timestamp": "[01:20]",
+    "start_s": 80.77,
+    "end_s": 84.53,
+    "score": 1,
+    "keywords": [
+      "skill"
+    ],
+    "text": "And yes, the skill should also work on Windows but I haven't tested it there yet so"
+  },
+  {
+    "timestamp": "[01:31]",
+    "start_s": 91.77,
+    "end_s": 95.69,
+    "score": 1,
+    "keywords": [
+      "terminal"
+    ],
+    "text": "First, you need cloud code and no, you don't need a terminal for it."
+  },
+  {
+    "timestamp": "[01:50]",
+    "start_s": 110.49,
+    "end_s": 114.31,
+    "score": 1,
+    "keywords": [
+      "skill"
+    ],
+    "text": "The skill writes projects for the CapCut version it was built on so you don't want"
+  },
+  {
+    "timestamp": "[01:59]",
+    "start_s": 119.69,
+    "end_s": 122.57,
+    "score": 1,
+    "keywords": [
+      "skill"
+    ],
+    "text": "Next get the skill zip file from my Builders Club community."
+  },
+  {
+    "timestamp": "[02:15]",
+    "start_s": 135.17,
+    "end_s": 139.09,
+    "score": 1,
+    "keywords": [
+      "skill"
+    ],
+    "text": "Now, ask cloud to install the skill from the zip in your downloads folder and it"
+  },
+  {
+    "timestamp": "[02:21]",
+    "start_s": 141.41,
+    "end_s": 143.17,
+    "score": 1,
+    "keywords": [
+      "skill"
+    ],
+    "text": "Then ask it to set up the skill."
+  },
+  {
+    "timestamp": "[02:23]",
+    "start_s": 143.17,
+    "end_s": 146.37,
+    "score": 1,
+    "keywords": [
+      "skill"
+    ],
+    "text": "Cloud runs a check and shows you a table of everything the skill needs."
+  },
+  {
+    "timestamp": "[02:57]",
+    "start_s": 177.45,
+    "end_s": 178.89,
+    "score": 1,
+    "keywords": [
+      "skill"
+    ],
+    "text": "you installed the skill from."
+  },
+  {
+    "timestamp": "[03:12]",
+    "start_s": 192.17,
+    "end_s": 195.49,
+    "score": 1,
+    "keywords": [
+      "studio"
+    ],
+    "text": "Flow mcp can also use Google AI Studio's premium voices, which"
+  },
+  {
+    "timestamp": "[03:15]",
+    "start_s": 195.49,
+    "end_s": 198.85,
+    "score": 1,
+    "keywords": [
+      "studio"
+    ],
+    "text": "sounds so much better and all you need is a free Google AI Studio key."
+  },
+  {
+    "timestamp": "[03:18]",
+    "start_s": 198.85,
+    "end_s": 203.61,
+    "score": 1,
+    "keywords": [
+      "studio"
+    ],
+    "text": "To get one, go to aistudio.google.com forward slash api dash keys"
+  },
+  {
+    "timestamp": "[03:31]",
+    "start_s": 211.09,
+    "end_s": 213.09,
+    "score": 1,
+    "keywords": [
+      "studio"
+    ],
+    "text": "Then ask cloud code to open flow studio."
+  },
+  {
+    "timestamp": "[03:39]",
+    "start_s": 219.25,
+    "end_s": 222.73,
+    "score": 1,
+    "keywords": [
+      "still"
+    ],
+    "text": "Without a key, cloud can still use your computer's built-in voices"
+  },
+  {
+    "timestamp": "[03:44]",
+    "start_s": 224.09,
+    "end_s": 226.89,
+    "score": 1,
+    "keywords": [
+      "studio"
+    ],
+    "text": "So I highly recommend that you use AI Studio voices."
+  },
+  {
+    "timestamp": "[03:57]",
+    "start_s": 237.69,
+    "end_s": 240.57,
+    "score": 1,
+    "keywords": [
+      "skill"
+    ],
+    "text": "Once you do that, ask cloud if the skill is ready to be used."
+  },
+  {
+    "timestamp": "[04:06]",
+    "start_s": 246.53,
+    "end_s": 247.73,
+    "score": 1,
+    "keywords": [
+      "skill"
+    ],
+    "text": "skill to make a new film."
+  },
+  {
+    "timestamp": "[04:51]",
+    "start_s": 291.53,
+    "end_s": 293.49,
+    "score": 1,
+    "keywords": [
+      "prompt"
+    ],
+    "text": "and each one comes with a picture prompt."
+  },
+  {
+    "timestamp": "[04:59]",
+    "start_s": 299.37,
+    "end_s": 302.09,
+    "score": 1,
+    "keywords": [
+      "still"
+    ],
+    "text": "Every scene has to work as a single still picture."
+  },
+  {
+    "timestamp": "[09:09]",
+    "start_s": 549.37,
+    "end_s": 551.89,
+    "score": 1,
+    "keywords": [
+      "timeline"
+    ],
+    "text": "caption and audio track is already on the timeline"
+  },
+  {
+    "timestamp": "[09:32]",
+    "start_s": 572.13,
+    "end_s": 573.97,
+    "score": 1,
+    "keywords": [
+      "still"
+    ],
+    "text": "so your previous version is still there."
+  },
+  {
+    "timestamp": "[13:26]",
+    "start_s": 806.42,
+    "end_s": 809.42,
+    "score": 1,
+    "keywords": [
+      "skill"
+    ],
+    "text": "The skill that did this is free in my Builders Club community"
+  }
+]

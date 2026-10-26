@@ -1,0 +1,296 @@
+start_s	end_s	timestamp	text
+0.05	18.33	[00:00]	Everything you've just watched came from one idea I typed into cloud code and I never
+18.33	20.09	[00:18]	touched the timeline in CapCut.
+20.09	23.53	[00:20]	Normally putting together something like that means hours of manual editing, recording
+23.53	28.97	[00:23]	a voiceover separately and keyframing every picture by hand in CapCut or any editing tool.
+28.97	32.53	[00:28]	So today I'll show you how to set up my free skill that does all of it and then we'll make
+32.53	35.41	[00:32]	a brand new long form video together, all for free.
+35.41	39.77	[00:35]	If you're not familiar, the skill is a set of instructions and tools that cloud code loads
+39.77	41.73	[00:39]	when you ask for a certain type of job.
+41.73	44.73	[00:41]	This one turns a single idea into a finished CapCut video.
+44.73	49.49	[00:44]	Cloud writes the story, records the narration, generates the pictures in Google Flow, builds
+49.49	54.21	[00:49]	the motion graphics and the soundtrack and then writes the whole edit straight into
+54.21	58.25	[00:54]	CapCut with every clip, keyframe and caption already on the timeline.
+58.25	60.65	[00:58]	None of this is made from a generated video clip.
+60.65	64.49	[01:00]	Every scene is once still picture and the skill brings those pictures to life with camera
+64.49	68.25	[01:04]	moves, light and sound, the way a good documentary treats photographs.
+68.25	71.73	[01:08]	This skill keeps your characters consistent from scene to scene and it keeps the cost
+71.73	74.77	[01:11]	at zero because pictures are free to create in Google Flow.
+74.77	79.37	[01:14]	To follow along you need cloud code, the free CapCut desktop app, Google Chrome and
+79.37	80.77	[01:19]	a Google account for Flow.
+80.77	84.53	[01:20]	And yes, the skill should also work on Windows but I haven't tested it there yet so
+84.53	87.53	[01:24]	let me know in the comments if you run into any issues and I'll fix them.
+87.53	90.77	[01:27]	This setup takes about 10 minutes and you only need to do it once.
+90.77	91.77	[01:30]	Let's get started.
+91.77	95.69	[01:31]	First, you need cloud code and no, you don't need a terminal for it.
+95.69	99.77	[01:35]	Download the cloud desktop app from cloud.com forward slash download and click the code
+99.77	100.77	[01:39]	tab.
+100.77	102.97	[01:40]	Then download CapCut from CapCut.com.
+102.97	107.05	[01:42]	Once it's installed, open it, go to settings, then general and under software update
+107.05	110.49	[01:47]	choose get notified about updates instead of automatic updates.
+110.49	114.31	[01:50]	The skill writes projects for the CapCut version it was built on so you don't want
+114.31	116.89	[01:54]	CapCut updating itself in the middle of a project.
+116.89	119.69	[01:56]	If it ever pops up an update window, just close it.
+119.69	122.57	[01:59]	Next get the skill zip file from my Builders Club community.
+122.57	124.53	[02:02]	The link is in the video description.
+124.53	126.61	[02:04]	Download it and leave it in your downloads folder.
+126.61	129.45	[02:06]	Make an empty folder on your desktop called storyfilms.
+129.45	133.49	[02:09]	Then open cloud code, start a new conversation, click the folder icon below the
+133.49	135.17	[02:13]	chat box and pick that folder.
+135.17	139.09	[02:15]	Now, ask cloud to install the skill from the zip in your downloads folder and it
+139.09	141.41	[02:19]	puts it in your cloud code skills folder.
+141.41	143.17	[02:21]	Then ask it to set up the skill.
+143.17	146.37	[02:23]	Cloud runs a check and shows you a table of everything the skill needs.
+146.37	148.45	[02:26]	That's already there and what's missing.
+148.45	153.21	[02:28]	That list can include homebrew, node, python, ffmpeg, the speech-to-text model that
+153.21	157.41	[02:33]	times the edits to the voice and the flow mcp, which is a connector I also built
+157.41	159.77	[02:37]	that list cloud drive google for you.
+159.77	161.65	[02:39]	It does a lot more than that by the way.
+161.65	164.61	[02:41]	So check out the video linked in the description as well for it to see
+164.61	167.01	[02:44]	everything it can do for you for free.
+167.01	169.33	[02:47]	So yeah, just say yes to install what's missing.
+169.33	172.33	[02:49]	If you're on a Mac it might ask for your password along the way because
+172.33	173.93	[02:52]	homebrew's installer needs it.
+173.97	177.45	[02:53]	When it's done, create the cloud app and open it again and go to the session
+177.45	178.89	[02:57]	you installed the skill from.
+178.89	182.05	[02:58]	The reason we restart cloud code is to load the flow mcp connector that was
+182.05	183.17	[03:02]	also installed.
+183.17	185.57	[03:03]	Then ask cloud to check flow mcp connection.
+185.57	188.77	[03:05]	It opens a Chrome window and you sign into your Google account there.
+188.77	192.17	[03:08]	You only need to do it once and cloud never sees or types your password.
+192.17	195.49	[03:12]	Flow mcp can also use Google AI Studio's premium voices, which
+195.49	198.85	[03:15]	sounds so much better and all you need is a free Google AI Studio key.
+198.85	203.61	[03:18]	To get one, go to aistudio.google.com forward slash api dash keys
+203.65	206.13	[03:23]	and click create api key in the top right corner.
+206.13	210.37	[03:26]	If you don't have a project, create one, name your key, click create key
+210.37	211.09	[03:30]	and copy it.
+211.09	213.09	[03:31]	Then ask cloud code to open flow studio.
+213.09	214.69	[03:33]	It will open on your browser.
+214.69	217.57	[03:34]	Go to the voice tab and paste the key in and click save.
+217.57	219.25	[03:37]	By the way, never paste your key into the chat.
+219.25	222.73	[03:39]	Without a key, cloud can still use your computer's built-in voices
+222.73	224.09	[03:42]	by they don't sound human.
+224.09	226.89	[03:44]	So I highly recommend that you use AI Studio voices.
+226.89	230.13	[03:46]	The last step is to give the cloud app screen recording and accessibility
+230.13	233.65	[03:50]	access in system settings right under privacy and security.
+233.65	237.69	[03:53]	Cloud uses that at the end to open the project in CapCut and check it for you.
+237.69	240.57	[03:57]	Once you do that, ask cloud if the skill is ready to be used.
+240.57	243.21	[04:00]	If no issues are found, you're ready to make your first film.
+243.21	246.53	[04:03]	To start a film, you just tell cloud to use the CapCut story film
+246.53	247.73	[04:06]	skill to make a new film.
+247.73	250.97	[04:07]	Before it does anything, it asks you six things in one message.
+250.97	254.41	[04:10]	How long the film should be, the genre, the visual style,
+254.41	257.37	[04:14]	white screen or vertical, a male or a female narrator
+257.37	259.17	[04:17]	and what kind of an ending you want.
+259.21	262.13	[04:19]	If you don't have an idea yet, you can ask it to suggest some.
+262.13	264.37	[04:22]	And it gives you seven and ranks the best three.
+264.37	267.21	[04:24]	For this video, I asked for a three-minute sci-fi film,
+267.21	270.41	[04:27]	photo realistic, white screen with a male narrator
+270.41	273.29	[04:30]	and a twist ending and I let it suggest ideas.
+273.29	275.57	[04:33]	I picked the one called The Voice Under Europa.
+275.57	277.93	[04:35]	It's about a woman who has spent 700 days alone
+277.93	280.81	[04:37]	in research station under the ice of Jupiter's moon Europa
+280.81	283.01	[04:40]	and every night she plays a recording of her daughter
+283.01	284.33	[04:43]	knocking on her bedroom door.
+284.33	286.33	[04:44]	Then one night, something knocks on the hall
+286.33	287.45	[04:46]	in her daughter's rhythm.
+287.53	289.09	[04:47]	Claude then writes a full storyboard.
+289.09	291.53	[04:49]	For the three-minute film, that's about 30 scenes
+291.53	293.49	[04:51]	and each one comes with a picture prompt.
+293.49	296.69	[04:53]	A camera mode, the narration line and the sound.
+296.69	299.37	[04:56]	It follows one or that the whole system depends on.
+299.37	302.09	[04:59]	Every scene has to work as a single still picture.
+302.09	304.53	[05:02]	A line like he walks to the door, opens it
+304.53	306.61	[05:04]	and looks inside, can't be one picture.
+306.61	309.01	[05:06]	So Claude picks the strongest moment to illustrate it
+309.01	311.09	[05:09]	instead, like her hands on the handle
+311.09	313.09	[05:11]	and lets the narration carry the rest.
+313.09	315.09	[05:13]	This is a good moment to read it properly
+315.13	318.21	[05:15]	and ask for changes because nothing has been generated yet.
+318.21	319.73	[05:18]	Next we have to do The Voice
+319.73	321.53	[05:19]	and it comes before any pictures
+321.53	324.41	[05:21]	because the narration decides how long your film really is.
+324.41	326.49	[05:24]	For this film, I planned three minutes
+326.49	328.81	[05:26]	and the narration came at around three and a half.
+328.81	331.13	[05:28]	So Claude timed the whole edit to The Voice
+331.13	332.13	[05:31]	instead of the plan.
+332.13	333.69	[05:32]	You want that because it's what makes
+333.69	335.05	[05:33]	every cut land on the words.
+335.05	336.85	[05:35]	Claude will start with one test line
+336.85	339.05	[05:36]	and read it in the style the storyboard described
+339.05	341.09	[05:39]	so you can hear The Voice before committing to it.
+341.09	343.53	[05:41]	Here it picked a low, gravely male voice
+343.53	344.93	[05:43]	and asked it to read slowly.
+344.93	346.85	[05:44]	Like a quite documentary storyteller.
+346.85	349.45	[05:46]	Once you approve it, Claude records the full narration
+349.45	351.81	[05:49]	and tells you the real runtime against the plan one.
+351.81	353.57	[05:51]	The pictures happen in two rounds.
+353.57	355.37	[05:53]	First, Claude makes one reference image
+355.37	358.69	[05:55]	for every recurring character, place and important object.
+358.69	360.13	[05:58]	For this film that was six,
+360.13	362.53	[06:00]	the woman, her daughter, the station,
+362.53	363.69	[06:02]	the room she lives in,
+363.69	366.57	[06:03]	the recorder she plays every night and the creature.
+366.57	368.61	[06:06]	You need these because these are what makes your characters
+368.61	370.17	[06:08]	looking the same scene after scene.
+370.17	372.17	[06:10]	So look closely and ask to redo anything
+372.17	373.33	[06:12]	if something feels off
+373.33	375.45	[06:13]	because rest of your scenes will depend on these.
+375.45	377.25	[06:15]	That review paid off for me here
+377.25	378.57	[06:17]	because in the first version,
+378.57	380.13	[06:18]	the woman was shown head to toe.
+380.13	383.05	[06:20]	So her face was too small to hold up in close-ups
+383.05	385.05	[06:23]	and the creature looked like a monster
+385.05	386.53	[06:25]	when this story needed wonder.
+386.53	389.05	[06:26]	Claude flagged both and once I said go,
+389.05	391.05	[06:29]	it remade them and show me the old
+391.05	393.61	[06:31]	and the new side by side before moving on.
+393.61	395.69	[06:33]	Then Claude tells you what the scene pictures
+395.69	397.41	[06:35]	will cost and waits for your yes.
+397.41	399.49	[06:37]	Pictures are free but follow MCP
+399.49	402.61	[06:39]	can also make video clips and those do cost credits.
+402.61	406.05	[06:42]	So I set it up in a way where anytime the MCP is used,
+406.05	408.69	[06:46]	Claude reads the price from flow before it does anything.
+408.69	411.01	[06:48]	Flow then generates all of the scenes in bulk
+411.01	414.09	[06:51]	in a single request with the reference characters attached.
+414.09	416.73	[06:54]	So every scene comes back with the same faces,
+416.73	418.93	[06:56]	same station and the same creature.
+418.93	421.29	[06:58]	It can also put several characters in one picture.
+421.29	423.29	[07:01]	Claude used that to remake two scenes.
+423.29	425.85	[07:03]	The photo on the wall now shows the mother and the daughter
+425.85	427.77	[07:05]	and the memory on the bedroom door now shows
+427.77	429.97	[07:07]	the mother kneeling as her daughter peeks out
+429.97	430.81	[07:09]	to say good night.
+430.81	431.89	[07:10]	After the batch is done,
+431.89	434.37	[07:11]	Claude lays every scene out on a contact sheet
+434.37	435.53	[07:14]	and checks for gaps.
+435.53	437.73	[07:15]	If a scene comes back wrong from the pictures
+437.73	439.45	[07:17]	or the face doesn't look just right,
+439.45	441.17	[07:19]	it regenerates just those scenes.
+441.17	444.29	[07:21]	This time, Altered came back on the first pass for me.
+444.29	446.69	[07:24]	All right, now that we have the images,
+446.69	449.37	[07:26]	Claude can go ahead and build the whole thing without you.
+449.37	450.69	[07:29]	And it will work through the whole thing
+450.69	451.65	[07:30]	just like an editor.
+451.65	452.85	[07:31]	First it listens.
+452.85	455.33	[07:32]	It transcribes the narration word by word
+455.33	457.93	[07:35]	so it knows the exact moment every word is spoken
+457.93	460.61	[07:37]	and it reads the transcript back like a proof reader.
+460.61	463.01	[07:40]	In this video, it caught that speech recognition
+463.01	465.13	[07:43]	heard the name Innes Innes with a Z
+465.13	467.25	[07:45]	and it fixed it so the captions are right.
+467.25	469.65	[07:47]	It also noticed that the pause before the big reveal
+469.65	472.09	[07:49]	was too short for the biggest moment in the film
+472.09	475.01	[07:52]	and stretched that to about five seconds of silence.
+475.01	476.37	[07:55]	Then it directs the camera.
+476.37	478.93	[07:56]	It looks at every picture, finds where the face,
+478.93	481.53	[07:58]	the hands or the important objects sit.
+481.53	483.25	[08:01]	And plans a move for each shot.
+483.25	486.13	[08:03]	So one picture gets a slow push in for tension,
+486.13	488.13	[08:06]	the next append that reveals something
+488.13	490.09	[08:08]	and the transitions follow the story
+490.09	491.93	[08:10]	with dissolves where time passes,
+491.93	493.81	[08:11]	a dip to black between acts
+493.81	496.53	[08:13]	and a match cut at the end that echoes an early shot.
+496.53	497.65	[08:16]	When a line runs long,
+497.65	499.41	[08:17]	it splits it across two pictures
+499.41	501.05	[08:19]	instead of holding one too long.
+501.05	503.89	[08:21]	Then it builds the motion graphics with hyperframes.
+503.89	505.37	[08:23]	Titles build word by word.
+505.37	506.89	[08:25]	The key line is stamped on the screen
+506.89	508.17	[08:26]	as the narrator says it
+508.17	510.25	[08:28]	and there is film grain over the memory
+510.25	512.61	[08:30]	and drifting particles in the water.
+512.61	514.41	[08:32]	It really thinks of every little detail
+514.41	516.49	[08:34]	to bring these images to life.
+516.49	518.97	[08:36]	My favorite part is the lights inside the pictures
+518.97	521.25	[08:38]	which switch on exactly on a spoken word.
+521.25	522.25	[08:41]	In this one we are making
+522.25	523.29	[08:42]	which we're gonna watch soon.
+523.29	525.81	[08:43]	The narrator says she played Lucia's voice again.
+525.81	528.81	[08:45]	The lights on the speaker panel switch on one by one.
+528.81	530.77	[08:48]	And when he says something answered,
+530.77	533.57	[08:50]	a tiny gold light appears far below the station.
+533.57	535.17	[08:53]	All right, then Claude composes the music
+535.17	537.69	[08:55]	and the sound effects encode following the story.
+537.69	539.29	[08:57]	Before it builds the CapCut project,
+539.29	541.09	[08:59]	Claude sends you a preview of the soundtrack
+541.09	542.77	[09:01]	so you can say if the mood is wrong.
+542.77	544.33	[09:02]	Finally, if CapCut is open,
+544.33	545.57	[09:04]	Claude asks you to close it
+545.57	546.81	[09:05]	and then it writes the project.
+546.81	549.37	[09:06]	Every clip, keyframe, graphic layer,
+549.37	551.89	[09:09]	caption and audio track is already on the timeline
+551.89	554.13	[09:11]	and it only uses CapCut's free features.
+554.13	556.45	[09:14]	So the export button never asks you to pay.
+556.45	558.57	[09:16]	Then it opens the project in CapCut itself
+558.57	560.09	[09:18]	and scrubs through the key moments
+560.09	561.45	[09:20]	to check that everything shows up
+561.45	562.93	[09:21]	before handing it over to you.
+562.93	563.97	[09:22]	Once everything is done,
+563.97	566.09	[09:23]	Claude will ask you to review the video in CapCut.
+566.09	567.53	[09:26]	Open the project and watch it.
+567.53	568.49	[09:27]	If something is off,
+568.49	570.21	[09:28]	just tell Claude to fix or change it
+570.21	572.13	[09:30]	and it builds the project under a new name
+572.13	573.97	[09:32]	so your previous version is still there.
+573.97	574.93	[09:33]	Now the big moment.
+574.93	576.97	[09:34]	Let's take a look at what we just made.
+577.97	582.17	[09:37]	20 kilometers beneath the ice of Europa,
+582.17	587.50	[09:42]	there is an ocean no human has ever seen.
+587.50	590.74	[09:47]	Hodel station hangs in that darkness
+590.74	592.66	[09:50]	like a lantern on a string.
+593.70	595.66	[09:53]	It was built to listen.
+596.78	600.50	[09:56]	Its whole hull is one giant microphone
+600.50	604.58	[10:00]	and one giant speaker pressed against the ocean.
+605.58	610.58	[10:05]	For 700 days, it has had a crew of one.
+610.86	615.34	[10:10]	Inez Calder came here to study the water.
+615.34	619.58	[10:15]	Mostly she came here to be far away from everything.
+620.66	623.26	[10:20]	Her daughter, Lucia, was eight.
+624.30	628.26	[10:24]	Every night Inez plays the same recording,
+628.26	630.94	[10:28]	Lucia at her bedroom door.
+630.94	634.10	[10:30]	Two quick knocks and one slow.
+634.10	637.82	[10:34]	Then her voice, goodnight mama.
+637.82	641.26	[10:37]	It is the only way Inez can sleep.
+641.26	643.46	[10:41]	She has never once skipped it.
+645.06	648.10	[10:45]	On the 700 and first night,
+648.10	651.34	[10:48]	something knocked on the hull.
+651.34	654.98	[10:51]	Not the ice, not the pumps,
+654.98	659.16	[10:54]	something outside.
+659.16	662.36	[10:59]	She checked every sensor twice.
+662.36	665.48	[11:02]	The hull was sealed, the ocean.
+666.20	669.32	[11:06]	As always, was empty.
+670.92	675.92	[11:10]	The next night it came again, closer and it had changed.
+679.56	684.56	[11:19]	Two quick, one slow, Lucia's knock.
+686.52	689.16	[11:26]	Inez cut the speakers.
+689.16	691.84	[11:29]	She told herself it was the cold
+691.84	694.48	[11:31]	and the grief and the dark.
+695.48	699.32	[11:35]	For three nights, there was nothing at all.
+700.32	702.72	[11:40]	Only the hum of the pumps.
+704.40	707.48	[11:44]	On the fourth, she couldn't sleep.
+708.80	711.36	[11:48]	She played Lucia's voice again.
+713.08	719.08	[11:53]	And far below, in the black, something answered.
+720.08	723.08	[12:00]	Then she understood.
+723.08	728.08	[12:03]	For two years, every recording had gone out through the hull,
+728.08	732.08	[12:08]	into the ocean, into the dark,
+732.08	735.08	[12:12]	where something was listening.
+735.08	740.49	[12:15]	Inez switched on the floodlights.
+740.49	747.71	[12:20]	It had learned her daughter's knock.
+747.71	752.71	[12:27]	And then the hull began to hum, softly.
+753.71	759.02	[12:33]	In a voice it had heard seven hundred times.
+759.02	764.86	[12:39]	Good night, mama.
+764.86	770.86	[12:44]	Humanity had waited centuries for its first words with another mind.
+770.86	779.45	[12:50]	Inez raised her hand to the glass and knocked back.
+779.45	792.42	[12:59]	The first thing it ever said to us was good night.
+792.42	796.42	[13:12]	I think that came out pretty good for how little direction it needed from me.
+796.42	799.42	[13:16]	It took about twenty-two shots and twenty-one motion graphic layers.
+799.42	801.42	[13:19]	It runs about three and a half minutes.
+801.42	805.42	[13:21]	It cost me nothing and I never opened Capcom to edit any of this.
+805.42	806.42	[13:25]	Isn't it amazing?
+806.42	809.42	[13:26]	The skill that did this is free in my Builders Club community
+809.42	811.42	[13:29]	and the link is in the description.
+811.42	814.42	[13:31]	The checklist inside walks you through every step we just did.
+814.42	817.42	[13:34]	Oh, by the way, if you want to learn how I make character-consistent AI videos
+817.42	819.42	[13:37]	for free in Google Flow,
+819.42	821.42	[13:39]	watch the video on your screen right now.
+821.42	823.42	[13:41]	I'll see you in the next one.

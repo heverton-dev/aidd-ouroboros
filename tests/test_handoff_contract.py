@@ -14,6 +14,7 @@ from motores.governanca.handoff_crypto import (
 @pytest.fixture(autouse=True)
 def setup_secret_key(monkeypatch):
     """Garante chave de teste em ambiente."""
+    monkeypatch.setenv("AIDD_HANDOFF_KEY", "super-secret-test-key-for-nt05-ouroboros")
     monkeypatch.setenv("OUROBOROS_HMAC_SECRET", "super-secret-test-key-for-nt05-ouroboros")
 
 
