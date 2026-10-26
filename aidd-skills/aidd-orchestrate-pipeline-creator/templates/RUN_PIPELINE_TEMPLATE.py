@@ -137,19 +137,38 @@ def topological_sort(nodes: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     return sorted_nodes
 
 
+def resolve_repo_root(pipeline_dir: Path) -> Path:
+    """Localiza a raiz do Ouroboros (pasta com aidd-skills/)."""
+    env_root = os.environ.get("AIDD_OUROBOROS_ROOT")
+    candidates: List[Path] = []
+    if env_root:
+        candidates.append(Path(env_root).expanduser().resolve())
+    candidates.append(pipeline_dir.parent.parent)
+    candidates.append(Path.cwd().resolve())
+    for start in list(candidates):
+        for cand in [start, *start.parents]:
+            if (cand / "aidd-skills").is_dir():
+                return cand
+    return pipeline_dir.parent.parent
+
+
 def resolve_skill_execution(skill_name: str, root_dir: Path) -> tuple[Path, str, str]:
     """Resolve entrypoint e flags CLI via dependencies.json da skill."""
     skill_dir = root_dir / "aidd-skills" / skill_name
     dep_file = skill_dir / "dependencies.json"
     if not dep_file.exists():
-        raise FileNotFoundError(f"dependencies.json não encontrado para {skill_name}")
+        raise FileNotFoundError(
+            f"dependencies.json não encontrado para {skill_name} em {skill_dir} "
+            f"(root={root_dir}; defina AIDD_OUROBOROS_ROOT se necessário)"
+        )
 
     with open(dep_file, "r", encoding="utf-8") as f:
         meta = json.load(f)
 
     entry = skill_dir / meta.get("entrypoint", "scripts/run.py")
-    in_flag = meta.get("input_flag", "--input")
-    out_flag = meta.get("output_flag", "--output")
+    contract = meta.get("cli_contract") or {}
+    in_flag = contract.get("input_flag") or meta.get("input_flag") or "--input"
+    out_flag = contract.get("output_flag") or meta.get("output_flag") or "--output"
     return entry, in_flag, out_flag
 
 
@@ -168,7 +187,7 @@ def execute_pipeline(
     state_file = ws_dir / "state.json"
     state = load_or_init_state(state_file, pipeline_id, run_id)
 
-    root_dir = pipeline_dir.parent.parent
+    root_dir = resolve_repo_root(pipeline_dir)
     ordered_nodes = topological_sort(nodes)
 
     print(f"=== Iniciando Pipeline: {pipeline_id} (Run ID: {run_id}) ===")
