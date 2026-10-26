@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "name": "AIDD Ecosystem Taxonomy",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Taxonomia formal, AST e grafo de compatibilidade composivel de micro-skills e pipelines AIDD.",
   "author": "Heverton Eduardo Peres",
   "license": "MIT",
@@ -259,6 +259,27 @@
         "sessao_dialogos_completos.md"
       ],
       "compatible_downstream": [
+        "aidd-orchestrate-pipeline-creator"
+      ]
+    },
+    "aidd-ouroboros-master": {
+      "domain": "orchestrate",
+      "subdomain": "meta-fluxo",
+      "specialization": "nl-to-pipeline",
+      "directory": "aidd-skills/aidd-ouroboros-master",
+      "description": "Orquestra pedido NL em spec de pipeline e executa F2 autônoma com handoffs e gates.",
+      "input_types": [
+        "text/plain",
+        "application/json"
+      ],
+      "output_contracts": [
+        "SPEC_PIPELINE.json",
+        "HANDOFF.json",
+        "PIPELINE.json"
+      ],
+      "compatible_downstream": [
+        "aidd-rea-router",
+        "aidd-orchestrate-skill-creator",
         "aidd-orchestrate-pipeline-creator"
       ]
     }

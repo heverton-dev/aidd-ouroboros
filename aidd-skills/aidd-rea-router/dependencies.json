@@ -6,22 +6,22 @@
   "dependencies": {
     "skills_required": [
       {
-        "name": "aidd-video-reengineer",
+        "name": "aidd-rea-video-youtube",
         "required": true,
         "purpose": "Dissecação de vídeos do YouTube e arquivos MP4"
       },
       {
-        "name": "aidd-web-reengineer",
+        "name": "aidd-rea-web-saas",
         "required": true,
         "purpose": "Dissecação de sites e aplicações SaaS"
       },
       {
-        "name": "aidd-social-reengineer",
+        "name": "aidd-rea-social-carousel",
         "required": true,
         "purpose": "Dissecação de carrosséis e posts sociais"
       },
       {
-        "name": "aidd-app-reengineer",
+        "name": "aidd-rea-app-android",
         "required": true,
         "purpose": "Dissecação de APKs e binários nativos"
       }

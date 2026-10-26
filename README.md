@@ -49,14 +49,24 @@ Originalmente concebido através do laboratório `stepo`, o Ouroboros transcende
 
 ## 🚀 Instalação Rápida (One-Liner)
 
-### Windows (PowerShell)
-```powershell
+### UV (recomendado) — instala o meta-sistema inteiro
+```bash
+git clone <repo> proj_aidd-ouroboros
+cd proj_aidd-ouroboros
+# Windows
 powershell -ExecutionPolicy Bypass -File setup.ps1
+# Linux / macOS
+bash setup.sh
 ```
 
-### Linux / macOS
+O `setup.*` detecta `uv` e roda `uv pip install -e .` (console script `ouroboros` + `motores`), sincroniza **todas** as skills (incluindo `aidd-ouroboros-master` → `/ouroboros`) e exporta `AIDD_OUROBOROS_ROOT`.
+
+### Só o pacote (sem sync de harnesses)
 ```bash
-bash setup.sh
+uv pip install -e .
+# ou
+pip install -e .
+ouroboros --master-doctor
 ```
 
 ---
@@ -64,15 +74,25 @@ bash setup.sh
 ## 🛠️ Comandos Principais
 
 ```bash
-# Diagnóstico de binários do sistema (ffmpeg, git, python)
-python ouroboros.py --doctor
+# Diagnóstico de binários + credenciais
+ouroboros --doctor
 
-# Execução de Quality Gates (100% de aprovação obrigatória)
-python ouroboros.py --audit
+# Diagnóstico do meta-fluxo (skills + HMAC + motores)
+ouroboros --master-doctor
 
-# Execução de pipeline autônomo
-python ouroboros.py --pipeline canal-dark-avatar
+# Quality Gates
+ouroboros --audit
+
+# Meta-fluxo: NL → SPEC (F1) → orquestração autônoma (F2)
+ouroboros --from-nl "criar pipeline X a partir de https://y"
+# ... entrevista; approved=true na SPEC_PIPELINE.json ...
+ouroboros --orchestrate ./SPEC_PIPELINE.json --output-dir ./ouroboros-out
+
+# Pipeline existente
+ouroboros --pipeline canal-dark-avatar
 ```
+
+No harness de agentes: skill **`aidd-ouroboros-master`** via `/ouroboros`.
 
 ---
 

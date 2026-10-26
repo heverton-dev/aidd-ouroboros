@@ -34,4 +34,12 @@ powershell -File setup.ps1
 
 # Disparar pipeline específico
 python ouroboros.py --pipeline canal-dark-avatar
+
+# Meta-fluxo: NL → SPEC (F1) → orquestração autônoma (F2)
+python ouroboros.py --from-nl "criar pipeline X a partir de https://y"
+# ... entrevista (agente preenche SPEC_PIPELINE.json, approved=true) ...
+python ouroboros.py --orchestrate ./SPEC_PIPELINE.json --output-dir ./ouroboros-out
+python ouroboros.py --master-doctor
 ```
+
+Entrada no harness: skill `aidd-ouroboros-master` (`/ouroboros`).

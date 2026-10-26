@@ -33,12 +33,16 @@ def obter_chave(chave_opcional: Optional[str] = None) -> str:
     if chave_opcional:
         return chave_opcional
 
-    chave_env = os.environ.get("AIDD_HANDOFF_KEY") or os.environ.get("OUROBOROS_HMAC_SECRET")
+    chave_env = (
+        os.environ.get("AIDD_HANDOFF_KEY")
+        or os.environ.get("OUROBOROS_HMAC_SECRET")
+        or os.environ.get("OUROBOROS_CRYPTO_SECRET")
+    )
     if chave_env and chave_env.strip():
         return chave_env.strip()
 
     raise RuntimeError(
-        "Chave de assinatura HMAC não configurada. Defina a variável de ambiente AIDD_HANDOFF_KEY ou OUROBOROS_HMAC_SECRET."
+        "Chave de assinatura HMAC não configurada. Defina AIDD_HANDOFF_KEY, OUROBOROS_HMAC_SECRET ou OUROBOROS_CRYPTO_SECRET."
     )
 
 

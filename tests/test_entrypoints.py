@@ -29,7 +29,7 @@ def get_canonical_skills():
 
 def test_all_12_skills_have_dependencies_json():
     skills = get_canonical_skills()
-    assert len(skills) == 12
+    assert len(skills) == 13
     for s in skills:
         dep_file = SKILLS_DIR / s / "dependencies.json"
         assert dep_file.is_file(), f"Skill {s} não possui dependencies.json"

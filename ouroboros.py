@@ -32,6 +32,27 @@ import jsonschema
 from motores.governanca.credentials import carregar_env_local, obter_credenciais_ia, verificar_prontidao_live
 
 
+def repo_root() -> Path:
+    """Resolve a raiz do repositório Ouroboros (env, pacote instalado ou cwd)."""
+    env = os.environ.get("AIDD_OUROBOROS_ROOT")
+    if env:
+        p = Path(env).expanduser().resolve()
+        if (p / "aidd-skills").is_dir():
+            return p
+
+    here = Path(__file__).resolve().parent
+    for candidate in (here, *here.parents):
+        if (candidate / "aidd-skills").is_dir() and (candidate / "motores").is_dir():
+            return candidate
+
+    cwd = Path.cwd().resolve()
+    for candidate in (cwd, *cwd.parents):
+        if (candidate / "aidd-skills").is_dir() and (candidate / "motores").is_dir():
+            return candidate
+
+    return here
+
+
 def check_doctor() -> bool:
     print("=" * 70)
     print(" 🩺 [AIDD-OUROBOROS] Diagnóstico de Ambiente & Pré-Voo")
@@ -106,7 +127,7 @@ def check_credentials_cmd() -> bool:
 
 
 def run_audit() -> bool:
-    root = Path(__file__).resolve().parent
+    root = repo_root()
     audit_runner = root / "motores" / "governanca" / "audit_runner.py"
     if not audit_runner.is_file():
         print(f"[!] Auditor de Quality Gates não encontrado em {audit_runner}", file=sys.stderr)
@@ -118,34 +139,62 @@ def run_audit() -> bool:
 
 
 def run_setup() -> bool:
-    root = Path(__file__).resolve().parent
+    root = repo_root()
     print("=" * 70)
     print(" ⚙️  [AIDD-OUROBOROS] Setup Automático & Sincronização Multi-Harness")
     print("=" * 70)
 
-    # 1. Instalar dependências Python
+    uv = shutil.which("uv")
     req_file = root / "requirements.txt"
-    if req_file.is_file():
+    pyproject = root / "pyproject.toml"
+
+    # 1. Instalar pacote + deps (preferir UV)
+    if uv and pyproject.is_file():
+        print("[*] Instalando pacote editável via uv...")
+        res = subprocess.run([uv, "pip", "install", "-q", "-e", str(root)], cwd=str(root))
+        if res.returncode != 0:
+            print("[!] uv pip install -e falhou; tentando pip...", file=sys.stderr)
+            res = subprocess.run(
+                [sys.executable, "-m", "pip", "install", "-q", "-e", str(root)],
+                cwd=str(root),
+            )
+        if res.returncode != 0:
+            print("[!] Falha ao instalar o pacote aidd-ouroboros.", file=sys.stderr)
+            return False
+    elif req_file.is_file():
         print("[*] Instalando dependências de requirements.txt...")
         res = subprocess.run([sys.executable, "-m", "pip", "install", "-q", "-r", str(req_file)])
         if res.returncode != 0:
             print("[!] Falha ao instalar dependências Python via pip.", file=sys.stderr)
+            return False
 
-    # 2. Sincronizar skills multi-harness
+    # 2. Sincronizar skills multi-harness (mestra primeiro)
     skills_dir = root / "aidd-skills"
     if skills_dir.is_dir():
         print("[*] Sincronizando skills canônicas para harnesses do sistema...")
-        sync_scripts = list(skills_dir.glob("*/sync.ps1"))
-        for sync in sync_scripts:
+        masters = [skills_dir / "aidd-ouroboros-master" / "sync.ps1"]
+        others = [p for p in skills_dir.glob("*/sync.ps1") if p.parent.name != "aidd-ouroboros-master"]
+        for sync in masters + others:
+            if not sync.is_file():
+                continue
             print(f"  -> Sincronizando {sync.parent.name}...")
             subprocess.run(["powershell", "-ExecutionPolicy", "Bypass", "-File", str(sync)], capture_output=True)
 
+    # 3. Pré-voo + gates
+    print("[*] Diagnóstico...")
+    if not check_doctor():
+        return False
+    print("[*] Quality Gates...")
+    if not run_audit():
+        return False
+
     print("[OK] Setup concluído com sucesso.\n")
+    print("[*] Uso: ouroboros --from-nl \"...\"  |  /ouroboros no harness\n")
     return True
 
 
 def run_pipeline(pipeline_name: str, force: bool = False, live: bool = False) -> bool:
-    root = Path(__file__).resolve().parent
+    root = repo_root()
     pipe_dir = root / "aidd-pipelines" / pipeline_name
     if not pipe_dir.is_dir():
         print(f"[!] Pipeline '{pipeline_name}' não encontrado em {root / 'aidd-pipelines'}", file=sys.stderr)
@@ -211,13 +260,57 @@ def sintetizar_plano(target: str, goal: str, taxonomy_path: Path | None = None) 
         "created_at": now_iso
     }
 
-    schema_path = Path(__file__).resolve().parent / "schemas" / "PLAN.schema.json"
+    schema_path = repo_root() / "schemas" / "PLAN.schema.json"
     if schema_path.is_file():
         with open(schema_path, "r", encoding="utf-8") as f:
             schema = json.load(f)
         jsonschema.validate(instance=plano, schema=schema)
 
     return plano
+
+
+def _master_script() -> Path:
+    return repo_root() / "aidd-skills" / "aidd-ouroboros-master" / "scripts" / "ouroboros_master.py"
+
+
+def run_master(args: argparse.Namespace) -> int:
+    """Encaminha para o orquestrador mestre (F1 semear / F2 orquestrar)."""
+    script = _master_script()
+    if not script.is_file():
+        print(f"[!] Skill mestra ausente: {script}", file=sys.stderr)
+        return 1
+
+    if args.from_nl:
+        cmd = [
+            sys.executable,
+            str(script),
+            "--from-nl",
+            args.from_nl,
+            "--output-spec",
+            args.output_spec or str(Path.cwd() / "SPEC_PIPELINE.json"),
+        ]
+        if args.goal:
+            cmd.extend(["--goal", args.goal])
+        return subprocess.run(cmd).returncode
+
+    if args.orchestrate:
+        cmd = [
+            sys.executable,
+            str(script),
+            "--orchestrate",
+            args.orchestrate,
+            "--output-dir",
+            args.output_dir or str(Path.cwd() / "ouroboros-out"),
+        ]
+        if args.resume:
+            cmd.append("--resume")
+        return subprocess.run(cmd).returncode
+
+    if args.master_doctor:
+        return subprocess.run([sys.executable, str(script), "--doctor"]).returncode
+
+    print("[!] Use --from-nl, --orchestrate ou --master-doctor.", file=sys.stderr)
+    return 1
 
 
 def main():
@@ -232,6 +325,8 @@ Exemplos de Uso:
   python ouroboros.py --pipeline commercial-spec-flow # Executa o pipeline em modo DRY_RUN
   python ouroboros.py --pipeline commercial-spec-flow --live # Executa chamando APIs reais
   python ouroboros.py --target app.apk --goal "Engenharia reversa" --dry-run
+  python ouroboros.py --from-nl "criar pipeline X a partir de https://y"
+  python ouroboros.py --orchestrate ./SPEC_PIPELINE.json --output-dir ./ouroboros-out
         """
     )
     parser.add_argument("--doctor", action="store_true", help="Diagnóstico dos pré-requisitos de ambiente e IA")
@@ -245,8 +340,17 @@ Exemplos de Uso:
     parser.add_argument("--goal", help="Objetivo funcional do plano a ser sintetizado")
     parser.add_argument("--dry-run", action="store_true", help="Gera o plano deterministicamente sem executar efeitos colaterais")
     parser.add_argument("--output-plan", metavar="CAMINHO", help="Caminho para salvar o plano sintetizado em formato JSON")
+    parser.add_argument("--from-nl", metavar="TEXTO", help="F1: semeia SPEC_PIPELINE.json a partir de pedido em linguagem natural")
+    parser.add_argument("--orchestrate", metavar="SPEC", help="F2: executa orquestração autônoma a partir de SPEC_PIPELINE.json")
+    parser.add_argument("--output-spec", metavar="CAMINHO", help="Caminho de saída para --from-nl (padrão: ./SPEC_PIPELINE.json)")
+    parser.add_argument("--output-dir", metavar="DIR", help="Diretório de artefatos para --orchestrate (padrão: ./ouroboros-out)")
+    parser.add_argument("--resume", action="store_true", help="Retoma state da orquestração após mini-entrevista")
+    parser.add_argument("--master-doctor", action="store_true", help="Diagnóstico da skill mestra aidd-ouroboros-master")
 
     args = parser.parse_args()
+
+    if args.from_nl or args.orchestrate or args.master_doctor:
+        sys.exit(run_master(args))
 
     if args.target and args.goal:
         try:

@@ -1,0 +1,27 @@
+{
+  "version": "1.0.0",
+  "pipeline_id": "example-lego",
+  "name": "example-lego",
+  "description": "Template de no canônico para pipelines Ouroboros",
+  "pipeline_type": "autonomous_lego_pipeline",
+  "input_contract": "context/input/pipeline_input.json",
+  "output_contract": "context/output/pipeline_output.json",
+  "nodes": [
+    {
+      "id": "node-01-ingest",
+      "skill": "aidd-rea-web-saas",
+      "description": "Ingestao e disseccao do alvo",
+      "depends_on": [],
+      "input_handoff": "context/input/pipeline_input.json",
+      "output_handoff": "context/handoffs/01_handoff.json"
+    },
+    {
+      "id": "node-02-factory",
+      "skill": "aidd-orchestrate-pipeline-creator",
+      "description": "Materializacao do DAG canonico",
+      "depends_on": ["node-01-ingest"],
+      "input_handoff": "context/handoffs/01_handoff.json",
+      "output_handoff": "context/output/pipeline_output.json"
+    }
+  ]
+}

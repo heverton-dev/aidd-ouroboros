@@ -1,0 +1,103 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AIDD Ouroboros Pipeline Spec",
+  "description": "Contrato da spec de pipeline gerada pela entrevista (F1) e consumida pela orquestracao autonoma (F2).",
+  "type": "object",
+  "required": [
+    "spec_id",
+    "version",
+    "user_request",
+    "approved",
+    "created_at",
+    "pipeline"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "spec_id": {
+      "type": "string",
+      "pattern": "^spec-[a-f0-9]{8,64}$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "user_request": {
+      "type": "string",
+      "minLength": 1
+    },
+    "goal": {
+      "type": "string"
+    },
+    "approved": {
+      "type": "boolean"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "target": {
+      "type": ["object", "null"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["web", "apk", "video", "social", "file", "none"]
+        },
+        "uri": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        }
+      },
+      "required": ["kind"]
+    },
+    "skills_required": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "role"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "role": { "type": "string", "minLength": 1 },
+          "mode": {
+            "type": "string",
+            "enum": ["reuse", "github-scout", "create"]
+          },
+          "github_query": { "type": "string" }
+        }
+      }
+    },
+    "pipeline": {
+      "type": "object",
+      "required": ["name", "steps"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["id", "skill"],
+            "properties": {
+              "id": { "type": "string", "minLength": 1 },
+              "skill": { "type": "string", "minLength": 1 },
+              "description": { "type": "string" },
+              "depends_on": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "install_dependencies": {
+      "type": "boolean"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

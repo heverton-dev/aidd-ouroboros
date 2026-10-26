@@ -1,0 +1,24 @@
+{
+  "$schema": "https://aidd.framework/schemas/dependencies-v1.json",
+  "skill": "aidd-ouroboros-master",
+  "version": "1.0.0",
+  "author": "Heverton Eduardo Peres",
+  "dependencies": {
+    "core_skills": [
+      { "name": "aidd-rea-router", "role": "Roteamento de alvos REA" },
+      { "name": "aidd-orchestrate-skill-creator", "role": "Fabrica de skills" },
+      { "name": "aidd-orchestrate-pipeline-creator", "role": "Scaffold de pipelines DAG" }
+    ],
+    "system_binaries": [
+      { "name": "python", "required": true, "purpose": "Execucao dos scripts" },
+      { "name": "git", "required": true, "purpose": "Rastreabilidade" },
+      { "name": "gh", "required": false, "purpose": "GitHub scout autenticado" }
+    ],
+    "python_packages": ["jsonschema>=4.0.0"]
+  },
+  "entrypoint": "scripts/ouroboros_master.py",
+  "cli_contract": {
+    "input_flag": "--orchestrate",
+    "output_flag": "--output-dir"
+  }
+}

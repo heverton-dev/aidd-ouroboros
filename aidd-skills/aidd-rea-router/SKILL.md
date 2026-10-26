@@ -31,10 +31,10 @@ Sua missão é **analisar qualquer entrada informada pelo usuário** (URL, arqui
 ```mermaid
 flowchart TD
     IN["Entrada do Usuário (URL, Arquivo, Pasta)"] --> CLASSIFY{"Classificador REA"}
-    CLASSIFY -->|"YouTube / TikTok / Vídeo"| VID["aidd-video-reengineer"]
-    CLASSIFY -->|"Site / SaaS / Landing Page"| WEB["aidd-web-reengineer"]
-    CLASSIFY -->|"Carrossel / Post Social"| SOC["aidd-social-reengineer"]
-    CLASSIFY -->|"APK / Binário Executável"| APP["aidd-app-reengineer"]
+    CLASSIFY -->|"YouTube / TikTok / Vídeo"| VID["aidd-rea-video-youtube"]
+    CLASSIFY -->|"Site / SaaS / Landing Page"| WEB["aidd-rea-web-saas"]
+    CLASSIFY -->|"Carrossel / Post Social"| SOC["aidd-rea-social-carousel"]
+    CLASSIFY -->|"APK / Binário Executável"| APP["aidd-rea-app-android"]
     VID --> OUT["Envelope Universal REA (HANDOFF.json)"]
     WEB --> OUT
     SOC --> OUT

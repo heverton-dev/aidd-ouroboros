@@ -34,3 +34,12 @@ aidd-pipelines/*/context/*/*
 *.wav
 *.mp3
 
+# Runtime do meta-fluxo (specs de sessão / outputs de smoke)
+pending_question.json
+ouroboros_master_state.json
+SPEC_PIPELINE.json
+ouroboros-out/
+laboratorio/ouroboros-out/
+laboratorio/SPEC_*.json
+aidd-skills/*/laboratorio/
+
