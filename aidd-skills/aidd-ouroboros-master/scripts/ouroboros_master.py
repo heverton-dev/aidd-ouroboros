@@ -330,14 +330,19 @@ def stage_rea(spec: Dict[str, Any], state: Dict[str, Any], out_dir: Path) -> Tup
         return True, None
 
     router = repo_tool("aidd-skills", "aidd-rea-router", "scripts", "rea_router.py")
-    handoff = out_dir / "handoffs" / "01_rea_handoff.json"
+    # Paths absolutos: subprocessos REA resolvem relativos a partir do cwd do skill,
+    # o que deslocaria o handoff para aidd-skills/<skill>/<path>
+    handoff = (out_dir / "handoffs" / "01_rea_handoff.json").resolve()
+    rea_dir = (out_dir / "rea").resolve()
+    handoff.parent.mkdir(parents=True, exist_ok=True)
+    rea_dir.mkdir(parents=True, exist_ok=True)
     cmd = [
         sys.executable,
         str(router),
         "--target",
         uri,
         "--output-dir",
-        str(out_dir / "rea"),
+        str(rea_dir),
         "--output-handoff",
         str(handoff),
     ]
@@ -352,8 +357,17 @@ def stage_rea(spec: Dict[str, Any], state: Dict[str, Any], out_dir: Path) -> Tup
         state["stages"]["rea"] = {"status": "FAILED", "rc": rc}
         return False, None
 
+    if not handoff.is_file():
+        emit_pending_question(
+            f"REA nao emitiu handoff em {handoff}. Verifique o alvo e o dissecador.",
+            context=out[-2000:],
+            stage="rea",
+        )
+        state["stages"]["rea"] = {"status": "FAILED", "reason": "handoff ausente"}
+        return False, None
+
     state["stages"]["rea"] = {"status": "OK", "handoff": str(handoff)}
-    return True, str(handoff) if handoff.is_file() else None
+    return True, str(handoff)
 
 
 def resolve_skill(name: str, entry: Dict[str, Any], state: Dict[str, Any]) -> bool:
@@ -670,6 +684,13 @@ def orchestrate(spec_path: Path, resume: bool, out_dir: Path) -> int:
     state["status"] = "OK" if ok_audit else "PARTIAL"
     state["finished_at"] = time_iso()
     save_state(state)
+
+    if ok_audit and PENDING_QUESTION.is_file():
+        try:
+            PENDING_QUESTION.unlink()
+        except OSError as unlink_exc:
+            print(f"[!] Nao foi possivel remover {PENDING_QUESTION.name}: {unlink_exc}", file=sys.stderr)
+
     emit_final_handoff(spec, state, out_dir)
 
     if ok_audit:
