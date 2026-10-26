@@ -552,9 +552,12 @@ def process_universal_input(input_source_str: str, author: str, output_base: Pat
         print(f"[*] Entrada Universal detectada: HANDOFF.json de {input_path}")
         with open(input_path, "r", encoding="utf-8") as f:
             envelope = json.load(f)
-        
-        artifacts = envelope.get("artifacts", {})
-        metodologia_path = artifacts.get("metodologia")
+
+        # Suporte a envelope canônico HMAC ({body,seal}) e legado (flat handoff-v1)
+        body = envelope.get("body") if isinstance(envelope.get("body"), dict) else envelope
+        artifacts = body.get("artifacts_pointers") or body.get("artifacts") or {}
+        raw_meto = artifacts.get("metodologia")
+        metodologia_path = raw_meto.get("path") if isinstance(raw_meto, dict) else raw_meto
         if metodologia_path and Path(metodologia_path).exists():
             skill_dir = build_skill_from_video_reengineer(metodologia_path, author, output_base, skill_name_override=skill_name_override)
             emit_handoff_envelope(skill_dir, author, Path(output_handoff) if output_handoff else None)
@@ -593,8 +596,8 @@ def save_scout_cache(cache_data: dict) -> None:
     try:
         cache_path = get_scout_cache_path()
         cache_path.write_text(json.dumps(cache_data, indent=2, ensure_ascii=False), encoding="utf-8")
-    except Exception:
-        pass
+    except Exception as cache_exc:
+        print(f"[!] Falha ao gravar cache scout em {get_scout_cache_path()}: {cache_exc}", file=sys.stderr)
 
 def scout_github_for_skill(query: str, min_stars: int = 10, limit: int = 5, cache_ttl_seconds: int = 604800) -> list[dict]:
     """
@@ -827,8 +830,8 @@ def evolve_skill(
             new_version = bump_version_minor(old_version)
             dep_data["version"] = new_version
             dep_file.write_text(json.dumps(dep_data, indent=2, ensure_ascii=False), encoding="utf-8")
-        except Exception:
-            pass
+        except Exception as ver_exc:
+            print(f"[!] Falha ao incrementar version em {dep_file}: {ver_exc}", file=sys.stderr)
 
     pyproj_file = skill_dir / "pyproject.toml"
     if pyproj_file.exists():

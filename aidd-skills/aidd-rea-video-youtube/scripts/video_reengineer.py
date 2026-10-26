@@ -22,6 +22,25 @@ import sys
 import unicodedata
 from pathlib import Path
 
+_REPO_ROOT = Path(__file__).resolve().parent.parent.parent.parent
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
+
+def emit_handoff_hmac(producer_skill: str, artifacts: dict, domain_data: dict, target: Path) -> dict:
+    from motores.governanca.credentials import carregar_env_local
+    from motores.governanca.handoff_crypto import criar_envelope_handoff
+
+    carregar_env_local()
+    return criar_envelope_handoff(
+        origem_skill=producer_skill,
+        status="SUCCESS",
+        artefatos=artifacts,
+        metadados=domain_data,
+        caminho_saida=target,
+    )
+
+
 KEYWORDS_TECNICAS = [
     "prompt", "skills", "skill", "remotion", "three.js", "gsap", "shader",
     "código", "terminal", "comando", "estúdio", "studio", "composição",
@@ -673,14 +692,14 @@ def generate_evidence_manifest(video_id: str, canonical_dir: Path, info_path: Pa
 
     print(f"[+] Manifesto de Evidências REA gerado na raiz: {manifest_path}")
 
-    # Geração do Envelope Universal de Handoff (Lego Pipe)
+    # Geração do Envelope Universal de Handoff (Lego Pipe) — HMAC-SHA256
     artifacts_map = {
         "canonical_dir": str(canonical_dir),
         "metodologia": str(canonical_dir / "metodologia.md"),
         "gap_analysis": str(canonical_dir / "gap_analysis.md"),
         "prompts_detectados": str(canonical_dir / "visual" / "prompts_detectados.txt"),
         "thumbnail": str(canonical_dir / "visual" / "thumbnail.jpg"),
-        "manifest": str(manifest_path)
+        "manifest": str(manifest_path),
     }
 
     if (canonical_dir / "conteudo_tecnico.md").exists():
@@ -688,30 +707,28 @@ def generate_evidence_manifest(video_id: str, canonical_dir: Path, info_path: Pa
     if (canonical_dir / "estrutura_narrativa.md").exists():
         artifacts_map["estrutura_narrativa"] = str(canonical_dir / "estrutura_narrativa.md")
 
-    handoff_envelope = {
-        "$schema": "https://aidd.framework/schemas/handoff-v1.json",
-        "producer_skill": "aidd-rea-video-youtube",
+    domain_meta = {
+        "video_id": video_id,
+        "title": info.get("title", ""),
+        "author": info.get("channel", "") or info.get("uploader", ""),
+        "duration_seconds": info.get("duration", 0),
         "producer_version": "1.6.0",
-        "timestamp": info.get("upload_date", ""),
-        "status": "SUCCESS",
-        "artifacts": artifacts_map,
-        "domain_data": {
-            "video_id": video_id,
-            "title": info.get("title", ""),
-            "author": info.get("channel", "") or info.get("uploader", ""),
-            "duration_seconds": info.get("duration", 0)
-        }
+        "upload_date": info.get("upload_date", ""),
     }
     handoff_path = canonical_dir / "HANDOFF.json"
-    with open(handoff_path, "w", encoding="utf-8") as f:
-        json.dump(handoff_envelope, f, indent=2, ensure_ascii=False)
-    print(f"[+] Envelope Universal de Handoff gerado: {handoff_path}")
+    envelope = emit_handoff_hmac(
+        producer_skill="aidd-rea-video-youtube",
+        artifacts=artifacts_map,
+        domain_data=domain_meta,
+        target=handoff_path,
+    )
+    print(f"[+] Envelope Universal de Handoff (HMAC-SHA256) gerado: {handoff_path}")
 
     if output_handoff_override:
         out_p = Path(output_handoff_override)
         out_p.parent.mkdir(parents=True, exist_ok=True)
         with open(out_p, "w", encoding="utf-8") as f:
-            json.dump(handoff_envelope, f, indent=2, ensure_ascii=False)
+            json.dump(envelope, f, indent=2, ensure_ascii=False)
         print(f"[+] Envelope Universal de Handoff copiado para: {out_p}")
 
     return manifest_path

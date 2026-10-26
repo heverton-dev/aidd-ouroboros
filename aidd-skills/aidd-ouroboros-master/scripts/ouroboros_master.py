@@ -366,7 +366,20 @@ def stage_rea(spec: Dict[str, Any], state: Dict[str, Any], out_dir: Path) -> Tup
         state["stages"]["rea"] = {"status": "FAILED", "reason": "handoff ausente"}
         return False, None
 
-    state["stages"]["rea"] = {"status": "OK", "handoff": str(handoff)}
+    ensure_hmac_env()
+    from motores.governanca.handoff_crypto import verify_handoff_envelope
+
+    sig_ok, sig_msg = verify_handoff_envelope(handoff, verificar_integridade_disco=False)
+    if not sig_ok:
+        emit_pending_question(
+            f"Handoff da REA falhou na verificacao HMAC: {sig_msg}. Reabra entrevista para regenerar o alvo.",
+            context=str(handoff),
+            stage="rea",
+        )
+        state["stages"]["rea"] = {"status": "FAILED", "reason": f"hmac: {sig_msg}"}
+        return False, None
+
+    state["stages"]["rea"] = {"status": "OK", "handoff": str(handoff), "hmac": "OK"}
     return True, str(handoff)
 
 

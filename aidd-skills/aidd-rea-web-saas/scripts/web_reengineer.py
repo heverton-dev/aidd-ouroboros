@@ -29,6 +29,26 @@ from pathlib import Path
 
 DEFAULT_AUTHOR = "Heverton Eduardo Peres"
 
+# Injetar raiz do repo para motores.governanca (HMAC de handoff)
+_REPO_ROOT = Path(__file__).resolve().parent.parent.parent.parent
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
+
+def emit_handoff_hmac(producer_skill: str, artifacts: dict, domain_data: dict, target: Path) -> dict:
+    """Emite envelope canônico assinado com HMAC-SHA256 (fail-closed se a chave faltar)."""
+    from motores.governanca.credentials import carregar_env_local
+    from motores.governanca.handoff_crypto import criar_envelope_handoff
+
+    carregar_env_local()
+    return criar_envelope_handoff(
+        origem_skill=producer_skill,
+        status="SUCCESS",
+        artefatos=artifacts,
+        metadados=domain_data,
+        caminho_saida=target,
+    )
+
 
 def time_iso() -> str:
     return datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -356,31 +376,27 @@ A interface organiza a comunicacao com foco em conversao imediata:
         json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8"
     )
 
-    # 7. Emitir HANDOFF.json Universal
-    handoff_envelope = {
-        "$schema": "https://aidd.framework/schemas/handoff-v1.json",
-        "producer_skill": "aidd-rea-web-saas",
-        "producer_version": "1.0.0",
-        "timestamp": time_iso(),
-        "status": "SUCCESS",
-        "artifacts": {
+    # 7. Emitir HANDOFF.json Universal (HMAC-SHA256)
+    target_handoff = output_handoff or (output_dir / "HANDOFF.json")
+    target_handoff.parent.mkdir(parents=True, exist_ok=True)
+    emit_handoff_hmac(
+        producer_skill="aidd-rea-web-saas",
+        artifacts={
             "manifest_rea": str(output_dir / "MANIFEST_REA.json"),
             "tokens_design": str(tokens_path),
             "conteudo_tecnico": str(output_dir / "conteudo_tecnico.md"),
-            "estrutura_ux": str(output_dir / "estrutura_ux.md")
+            "estrutura_ux": str(output_dir / "estrutura_ux.md"),
         },
-        "domain_data": {
+        domain_data={
             "target_url": url,
             "stack": tech_info["stack_detected"],
             "palette": tokens["colors"]["palette_detected"],
-            "ctas": tech_info["ctas_detected"]
-        }
-    }
-
-    target_handoff = output_handoff or (output_dir / "HANDOFF.json")
-    target_handoff.parent.mkdir(parents=True, exist_ok=True)
-    target_handoff.write_text(json.dumps(handoff_envelope, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"[+] Envelope Universal de Handoff emitido em: {target_handoff}")
+            "ctas": tech_info["ctas_detected"],
+            "producer_version": "1.0.0",
+        },
+        target=target_handoff,
+    )
+    print(f"[+] Envelope Universal de Handoff (HMAC-SHA256) emitido em: {target_handoff}")
 
     print(f"\n[OK] Dissecacao Web de '{url}' concluida com sucesso em: {output_dir.resolve()}")
     return output_dir

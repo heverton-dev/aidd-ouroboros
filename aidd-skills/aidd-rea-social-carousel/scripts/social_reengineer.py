@@ -25,6 +25,24 @@ from pathlib import Path
 
 DEFAULT_AUTHOR = "Heverton Eduardo Peres"
 
+_REPO_ROOT = Path(__file__).resolve().parent.parent.parent.parent
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
+
+def emit_handoff_hmac(producer_skill: str, artifacts: dict, domain_data: dict, target: Path) -> dict:
+    from motores.governanca.credentials import carregar_env_local
+    from motores.governanca.handoff_crypto import criar_envelope_handoff
+
+    carregar_env_local()
+    return criar_envelope_handoff(
+        origem_skill=producer_skill,
+        status="SUCCESS",
+        artefatos=artifacts,
+        metadados=domain_data,
+        caminho_saida=target,
+    )
+
 
 def time_iso() -> str:
     return datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -169,8 +187,8 @@ def ocr_image_file(image_path: Path) -> str:
             )
             if res.returncode == 0 and res.stdout.strip():
                 return res.stdout.strip()
-        except Exception:
-            pass
+        except Exception as ocr_exc:
+            print(f"[!] OCR falhou em {image_path.name}: {ocr_exc}", file=sys.stderr)
     return f"Texto do slide extraido de {image_path.name}"
 
 
@@ -352,33 +370,29 @@ Apresenta progressao linear de informacao em blocos digestivos para maximizar sw
         json.dumps(manifest_full, indent=2, ensure_ascii=False), encoding="utf-8"
     )
 
-    # 5. Emitir HANDOFF.json Universal
-    handoff_envelope = {
-        "$schema": "https://aidd.framework/schemas/handoff-v1.json",
-        "producer_skill": "aidd-rea-social-carousel",
-        "producer_version": "1.0.0",
-        "timestamp": time_iso(),
-        "status": "SUCCESS",
-        "artifacts": {
+    # 5. Emitir HANDOFF.json Universal (HMAC-SHA256)
+    target_handoff = output_handoff or (output_dir / "HANDOFF.json")
+    target_handoff.parent.mkdir(parents=True, exist_ok=True)
+    emit_handoff_hmac(
+        producer_skill="aidd-rea-social-carousel",
+        artifacts={
             "manifest_rea": str(output_dir / "MANIFEST_REA.json"),
             "manifest": str(output_dir / "manifest.json"),
             "tokens_design": str(tokens_path),
             "conteudo_tecnico": str(output_dir / "conteudo_tecnico.md"),
-            "estrutura_narrativa": str(output_dir / "estrutura_narrativa.md")
+            "estrutura_narrativa": str(output_dir / "estrutura_narrativa.md"),
         },
-        "domain_data": {
+        domain_data={
             "source": input_source,
             "total_slides": total_slides,
             "hook": hook_slide["text"],
             "cta": cta_slide["text"],
-            "palette": tokens["colors"]
-        }
-    }
-
-    target_handoff = output_handoff or (output_dir / "HANDOFF.json")
-    target_handoff.parent.mkdir(parents=True, exist_ok=True)
-    target_handoff.write_text(json.dumps(handoff_envelope, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"[+] Envelope Universal de Handoff emitido em: {target_handoff}")
+            "palette": tokens["colors"],
+            "producer_version": "1.0.0",
+        },
+        target=target_handoff,
+    )
+    print(f"[+] Envelope Universal de Handoff (HMAC-SHA256) emitido em: {target_handoff}")
 
     print(f"\n[OK] Dissecacao Social de '{input_source}' concluida com sucesso em: {output_dir.resolve()}")
     return output_dir

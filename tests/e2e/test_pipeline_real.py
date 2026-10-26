@@ -55,12 +55,13 @@ def test_pipeline_real_e2e_smoke(tmp_path):
     assert verify_handoff(node_01_payload, "test") is True, "Handoff node-01 falhou na verificação HMAC-SHA256"
     assert verify_handoff(node_02_payload, "test") is True, "Handoff node-02 falhou na verificação HMAC-SHA256"
 
-    # Asserção 4: body.domain_data do nó 02 com permissões reais do fixture APK
+    # Asserção 4: metadados de domínio do nó 02 com permissões reais do fixture APK
+    # Formato canônico HMAC usa domain_metadata; legado usava domain_data.
     body_02 = node_02_payload.get("body", {})
-    domain_data_02 = body_02.get("domain_data", {})
-    permissions = domain_data_02.get("permissions", [])
+    domain_02 = body_02.get("domain_metadata") or body_02.get("domain_data") or {}
+    permissions = domain_02.get("permissions", [])
 
-    assert "android.permission.INTERNET" in permissions, "android.permission.INTERNET ausente no domain_data"
-    assert "android.permission.ACCESS_FINE_LOCATION" in permissions, "android.permission.ACCESS_FINE_LOCATION ausente no domain_data"
+    assert "android.permission.INTERNET" in permissions, "android.permission.INTERNET ausente no domain"
+    assert "android.permission.ACCESS_FINE_LOCATION" in permissions, "android.permission.ACCESS_FINE_LOCATION ausente no domain"
     # Garantir que não há permissões inventadas / vazias
     assert all(isinstance(p, str) and p.startswith("android.permission.") for p in permissions), "Permissões contêm dados inválidos"

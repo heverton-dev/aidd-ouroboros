@@ -38,15 +38,8 @@
     "SILENT_EXCEPT_PASS:842",
     "SILENT_EXCEPT_PASS:89"
   ],
-  "aidd-skills/aidd-orchestrate-skill-creator/scripts/skill_creator.py": [
-    "SILENT_EXCEPT_PASS:596",
-    "SILENT_EXCEPT_PASS:830"
-  ],
   "aidd-skills/aidd-rea-app-android/scripts/app_reengineer.py": [
     "SILENT_EXCEPT_PASS:198"
-  ],
-  "aidd-skills/aidd-rea-social-carousel/scripts/social_reengineer.py": [
-    "SILENT_EXCEPT_PASS:172"
   ],
   "motores/governanca/gate_ast.py": [
     "SILENT_EXCEPT_PASS:254"

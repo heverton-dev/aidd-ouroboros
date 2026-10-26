@@ -42,10 +42,14 @@ class TestSocialReengineer(unittest.TestCase):
 
             # Validar estrutura do envelope de handoff
             handoff_data = json.loads(custom_handoff.read_text(encoding="utf-8"))
-            self.assertEqual(handoff_data["producer_skill"], "aidd-rea-social-carousel")
-            self.assertEqual(handoff_data["status"], "SUCCESS")
-            self.assertIn("tokens_design", handoff_data["artifacts"])
-            self.assertIn("estrutura_narrativa", handoff_data["artifacts"])
+            body = handoff_data.get("body") or handoff_data
+            self.assertEqual(body.get("producer_skill") or handoff_data.get("producer_skill"), "aidd-rea-social-carousel")
+            self.assertEqual(body.get("status"), "SUCCESS")
+            artifacts = body.get("artifacts_pointers") or body.get("artifacts") or {}
+            self.assertIn("tokens_design", artifacts)
+            self.assertIn("estrutura_narrativa", artifacts)
+            self.assertEqual(handoff_data.get("signature_algorithm"), "HMAC-SHA256")
+            self.assertIn("seal", handoff_data)
 
 
 if __name__ == "__main__":

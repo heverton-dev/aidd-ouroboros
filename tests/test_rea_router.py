@@ -55,8 +55,11 @@ class TestReaRouter(unittest.TestCase):
             self.assertTrue(ok)
             self.assertTrue(handoff_p.exists())
             data = json.loads(handoff_p.read_text(encoding="utf-8"))
-            self.assertEqual(data["producer_skill"], "aidd-rea-web-saas")
-            self.assertEqual(data["status"], "SUCCESS")
+            body = data.get("body") or data
+            self.assertEqual(body.get("producer_skill") or data.get("producer_skill"), "aidd-rea-web-saas")
+            self.assertEqual(body.get("status"), "SUCCESS")
+            self.assertEqual(data.get("signature_algorithm"), "HMAC-SHA256")
+            self.assertIn("seal", data)
 
 
 if __name__ == "__main__":

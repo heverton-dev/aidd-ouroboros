@@ -26,6 +26,24 @@ from pathlib import Path
 
 DEFAULT_AUTHOR = "Heverton Eduardo Peres"
 
+_REPO_ROOT = Path(__file__).resolve().parent.parent.parent.parent
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
+
+def emit_handoff_hmac(producer_skill: str, artifacts: dict, domain_data: dict, target: Path) -> dict:
+    from motores.governanca.credentials import carregar_env_local
+    from motores.governanca.handoff_crypto import criar_envelope_handoff
+
+    carregar_env_local()
+    return criar_envelope_handoff(
+        origem_skill=producer_skill,
+        status="SUCCESS",
+        artefatos=artifacts,
+        metadados=domain_data,
+        caminho_saida=target,
+    )
+
 
 def time_iso() -> str:
     return datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -357,32 +375,28 @@ Mapeamento estrutural de telas e rotas de navegacao nativa.
         json.dumps(manifest_canon, indent=2, ensure_ascii=False), encoding="utf-8"
     )
 
-    # 5. Emitir HANDOFF.json Universal
-    handoff_envelope = {
-        "$schema": "https://aidd.framework/schemas/handoff-v1.json",
-        "producer_skill": "aidd-rea-app-android",
-        "producer_version": "1.0.0",
-        "timestamp": time_iso(),
-        "status": "SUCCESS",
-        "artifacts": {
+    # 5. Emitir HANDOFF.json Universal (HMAC-SHA256)
+    target_handoff = output_handoff or (output_dir / "HANDOFF.json")
+    target_handoff.parent.mkdir(parents=True, exist_ok=True)
+    emit_handoff_hmac(
+        producer_skill="aidd-rea-app-android",
+        artifacts={
             "manifest_rea": str(output_dir / "MANIFEST_REA.json"),
             "tokens_design": str(tokens_path),
             "conteudo_tecnico": str(output_dir / "conteudo_tecnico.md"),
-            "arquitetura": str(output_dir / "arquitetura.md")
+            "arquitetura": str(output_dir / "arquitetura.md"),
         },
-        "domain_data": {
+        domain_data={
             "source": input_source,
             "package_name": package_name,
             "permissions": permissions_found,
             "activities": activities_found,
-            "endpoints": urls_found
-        }
-    }
-
-    target_handoff = output_handoff or (output_dir / "HANDOFF.json")
-    target_handoff.parent.mkdir(parents=True, exist_ok=True)
-    target_handoff.write_text(json.dumps(handoff_envelope, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"[+] Envelope Universal de Handoff emitido em: {target_handoff}")
+            "endpoints": urls_found,
+            "producer_version": "1.0.0",
+        },
+        target=target_handoff,
+    )
+    print(f"[+] Envelope Universal de Handoff (HMAC-SHA256) emitido em: {target_handoff}")
 
     print(f"\n[OK] Dissecacao de App de '{input_source}' concluida com sucesso em: {output_dir.resolve()}")
     return output_dir
