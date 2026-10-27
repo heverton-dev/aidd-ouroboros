@@ -1,0 +1,28 @@
+{
+  "body": {
+    "source_step": "node-01-router",
+    "target_step": "node-02-app",
+    "domain_data": {
+      "target_path": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\tests\\fixtures\\sample_app.apk",
+      "classification": {
+        "type": "app",
+        "skill": "aidd-rea-app-android",
+        "script": "app_reengineer.py",
+        "confidence": 1.0,
+        "reason": "Extensao de pacote mobile ou binario executavel detectada."
+      }
+    },
+    "artifacts": [
+      {
+        "path": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\tests\\fixtures\\sample_app.apk",
+        "descricao": "Fixture APK real"
+      }
+    ]
+  },
+  "seal": {
+    "algorithm": "HMAC-SHA256",
+    "key_id": "ouroboros-v2",
+    "hmac_sha256": "aa9ab4e91d8ceda63f548155f2ef2cb38409f0f3ff6b37a6ab274810e175faf4",
+    "sealed_at": "2026-10-26T23:10:31.330290+00:00"
+  }
+}

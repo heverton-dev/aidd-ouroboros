@@ -1,0 +1,103 @@
+{
+  "envelope_format": "AIDD-CANONICAL-HANDOFF",
+  "signature_algorithm": "HMAC-SHA256",
+  "hmac_sha256": "4f4646feac394fa53d71e3f5194728e997618c8550063d3f96ef04ae30518962",
+  "payload": {
+    "schema_version": "2.0-crypto",
+    "producer_skill": "aidd-ouroboros-master",
+    "timestamp": "2026-10-26T23:07:59.401441+00:00",
+    "status": "SUCCESS",
+    "artifacts_pointers": {
+      "state_path": {
+        "path": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e-full\\out\\ouroboros_master_state.json",
+        "sha256": "8b50d9bb78cb836976acc68002a5cb3e0eef98cb4652ad25eaddce1b5856040a",
+        "tamanho_bytes": 762
+      },
+      "pipeline_dir": {
+        "path": "laboratorio\\e2e-full\\out\\aidd-pipelines\\full-e2e",
+        "sha256": null,
+        "tamanho_bytes": 0,
+        "alerta": "Arquivo ainda não materializado no disco"
+      }
+    },
+    "domain_metadata": {
+      "spec_id": "spec-280160b61b7e08ec",
+      "user_request": "criar pipeline full-e2e a partir de https://example.com com dissecacao web e scaffold canonico",
+      "goal": "meta-fluxo completo verificado",
+      "pipeline_name": "full-e2e",
+      "stages": {
+        "rea": {
+          "status": "OK",
+          "handoff": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e-full\\out\\handoffs\\01_rea_handoff.json",
+          "hmac": "OK"
+        },
+        "skills": {
+          "status": "OK"
+        },
+        "pipeline": {
+          "status": "OK",
+          "path": "laboratorio\\e2e-full\\out\\aidd-pipelines\\full-e2e"
+        },
+        "dependencies": {
+          "status": "SKIPPED"
+        },
+        "audit": {
+          "status": "OK",
+          "rc": 0
+        }
+      }
+    }
+  },
+  "body": {
+    "schema_version": "2.0-crypto",
+    "producer_skill": "aidd-ouroboros-master",
+    "timestamp": "2026-10-26T23:07:59.401441+00:00",
+    "status": "SUCCESS",
+    "artifacts_pointers": {
+      "state_path": {
+        "path": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e-full\\out\\ouroboros_master_state.json",
+        "sha256": "8b50d9bb78cb836976acc68002a5cb3e0eef98cb4652ad25eaddce1b5856040a",
+        "tamanho_bytes": 762
+      },
+      "pipeline_dir": {
+        "path": "laboratorio\\e2e-full\\out\\aidd-pipelines\\full-e2e",
+        "sha256": null,
+        "tamanho_bytes": 0,
+        "alerta": "Arquivo ainda não materializado no disco"
+      }
+    },
+    "domain_metadata": {
+      "spec_id": "spec-280160b61b7e08ec",
+      "user_request": "criar pipeline full-e2e a partir de https://example.com com dissecacao web e scaffold canonico",
+      "goal": "meta-fluxo completo verificado",
+      "pipeline_name": "full-e2e",
+      "stages": {
+        "rea": {
+          "status": "OK",
+          "handoff": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e-full\\out\\handoffs\\01_rea_handoff.json",
+          "hmac": "OK"
+        },
+        "skills": {
+          "status": "OK"
+        },
+        "pipeline": {
+          "status": "OK",
+          "path": "laboratorio\\e2e-full\\out\\aidd-pipelines\\full-e2e"
+        },
+        "dependencies": {
+          "status": "SKIPPED"
+        },
+        "audit": {
+          "status": "OK",
+          "rc": 0
+        }
+      }
+    }
+  },
+  "seal": {
+    "algorithm": "HMAC-SHA256",
+    "key_id": "ouroboros-v2",
+    "hmac_sha256": "4f4646feac394fa53d71e3f5194728e997618c8550063d3f96ef04ae30518962",
+    "sealed_at": "2026-10-26T23:07:59.401519+00:00"
+  }
+}

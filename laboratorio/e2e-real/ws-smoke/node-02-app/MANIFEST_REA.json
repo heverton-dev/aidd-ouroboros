@@ -1,0 +1,17 @@
+{
+  "source": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\tests\\fixtures\\sample_app.apk",
+  "dissection_timestamp": "2026-10-26T23:17:08Z",
+  "dissector": "aidd-rea-app-android",
+  "author": "Heverton Eduardo Peres",
+  "license": "MIT",
+  "artifacts": {
+    "tokens": "laboratorio\\e2e-real\\ws-smoke\\node-02-app\\tokens\\TOKENS_DESIGN.json",
+    "conteudo_tecnico": "laboratorio\\e2e-real\\ws-smoke\\node-02-app\\conteudo_tecnico.md",
+    "arquitetura": "laboratorio\\e2e-real\\ws-smoke\\node-02-app\\arquitetura.md"
+  },
+  "summary": {
+    "permissions_count": 2,
+    "activities_count": 1,
+    "endpoints_count": 1
+  }
+}

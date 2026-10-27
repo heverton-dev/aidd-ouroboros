@@ -1,0 +1,97 @@
+{
+  "envelope_format": "AIDD-CANONICAL-HANDOFF",
+  "signature_algorithm": "HMAC-SHA256",
+  "hmac_sha256": "d68b2a48211b0245f9c4725cb3e263dd938f1c01764111a70b0bb75c00004546",
+  "payload": {
+    "schema_version": "2.0-crypto",
+    "producer_skill": "aidd-rea-web-saas",
+    "timestamp": "2026-10-26T23:16:35.492187+00:00",
+    "status": "SUCCESS",
+    "artifacts_pointers": {
+      "manifest_rea": {
+        "path": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e-real\\out\\rea\\MANIFEST_REA.json",
+        "sha256": "d499030f4bb263abcce283b2e2257ff80e2426c68f327bec46431201c958a2b4",
+        "tamanho_bytes": 767
+      },
+      "tokens_design": {
+        "path": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e-real\\out\\rea\\tokens\\TOKENS_DESIGN.json",
+        "sha256": "bd7fa58e02294ba730522b8f19beec958c847c0031df8bfb51b06bc67fbf9dcc",
+        "tamanho_bytes": 707
+      },
+      "conteudo_tecnico": {
+        "path": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e-real\\out\\rea\\conteudo_tecnico.md",
+        "sha256": "8c17e79f2fdc53a1d4f99c02d8dbb8b6ea6ee4d3870627507234786740230a2a",
+        "tamanho_bytes": 427
+      },
+      "estrutura_ux": {
+        "path": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e-real\\out\\rea\\estrutura_ux.md",
+        "sha256": "c323db3325f8c6246023e2fc051af73d289a14fce9092c1d936b200dfd2d6d92",
+        "tamanho_bytes": 525
+      }
+    },
+    "domain_metadata": {
+      "target_url": "https://example.com",
+      "stack": [
+        "Vanilla / Modern Web"
+      ],
+      "palette": [
+        "#eee",
+        "#222"
+      ],
+      "ctas": [
+        "Começar Agora",
+        "Saiba Mais"
+      ],
+      "producer_version": "1.0.0"
+    }
+  },
+  "body": {
+    "schema_version": "2.0-crypto",
+    "producer_skill": "aidd-rea-web-saas",
+    "timestamp": "2026-10-26T23:16:35.492187+00:00",
+    "status": "SUCCESS",
+    "artifacts_pointers": {
+      "manifest_rea": {
+        "path": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e-real\\out\\rea\\MANIFEST_REA.json",
+        "sha256": "d499030f4bb263abcce283b2e2257ff80e2426c68f327bec46431201c958a2b4",
+        "tamanho_bytes": 767
+      },
+      "tokens_design": {
+        "path": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e-real\\out\\rea\\tokens\\TOKENS_DESIGN.json",
+        "sha256": "bd7fa58e02294ba730522b8f19beec958c847c0031df8bfb51b06bc67fbf9dcc",
+        "tamanho_bytes": 707
+      },
+      "conteudo_tecnico": {
+        "path": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e-real\\out\\rea\\conteudo_tecnico.md",
+        "sha256": "8c17e79f2fdc53a1d4f99c02d8dbb8b6ea6ee4d3870627507234786740230a2a",
+        "tamanho_bytes": 427
+      },
+      "estrutura_ux": {
+        "path": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e-real\\out\\rea\\estrutura_ux.md",
+        "sha256": "c323db3325f8c6246023e2fc051af73d289a14fce9092c1d936b200dfd2d6d92",
+        "tamanho_bytes": 525
+      }
+    },
+    "domain_metadata": {
+      "target_url": "https://example.com",
+      "stack": [
+        "Vanilla / Modern Web"
+      ],
+      "palette": [
+        "#eee",
+        "#222"
+      ],
+      "ctas": [
+        "Começar Agora",
+        "Saiba Mais"
+      ],
+      "producer_version": "1.0.0"
+    }
+  },
+  "seal": {
+    "algorithm": "HMAC-SHA256",
+    "key_id": "ouroboros-v2",
+    "hmac_sha256": "d68b2a48211b0245f9c4725cb3e263dd938f1c01764111a70b0bb75c00004546",
+    "sealed_at": "2026-10-26T23:16:35.492270+00:00"
+  }
+}

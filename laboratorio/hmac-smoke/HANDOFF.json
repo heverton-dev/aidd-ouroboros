@@ -1,0 +1,53 @@
+{
+  "envelope_format": "AIDD-CANONICAL-HANDOFF",
+  "signature_algorithm": "HMAC-SHA256",
+  "hmac_sha256": "6f77189e07132f85a521ab06051583effd786274dbb2e3cf901130a7ce9d3489",
+  "payload": {
+    "schema_version": "2.0-crypto",
+    "producer_skill": "aidd-rea-web-saas",
+    "timestamp": "2026-10-26T22:50:41.740750+00:00",
+    "status": "SUCCESS",
+    "artifacts_pointers": {
+      "tokens_design": {
+        "path": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\hmac-smoke\\tok.json",
+        "sha256": "015abd7f5cc57a2dd94b7590f04ad8084273905ee33ec5cebeae62276a97f862",
+        "tamanho_bytes": 7
+      },
+      "manifest_rea": {
+        "path": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\hmac-smoke\\man.json",
+        "sha256": "3227ed0614bb57255f2bde87551b9c1518eb4c8a4374cb40557d5bac62e7129f",
+        "tamanho_bytes": 7
+      }
+    },
+    "domain_metadata": {
+      "t": "x"
+    }
+  },
+  "body": {
+    "schema_version": "2.0-crypto",
+    "producer_skill": "aidd-rea-web-saas",
+    "timestamp": "2026-10-26T22:50:41.740750+00:00",
+    "status": "SUCCESS",
+    "artifacts_pointers": {
+      "tokens_design": {
+        "path": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\hmac-smoke\\tok.json",
+        "sha256": "015abd7f5cc57a2dd94b7590f04ad8084273905ee33ec5cebeae62276a97f862",
+        "tamanho_bytes": 7
+      },
+      "manifest_rea": {
+        "path": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\hmac-smoke\\man.json",
+        "sha256": "3227ed0614bb57255f2bde87551b9c1518eb4c8a4374cb40557d5bac62e7129f",
+        "tamanho_bytes": 7
+      }
+    },
+    "domain_metadata": {
+      "t": "x"
+    }
+  },
+  "seal": {
+    "algorithm": "HMAC-SHA256",
+    "key_id": "ouroboros-v2",
+    "hmac_sha256": "6f77189e07132f85a521ab06051583effd786274dbb2e3cf901130a7ce9d3489",
+    "sealed_at": "2026-10-26T22:50:41.740853+00:00"
+  }
+}

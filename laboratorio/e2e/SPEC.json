@@ -1,0 +1,42 @@
+{
+  "$schema": "./SPEC_PIPELINE.schema.json",
+  "spec_id": "spec-ae6ae5b2ef080f6c",
+  "version": "1.0.0",
+  "user_request": "criar pipeline e2e-hmac a partir de https://example.com",
+  "goal": "PREENCHER: resultado observavel desejado",
+  "approved": true,
+  "created_at": "2026-10-26T22:55:42Z",
+  "target": {
+    "kind": "web",
+    "uri": "https://example.com"
+  },
+  "skills_required": [
+    {
+      "name": "aidd-rea-web-saas",
+      "role": "REA",
+      "mode": "reuse"
+    }
+  ],
+  "pipeline": {
+    "name": "e2e-hmac",
+    "description": "E2E HMAC",
+    "steps": [
+      {
+        "id": "node-01-ingest",
+        "skill": "aidd-rea-web-saas",
+        "description": "REA web",
+        "depends_on": []
+      },
+      {
+        "id": "node-02-factory",
+        "skill": "aidd-orchestrate-pipeline-creator",
+        "description": "scaffold",
+        "depends_on": [
+          "node-01-ingest"
+        ]
+      }
+    ]
+  },
+  "install_dependencies": false,
+  "notes": "E2E HMAC final"
+}

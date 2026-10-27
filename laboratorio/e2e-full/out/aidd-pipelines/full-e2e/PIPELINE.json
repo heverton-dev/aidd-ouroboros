@@ -1,0 +1,30 @@
+{
+  "version": "1.0.0",
+  "pipeline_id": "full-e2e",
+  "name": "full-e2e",
+  "description": "Pipeline autonomo composivel para full-e2e",
+  "pipeline_type": "autonomous_lego_pipeline",
+  "input_contract": "context/input/pipeline_input.json",
+  "output_contract": "context/output/pipeline_output.json",
+  "upstream_reference": null,
+  "nodes": [
+    {
+      "id": "node-01-ingest",
+      "skill": "aidd-rea-web-saas",
+      "description": "Disseccao web",
+      "depends_on": [],
+      "input_handoff": "context/handoffs/01_in.json",
+      "output_handoff": "context/handoffs/01_out.json"
+    },
+    {
+      "id": "node-02-factory",
+      "skill": "aidd-orchestrate-pipeline-creator",
+      "description": "Scaffold DAG",
+      "depends_on": [
+        "node-01-ingest"
+      ],
+      "input_handoff": "context/handoffs/02_in.json",
+      "output_handoff": "context/handoffs/02_out.json"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0",
+  "timestamp": "2026-10-26T23:10:31Z",
+  "colors": {
+    "colorPrimary": "#1E40AF",
+    "colorPrimaryDark": "#1E3A8A",
+    "colorAccent": "#3B82F6",
+    "background": "#F8FAFC",
+    "surface": "#FFFFFF",
+    "text": "#0F172A"
+  },
+  "theme": {
+    "style_parent": "Theme.MaterialComponents.DayNight.NoActionBar",
+    "dark_mode_supported": true,
+    "elevation_dp": {
+      "card": 4,
+      "appbar": 8,
+      "dialog": 24
+    }
+  }
+}

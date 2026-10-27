@@ -1,0 +1,42 @@
+{
+  "$schema": "./SPEC_PIPELINE.schema.json",
+  "spec_id": "spec-280160b61b7e08ec",
+  "version": "1.0.0",
+  "user_request": "criar pipeline full-e2e a partir de https://example.com com dissecacao web e scaffold canonico",
+  "goal": "meta-fluxo completo verificado",
+  "approved": true,
+  "created_at": "2026-10-26T23:07:40Z",
+  "target": {
+    "kind": "web",
+    "uri": "https://example.com"
+  },
+  "skills_required": [
+    {
+      "name": "aidd-rea-web-saas",
+      "role": "Disseccao web",
+      "mode": "reuse"
+    }
+  ],
+  "pipeline": {
+    "name": "full-e2e",
+    "description": "Meta-fluxo completo: REA web + scaffold canonico",
+    "steps": [
+      {
+        "id": "node-01-ingest",
+        "skill": "aidd-rea-web-saas",
+        "description": "Disseccao web",
+        "depends_on": []
+      },
+      {
+        "id": "node-02-factory",
+        "skill": "aidd-orchestrate-pipeline-creator",
+        "description": "Scaffold DAG",
+        "depends_on": [
+          "node-01-ingest"
+        ]
+      }
+    ]
+  },
+  "install_dependencies": false,
+  "notes": "Full E2E aprovado"
+}

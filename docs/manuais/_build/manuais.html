@@ -1,0 +1,2261 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.10" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Manual de Engenharia - AIDD Ouroboros</title>
+  <style>
+
+@page {
+  size: A4;
+  margin: 22mm 18mm 24mm 18mm;
+  @bottom-center {
+    content: counter(page);
+  }
+}
+* { box-sizing: border-box; }
+html, body {
+  font-family: "Segoe UI", "Calibri", "Arial", sans-serif;
+  font-size: 11pt;
+  line-height: 1.45;
+  color: #1a1a1a;
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  font-size: 18pt;
+  color: #0b3d5c;
+  border-bottom: 2.5pt solid #0b3d5c;
+  padding-bottom: 6pt;
+  margin: 0 0 12pt 0;
+  page-break-after: avoid;
+}
+h2 {
+  font-size: 13.5pt;
+  color: #0b3d5c;
+  margin: 16pt 0 8pt 0;
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 11.5pt;
+  color: #1f4e79;
+  margin: 12pt 0 6pt 0;
+  page-break-after: avoid;
+}
+p, li { margin: 4pt 0; text-align: justify; }
+blockquote {
+  margin: 8pt 0 12pt 0;
+  padding: 8pt 12pt;
+  background: #eef5fa;
+  border-left: 3pt solid #0b3d5c;
+  color: #243;
+}
+blockquote p { margin: 2pt 0; }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 8pt 0 14pt 0;
+  font-size: 9.5pt;
+  page-break-inside: avoid;
+}
+th, td {
+  border: 0.6pt solid #99b8cc;
+  padding: 5pt 7pt;
+  vertical-align: top;
+  text-align: left;
+}
+th { background: #d6e8f5; font-weight: 600; color: #0b3d5c; }
+tr:nth-child(even) td { background: #f7fafc; }
+code {
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 9.5pt;
+  background: #f0f0f0;
+  padding: 1pt 3pt;
+  border-radius: 2pt;
+}
+pre {
+  background: #0f2433;
+  color: #d8e8f0;
+  padding: 10pt 12pt;
+  border-radius: 4pt;
+  font-size: 9pt;
+  line-height: 1.35;
+  white-space: pre-wrap;
+  word-break: break-word;
+  page-break-inside: avoid;
+  margin: 8pt 0 12pt 0;
+}
+pre code { background: transparent; color: inherit; padding: 0; }
+.page-break { break-after: page; page-break-after: always; height: 0; }
+hr {
+  border: none;
+  border-top: 0.6pt solid #99b8cc;
+  margin: 14pt 0;
+}
+strong { color: #0b3d5c; }
+ul, ol { padding-left: 18pt; }
+.cover-note {
+  margin-top: 10pt;
+  font-size: 10pt;
+  color: #444;
+}
+
+</style>
+  
+  <meta charset="utf-8">
+<style>
+
+@page {
+  size: A4;
+  margin: 22mm 18mm 24mm 18mm;
+  @bottom-center {
+    content: counter(page);
+  }
+}
+* { box-sizing: border-box; }
+html, body {
+  font-family: "Segoe UI", "Calibri", "Arial", sans-serif;
+  font-size: 11pt;
+  line-height: 1.45;
+  color: #1a1a1a;
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  font-size: 18pt;
+  color: #0b3d5c;
+  border-bottom: 2.5pt solid #0b3d5c;
+  padding-bottom: 6pt;
+  margin: 0 0 12pt 0;
+  page-break-after: avoid;
+}
+h2 {
+  font-size: 13.5pt;
+  color: #0b3d5c;
+  margin: 16pt 0 8pt 0;
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 11.5pt;
+  color: #1f4e79;
+  margin: 12pt 0 6pt 0;
+  page-break-after: avoid;
+}
+p, li { margin: 4pt 0; text-align: justify; }
+blockquote {
+  margin: 8pt 0 12pt 0;
+  padding: 8pt 12pt;
+  background: #eef5fa;
+  border-left: 3pt solid #0b3d5c;
+  color: #243;
+}
+blockquote p { margin: 2pt 0; }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 8pt 0 14pt 0;
+  font-size: 9.5pt;
+  page-break-inside: avoid;
+}
+th, td {
+  border: 0.6pt solid #99b8cc;
+  padding: 5pt 7pt;
+  vertical-align: top;
+  text-align: left;
+}
+th { background: #d6e8f5; font-weight: 600; color: #0b3d5c; }
+tr:nth-child(even) td { background: #f7fafc; }
+code {
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 9.5pt;
+  background: #f0f0f0;
+  padding: 1pt 3pt;
+  border-radius: 2pt;
+}
+pre {
+  background: #0f2433;
+  color: #d8e8f0;
+  padding: 10pt 12pt;
+  border-radius: 4pt;
+  font-size: 9pt;
+  line-height: 1.35;
+  white-space: pre-wrap;
+  word-break: break-word;
+  page-break-inside: avoid;
+  margin: 8pt 0 12pt 0;
+}
+pre code { background: transparent; color: inherit; padding: 0; }
+.page-break { break-after: page; page-break-after: always; height: 0; }
+hr {
+  border: none;
+  border-top: 0.6pt solid #99b8cc;
+  margin: 14pt 0;
+}
+strong { color: #0b3d5c; }
+ul, ol { padding-left: 18pt; }
+.cover-note {
+  margin-top: 10pt;
+  font-size: 10pt;
+  color: #444;
+}
+
+</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Manual de Engenharia - AIDD Ouroboros</h1>
+</header>
+<h1 id="manual-de-engenharia-visão-geral-meta-fluxo-ouroboros">Manual de
+Engenharia • Visão Geral: Meta-Fluxo Ouroboros</h1>
+<blockquote>
+<p><strong>Raio-X de Arquitetura do Ouroboros (Todas as
+Etapas)</strong><br />
+Localização no pipeline:
+<code>[1. F1 ENTREVISTA] ➔ 2. SPEC ➔ 3. F2 ORQUESTRAÇÃO ➔ 4. HANDOFF ➔ 5. RUNNER</code></p>
+</blockquote>
+<hr />
+<h2 id="grau-geral-de-automação-do-sistema">📊 Grau Geral de Automação
+do Sistema</h2>
+<pre><code>[██████████████████████████████░░░░░░░░░░░░░░░░░░░] 60% Determinístico | 40% Misto</code></pre>
+<ul>
+<li><strong>60% Determinístico</strong>: Validação de SPEC (JSON
+Schema), roteamento REA, scaffold de pipelines, instalação de deps,
+quality gates AST, assinatura HMAC-SHA256 e runner de DAG.</li>
+<li><strong>40% Misto</strong>: Entrevista F1 (julgamento do agente +
+decisão humana), interpretação de NL, captura de rede na dissecação e
+scout GitHub (rede + ranking externo).</li>
+</ul>
+<hr />
+<h2 id="índice-das-etapas">1. Índice das Etapas</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">#</th>
+<th style="text-align: left;">Manual</th>
+<th style="text-align: left;">Fase</th>
+<th style="text-align: left;">Natureza dominante</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">01</td>
+<td style="text-align: left;"><a href="01-f1-entrevista.md">Entrevista
+F1</a></td>
+<td style="text-align: left;">F1</td>
+<td style="text-align: left;">Humano + Agente</td>
+</tr>
+<tr>
+<td style="text-align: left;">02</td>
+<td style="text-align: left;"><a href="02-f1-semeadura-spec.md">Semeadura da SPEC</a></td>
+<td style="text-align: left;">F1</td>
+<td style="text-align: left;">100% Determinístico</td>
+</tr>
+<tr>
+<td style="text-align: left;">03</td>
+<td style="text-align: left;"><a href="03-f2-validacao-spec.md">Validação da SPEC</a></td>
+<td style="text-align: left;">F2</td>
+<td style="text-align: left;">100% Determinístico</td>
+</tr>
+<tr>
+<td style="text-align: left;">04</td>
+<td style="text-align: left;"><a href="04-f2-rea-router.md">Roteamento
+REA</a></td>
+<td style="text-align: left;">F2</td>
+<td style="text-align: left;">100% Determinístico</td>
+</tr>
+<tr>
+<td style="text-align: left;">05</td>
+<td style="text-align: left;"><a href="05-f2-dissecao-rea.md">Dissecação
+REA</a></td>
+<td style="text-align: left;">F2</td>
+<td style="text-align: left;">70% Det. / 30% Rede</td>
+</tr>
+<tr>
+<td style="text-align: left;">06</td>
+<td style="text-align: left;"><a href="06-f2-skill-creator.md">Skill
+Creator</a></td>
+<td style="text-align: left;">F2</td>
+<td style="text-align: left;">85% Det. / 15% Rede</td>
+</tr>
+<tr>
+<td style="text-align: left;">07</td>
+<td style="text-align: left;"><a href="07-f2-pipeline-creator.md">Pipeline Creator</a></td>
+<td style="text-align: left;">F2</td>
+<td style="text-align: left;">100% Determinístico</td>
+</tr>
+<tr>
+<td style="text-align: left;">08</td>
+<td style="text-align: left;"><a href="08-f2-dependency-resolver.md">Dependency Resolver</a></td>
+<td style="text-align: left;">F2</td>
+<td style="text-align: left;">60% Det. / 40% Ambiente</td>
+</tr>
+<tr>
+<td style="text-align: left;">09</td>
+<td style="text-align: left;"><a href="09-f2-audit-runner.md">Quality
+Gates</a></td>
+<td style="text-align: left;">F2</td>
+<td style="text-align: left;">100% Determinístico</td>
+</tr>
+<tr>
+<td style="text-align: left;">10</td>
+<td style="text-align: left;"><a href="10-f2-handoff-final.md">Handoff
+Final</a></td>
+<td style="text-align: left;">F2</td>
+<td style="text-align: left;">100% Determinístico</td>
+</tr>
+<tr>
+<td style="text-align: left;">11</td>
+<td style="text-align: left;"><a href="11-runner-pipeline.md">Runner do
+Pipeline</a></td>
+<td style="text-align: left;">Pós-F2</td>
+<td style="text-align: left;">90% Det. / 10% Skills</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="fluxo-em-uma-linha">2. Fluxo em Uma Linha</h2>
+<p><strong>Pedido NL</strong> → Entrevista (aprovação humana) →
+<strong>SPEC.json</strong> → F2 autônoma: valida → REA (se houver alvo)
+→ skills → scaffold → deps → audit → <strong>handoff HMAC</strong> →
+runner do DAG.</p>
+<hr />
+<h2 id="convenções-de-nomenclatura">3. Convenções de Nomenclatura</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Conceito</th>
+<th style="text-align: left;">Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>F1</strong></td>
+<td style="text-align: left;">Fase interativa (entrevista + SPEC)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>F2</strong></td>
+<td style="text-align: left;">Fase autônoma
+(<code>--orchestrate</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Exit 0/1/2/3</strong></td>
+<td style="text-align: left;">Sucesso / Erro técnico / Não aprovado /
+Dúvida (mini-entrevista)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Determinístico</strong></td>
+<td style="text-align: left;">Mesmo input → mesmo output, sem LLM</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Probabilístico</strong></td>
+<td style="text-align: left;">Depende de LLM, julgamento ou rede
+externa</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="o-que-o-sistema-entrega-para-quem-e-como">4. O que o Sistema
+Entrega, Para Quem e Como?</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">O que entrega</th>
+<th style="text-align: left;">Para quem entrega</th>
+<th style="text-align: left;">Como entrega (Formato / Meio)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>SPEC aprovada</strong></td>
+<td style="text-align: left;">F2 (orquestrador)</td>
+<td style="text-align: left;">Arquivo JSON:
+<code>SPEC_PIPELINE.json</code> com <code>approved: true</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Pipeline canônico</strong></td>
+<td style="text-align: left;">Usuário / Runner</td>
+<td style="text-align: left;">Pasta:
+<code>OUT/aidd-pipelines/&lt;nome&gt;/</code> com DAG + runner</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Handoffs assinados</strong></td>
+<td style="text-align: left;">Auditoria / próximo nó</td>
+<td style="text-align: left;">JSON HMAC-SHA256:
+<code>OUT/handoffs/*.json</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Relatório de gates</strong></td>
+<td style="text-align: left;">CI / operador</td>
+<td style="text-align: left;">Exit code 0 do <code>audit_runner</code> +
+log em stdout</td>
+</tr>
+</tbody>
+</table>
+<div class="page-break">
+
+</div>
+<h1 id="manual-de-engenharia-etapa-1-entrevista-f1">Manual de Engenharia
+• Etapa 1: Entrevista F1</h1>
+<blockquote>
+<p><strong>Raio-X de Arquitetura da Etapa 1 do Ouroboros</strong><br />
+Localização no pipeline:
+<code>[1. ENTREVISTA] ➔ 2. SPEC ➔ 3. F2 ORQUESTRAÇÃO ➔ 4. HANDOFF ➔ 5. RUNNER</code></p>
+</blockquote>
+<hr />
+<h2 id="grau-geral-de-automação-da-etapa">📊 Grau Geral de Automação da
+Etapa</h2>
+<pre><code>[████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 35% Determinístico | 65% Humano/Agente</code></pre>
+<ul>
+<li><strong>35% Determinístico</strong>: Semente da SPEC
+(<code>--from-nl</code>), schema JSON e limites de frontmatter.</li>
+<li><strong>65% Humano/Agente</strong>: Interpretação do pedido em
+linguagem natural, uma pergunta por vez, palpite do agente e
+<strong>aprovação explícita</strong> (<code>approved: true</code>) que
+só o usuário pode dar.</li>
+</ul>
+<hr />
+<h2 id="input-da-etapa-o-que-entra-e-de-onde-vem">1. Input da Etapa (O
+que entra e de onde vem)</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Dado</th>
+<th style="text-align: left;">Tipo</th>
+<th style="text-align: left;">Exemplo</th>
+<th style="text-align: left;">Origem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Pedido em linguagem natural</td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;"><code>&quot;criar app de checklist simples&quot;</code></td>
+<td style="text-align: left;">Usuário no chat ou
+<code>/ouroboros</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>--output-spec</code></td>
+<td style="text-align: left;"><code>Path</code></td>
+<td style="text-align: left;"><code>./SPEC_PIPELINE.json</code></td>
+<td style="text-align: left;">CLI (default: cwd)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>--goal</code></td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;"><code>&quot;provar fluxo de ponta a ponta&quot;</code></td>
+<td style="text-align: left;">CLI / resposta da entrevista</td>
+</tr>
+<tr>
+<td style="text-align: left;">Template da SPEC</td>
+<td style="text-align: left;"><code>JSON</code></td>
+<td style="text-align: left;"><code>schemas/SPEC_PIPELINE.template.json</code></td>
+<td style="text-align: left;">Repositório</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="processamento-passo-a-passo-microações-e-natureza">2.
+Processamento Passo a Passo (Microações e Natureza)</h2>
+<h3 id="ação-1.1-reconhecimento-do-pedido">Ação 1.1: Reconhecimento do
+pedido</h3>
+<ul>
+<li><strong>O que faz</strong>: Identifica que o texto é um pedido de
+fabricação (pipeline/skill a partir de X) e ativa a trilha F1 — não pula
+para F2.</li>
+<li><strong>Natureza</strong>:
+<code>40% Determinístico / 60% Probabilístico</code> (heurística simples
++ julgamento do agente).</li>
+</ul>
+<h3 id="ação-1.2-semeadura-da-spec">Ação 1.2: Semeadura da SPEC</h3>
+<ul>
+<li><strong>O que faz</strong>: Executa
+<code>ouroboros_master.py --from-nl &quot;&lt;pedido&gt;&quot;</code>, gera
+<code>spec_id</code> (SHA-256) e grava template com
+<code>approved: false</code> e placeholders.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<h3 id="ação-1.3-entrevista-uma-pergunta-por-vez-protocolo-interview-me">Ação
+1.3: Entrevista uma pergunta por vez (protocolo interview-me)</h3>
+<ul>
+<li><strong>O que faz</strong>: Pergunta, nesta ordem mínima: alvo
+(URL/APK/nenhum), sucesso observável, skills
+(<code>reuse</code>/<code>github-scout</code>/<code>create</code>), nome
+do pipeline, steps do DAG, instalação de deps. Cada pergunta leva um
+<strong>palpite</strong>.</li>
+<li><strong>Natureza</strong>:
+<code>10% Determinístico / 90% Humano/Agente</code>.</li>
+</ul>
+<h3 id="ação-1.4-preenchimento-e-trava-de-aprovação">Ação 1.4:
+Preenchimento e trava de aprovação</h3>
+<ul>
+<li><strong>O que faz</strong>: Escreve as respostas na SPEC; só após
+confirmação explícita grava <code>&quot;approved&quot;: true</code>. Placeholders
+(<code>PREENCHER</code>, <code>placeholder-pipeline</code>) impedem a
+F2.</li>
+<li><strong>Natureza</strong>:
+<code>50% Determinístico / 50% Humano</code> (a trava é sempre
+humana).</li>
+</ul>
+<hr />
+<h2 id="scripts-funções-e-regras-no-código">3. Scripts, Funções e Regras
+no Código</h2>
+<ul>
+<li><strong>CLI de semente</strong>: <code>ouroboros.py</code> •
+<code>--from-nl</code> / <code>--output-spec</code> /
+<code>--goal</code>.</li>
+<li><strong>Script mestre</strong>:
+<code>aidd-skills/aidd-ouroboros-master/scripts/ouroboros_master.py</code>
+• função <code>cmd_init_spec</code>.</li>
+<li><strong>Template</strong>:
+<code>schemas/SPEC_PIPELINE.template.json</code>.</li>
+<li><strong>Schema da SPEC</strong>:
+<code>schemas/SPEC_PIPELINE.schema.json</code> (validado na Etapa
+3).</li>
+<li><strong>Skill de conduta</strong>:
+<code>aidd-ouroboros-master/SKILL.md</code> (F1) + skill de harness
+<code>interview-me</code>.</li>
+<li><strong>Regra de ouro</strong>: F2 proibida sem
+<code>approved: true</code> e sem placeholders.</li>
+</ul>
+<hr />
+<h2 id="o-que-a-etapa-entrega-para-quem-e-como">4. O que a Etapa
+Entrega, Para Quem e Como?</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">O que entrega</th>
+<th style="text-align: left;">Para quem entrega</th>
+<th style="text-align: left;">Como entrega (Formato / Meio)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>SPEC template</strong></td>
+<td style="text-align: left;">Usuário / Agente</td>
+<td style="text-align: left;">Arquivo JSON:
+<code>SPEC_PIPELINE.json</code> com <code>approved: false</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SPEC preenchida e
+aprovada</strong></td>
+<td style="text-align: left;">Etapa 3 (Validação F2)</td>
+<td style="text-align: left;">Mesmo JSON com <code>approved: true</code>
+e <code>pipeline.name</code> real</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Resumo da entrevista</strong></td>
+<td style="text-align: left;">Usuário (humano)</td>
+<td style="text-align: left;">Mensagem no chat (linhas de
+confirmação)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Pedido original</strong></td>
+<td style="text-align: left;">Auditoria / F2</td>
+<td style="text-align: left;">Campo <code>user_request</code> +
+<code>goal</code> dentro da SPEC</td>
+</tr>
+</tbody>
+</table>
+<div class="page-break">
+
+</div>
+<h1 id="manual-de-engenharia-etapa-2-semeadura-da-spec">Manual de
+Engenharia • Etapa 2: Semeadura da SPEC</h1>
+<blockquote>
+<p><strong>Raio-X de Arquitetura da Etapa 2 do Ouroboros</strong><br />
+Localização no pipeline:
+<code>1. ENTREVISTA ➔ [2. SEMEADURA DA SPEC] ➔ 3. F2 ORQUESTRAÇÃO ➔ 4. HANDOFF ➔ 5. RUNNER</code></p>
+</blockquote>
+<hr />
+<h2 id="grau-geral-de-automação-da-etapa-1">📊 Grau Geral de Automação
+da Etapa</h2>
+<pre><code>[██████████████████████████████████████████████████] 100% Determinístico | 0% Probabilístico</code></pre>
+<ul>
+<li><strong>100% Determinístico</strong>: Hash do pedido, leitura de
+template e escrita de JSON — sem LLM, sem rede, sem aleatoriedade
+(apenas timestamp no <code>spec_id</code>/<code>created_at</code>).</li>
+</ul>
+<hr />
+<h2 id="input-da-etapa-o-que-entra-e-de-onde-vem-1">1. Input da Etapa (O
+que entra e de onde vem)</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Dado</th>
+<th style="text-align: left;">Tipo</th>
+<th style="text-align: left;">Exemplo</th>
+<th style="text-align: left;">Origem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>--from-nl</code></td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;"><code>&quot;criar pipeline demo a partir de https://example.com&quot;</code></td>
+<td style="text-align: left;">CLI do operador</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>--output-spec</code></td>
+<td style="text-align: left;"><code>Path</code></td>
+<td style="text-align: left;"><code>./SPEC_PIPELINE.json</code></td>
+<td style="text-align: left;">CLI (default:
+<code>./SPEC_PIPELINE.json</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>--goal</code></td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;"><code>&quot;provar fluxo&quot;</code></td>
+<td style="text-align: left;">CLI (opcional)</td>
+</tr>
+<tr>
+<td style="text-align: left;">Template</td>
+<td style="text-align: left;"><code>JSON</code></td>
+<td style="text-align: left;"><code>schemas/SPEC_PIPELINE.template.json</code></td>
+<td style="text-align: left;">Repositório</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="processamento-passo-a-passo-microações-e-natureza-1">2.
+Processamento Passo a Passo (Microações e Natureza)</h2>
+<h3 id="ação-2.1-carregamento-do-template">Ação 2.1: Carregamento do
+template</h3>
+<ul>
+<li><strong>O que faz</strong>: Lê
+<code>SPEC_PIPELINE.template.json</code> (estrutura com placeholders e
+<code>approved: false</code>).</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<h3 id="ação-2.2-geração-do-identificador-canônico">Ação 2.2: Geração do
+identificador canônico</h3>
+<ul>
+<li><strong>O que faz</strong>:
+<code>spec_id = &quot;spec-&quot; + sha256(user_request + timestamp_utc)[:16]</code>.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<h3 id="ação-2.3-preenchimento-dos-campos-de-cabeçalho">Ação 2.3:
+Preenchimento dos campos de cabeçalho</h3>
+<ul>
+<li><strong>O que faz</strong>: Grava <code>user_request</code>,
+<code>goal</code>, <code>created_at</code> (UTC) e força
+<code>approved: false</code>.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<h3 id="ação-2.4-persistência-e-anúncio">Ação 2.4: Persistência e
+anúncio</h3>
+<ul>
+<li><strong>O que faz</strong>: Escreve JSON indentado no caminho de
+<code>--output-spec</code>, imprime a SPEC no stdout e a instrução da F1
+no stderr.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<hr />
+<h2 id="scripts-funções-e-regras-no-código-1">3. Scripts, Funções e
+Regras no Código</h2>
+<ul>
+<li><strong>Função</strong>: <code>ouroboros_master.py</code> •
+<code>cmd_init_spec(output, user_request, goal)</code>.</li>
+<li><strong>CLI espelho</strong>: <code>ouroboros.py --from-nl</code> •
+despacha para o script da mestra.</li>
+<li><strong>Template</strong>:
+<code>schemas/SPEC_PIPELINE.template.json</code>.</li>
+<li><strong>Regra</strong>: nunca seta <code>approved: true</code>;
+nunca remove placeholders (papel exclusivo da Etapa 1).</li>
+</ul>
+<hr />
+<h2 id="o-que-a-etapa-entrega-para-quem-e-como-1">4. O que a Etapa
+Entrega, Para Quem e Como?</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">O que entrega</th>
+<th style="text-align: left;">Para quem entrega</th>
+<th style="text-align: left;">Como entrega (Formato / Meio)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>SPEC inicial</strong></td>
+<td style="text-align: left;">Usuário / agente (F1)</td>
+<td style="text-align: left;">Arquivo JSON em <code>--output-spec</code>
++ cópia no stdout</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Estado de bloqueio</strong></td>
+<td style="text-align: left;">Etapa 3 (validação F2)</td>
+<td style="text-align: left;"><code>approved: false</code> (impede
+orquestração prematura)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Identificador
+estável</strong></td>
+<td style="text-align: left;">Audição / logs</td>
+<td style="text-align: left;">Campo <code>spec_id</code></td>
+</tr>
+</tbody>
+</table>
+<div class="page-break">
+
+</div>
+<h1 id="manual-de-engenharia-etapa-3-validação-da-spec">Manual de
+Engenharia • Etapa 3: Validação da SPEC</h1>
+<blockquote>
+<p><strong>Raio-X de Arquitetura da Etapa 3 do Ouroboros</strong><br />
+Localização no pipeline:
+<code>1. ENTREVISTA ➔ 2. SPEC ➔ [3. VALIDAÇÃO DA SPEC] ➔ 4. REA ➔ 5. SKILLS ➔ 6. PIPELINE ➔ 7. DEPS ➔ 8. GATES ➔ 9. HANDOFF</code></p>
+</blockquote>
+<hr />
+<h2 id="grau-geral-de-automação-da-etapa-2">📊 Grau Geral de Automação
+da Etapa</h2>
+<pre><code>[██████████████████████████████████████████████████] 100% Determinístico | 0% Probabilístico</code></pre>
+<ul>
+<li><strong>100% Determinístico</strong>: JSON Schema (Draft7), checagem
+de <code>approved</code> e detecção de placeholders — fail-closed, sem
+LLM.</li>
+</ul>
+<hr />
+<h2 id="input-da-etapa-o-que-entra-e-de-onde-vem-2">1. Input da Etapa (O
+que entra e de onde vem)</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Dado</th>
+<th style="text-align: left;">Tipo</th>
+<th style="text-align: left;">Exemplo</th>
+<th style="text-align: left;">Origem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>SPEC.json</code></td>
+<td style="text-align: left;"><code>Path</code> (CLI
+<code>--orchestrate</code>)</td>
+<td style="text-align: left;"><code>./SPEC_PIPELINE.json</code></td>
+<td style="text-align: left;">Etapa 1 / 2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>--output-dir</code></td>
+<td style="text-align: left;"><code>Path</code></td>
+<td style="text-align: left;"><code>./ouroboros-out</code></td>
+<td style="text-align: left;">CLI (default: cwd)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>--resume</code></td>
+<td style="text-align: left;"><code>bool</code></td>
+<td style="text-align: left;">após exit 3</td>
+<td style="text-align: left;">CLI</td>
+</tr>
+<tr>
+<td style="text-align: left;">Chave HMAC</td>
+<td style="text-align: left;"><code>env</code></td>
+<td style="text-align: left;"><code>OUROBOROS_CRYPTO_SECRET</code></td>
+<td style="text-align: left;"><code>.env</code> (para handoffs
+seguintes)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="processamento-passo-a-passo-microações-e-natureza-2">2.
+Processamento Passo a Passo (Microações e Natureza)</h2>
+<h3 id="ação-3.1-existência-e-sintaxe-json">Ação 3.1: Existência e
+sintaxe JSON</h3>
+<ul>
+<li><strong>O que faz</strong>: Verifica arquivo no disco e
+<code>json.load</code>; erro → exit 1.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<h3 id="ação-3.2-validação-jsonschema">Ação 3.2: Validação
+JsonSchema</h3>
+<ul>
+<li><strong>O que faz</strong>: <code>jsonschema.Draft7Validator</code>
+contra <code>schemas/SPEC_PIPELINE.schema.json</code>; cada violação
+formatada <code>caminho: mensagem</code> → exit 1.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<h3 id="ação-3.3-travas-de-aprovação-e-placeholder">Ação 3.3: Travas de
+aprovação e placeholder</h3>
+<ul>
+<li><strong>O que faz</strong>: Se <code>approved != true</code> → exit
+2. Se <code>user_request</code> contém <code>PREENCHER</code> ou
+<code>pipeline.name</code> for <code>placeholder-pipeline</code>/vazio →
+grava <code>pending_question.json</code> e exit 3.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<h3 id="ação-3.4-inicialização-do-runtime-de-execução">Ação 3.4:
+Inicialização do runtime de execução</h3>
+<ul>
+<li><strong>O que faz</strong>: Cria <code>output-dir/handoffs</code>,
+fixa raiz de estado (<code>ouroboros_master_state.json</code> +
+<code>pending_question.json</code> no out_dir), marca
+<code>status: RUNNING</code>.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<hr />
+<h2 id="scripts-funções-e-regras-no-código-2">3. Scripts, Funções e
+Regras no Código</h2>
+<ul>
+<li><strong>Função</strong>: <code>ouroboros_master.py</code> •
+<code>orchestrate(spec_path, resume, out_dir)</code>.</li>
+<li><strong>Validadores</strong>: <code>validate_spec</code> +
+<code>spec_is_placeholder</code>.</li>
+<li><strong>Schema</strong>:
+<code>schemas/SPEC_PIPELINE.schema.json</code>
+(<code>additionalProperties: false</code>, <code>approved</code>
+boolean, <code>pipeline.steps</code> minItems 1).</li>
+<li><strong>Regra</strong>: nenhuma etapa F2 roda se esta retornar exit
+1, 2 ou 3.</li>
+</ul>
+<hr />
+<h2 id="o-que-a-etapa-entrega-para-quem-e-como-2">4. O que a Etapa
+Entrega, Para Quem e Como?</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">O que entrega</th>
+<th style="text-align: left;">Para quem entrega</th>
+<th style="text-align: left;">Como entrega (Formato / Meio)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>SPEC validada</strong></td>
+<td style="text-align: left;">Próxima etapa F2 (REA)</td>
+<td style="text-align: left;">Sinalização por exit code 0 + estado em
+memória</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>State inicial</strong></td>
+<td style="text-align: left;">Operador / mestre</td>
+<td style="text-align: left;"><code>OUT/ouroboros_master_state.json</code>
+(<code>status: RUNNING</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Pergunta pendente</strong> (exit
+3)</td>
+<td style="text-align: left;">Usuário (mini-entrevista)</td>
+<td style="text-align: left;"><code>OUT/pending_question.json</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Recusa de avanço</strong> (exit
+2)</td>
+<td style="text-align: left;">Operador</td>
+<td style="text-align: left;">Mensagem em stderr + código 2</td>
+</tr>
+</tbody>
+</table>
+<div class="page-break">
+
+</div>
+<h1 id="manual-de-engenharia-etapa-4-roteamento-rea">Manual de
+Engenharia • Etapa 4: Roteamento REA</h1>
+<blockquote>
+<p><strong>Raio-X de Arquitetura da Etapa 4 do Ouroboros</strong><br />
+Localização no pipeline:
+<code>3. VALIDAÇÃO SPEC ➔ [4. ROTEAMENTO REA] ➔ 5. DISSECAÇÃO ➔ 6. SKILLS ➔ 7. PIPELINE ➔ 8. GATES</code></p>
+</blockquote>
+<hr />
+<h2 id="grau-geral-de-automação-da-etapa-3">📊 Grau Geral de Automação
+da Etapa</h2>
+<pre><code>[██████████████████████████████████████████████████] 100% Determinístico | 0% Probabilístico</code></pre>
+<ul>
+<li><strong>100% Determinístico</strong>: Classificação por extensão,
+prefixo de URL e keywords. Sem rede na classificação; o despacho apenas
+executa o especialista (que pode ter rede).</li>
+</ul>
+<hr />
+<h2 id="input-da-etapa-o-que-entra-e-de-onde-vem-3">1. Input da Etapa (O
+que entra e de onde vem)</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Dado</th>
+<th style="text-align: left;">Tipo</th>
+<th style="text-align: left;">Exemplo</th>
+<th style="text-align: left;">Origem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>target.kind</code></td>
+<td style="text-align: left;"><code>enum</code></td>
+<td style="text-align: left;"><code>&quot;web&quot;</code> | <code>&quot;apk&quot;</code> |
+<code>&quot;video&quot;</code> | <code>&quot;social&quot;</code> | <code>&quot;none&quot;</code></td>
+<td style="text-align: left;">SPEC (Etapa 1)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>target.uri</code> /
+<code>path</code></td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;"><code>https://example.com</code> ou
+<code>/app.apk</code></td>
+<td style="text-align: left;">SPEC</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>--output-dir</code> (absoluto)</td>
+<td style="text-align: left;"><code>Path</code></td>
+<td style="text-align: left;"><code>C:/.../OUT/rea</code></td>
+<td style="text-align: left;">Mestra F2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>--output-handoff</code>
+(absoluto)</td>
+<td style="text-align: left;"><code>Path</code></td>
+<td style="text-align: left;"><code>C:/.../OUT/handoffs/01_rea_handoff.json</code></td>
+<td style="text-align: left;">Mestra F2</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Se <code>target.kind == &quot;none&quot;</code>, a etapa inteira é
+<strong>SKIPPED</strong> (projeto do zero).</p>
+</blockquote>
+<hr />
+<h2 id="processamento-passo-a-passo-microações-e-natureza-3">2.
+Processamento Passo a Passo (Microações e Natureza)</h2>
+<h3 id="ação-4.1-decisão-de-execução">Ação 4.1: Decisão de execução</h3>
+<ul>
+<li><strong>O que faz</strong>: Sem alvo → <code>SKIPPED</code>; com
+alvo → prossegue.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<h3 id="ação-4.2-classificação-da-mídia">Ação 4.2: Classificação da
+mídia</h3>
+<ul>
+<li><strong>O que faz</strong>: Mapeia alvo → dissecador:
+<code>.apk</code>/binário → <code>aidd-rea-app-android</code>;
+<code>.mp4</code>/YouTube → <code>aidd-rea-video-youtube</code>;
+<code>http(s)</code> → <code>aidd-rea-web-saas</code>; slides/pasta →
+<code>aidd-rea-social-carousel</code>.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<h3 id="ação-4.3-despacho-do-especialista">Ação 4.3: Despacho do
+especialista</h3>
+<ul>
+<li><strong>O que faz</strong>:
+<code>rea_router.py --target &lt;uri&gt; --output-dir &lt;abs&gt; --output-handoff &lt;abs&gt;</code>
+em subprocesso, cwd = raiz do repo.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>
+(orquestração); o trabalho pesado é da Etapa 5.</li>
+</ul>
+<h3 id="ação-4.4-pré-checagem-de-saída">Ação 4.4: Pré-checagem de
+saída</h3>
+<ul>
+<li><strong>O que faz</strong>: Exige rc=0, existência do handoff e
+<strong>verificação HMAC</strong> do envelope da REA. Falha →
+<code>pending_question.json</code> + exit 3.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<hr />
+<h2 id="scripts-funções-e-regras-no-código-3">3. Scripts, Funções e
+Regras no Código</h2>
+<ul>
+<li><strong>Função da mestra</strong>: <code>ouroboros_master.py</code>
+• <code>stage_rea</code>.</li>
+<li><strong>Script</strong>:
+<code>aidd-skills/aidd-rea-router/scripts/rea_router.py</code> •
+<code>classify_target</code>, <code>route_and_execute</code>.</li>
+<li><strong>Regra de caminho</strong>: paths de saída
+<strong>absolutos</strong> (path relativo vaza para
+<code>aidd-skills/&lt;skill&gt;/...</code>).</li>
+<li><strong>Gates</strong>: handoff deve verificar
+<code>verify_handoff_envelope == True</code>.</li>
+</ul>
+<hr />
+<h2 id="o-que-a-etapa-entrega-para-quem-e-como-3">4. O que a Etapa
+Entrega, Para Quem e Como?</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">O que entrega</th>
+<th style="text-align: left;">Para quem entrega</th>
+<th style="text-align: left;">Como entrega (Formato / Meio)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Despacho</strong></td>
+<td style="text-align: left;">Dissecador especialista (Etapa 5)</td>
+<td style="text-align: left;">Subprocesso CLI com alvo + paths
+absolutos</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Estado da etapa</strong></td>
+<td style="text-align: left;">Mestra / operador</td>
+<td style="text-align: left;"><code>stages.rea = {status, handoff, hmac}</code>
+no state</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Handoff da REA</strong></td>
+<td style="text-align: left;">Mestra (verificação) e downstream</td>
+<td style="text-align: left;"><code>OUT/handoffs/01_rea_handoff.json</code>
+(HMAC)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>SKIP legítimo</strong></td>
+<td style="text-align: left;">Mestra</td>
+<td style="text-align: left;"><code>stages.rea = {status: SKIPPED}</code> se
+<code>kind=none</code></td>
+</tr>
+</tbody>
+</table>
+<div class="page-break">
+
+</div>
+<h1 id="manual-de-engenharia-etapa-5-dissecação-rea">Manual de
+Engenharia • Etapa 5: Dissecação REA</h1>
+<blockquote>
+<p><strong>Raio-X de Arquitetura da Etapa 5 do Ouroboros</strong><br />
+Localização no pipeline:
+<code>3. VALIDAÇÃO SPEC ➔ 4. ROTEAMENTO ➔ [5. DISSECAÇÃO REA] ➔ 6. SKILLS ➔ 7. PIPELINE ➔ 8. GATES</code></p>
+</blockquote>
+<hr />
+<h2 id="grau-geral-de-automação-da-etapa-4">📊 Grau Geral de Automação
+da Etapa</h2>
+<pre><code>[███████████████████████████████████░░░░░░░░░░░░░░░] 70% Determinístico | 30% Rede/Ambiente</code></pre>
+<ul>
+<li><strong>70% Determinístico</strong>: Extração de tokens, manifests,
+hashing SHA-256, escrita de relatórios e selagem HMAC.</li>
+<li><strong>30% Rede/Ambiente</strong>: Fetch de URL, download de vídeo,
+OCR local (tesseract) e fallbacks quando binários/rede falham.</li>
+</ul>
+<hr />
+<h2 id="input-da-etapa-o-que-entra-e-de-onde-vem-4">1. Input da Etapa (O
+que entra e de onde vem)</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Dado</th>
+<th style="text-align: left;">Tipo</th>
+<th style="text-align: left;">Exemplo</th>
+<th style="text-align: left;">Origem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Alvo de engenharia reversa</td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;"><code>https://example.com</code></td>
+<td style="text-align: left;">Etapa 4 (router)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>--output-dir</code></td>
+<td style="text-align: left;"><code>Path</code> abs.</td>
+<td style="text-align: left;"><code>OUT/rea</code></td>
+<td style="text-align: left;">Mestra</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>--output-handoff</code></td>
+<td style="text-align: left;"><code>Path</code> abs.</td>
+<td style="text-align: left;"><code>OUT/handoffs/01_rea_handoff.json</code></td>
+<td style="text-align: left;">Mestra</td>
+</tr>
+<tr>
+<td style="text-align: left;">Binários opcionais</td>
+<td style="text-align: left;"><code>system</code></td>
+<td style="text-align: left;"><code>ffmpeg</code>, <code>yt-dlp</code>,
+<code>tesseract</code></td>
+<td style="text-align: left;">Ambiente</td>
+</tr>
+<tr>
+<td style="text-align: left;">Chave HMAC</td>
+<td style="text-align: left;"><code>env</code></td>
+<td style="text-align: left;"><code>OUROBOROS_CRYPTO_SECRET</code></td>
+<td style="text-align: left;"><code>.env</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="processamento-passo-a-passo-microações-e-natureza-4">2.
+Processamento Passo a Passo (Microações e Natureza)</h2>
+<h3 id="ação-5.1-abertura-e-normalização-do-alvo">Ação 5.1: Abertura e
+normalização do alvo</h3>
+<ul>
+<li><strong>O que faz</strong>: Conforme tipo: HTTP fetch, abertura de
+APK/zip, leitura de imagens ou aquisição de vídeo/metadata.</li>
+<li><strong>Natureza</strong>:
+<code>50% Determinístico / 50% Rede</code> (web/vídeo) ou
+<code>100% Determinístico</code> (APK local).</li>
+</ul>
+<h3 id="ação-5.2-extração-de-evidências-microação-por-família">Ação 5.2:
+Extração de evidências (microação por família)</h3>
+<ul>
+<li><strong>O que faz</strong>:
+<ul>
+<li><strong>Web</strong>: tokens de design,
+<code>conteudo_tecnico.md</code>, <code>estrutura_ux.md</code>,
+<code>MANIFEST_REA.json</code>.</li>
+<li><strong>APK</strong>: package, permissões, activities, endpoints +
+manifesto.</li>
+<li><strong>Vídeo</strong>: metadata, metodologia, evidências
+visuais.</li>
+<li><strong>Social</strong>: OCR slide a slide, paleta, hook/CTA,
+manifesto.</li>
+</ul></li>
+<li><strong>Natureza</strong>:
+<code>90% Determinístico / 10% Fallback de rede ou OCR</code>.</li>
+</ul>
+<h3 id="ação-5.3-selo-do-envelope-rea">Ação 5.3: Selo do envelope
+REA</h3>
+<ul>
+<li><strong>O que faz</strong>: <code>emit_handoff_hmac</code> →
+<code>criar_envelope_handoff</code> com ponteiros
+<code>{path, sha256, tamanho_bytes}</code> e
+<code>domain_metadata</code> do alvo.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>
+(HMAC-SHA256 + SHA-256 de arquivos).</li>
+</ul>
+<h3 id="ação-5.4-publicação-no-workspace-da-f2">Ação 5.4: Publicação no
+workspace da F2</h3>
+<ul>
+<li><strong>O que faz</strong>: Escreve artefatos sob
+<code>OUT/rea/**</code> e handoff em
+<code>OUT/handoffs/01_rea_handoff.json</code> (caminhos absolutos).</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<hr />
+<h2 id="scripts-funções-e-regras-no-código-4">3. Scripts, Funções e
+Regras no Código</h2>
+<ul>
+<li><strong>Web</strong>:
+<code>aidd-rea-web-saas/scripts/web_reengineer.py</code> •
+<code>dissect_web_application</code>,
+<code>emit_handoff_hmac</code>.</li>
+<li><strong>APK</strong>:
+<code>aidd-rea-app-android/scripts/app_reengineer.py</code> •
+<code>dissect_mobile_or_binary_app</code>.</li>
+<li><strong>Vídeo</strong>:
+<code>aidd-rea-video-youtube/scripts/video_reengineer.py</code> •
+<code>generate_evidence_manifest</code>.</li>
+<li><strong>Social</strong>:
+<code>aidd-rea-social-carousel/scripts/social_reengineer.py</code> •
+<code>dissect_social_carousel</code>, <code>ocr_image_file</code>.</li>
+<li><strong>Motores</strong>:
+<code>handoff_crypto.criar_envelope_handoff</code>,
+<code>credentials.carregar_env_local</code>.</li>
+<li><strong>Regra</strong>: envelope canônico <code>{body, seal}</code>
+— proibido legado flat <code>handoff-v1</code> sem assinatura.</li>
+</ul>
+<hr />
+<h2 id="o-que-a-etapa-entrega-para-quem-e-como-4">4. O que a Etapa
+Entrega, Para Quem e Como?</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">O que entrega</th>
+<th style="text-align: left;">Para quem entrega</th>
+<th style="text-align: left;">Como entrega (Formato / Meio)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Tokens / relatórios /
+manifesto</strong></td>
+<td style="text-align: left;">Usuário e etapas seguintes</td>
+<td style="text-align: left;">Arquivos em <code>OUT/rea/**</code> (JSON
++ Markdown)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Handoff assinado da
+REA</strong></td>
+<td style="text-align: left;">Mestra (Etapa 4/6) e pipelines</td>
+<td style="text-align: left;"><code>OUT/handoffs/01_rea_handoff.json</code>
+(HMAC verificável)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Ponteiros com hash</strong></td>
+<td style="text-align: left;">Auditoria forense</td>
+<td style="text-align: left;"><code>body.artifacts_pointers[*].sha256</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Dados do domínio</strong></td>
+<td style="text-align: left;">Downstream / humano</td>
+<td style="text-align: left;"><code>body.domain_metadata</code> (ex.:
+permissões do APK)</td>
+</tr>
+</tbody>
+</table>
+<div class="page-break">
+
+</div>
+<h1 id="manual-de-engenharia-etapa-6-skill-creator">Manual de Engenharia
+• Etapa 6: Skill Creator</h1>
+<blockquote>
+<p><strong>Raio-X de Arquitetura da Etapa 6 do Ouroboros</strong><br />
+Localização no pipeline:
+<code>5. DISSECAÇÃO ➔ [6. SKILL CREATOR] ➔ 7. PIPELINE CREATOR ➔ 8. DEPS ➔ 9. GATES</code></p>
+</blockquote>
+<hr />
+<h2 id="grau-geral-de-automação-da-etapa-5">📊 Grau Geral de Automação
+da Etapa</h2>
+<pre><code>[███████████████████████████████████░░░░░░░░░░░░░░░] 85% Determinístico | 15% Rede (GitHub)</code></pre>
+<ul>
+<li><strong>85% Determinístico</strong>: Checagem de existência local,
+scaffold enterprise a partir de templates, auditoria de gates da
+skill.</li>
+<li><strong>15% Rede</strong>: GitHub Scout (<code>gh</code>/API) com
+cache e ranking externo — só quando <code>mode = github-scout</code> e a
+skill não existe localmente.</li>
+</ul>
+<hr />
+<h2 id="input-da-etapa-o-que-entra-e-de-onde-vem-5">1. Input da Etapa (O
+que entra e de onde vem)</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Dado</th>
+<th style="text-align: left;">Tipo</th>
+<th style="text-align: left;">Exemplo</th>
+<th style="text-align: left;">Origem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>skills_required[]</code></td>
+<td style="text-align: left;"><code>array</code></td>
+<td style="text-align: left;"><code>[{name, role, mode}]</code></td>
+<td style="text-align: left;">SPEC (Etapa 1)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>mode</code></td>
+<td style="text-align: left;"><code>enum</code></td>
+<td style="text-align: left;"><code>reuse</code> |
+<code>github-scout</code> | <code>create</code></td>
+<td style="text-align: left;">SPEC</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>github_query</code></td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;"><code>&quot;checklist tdd&quot;</code></td>
+<td style="text-align: left;">SPEC (se scout)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>--output-dir</code></td>
+<td style="text-align: left;"><code>Path</code></td>
+<td style="text-align: left;"><code>aidd-skills/</code> do repo</td>
+<td style="text-align: left;">Mestra</td>
+</tr>
+<tr>
+<td style="text-align: left;">Cache GitHub</td>
+<td style="text-align: left;"><code>JSON</code></td>
+<td style="text-align: left;"><code>.cache/github_scout_cache.json</code></td>
+<td style="text-align: left;">Disco (TTL 7 dias)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="processamento-passo-a-passo-microações-e-natureza-5">2.
+Processamento Passo a Passo (Microações e Natureza)</h2>
+<h3 id="ação-6.1-resolução-por-reuso">Ação 6.1: Resolução por reuso</h3>
+<ul>
+<li><strong>O que faz</strong>: Se
+<code>aidd-skills/&lt;name&gt;/SKILL.md</code> existe →
+<code>action: reuse</code>, segue sem criar nada.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<h3 id="ação-6.2-criação-proprietária-mode-create">Ação 6.2: Criação
+proprietária (mode create)</h3>
+<ul>
+<li><strong>O que faz</strong>:
+<code>skill_creator.py --nome &lt;name&gt; --output-dir</code> gera
+anatomia enterprise (scripts, references, templates, AGENTS, RULES,
+sync, dependencies, comandos).</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>
+(templates fixos).</li>
+</ul>
+<h3 id="ação-6.3-github-scout-mode-github-scout">Ação 6.3: GitHub Scout
+(mode github-scout)</h3>
+<ul>
+<li><strong>O que faz</strong>: Busca repositórios por estrelas/licença
+via <code>gh</code> ou REST, usa cache local, refatora no prefixo
+canônico <code>aidd-&lt;slug&gt;</code>.</li>
+<li><strong>Natureza</strong>:
+<code>40% Determinístico / 60% Rede</code> (resultado depende do GitHub
+no momento).</li>
+</ul>
+<h3 id="ação-6.4-auditoria-da-skill-e-registro-de-estado">Ação 6.4:
+Auditoria da skill e registro de estado</h3>
+<ul>
+<li><strong>O que faz</strong>: Roda <code>--audit</code> da skill
+gerada; grava <code>state.skills[name] = {action, status}</code>. Falha
+→ exit 3 + <code>pending_question.json</code>.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<hr />
+<h2 id="scripts-funções-e-regras-no-código-5">3. Scripts, Funções e
+Regras no Código</h2>
+<ul>
+<li><strong>Função da mestra</strong>: <code>ouroboros_master.py</code>
+• <code>stage_skills</code>, <code>resolve_skill</code>.</li>
+<li><strong>Factory</strong>:
+<code>aidd-orchestrate-skill-creator/scripts/skill_creator.py</code> •
+<code>create_canonical_skill</code>,
+<code>scout_and_canonize_skill</code>,
+<code>emit_handoff_envelope</code>.</li>
+<li><strong>Leis</strong>: micro-frontmatter ≤ 25 palavras; dual-spec
+SKILL+AGENTS; autocontenção; <strong>prioridade local → GitHub →
+create</strong>; proibição de criação ad-hoc fora da factory.</li>
+</ul>
+<hr />
+<h2 id="o-que-a-etapa-entrega-para-quem-e-como-5">4. O que a Etapa
+Entrega, Para Quem e Como?</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">O que entrega</th>
+<th style="text-align: left;">Para quem entrega</th>
+<th style="text-align: left;">Como entrega (Formato / Meio)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Skills prontas
+(reuso/novas)</strong></td>
+<td style="text-align: left;">Etapa 7 (pipeline) e harness (após
+sync)</td>
+<td style="text-align: left;">Diretórios
+<code>aidd-skills/&lt;nome&gt;/</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Estado por skill</strong></td>
+<td style="text-align: left;">Operador / mestre</td>
+<td style="text-align: left;"><code>stages.skills</code> +
+<code>state.skills</code> no state</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Handoff da factory</strong>
+(quando cria)</td>
+<td style="text-align: left;">Downstream</td>
+<td style="text-align: left;"><code>HANDOFF.json</code> canônico HMAC na
+pasta da skill</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Dúvida de criação</strong> (exit
+3)</td>
+<td style="text-align: left;">Usuário</td>
+<td style="text-align: left;"><code>pending_question.json</code></td>
+</tr>
+</tbody>
+</table>
+<div class="page-break">
+
+</div>
+<h1 id="manual-de-engenharia-etapa-7-pipeline-creator-scaffold">Manual
+de Engenharia • Etapa 7: Pipeline Creator (Scaffold)</h1>
+<blockquote>
+<p><strong>Raio-X de Arquitetura da Etapa 7 do Ouroboros</strong><br />
+Localização no pipeline:
+<code>6. SKILLS ➔ [7. PIPELINE CREATOR] ➔ 8. DEPS ➔ 9. GATES ➔ 10. HANDOFF</code></p>
+</blockquote>
+<hr />
+<h2 id="grau-geral-de-automação-da-etapa-6">📊 Grau Geral de Automação
+da Etapa</h2>
+<pre><code>[██████████████████████████████████████████████████] 100% Determinístico | 0% Probabilístico</code></pre>
+<ul>
+<li><strong>100% Determinístico</strong>: Scaffold a partir de templates
++ reescrita do <code>PIPELINE.json</code> com o DAG exato da SPEC. Sem
+rede e sem LLM nesta etapa.</li>
+</ul>
+<hr />
+<h2 id="input-da-etapa-o-que-entra-e-de-onde-vem-6">1. Input da Etapa (O
+que entra e de onde vem)</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Dado</th>
+<th style="text-align: left;">Tipo</th>
+<th style="text-align: left;">Exemplo</th>
+<th style="text-align: left;">Origem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>pipeline.name</code></td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;"><code>&quot;e2e-real&quot;</code></td>
+<td style="text-align: left;">SPEC (Etapa 1)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>pipeline.steps[]</code></td>
+<td style="text-align: left;"><code>array</code></td>
+<td style="text-align: left;"><code>[{id, skill, depends_on}]</code></td>
+<td style="text-align: left;">SPEC</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>--output-dir</code></td>
+<td style="text-align: left;"><code>Path</code></td>
+<td style="text-align: left;"><code>OUT/</code> (cwd do scaffold)</td>
+<td style="text-align: left;">Mestra</td>
+</tr>
+<tr>
+<td style="text-align: left;">Skills referenciadas</td>
+<td style="text-align: left;"><code>nomes</code></td>
+<td style="text-align: left;"><code>aidd-rea-web-saas</code></td>
+<td style="text-align: left;">Etapa 6 / Almoxarifado</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="processamento-passo-a-passo-microações-e-natureza-6">2.
+Processamento Passo a Passo (Microações e Natureza)</h2>
+<h3 id="ação-7.1-validação-do-dag-mínimo">Ação 7.1: Validação do DAG
+mínimo</h3>
+<ul>
+<li><strong>O que faz</strong>: Exige <code>name</code> e
+<code>steps</code> com pelo menos um <code>skill</code> válido. Sem isso
+→ exit 3.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<h3 id="ação-7.2-scaffold-canônico">Ação 7.2: Scaffold canônico</h3>
+<ul>
+<li><strong>O que faz</strong>:
+<code>pipeline_creator.py --scaffold-pipeline &lt;nome&gt; --steps &lt;csv-de-skills&gt;</code>
+cria <code>OUT/aidd-pipelines/&lt;slug&gt;/</code> com README, AGENTS,
+RULES, LICENSE, PIPELINE.json, state.json, run_pipeline.py, context/,
+templates/, references/.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<h3 id="ação-7.3-reescrita-rica-do-dag">Ação 7.3: Reescrita rica do
+DAG</h3>
+<ul>
+<li><strong>O que faz</strong>: Sobrescreve <code>PIPELINE.json</code>
+com IDs, descrições e <code>depends_on</code> originais da SPEC (o CSV
+do CLI só aciona o scaffold).</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<h3 id="ação-7.4-publicação-no-state-da-f2">Ação 7.4: Publicação no
+state da F2</h3>
+<ul>
+<li><strong>O que faz</strong>:
+<code>stages.pipeline = {status: OK, path: &lt;dir&gt;}</code>. Path
+ausente pós-scaffold → exit 3.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<hr />
+<h2 id="scripts-funções-e-regras-no-código-6">3. Scripts, Funções e
+Regras no Código</h2>
+<ul>
+<li><strong>Função da mestra</strong>: <code>ouroboros_master.py</code>
+• <code>stage_pipeline</code>.</li>
+<li><strong>Factory</strong>: <code>pipeline_creator.py</code> •
+<code>scaffold_autonomous_pipeline</code>, CLI
+<code>--scaffold-pipeline</code>.</li>
+<li><strong>Regras</strong>: anatomia enterprise completa (circuit
+breaker); encapsulamento em pasta própria; nunca skills soltas na raiz;
+runner padrão de <code>templates/RUN_PIPELINE_TEMPLATE.py</code>.</li>
+</ul>
+<hr />
+<h2 id="o-que-a-etapa-entrega-para-quem-e-como-6">4. O que a Etapa
+Entrega, Para Quem e Como?</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">O que entrega</th>
+<th style="text-align: left;">Para quem entrega</th>
+<th style="text-align: left;">Como entrega (Formato / Meio)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Pipeline encapsulado</strong></td>
+<td style="text-align: left;">Operador + Etapa 8 (deps) + Etapa 11
+(runner)</td>
+<td style="text-align: left;">Pasta
+<code>OUT/aidd-pipelines/&lt;slug&gt;/</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>DAG canônico</strong></td>
+<td style="text-align: left;">Runner / humanos</td>
+<td style="text-align: left;"><code>PIPELINE.json</code> com nós e
+<code>depends_on</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Runner</strong></td>
+<td style="text-align: left;">Execução pós-F2</td>
+<td style="text-align: left;"><code>run_pipeline.py</code> (+
+<code>state.json</code> INITIALIZED)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Estado F2</strong></td>
+<td style="text-align: left;">Mestra</td>
+<td style="text-align: left;"><code>stages.pipeline.status = &quot;OK&quot;</code></td>
+</tr>
+</tbody>
+</table>
+<div class="page-break">
+
+</div>
+<h1 id="manual-de-engenharia-etapa-8-dependency-resolver">Manual de
+Engenharia • Etapa 8: Dependency Resolver</h1>
+<blockquote>
+<p><strong>Raio-X de Arquitetura da Etapa 8 do Ouroboros</strong><br />
+Localização no pipeline:
+<code>7. PIPELINE CREATOR ➔ [8. DEPENDENCY RESOLVER] ➔ 9. GATES ➔ 10. HANDOFF</code></p>
+</blockquote>
+<hr />
+<h2 id="grau-geral-de-automação-da-etapa-7">📊 Grau Geral de Automação
+da Etapa</h2>
+<pre><code>[████████████████████████████░░░░░░░░░░░░░░░░░░░░░░] 60% Determinístico | 40% Ambiente/Rede</code></pre>
+<ul>
+<li><strong>60% Determinístico</strong>: Leitura e validação estrita dos
+manifests <code>dependencies.json</code>, checagem de pacotes/binários
+locais.</li>
+<li><strong>40% Ambiente/Rede</strong>: Instalação real via pip/uv
+(estado da máquina e download de pacotes).</li>
+</ul>
+<hr />
+<h2 id="input-da-etapa-o-que-entra-e-de-onde-vem-7">1. Input da Etapa (O
+que entra e de onde vem)</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Dado</th>
+<th style="text-align: left;">Tipo</th>
+<th style="text-align: left;">Exemplo</th>
+<th style="text-align: left;">Origem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>install_dependencies</code></td>
+<td style="text-align: left;"><code>bool</code></td>
+<td style="text-align: left;"><code>true</code> /
+<code>false</code></td>
+<td style="text-align: left;">SPEC (Etapa 1)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>dependencies.json</code> do
+pipeline</td>
+<td style="text-align: left;"><code>JSON</code></td>
+<td style="text-align: left;"><code>OUT/aidd-pipelines/&lt;slug&gt;/dependencies.json</code></td>
+<td style="text-align: left;">Etapa 7</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>dependencies.json</code> das
+skills</td>
+<td style="text-align: left;"><code>JSON</code></td>
+<td style="text-align: left;"><code>aidd-skills/&lt;name&gt;/dependencies.json</code></td>
+<td style="text-align: left;">Repo / Etapa 6</td>
+</tr>
+<tr>
+<td style="text-align: left;">Flags</td>
+<td style="text-align: left;">CLI</td>
+<td style="text-align: left;"><code>--manifest &lt;p&gt; --install --yes</code></td>
+<td style="text-align: left;">Mestra (sempre <code>--yes</code>)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Se <code>install_dependencies == false</code> → etapa
+<strong>SKIPPED</strong>.</p>
+</blockquote>
+<hr />
+<h2 id="processamento-passo-a-passo-microações-e-natureza-7">2.
+Processamento Passo a Passo (Microações e Natureza)</h2>
+<h3 id="ação-8.1-decisão-de-execução">Ação 8.1: Decisão de execução</h3>
+<ul>
+<li><strong>O que faz</strong>: SPEC pediu skip → <code>SKIPPED</code>;
+senão coleta manifests (pipeline + skills da SPEC).</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<h3 id="ação-8.2-resolução-estática-do-manifesto">Ação 8.2: Resolução
+estática do manifesto</h3>
+<ul>
+<li><strong>O que faz</strong>:
+<code>DependencyResolver(manifest)</code> valida estrutura, versões
+pinadas, pacotes Python e binários de sistema.</li>
+<li><strong>Natureza</strong>: <code>100% Determinético</code>.</li>
+</ul>
+<h3 id="ação-8.3-instalação-não-interativa">Ação 8.3: Instalação
+não-interativa</h3>
+<ul>
+<li><strong>O que faz</strong>:
+<code>install(non_interactive=True)</code> executa o gerenciador de
+pacotes. rc≠0 → estado FAILED + exit 3 (pergunta: continuar sem
+instalar? ajustar versão?).</li>
+<li><strong>Natureza</strong>:
+<code>30% Determinístico / 70% Ambiente+Rede</code>.</li>
+</ul>
+<h3 id="ação-8.4-registro-do-resultado">Ação 8.4: Registro do
+resultado</h3>
+<ul>
+<li><strong>O que faz</strong>:
+<code>stages.dependencies = {status, count|manifest, rc}</code> no state
+da F2.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<hr />
+<h2 id="scripts-funções-e-regras-no-código-7">3. Scripts, Funções e
+Regras no Código</h2>
+<ul>
+<li><strong>Função da mestra</strong>: <code>ouroboros_master.py</code>
+• <code>stage_dependencies</code>.</li>
+<li><strong>Motor</strong>:
+<code>motores/governanca/dependency_resolver.py</code> •
+<code>DependencyResolver.check</code> / <code>.install</code>.</li>
+<li><strong>CLI</strong>:
+<code>python motores/governanca/dependency_resolver.py --manifest &lt;path&gt; --install --yes</code>.</li>
+<li><strong>Regras</strong>: fail-closed em manifesto inválido;
+instalação exige confirmação não-interativa (<code>--yes</code>); zero
+stubs.</li>
+</ul>
+<hr />
+<h2 id="o-que-a-etapa-entrega-para-quem-e-como-7">4. O que a Etapa
+Entrega, Para Quem e Como?</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">O que entrega</th>
+<th style="text-align: left;">Para quem entrega</th>
+<th style="text-align: left;">Como entrega (Formato / Meio)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Pacotes instalados</strong></td>
+<td style="text-align: left;">Execução futura dos scripts
+(etapas/runner)</td>
+<td style="text-align: left;">Ambiente Python (venv/site-packages)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Estado da etapa</strong></td>
+<td style="text-align: left;">Mestra / operador</td>
+<td style="text-align: left;"><code>stages.dependencies</code> no
+<code>state.json</code> da F2</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Dúvida de ambiente</strong> (exit
+3)</td>
+<td style="text-align: left;">Usuário</td>
+<td style="text-align: left;"><code>pending_question.json</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Skip legítimo</strong></td>
+<td style="text-align: left;">Mestra</td>
+<td style="text-align: left;"><code>stages.dependencies = {status: SKIPPED}</code></td>
+</tr>
+</tbody>
+</table>
+<div class="page-break">
+
+</div>
+<h1 id="manual-de-engenharia-etapa-9-quality-gates-audit-runner">Manual
+de Engenharia • Etapa 9: Quality Gates (Audit Runner)</h1>
+<blockquote>
+<p><strong>Raio-X de Arquitetura da Etapa 9 do Ouroboros</strong><br />
+Localização no pipeline:
+<code>7. PIPELINE ➔ 8. DEPS ➔ [9. QUALITY GATES] ➔ 10. HANDOFF FINAL</code></p>
+</blockquote>
+<hr />
+<h2 id="grau-geral-de-automação-da-etapa-8">📊 Grau Geral de Automação
+da Etapa</h2>
+<pre><code>[██████████████████████████████████████████████████] 100% Determinístico | 0% Probabilístico</code></pre>
+<ul>
+<li><strong>100% Determinístico</strong>: AST, contagem de palavras,
+checagens de filesystem e baseline — mesma árvore de código ⇒ mesmo
+resultado.</li>
+</ul>
+<hr />
+<h2 id="input-da-etapa-o-que-entra-e-de-onde-vem-8">1. Input da Etapa (O
+que entra e de onde vem)</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Dado</th>
+<th style="text-align: left;">Tipo</th>
+<th style="text-align: left;">Exemplo</th>
+<th style="text-align: left;">Origem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Raiz do repositório</td>
+<td style="text-align: left;"><code>Path</code></td>
+<td style="text-align: left;">cwd ou
+<code>AIDD_OUROBOROS_ROOT</code></td>
+<td style="text-align: left;">Ambiente</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>--skip-pytest</code></td>
+<td style="text-align: left;"><code>bool</code></td>
+<td style="text-align: left;">presente na F2</td>
+<td style="text-align: left;">Mestra / CLI</td>
+</tr>
+<tr>
+<td style="text-align: left;">Baseline de violações</td>
+<td style="text-align: left;"><code>JSON</code></td>
+<td style="text-align: left;"><code>motores/governanca/gate_baseline.json</code></td>
+<td style="text-align: left;">Repo</td>
+</tr>
+<tr>
+<td style="text-align: left;">Código, skills, pipelines</td>
+<td style="text-align: left;">filesystem</td>
+<td style="text-align: left;"><code>aidd-skills/**</code>,
+<code>aidd-pipelines/**</code></td>
+<td style="text-align: left;">Repo</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="processamento-passo-a-passo-microações-e-natureza-8">2.
+Processamento Passo a Passo (Microações e Natureza)</h2>
+<h3 id="ação-9.1-gate-ast-zero-stubs">Ação 9.1: Gate AST /
+Zero-stubs</h3>
+<ul>
+<li><strong>O que faz</strong>: Varre <code>.py</code> com
+<code>gate_ast.py</code>; reprova sintaxe inválida e
+<code>except: pass</code> / stubs, respeitando
+<code>gate_baseline.json</code>.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<h3 id="ação-9.2-gate-micro-frontmatter">Ação 9.2: Gate
+Micro-frontmatter</h3>
+<ul>
+<li><strong>O que faz</strong>: <code>description</code> de cada
+<code>SKILL.md</code> ≤ 25 palavras.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<h3 id="ação-9.3-gate-agents.md-fractal">Ação 9.3: Gate AGENTS.md
+fractal</h3>
+<ul>
+<li><strong>O que faz</strong>: Existe e respeita limite de palavras do
+projeto.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<h3 id="ação-9.4-gate-anatômico-circuit-breaker">Ação 9.4: Gate
+anatômico (Circuit Breaker)</h3>
+<ul>
+<li><strong>O que faz</strong>: Reprova skills/pipelines anêmicos (ex.:
+<code>templates/</code> vazio = criação ad-hoc).</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<h3 id="ação-9.5-pytest-opcional">Ação 9.5: Pytest (opcional)</h3>
+<ul>
+<li><strong>O que faz</strong>: Em F2 costuma vir
+<code>--skip-pytest</code>; no CI/<code>ouroboros --audit</code>
+completo roda a suíte.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>
+(execução local).</li>
+</ul>
+<hr />
+<h2 id="scripts-funções-e-regras-no-código-8">3. Scripts, Funções e
+Regras no Código</h2>
+<ul>
+<li><strong>Função da mestra</strong>: <code>ouroboros_master.py</code>
+• <code>stage_audit</code>.</li>
+<li><strong>Orquestrador</strong>:
+<code>motores/governanca/audit_runner.py</code>.</li>
+<li><strong>AST</strong>: <code>motores/governanca/gate_ast.py</code> •
+<code>scan_path</code>, baseline.</li>
+<li><strong>Regras do projeto</strong>: zero stubs; micro-frontmatter;
+governança fractal; anatomia enterprise obrigatória.</li>
+<li><strong>Estado F2</strong>: rc=0 → <code>stages.audit=OK</code> e F2
+pode fechar SUCCESS; rc≠0 → F2 PARTIAL / exit 1.</li>
+</ul>
+<hr />
+<h2 id="o-que-a-etapa-entrega-para-quem-e-como-8">4. O que a Etapa
+Entrega, Para Quem e Como?</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">O que entrega</th>
+<th style="text-align: left;">Para quem entrega</th>
+<th style="text-align: left;">Como entrega (Formato / Meio)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Veredito dos gates</strong></td>
+<td style="text-align: left;">Mestra / CI / operador</td>
+<td style="text-align: left;">Exit code 0 ou 1 + log
+<code>[OK]</code>/<code>[FALHA]</code> em stdout</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Estado do gate</strong></td>
+<td style="text-align: left;">Handoff final (Etapa 10)</td>
+<td style="text-align: left;"><code>stages.audit = {status, rc}</code> →
+define SUCCESS vs PARTIAL</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Evidência de
+conformidade</strong></td>
+<td style="text-align: left;">Revisor humano / auditoria</td>
+<td style="text-align: left;">Relatório textual da execução do
+<code>audit_runner</code></td>
+</tr>
+</tbody>
+</table>
+<div class="page-break">
+
+</div>
+<h1 id="manual-de-engenharia-etapa-10-handoff-final-envelope-hmac">Manual de
+Engenharia • Etapa 10: Handoff Final (Envelope HMAC)</h1>
+<blockquote>
+<p><strong>Raio-X de Arquitetura da Etapa 10 do Ouroboros</strong><br />
+Localização no pipeline:
+<code>8. DEPS ➔ 9. GATES ➔ [10. HANDOFF FINAL] ➔ 11. RUNNER</code></p>
+</blockquote>
+<hr />
+<h2 id="grau-geral-de-automação-da-etapa-9">📊 Grau Geral de Automação
+da Etapa</h2>
+<pre><code>[██████████████████████████████████████████████████] 100% Determinístico | 0% Probabilístico</code></pre>
+<ul>
+<li><strong>100% Determinístico</strong>: SHA-256 dos artefatos
+apontados + HMAC-SHA256 canônico (JSON ordenado). Sem chave → não emite
+(fail-closed).</li>
+</ul>
+<hr />
+<h2 id="input-da-etapa-o-que-entra-e-de-onde-vem-9">1. Input da Etapa (O
+que entra e de onde vem)</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Dado</th>
+<th style="text-align: left;">Tipo</th>
+<th style="text-align: left;">Exemplo</th>
+<th style="text-align: left;">Origem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">SPEC em memória</td>
+<td style="text-align: left;"><code>dict</code></td>
+<td style="text-align: left;">campos <code>spec_id</code>,
+<code>user_request</code>, <code>pipeline</code></td>
+<td style="text-align: left;">Etapa 3</td>
+</tr>
+<tr>
+<td style="text-align: left;">State da F2</td>
+<td style="text-align: left;"><code>JSON</code></td>
+<td style="text-align: left;"><code>OUT/ouroboros_master_state.json</code></td>
+<td style="text-align: left;">Etapas 3–9</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>output-dir</code></td>
+<td style="text-align: left;"><code>Path</code></td>
+<td style="text-align: left;"><code>OUT/handoffs/</code></td>
+<td style="text-align: left;">CLI</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Chave HMAC</strong></td>
+<td style="text-align: left;"><code>env</code></td>
+<td style="text-align: left;"><code>AIDD_HANDOFF_KEY</code> |
+<code>OUROBOROS_HMAC_SECRET</code> |
+<code>OUROBOROS_CRYPTO_SECRET</code></td>
+<td style="text-align: left;"><code>.env</code> / ambiente</td>
+</tr>
+<tr>
+<td style="text-align: left;">Ponteiros de artefato</td>
+<td style="text-align: left;"><code>paths</code></td>
+<td style="text-align: left;"><code>state_path</code>,
+<code>pipeline_dir</code></td>
+<td style="text-align: left;">State (se existirem em disco)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="processamento-passo-a-passo-microações-e-natureza-9">2.
+Processamento Passo a Passo (Microações e Natureza)</h2>
+<h3 id="ação-10.1-resolução-da-chave">Ação 10.1: Resolução da chave</h3>
+<ul>
+<li><strong>O que faz</strong>: <code>ensure_hmac_env()</code> carrega
+<code>.env</code> e lê a variável de segredo. Ausente →
+<code>RuntimeError</code> (não assina envelope falso).</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<h3 id="ação-10.2-montagem-do-payload">Ação 10.2: Montagem do
+payload</h3>
+<ul>
+<li><strong>O que faz</strong>: Define <code>status</code>
+(<code>SUCCESS</code> se audit OK, senão <code>PARTIAL</code>), hash
+SHA-256 dos artefatos existentes e metadados da SPEC/estágios.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<h3 id="ação-10.3-selo-do-envelope">Ação 10.3: Selo do envelope</h3>
+<ul>
+<li><strong>O que faz</strong>: <code>criar_envelope_handoff</code> →
+<code>selar(body)</code> com HMAC-SHA256; espelha <code>payload</code> +
+<code>hmac_sha256</code> no topo (retrocompat).</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<h3 id="ação-10.4-persistência-e-limpeza">Ação 10.4: Persistência e
+limpeza</h3>
+<ul>
+<li><strong>O que faz</strong>: Grava
+<code>OUT/handoffs/master_final_handoff.json</code>; se audit OK, remove
+<code>pending_question.json</code> residual.</li>
+<li><strong>Natureza</strong>: <code>100% Determinético</code>.</li>
+</ul>
+<blockquote>
+<p><strong>Paralelo da Etapa 4/5:</strong> o handoff da REA
+(<code>01_rea_handoff.json</code>) usa o mesmo motor e é
+<strong>verificado</strong> antes desta etapa.</p>
+</blockquote>
+<hr />
+<h2 id="scripts-funções-e-regras-no-código-9">3. Scripts, Funções e
+Regras no Código</h2>
+<ul>
+<li><strong>Função da mestra</strong>: <code>ouroboros_master.py</code>
+• <code>emit_final_handoff</code>, <code>ensure_hmac_env</code>.</li>
+<li><strong>Motor cripto</strong>:
+<code>motores/governanca/handoff_crypto.py</code> •
+<code>criar_envelope_handoff</code>, <code>selar</code>,
+<code>abrir</code>, <code>verify_handoff_envelope</code>.</li>
+<li><strong>Estrutura</strong>: <code>envelope_format</code>,
+<code>body</code>, <code>seal</code>, espelho
+<code>payload</code>/<code>hmac_sha256</code>.</li>
+<li><strong>Regra</strong>: pointer architecture — entrega ponteiros +
+hash, não despeja binários no chat.</li>
+</ul>
+<hr />
+<h2 id="o-que-a-etapa-entrega-para-quem-e-como-9">4. O que a Etapa
+Entrega, Para Quem e Como?</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">O que entrega</th>
+<th style="text-align: left;">Para quem entrega</th>
+<th style="text-align: left;">Como entrega (Formato / Meio)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Envelope final da
+fabricação</strong></td>
+<td style="text-align: left;">Usuário / auditoria / próximo pipeline
+(Lego)</td>
+<td style="text-align: left;"><code>OUT/handoffs/master_final_handoff.json</code>
+(JSON HMAC)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Status da corrida</strong></td>
+<td style="text-align: left;">Operador</td>
+<td style="text-align: left;">Campo <code>status</code>
+(SUCCESS/PARTIAL) + <code>spec_id</code> no stdout</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Verificabilidade</strong></td>
+<td style="text-align: left;">Qualquer consumidor</td>
+<td style="text-align: left;"><code>verify_handoff_envelope(path) == True</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>State fechado</strong></td>
+<td style="text-align: left;">Operador / resume</td>
+<td style="text-align: left;"><code>ouroboros_master_state.json</code>
+com <code>finished_at</code></td>
+</tr>
+</tbody>
+</table>
+<div class="page-break">
+
+</div>
+<h1 id="manual-de-engenharia-etapa-11-runner-do-pipeline-gerado">Manual
+de Engenharia • Etapa 11: Runner do Pipeline Gerado</h1>
+<blockquote>
+<p><strong>Raio-X de Arquitetura da Etapa 11 do Ouroboros</strong><br />
+Localização no pipeline:
+<code>1..10 F2 (FABRICAÇÃO) ➔ [11. RUNNER] ➔ entrega em execução</code></p>
+</blockquote>
+<hr />
+<h2 id="grau-geral-de-automação-da-etapa-10">📊 Grau Geral de Automação
+da Etapa</h2>
+<pre><code>[███████████████████████████████████░░░░░░░░░░░░░░░] 90% Determinístico | 10% Skills/Rede</code></pre>
+<ul>
+<li><strong>90% Determinístico</strong>: Ordenação topológica,
+<code>inputs_hash</code>, máquina de estados do workspace, resolução de
+entrypoints via <code>cli_contract</code>.</li>
+<li><strong>10% Skills/Rede</strong>: O que cada skill faz de fato (REA
+web usa rede; scaffold é local). Limitação conhecida: nós com inputs
+placeholder podem concluir em “modo help”.</li>
+</ul>
+<hr />
+<h2 id="input-da-etapa-o-que-entra-e-de-onde-vem-10">1. Input da Etapa
+(O que entra e de onde vem)</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Dado</th>
+<th style="text-align: left;">Tipo</th>
+<th style="text-align: left;">Exemplo</th>
+<th style="text-align: left;">Origem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>PIPELINE.json</code></td>
+<td style="text-align: left;"><code>JSON</code></td>
+<td style="text-align: left;"><code>OUT/aidd-pipelines/&lt;slug&gt;/PIPELINE.json</code></td>
+<td style="text-align: left;">Etapa 7</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>--workspace</code></td>
+<td style="text-align: left;"><code>Path</code></td>
+<td style="text-align: left;"><code>/tmp/ws</code></td>
+<td style="text-align: left;">CLI (ou
+<code>.workspaces/run_*</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>--force</code> /
+<code>--resume</code></td>
+<td style="text-align: left;"><code>bool</code> /
+<code>run_id</code></td>
+<td style="text-align: left;">reexecuta / retoma</td>
+<td style="text-align: left;">CLI</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>AIDD_OUROBOROS_ROOT</code></td>
+<td style="text-align: left;"><code>env</code></td>
+<td style="text-align: left;">raiz do repo com
+<code>aidd-skills/</code></td>
+<td style="text-align: left;">Ambiente (recomendado fora de
+<code>aidd-pipelines/</code> raiz)</td>
+</tr>
+<tr>
+<td style="text-align: left;">Skills</td>
+<td style="text-align: left;"><code>dependencies.json</code></td>
+<td style="text-align: left;">entrypoint +
+<code>cli_contract</code></td>
+<td style="text-align: left;"><code>aidd-skills/&lt;nome&gt;/</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="processamento-passo-a-passo-microações-e-natureza-10">2.
+Processamento Passo a Passo (Microações e Natureza)</h2>
+<h3 id="ação-11.1-resolução-da-raiz-do-repositório">Ação 11.1: Resolução
+da raiz do repositório</h3>
+<ul>
+<li><strong>O que faz</strong>: Procura <code>AIDD_OUROBOROS_ROOT</code>
+→ <code>pipeline.parent.parent</code> → <code>cwd</code> e pais;
+primeira pasta com <code>aidd-skills/</code>.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<h3 id="ação-11.2-ordenação-topológica-do-dag">Ação 11.2: Ordenação
+topológica do DAG</h3>
+<ul>
+<li><strong>O que faz</strong>: Ordena por <code>depends_on</code>;
+detecta ciclo → erro.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<h3 id="ação-11.3-controle-de-estado-e-cache-de-inputs">Ação 11.3:
+Controle de estado e cache de inputs</h3>
+<ul>
+<li><strong>O que faz</strong>: <code>state.json</code> por
+<code>run_id</code>; <code>inputs_hash</code> (SHA-256 do input +
+estrutura do nó); nó COMPLETED com hash igual e sem <code>--force</code>
+→ skip.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<h3 id="ação-11.4-resolução-e-execução-do-nó">Ação 11.4: Resolução e
+execução do nó</h3>
+<ul>
+<li><strong>O que faz</strong>: Lê <code>entrypoint</code> e
+<code>cli_contract.input_flag/output_flag</code>; monta comando;
+<code>subprocess</code> com cwd/workspace; rc≠0 → FAILED e aborta.</li>
+<li><strong>Natureza</strong>:
+<code>95% Determinístico / 5% Mistura</code> (depende da skill
+invocada).</li>
+</ul>
+<h3 id="ação-11.5-fecho-do-workspace">Ação 11.5: Fecho do workspace</h3>
+<ul>
+<li><strong>O que faz</strong>: Todos OK →
+<code>state.status = COMPLETED</code>, exit 0.</li>
+<li><strong>Natureza</strong>: <code>100% Determinístico</code>.</li>
+</ul>
+<hr />
+<h2 id="scripts-funções-e-regras-no-código-10">3. Scripts, Funções e
+Regras no Código</h2>
+<ul>
+<li><strong>Template</strong>:
+<code>aidd-orchestrate-pipeline-creator/templates/RUN_PIPELINE_TEMPLATE.py</code>.</li>
+<li><strong>Funções</strong>: <code>resolve_repo_root</code>,
+<code>resolve_skill_execution</code>, <code>topological_sort</code>,
+<code>execute_pipeline</code>.</li>
+<li><strong>Regras</strong>: contrato <code>dependencies.json</code> +
+<code>cli_contract</code>; sem globbing de <code>*.py</code>; zero
+stubs; handoffs de nó quando a skill emite.</li>
+<li><strong>Contrato de testes</strong>:
+<code>tests/test_entrypoints.py</code> garante entrypoint e flags
+existentes em todas as skills canônicas.</li>
+</ul>
+<hr />
+<h2 id="o-que-a-etapa-entrega-para-quem-e-como-10">4. O que a Etapa
+Entrega, Para Quem e Como?</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">O que entrega</th>
+<th style="text-align: left;">Para quem entrega</th>
+<th style="text-align: left;">Como entrega (Formato / Meio)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Estado da execução</strong></td>
+<td style="text-align: left;">Operador / CI</td>
+<td style="text-align: left;"><code>WORKSPACE/state.json</code>
+(<code>COMPLETED</code>/<code>FAILED</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Saídas por nó</strong></td>
+<td style="text-align: left;">Downstream / humano</td>
+<td style="text-align: left;"><code>WORKSPACE/&lt;node_id&gt;/</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Código de saída</strong></td>
+<td style="text-align: left;">Shell / pipeline de deploy</td>
+<td style="text-align: left;">Exit 0 = todos os nós OK</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Evidência de DAG
+real</strong></td>
+<td style="text-align: left;">Teste E2E</td>
+<td style="text-align: left;">Ex.:
+<code>aidd-pipelines/_e2e-smoke</code> com HMAC por nó</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Nota de operação:</strong> a fabricação (F2) e a execução
+(runner) são separadas. O trabalho pesado de ponta a ponta comprovado
+hoje: <strong>F2 da mestra</strong> + runners com inputs reais
+(<code>_e2e-smoke</code>).</p>
+</blockquote>
+</body>
+</html>

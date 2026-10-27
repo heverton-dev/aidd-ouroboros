@@ -1,0 +1,37 @@
+{
+  "version": "1.0.0",
+  "timestamp": "2026-10-26T23:07:58Z",
+  "colors": {
+    "background": "#eee",
+    "surface": "#222",
+    "primary": "#38BDF8",
+    "text": "#F8FAFC",
+    "palette_detected": [
+      "#eee",
+      "#222"
+    ]
+  },
+  "typography": {
+    "primary_family": "Inter",
+    "fallback_families": [
+      "system-ui",
+      "-apple-system",
+      "sans-serif"
+    ],
+    "scale": {
+      "xs": "0.75rem",
+      "sm": "0.875rem",
+      "base": "1rem",
+      "lg": "1.125rem",
+      "xl": "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "1.875rem"
+    }
+  },
+  "border_radius": {
+    "sm": "4px",
+    "md": "8px",
+    "lg": "12px",
+    "full": "9999px"
+  }
+}

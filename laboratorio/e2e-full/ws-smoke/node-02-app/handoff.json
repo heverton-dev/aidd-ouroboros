@@ -1,0 +1,51 @@
+{
+  "body": {
+    "schema_version": "2.0-crypto",
+    "producer_skill": "aidd-rea-app-android",
+    "timestamp": "2026-10-26T23:10:31.483924+00:00",
+    "status": "SUCCESS",
+    "artifacts_pointers": {
+      "manifest_rea": {
+        "path": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e-full\\ws-smoke\\node-02-app\\MANIFEST_REA.json",
+        "sha256": "3e1caf3aec01563a0049410a71828eff91dd0de3cc26deaa871dd0b02bbbe68c",
+        "tamanho_bytes": 660
+      },
+      "tokens_design": {
+        "path": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e-full\\ws-smoke\\node-02-app\\tokens\\TOKENS_DESIGN.json",
+        "sha256": "a47530a8a094bd3c2fa136d92ed26e7e37b68e3a8d2af7fcf66ffd7b66456196",
+        "tamanho_bytes": 478
+      },
+      "conteudo_tecnico": {
+        "path": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e-full\\ws-smoke\\node-02-app\\conteudo_tecnico.md",
+        "sha256": "2ba8937df83cc3289b85e06be51e75e13c2919138736a5acec1e61ffc6026f37",
+        "tamanho_bytes": 517
+      },
+      "arquitetura": {
+        "path": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e-full\\ws-smoke\\node-02-app\\arquitetura.md",
+        "sha256": "a5c6e4c618d54c74af9330e59df16ec246e3a106fc3fe572aa93c3ef7bd1ffdf",
+        "tamanho_bytes": 350
+      }
+    },
+    "domain_metadata": {
+      "source": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\tests\\fixtures\\sample_app.apk",
+      "package_name": "com.app.target",
+      "permissions": [
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.INTERNET"
+      ],
+      "activities": [
+        ".MainActivity"
+      ],
+      "endpoints": [
+        "http://schemas.android.com/apk/res/android"
+      ],
+      "producer_version": "1.0.0"
+    }
+  },
+  "seal": {
+    "algorithm": "HMAC-SHA256",
+    "key_id": "ouroboros-v2",
+    "hmac_sha256": "d4a9ec2d64492c991b653ace5ae17f9b2e01b17491d96cb9777ce0924fac9228",
+    "sealed_at": "2026-10-26T23:10:31.504950+00:00"
+  }
+}

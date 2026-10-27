@@ -1,0 +1,19 @@
+{
+  "target_url": "https://example.com",
+  "dissection_timestamp": "2026-10-26T22:55:43Z",
+  "dissector": "aidd-rea-web-saas",
+  "author": "Heverton Eduardo Peres",
+  "license": "MIT",
+  "artifacts": {
+    "tokens": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e\\out\\rea\\tokens\\TOKENS_DESIGN.json",
+    "conteudo_tecnico": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e\\out\\rea\\conteudo_tecnico.md",
+    "estrutura_ux": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e\\out\\rea\\estrutura_ux.md"
+  },
+  "summary": {
+    "stack": [
+      "Vanilla / Modern Web"
+    ],
+    "primary_color": "#38BDF8",
+    "primary_font": "Inter"
+  }
+}

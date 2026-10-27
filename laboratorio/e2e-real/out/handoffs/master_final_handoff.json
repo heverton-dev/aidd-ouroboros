@@ -1,0 +1,103 @@
+{
+  "envelope_format": "AIDD-CANONICAL-HANDOFF",
+  "signature_algorithm": "HMAC-SHA256",
+  "hmac_sha256": "bf360413c30c3b953fb45f198603dbe7974c83627c76383bd427f2d3ad22a079",
+  "payload": {
+    "schema_version": "2.0-crypto",
+    "producer_skill": "aidd-ouroboros-master",
+    "timestamp": "2026-10-26T23:16:36.683028+00:00",
+    "status": "SUCCESS",
+    "artifacts_pointers": {
+      "state_path": {
+        "path": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e-real\\out\\ouroboros_master_state.json",
+        "sha256": "fc834e2262b1b87c68c71eef6dcf543dcc0bb61df302080dc9fe4c745837835d",
+        "tamanho_bytes": 762
+      },
+      "pipeline_dir": {
+        "path": "laboratorio\\e2e-real\\out\\aidd-pipelines\\e2e-real",
+        "sha256": null,
+        "tamanho_bytes": 0,
+        "alerta": "Arquivo ainda não materializado no disco"
+      }
+    },
+    "domain_metadata": {
+      "spec_id": "spec-9df715e33efdedca",
+      "user_request": "criar pipeline e2e-real a partir de https://example.com",
+      "goal": "teste real de ponta a ponta",
+      "pipeline_name": "e2e-real",
+      "stages": {
+        "rea": {
+          "status": "OK",
+          "handoff": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e-real\\out\\handoffs\\01_rea_handoff.json",
+          "hmac": "OK"
+        },
+        "skills": {
+          "status": "OK"
+        },
+        "pipeline": {
+          "status": "OK",
+          "path": "laboratorio\\e2e-real\\out\\aidd-pipelines\\e2e-real"
+        },
+        "dependencies": {
+          "status": "SKIPPED"
+        },
+        "audit": {
+          "status": "OK",
+          "rc": 0
+        }
+      }
+    }
+  },
+  "body": {
+    "schema_version": "2.0-crypto",
+    "producer_skill": "aidd-ouroboros-master",
+    "timestamp": "2026-10-26T23:16:36.683028+00:00",
+    "status": "SUCCESS",
+    "artifacts_pointers": {
+      "state_path": {
+        "path": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e-real\\out\\ouroboros_master_state.json",
+        "sha256": "fc834e2262b1b87c68c71eef6dcf543dcc0bb61df302080dc9fe4c745837835d",
+        "tamanho_bytes": 762
+      },
+      "pipeline_dir": {
+        "path": "laboratorio\\e2e-real\\out\\aidd-pipelines\\e2e-real",
+        "sha256": null,
+        "tamanho_bytes": 0,
+        "alerta": "Arquivo ainda não materializado no disco"
+      }
+    },
+    "domain_metadata": {
+      "spec_id": "spec-9df715e33efdedca",
+      "user_request": "criar pipeline e2e-real a partir de https://example.com",
+      "goal": "teste real de ponta a ponta",
+      "pipeline_name": "e2e-real",
+      "stages": {
+        "rea": {
+          "status": "OK",
+          "handoff": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e-real\\out\\handoffs\\01_rea_handoff.json",
+          "hmac": "OK"
+        },
+        "skills": {
+          "status": "OK"
+        },
+        "pipeline": {
+          "status": "OK",
+          "path": "laboratorio\\e2e-real\\out\\aidd-pipelines\\e2e-real"
+        },
+        "dependencies": {
+          "status": "SKIPPED"
+        },
+        "audit": {
+          "status": "OK",
+          "rc": 0
+        }
+      }
+    }
+  },
+  "seal": {
+    "algorithm": "HMAC-SHA256",
+    "key_id": "ouroboros-v2",
+    "hmac_sha256": "bf360413c30c3b953fb45f198603dbe7974c83627c76383bd427f2d3ad22a079",
+    "sealed_at": "2026-10-26T23:16:36.683106+00:00"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://aidd.framework/schemas/dependencies-v1.json",
+  "pipeline_name": "e2e-real",
+  "version": "1.0.0",
+  "author": "Heverton Eduardo Peres",
+  "dependencies": {
+    "skills_required": [
+      {
+        "name": "aidd-orchestrate-pipeline-creator",
+        "optional": false,
+        "purpose": "Execucao dos nos de aidd-orchestrate-pipeline-creator"
+      },
+      {
+        "name": "aidd-rea-web-saas",
+        "optional": false,
+        "purpose": "Execucao dos nos de aidd-rea-web-saas"
+      }
+    ],
+    "mcp_servers": {},
+    "system_binaries": [
+      {
+        "name": "python",
+        "required": true,
+        "purpose": "Execucao dos scripts do pipeline"
+      },
+      {
+        "name": "git",
+        "required": true,
+        "purpose": "Versionamento e controle de estado"
+      }
+    ],
+    "python_packages": [
+      "argparse"
+    ]
+  }
+}

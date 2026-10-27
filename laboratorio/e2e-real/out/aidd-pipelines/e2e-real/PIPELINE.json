@@ -1,0 +1,30 @@
+{
+  "version": "1.0.0",
+  "pipeline_id": "e2e-real",
+  "name": "e2e-real",
+  "description": "Pipeline autonomo composivel para e2e-real",
+  "pipeline_type": "autonomous_lego_pipeline",
+  "input_contract": "context/input/pipeline_input.json",
+  "output_contract": "context/output/pipeline_output.json",
+  "upstream_reference": null,
+  "nodes": [
+    {
+      "id": "node-01-ingest",
+      "skill": "aidd-rea-web-saas",
+      "description": "REA",
+      "depends_on": [],
+      "input_handoff": "context/handoffs/01_in.json",
+      "output_handoff": "context/handoffs/01_out.json"
+    },
+    {
+      "id": "node-02-factory",
+      "skill": "aidd-orchestrate-pipeline-creator",
+      "description": "scaffold",
+      "depends_on": [
+        "node-01-ingest"
+      ],
+      "input_handoff": "context/handoffs/02_in.json",
+      "output_handoff": "context/handoffs/02_out.json"
+    }
+  ]
+}

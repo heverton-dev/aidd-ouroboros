@@ -1,0 +1,103 @@
+{
+  "envelope_format": "AIDD-CANONICAL-HANDOFF",
+  "signature_algorithm": "HMAC-SHA256",
+  "hmac_sha256": "5ee7d52631c17be6fc329011d95e44f923baf2724959ec2dbf06ed80192ad0a1",
+  "payload": {
+    "schema_version": "2.0-crypto",
+    "producer_skill": "aidd-ouroboros-master",
+    "timestamp": "2026-10-26T22:55:44.554379+00:00",
+    "status": "SUCCESS",
+    "artifacts_pointers": {
+      "state_path": {
+        "path": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e\\out\\ouroboros_master_state.json",
+        "sha256": "ada0536994c64c735b9854564323e5e5222798c0077bca816af9fe73ce73c306",
+        "tamanho_bytes": 752
+      },
+      "pipeline_dir": {
+        "path": "laboratorio\\e2e\\out\\aidd-pipelines\\e2e-hmac",
+        "sha256": null,
+        "tamanho_bytes": 0,
+        "alerta": "Arquivo ainda não materializado no disco"
+      }
+    },
+    "domain_metadata": {
+      "spec_id": "spec-ae6ae5b2ef080f6c",
+      "user_request": "criar pipeline e2e-hmac a partir de https://example.com",
+      "goal": "PREENCHER: resultado observavel desejado",
+      "pipeline_name": "e2e-hmac",
+      "stages": {
+        "rea": {
+          "status": "OK",
+          "handoff": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e\\out\\handoffs\\01_rea_handoff.json",
+          "hmac": "OK"
+        },
+        "skills": {
+          "status": "OK"
+        },
+        "pipeline": {
+          "status": "OK",
+          "path": "laboratorio\\e2e\\out\\aidd-pipelines\\e2e-hmac"
+        },
+        "dependencies": {
+          "status": "SKIPPED"
+        },
+        "audit": {
+          "status": "OK",
+          "rc": 0
+        }
+      }
+    }
+  },
+  "body": {
+    "schema_version": "2.0-crypto",
+    "producer_skill": "aidd-ouroboros-master",
+    "timestamp": "2026-10-26T22:55:44.554379+00:00",
+    "status": "SUCCESS",
+    "artifacts_pointers": {
+      "state_path": {
+        "path": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e\\out\\ouroboros_master_state.json",
+        "sha256": "ada0536994c64c735b9854564323e5e5222798c0077bca816af9fe73ce73c306",
+        "tamanho_bytes": 752
+      },
+      "pipeline_dir": {
+        "path": "laboratorio\\e2e\\out\\aidd-pipelines\\e2e-hmac",
+        "sha256": null,
+        "tamanho_bytes": 0,
+        "alerta": "Arquivo ainda não materializado no disco"
+      }
+    },
+    "domain_metadata": {
+      "spec_id": "spec-ae6ae5b2ef080f6c",
+      "user_request": "criar pipeline e2e-hmac a partir de https://example.com",
+      "goal": "PREENCHER: resultado observavel desejado",
+      "pipeline_name": "e2e-hmac",
+      "stages": {
+        "rea": {
+          "status": "OK",
+          "handoff": "C:\\Users\\trcnologia\\Desktop\\_inbox\\proj_aidd-ouroboros\\laboratorio\\e2e\\out\\handoffs\\01_rea_handoff.json",
+          "hmac": "OK"
+        },
+        "skills": {
+          "status": "OK"
+        },
+        "pipeline": {
+          "status": "OK",
+          "path": "laboratorio\\e2e\\out\\aidd-pipelines\\e2e-hmac"
+        },
+        "dependencies": {
+          "status": "SKIPPED"
+        },
+        "audit": {
+          "status": "OK",
+          "rc": 0
+        }
+      }
+    }
+  },
+  "seal": {
+    "algorithm": "HMAC-SHA256",
+    "key_id": "ouroboros-v2",
+    "hmac_sha256": "5ee7d52631c17be6fc329011d95e44f923baf2724959ec2dbf06ed80192ad0a1",
+    "sealed_at": "2026-10-26T22:55:44.554456+00:00"
+  }
+}
